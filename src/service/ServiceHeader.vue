@@ -17,9 +17,9 @@ import { NButton } from "naive-ui";
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(255, 255, 255);
-  margin: 100px 0 80px;
-  padding-top: 50px;
+  background: rgb(240, 240, 240, 0.4);
+  margin: 0;
+  padding: 150px 0 80px;
 }
 
 .n-button:hover {
@@ -33,5 +33,6 @@ import { NButton } from "naive-ui";
 .small {
 font-size: 16px;
 color: #434446;
+text-align: center;
 }
 </style>

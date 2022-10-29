@@ -1,11 +1,11 @@
 <template>
   <MenuBar class="menu-bar" />
-  <div class="margin-from-menu" id="home">
+  <div id="home">
     <HomeView />
     <ServiceView />
     <SkillsView />
     <PortfolioView />
-    <BlogView />
+    <ContactView />
   </div>
 
 </template>
@@ -16,17 +16,42 @@ import HomeView from './Home/HomeView.vue';
 import ServiceView from './service/ServiceView.vue';
 import SkillsView from './skills/SkillsView.vue';
 import PortfolioView from './portfolio/PortfolioView.vue';
-import BlogView from './blog/BlogView.vue';
+import ContactView from './contact/ContactView.vue';
+
 
 </script>
-<style scoped>
+<style>
+
 .menu-bar {
   position: fixed;
   background-color: white;
   z-index: 20;
 }
 
-.margin-from-menu {
-  padding-top: 60px;
+
+
+@media only screen and (max-width: 1025px) {
+  .first-span, .second-span {
+  display: none;
 }
+.avatar, .author {
+  margin-left: 10px;
+}
+
+.menu {
+  margin-right: 10px;
+}
+
+}
+
+
+@media only screen and (max-width: 1281px) {
+  .second-span {
+  display: none;
+}
+
+}
+
+
+
 </style>

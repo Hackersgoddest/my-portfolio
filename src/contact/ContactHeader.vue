@@ -1,10 +1,9 @@
 <template>
 <div class="first-column">
   <n-button strong quaternary="" type="success" size="large">
-      BLOGS
+      CONTACT
     </n-button>
-<p class="bold">My Latest Blogs</p>
-<p class="small">I have begun my journey as blog writing.</p>
+<p class="bold">CHECK ME OUT</p>
 </div>
 </template>
 <script setup>
@@ -17,9 +16,9 @@ import { NButton } from "naive-ui";
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(255, 255, 255);
-  margin: 50px 0 80px;
-  padding-top: 50px;
+  background: rgb(240, 240, 240, 0.4);
+  margin: 0;
+  padding: 100px 0 80px;
 }
 
 .n-button:hover {
@@ -30,8 +29,4 @@ import { NButton } from "naive-ui";
   margin: 0;
 }
 
-.small {
-font-size: 16px;
-color: #434446;
-}
 </style>

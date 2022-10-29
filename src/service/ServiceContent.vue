@@ -1,6 +1,7 @@
 <template>
-  <n-grid :cols="24">
-    <n-gi :span="2"></n-gi>
+    <n-grid cols="20 s:20 m:22 l:24 xl:24 2xl:24" responsive="screen">
+    <n-gi class="first-span"></n-gi>
+    <n-gi class="second-span"></n-gi>
     <n-gi :span="20">
       <div class="main-container">
         <div class="notification">
@@ -26,7 +27,8 @@
         </div>
       </div>
     </n-gi>
-    <n-gi :span="2"></n-gi>
+    <n-gi class="first-span"></n-gi>
+    <n-gi class="second-span"></n-gi>
   </n-grid>
 
 
@@ -42,6 +44,10 @@ import { NGrid, NGi } from "naive-ui";
 </script>
 
 <style scoped>
+
+.n-grid {
+  background: rgb(240, 240, 240, 0.4);
+}
 .main-container {
   display: flex;
   flex-wrap: wrap;
@@ -51,18 +57,28 @@ import { NGrid, NGi } from "naive-ui";
 .notification {
   background-color: #dee0e2;
   border-radius: 5px;
-  width: 400px;
+  width: 350px;
   height: 200px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: space-evenly;
   margin-bottom: 20px;
-  /* padding: 10px; */
 }
 
 figure svg {
   width: 40px;
+}
+
+@media only screen and (max-width: 700px) {
+  .notification {
+    width: 300px;
+    height: 230px;
+  }
+
+  figure svg {
+    width: 35px;
+    height: 30px;
+  }
 }
 
 figcaption {

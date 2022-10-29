@@ -223,7 +223,11 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  height: 300px;
+}
+
+
+figure {
+ margin: 0px 20px;
 }
 
 figure svg {

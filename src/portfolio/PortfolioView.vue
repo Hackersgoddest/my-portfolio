@@ -1,6 +1,6 @@
 <template>
     <PortfolioHeader id="portfolio" />
-    <PortfolioContent class="service-content" />
+    <PortfolioContent class="portfolio-content" />
 </template>
 
 <script setup>
@@ -9,7 +9,12 @@ import PortfolioContent from './PortfolioContent.vue';
 </script>
 
 <style scoped>
-.service-content {
-    margin-bottom: 100px;
+
+@media only screen and (max-width: 500px) {
+  .portfolio-content{
+    padding-bottom: 50px;
+  }
 }
+
+
 </style>

@@ -1,7 +1,8 @@
 <template>
-  <n-grid :cols="24">
-    <n-gi :span="2"></n-gi>
-    <n-gi :span="20">
+    <n-grid cols="22 s:22 m:23 l:24 xl:24 2xl:24" responsive="screen">
+    <n-gi class="first-span"></n-gi>
+    <n-gi class="second-span"></n-gi>
+    <n-gi class="author" :span="20">
       <!-- <p class="author__title">Software Developer</p> -->
       <n-button strong secondary type="success" size="large">
       Software Developer
@@ -167,4 +168,6 @@ function CV() {
   font-size: 0.75rem;
   color: #9CA3AF;
 }
+
+
 </style>

@@ -10,6 +10,15 @@ import ServiceContent from './ServiceContent.vue';
 
 <style scoped>
 .service-content {
-    margin-bottom: 100px;
+    padding-bottom: 100px;
 }
+
+
+@media only screen and (max-width: 500px) {
+  .service-content {
+    padding-bottom: 50px;
+  }
+}
+
+
 </style>

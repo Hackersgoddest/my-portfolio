@@ -55,6 +55,23 @@ import { NIcon, NCarousel } from "naive-ui";
   object-fit: cover;
 }
 
+@media only screen and (max-width: 800px) {
+  .carousel-img {
+    height: 500px;
+  }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 1025px) {
+  .carousel-img {
+    height: 600px;
+  }
+}
+
+@media only screen and (min-width: 1026px) and (max-width: 1281px) {
+  .carousel-img {
+    height: 700px;
+  }
+}
 .custom-arrow {
   display: flex;
   position: absolute;

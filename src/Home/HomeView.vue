@@ -20,4 +20,10 @@ onMounted(() => isMounted.value = !isMounted.value);
   top: 200px;
   /* left: 20px; */
 }
+
+@media only screen and (max-width: 800px) {
+  .author {
+    top: 120px;
+  }
+}
 </style>

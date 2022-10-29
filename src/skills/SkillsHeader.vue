@@ -4,8 +4,9 @@
       SKILLS
     </n-button>
     <p class="bold">The Stack I Work With</p>
-    <n-grid :cols="24">
-      <n-gi :span="2"></n-gi>
+  <n-grid cols="20 s:20 m:22 l:24 xl:24 2xl:24" responsive="screen">
+      <n-gi class="first-span"></n-gi>
+    <n-gi class="second-span"></n-gi>
       <n-gi :span="20">
         <n-tabs type="bar" size="large" trigger="hover" justify-content="center">
           <n-tab-pane name="frontend" tab="Frontend" class="center-content">
@@ -19,7 +20,8 @@
           </n-tab-pane>
         </n-tabs>
       </n-gi>
-      <n-gi :span="2"></n-gi>
+      <n-gi class="first-span"></n-gi>
+    <n-gi class="second-span"></n-gi>
     </n-grid>
 
   </div>
@@ -31,15 +33,22 @@ import BackEnd from "./BackEnd.vue";
 import FullStack from "./FullStack.vue";
 
 </script>
-<style scoped>
+<style >
 .first-column {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(255, 255, 255);
-  margin: 100px 0 0;
-  padding-top: 50px;
+  background: rgb(240, 240, 240, 0.4);
+  margin: 0;
+  padding: 150px 0 100px;
+}
+
+
+@media only screen and (max-width: 500px) {
+  .first-column{
+    padding-bottom: 50px;
+  }
 }
 
 .n-button:hover {
