@@ -1,17 +1,20 @@
-# my-portfolio
+# My-portfolio
 
-This template should help get you started developing with Vue 3 in Vite.
+This is Hackersgoddest Portfolio
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## How to clone the project onto your local machine
+Create a folder
+Open the folder on command line interface or preffered IDE
+Run the following command on the console or terminal one by one
+```sh
+git init
+```
+```sh
+git clone "https://github.com/Hackersgoddest/my-portfolio.git"
+```
 
 ## Project Setup
-
+Run the command below to install all dependencies needed
 ```sh
 npm install
 ```
