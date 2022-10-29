@@ -200,7 +200,7 @@ watch(
   color: #777;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 850px) {
   .svg-container {
     display: block;
     position: absolute;

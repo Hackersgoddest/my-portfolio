@@ -57,7 +57,7 @@ import { NIcon, NCarousel } from "naive-ui";
 
 @media only screen and (max-width: 800px) {
   .carousel-img {
-    height: 500px;
+    height: 550px;
   }
 }
 

@@ -75,6 +75,12 @@ function CV() {
   line-height: 2.5rem;
 }
 
+@media only screen and (max-width: 600px) {
+  .author__name {
+    font-size: 1.2rem;
+  }
+}
+
 .author__interest {
   margin: 1rem 0 0 0;
   color: white;
