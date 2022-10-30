@@ -142,7 +142,7 @@ function toggleSideMenu() {
 }
 
 
-let screenWidth = window.innerHeight;
+let screenWidth = window.innerWidth;
 let changeToVerticalMode = ref(false);
 watch(
   screenWidth,
