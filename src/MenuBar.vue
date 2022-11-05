@@ -169,6 +169,7 @@ watch(
   align-items: center;
 }
 
+
 .is-end {
   text-align: end;
 }
@@ -201,6 +202,11 @@ watch(
 }
 
 @media only screen and (max-width: 850px) {
+
+  .n-grid {
+    position: fixed;
+    height: 64px;
+  }
   .svg-container {
     display: block;
     position: absolute;
