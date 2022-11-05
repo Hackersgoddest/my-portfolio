@@ -164,7 +164,7 @@ watch(
 
 
 .n-grid {
-  height: 60px;
+  height: 64px;
   display: flex;
   align-items: center;
 }
@@ -202,12 +202,6 @@ watch(
 }
 
 @media only screen and (max-width: 850px) {
-
-  .n-grid {
-    position: fixed;
-    top: 0;
-    height: 64px;
-  }
   .svg-container {
     display: block;
     position: absolute;

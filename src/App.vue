@@ -23,12 +23,16 @@ import Footer from "./Footer.vue";
 
 </script>
 <style>
+* {
+  box-sizing: border-box;
+}
 
 .menu-bar {
+  scroll-behavior: smooth;
   position: fixed;
   top: 0;
   background-color: white;
-  z-index: 20;
+  z-index: 40;
 }
 
 
