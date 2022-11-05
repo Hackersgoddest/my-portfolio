@@ -206,7 +206,7 @@ watch(
     display: block;
     position: absolute;
     right: 10px;
-    top: 12px;
+    top: 11px;
   }
 
   .svg-container .close {
