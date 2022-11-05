@@ -218,7 +218,7 @@ watch(
   }
 
   .svg-container svg {
-    width: 30px;
+    width: 40px;
     padding: 5px;
     cursor: pointer;
   }

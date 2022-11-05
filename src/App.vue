@@ -28,9 +28,7 @@ import Footer from "./Footer.vue";
 }
 
 .menu-bar {
-  overflow: hidden;
   width: 100%;
-  border-top: 0;
   position: fixed;
   top: 0;
   background-color: white;
