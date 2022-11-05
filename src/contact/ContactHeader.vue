@@ -18,7 +18,7 @@ import { NButton } from "naive-ui";
   align-items: center;
   background: rgb(240, 240, 240, 0.4);
   margin: 0;
-  padding: 100px 0 80px;
+  padding: 100px 0 50px;
 }
 
 .n-button:hover {

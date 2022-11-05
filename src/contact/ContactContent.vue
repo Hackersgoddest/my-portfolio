@@ -5,64 +5,64 @@
     <n-gi :span="20">
       <div class="main-container">
         <a href="mailto: hackersgoddest@gmail.com" class="notification">
-          <div class="container">
+          <span class="container">
             <mail-icon />
-            <p>EMAIL</p>
-          </div>
-          <div class="container">
-            <p href="">hackersgoddest@gmail.com</p>
+            <span>EMAIL</span>
+          </span>
+          <span class="container">
+            <span href="">hackersgoddest@gmail.com</span>
             <open-icon />
-          </div>
+          </span>
         </a>
         <a href="tel:+233256287192" class="notification">
-          <div class="container">
+          <span class="container">
             <call-icon />
-            <p>PHONE</p>
-          </div>
-          <div class="container">
-            <p>0256287192</p>
+            <span>PHONE</span>
+          </span>
+          <span class="container">
+            <span>0256287192</span>
             <open-icon />
-          </div>
+          </span>
         </a>
         <a href="https://stackoverflow.com/users/17446079/frank-oppong-konadu" target="_blank" class="notification">
-          <div class="container">
+          <span class="container">
             <stack-icon />
-            <p>STACKOVERFLOW</p>
-          </div>
+            <span>STACKOVERFLOW</span>
+          </span>
           <div class="container">
-            <p>Frank Oppong Konadu</p>
+            <span>Frank Oppong Konadu</span>
             <open-icon />
           </div>
         </a>
         <a href="https://github.com/Hackersgoddest" target="_blank" class="notification">
-          <div class="container">
+          <span class="container">
             <github-icon />
-            <p>GITHUB</p>
-          </div>
-          <div class="container">
-            <p>Hackersgoddest</p>
+            <span>GITHUB</span>
+          </span>
+          <span class="container">
+            <span>Hackersgoddest</span>
             <open-icon />
-          </div>
+          </span>
         </a>
         <a href="https://www.linkedin.com/in/frank-oppong-konadu-9286b523b/" target="_blank" class="notification">
-          <div class="container">
+          <span class="container">
             <linkedin-icon />
-            <p>LINKEDIN</p>
-          </div>
-          <div class="container">
-            <p>Frank Oppong Konadu</p>
+            <span>LINKEDIN</span>
+          </span>
+          <span class="container">
+            <span>Frank Oppong Konadu</span>
             <open-icon />
-          </div>
+          </span>
         </a>
         <a href="https://twitter.com/UndefineHacker" target="_blank" class="notification">
-          <div class="container">
+          <span class="container">
             <twitter-icon />
-            <p>TWITTER</p>
-          </div>
-          <div class="container">
-            <p>Hackersgoddest</p>
+            <span>TWITTER</span>
+          </span>
+          <span class="container">
+            <span>Hackersgoddest</span>
             <open-icon />
-          </div>
+          </span>
         </a>
       </div>
     </n-gi>
@@ -95,27 +95,32 @@ import { NGrid, NGi } from "naive-ui";
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding: 10px 0;
+}
+@media screen and (min-width: 600px) {
+  .main-container {
+    height: 200px;
+  }
 }
 
 .notification {
   text-decoration: none;
   color: #303031;
-  width: 250px;
-  height: 100px;
+  width: 200px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  margin-bottom: 20px;
+
 }
 
 .container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  height: 10px;
 }
 
-.container p {
+.container span {
   margin: 0;
   font-size: 15px;
 }

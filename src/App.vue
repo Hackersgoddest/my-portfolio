@@ -6,6 +6,7 @@
     <SkillsView />
     <PortfolioView />
     <ContactView />
+    <Footer />
   </div>
 
 </template>
@@ -17,6 +18,7 @@ import ServiceView from './service/ServiceView.vue';
 import SkillsView from './skills/SkillsView.vue';
 import PortfolioView from './portfolio/PortfolioView.vue';
 import ContactView from './contact/ContactView.vue';
+import Footer from "./Footer.vue";
 
 
 </script>
