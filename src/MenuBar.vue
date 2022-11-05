@@ -205,6 +205,7 @@ watch(
 
   .n-grid {
     position: fixed;
+    top: 0;
     height: 64px;
   }
   .svg-container {

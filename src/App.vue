@@ -26,6 +26,7 @@ import Footer from "./Footer.vue";
 
 .menu-bar {
   position: fixed;
+  top: 0;
   background-color: white;
   z-index: 20;
 }
