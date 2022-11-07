@@ -8,7 +8,7 @@
       Software Developer
     </n-button>
       <p class="author__name">I am Frank Oppong Konadu</p>
-      <p class="author__interest">I am passionate software developer with a year of experience</p>
+      <p class="author__interest">I am a passionate software developer with a year of experience</p>
       <span class="location__container">
         <div class="current__location">
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="mr-1"
