@@ -68,12 +68,17 @@
     </div>
 
     <DisclosurePanel class="sm:hidden">
-      <div class="space-y-1 px-2 pt-2 pb-3">
-          <DisclosureButton 
-          v-for="item in navigation" :key="item.name"
-           :aria-current="item.current ? 'page' : undefined"
-            :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
-            :href="item.href" as="a">{{ item.name }}</DisclosureButton>
+      <div class="space-y-1 px-2 pt-2 pb-3" v-if="mount">
+      <template
+      v-for="(item, index) in navigation" :key="item.name"
+      >
+      <DisclosureButton 
+    @click="changeCurrent(index)"
+    :aria-current="item.current ? 'page' : undefined"
+     :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
+     :href="item.href" as="a">{{ item.name }}</DisclosureButton>
+      
+      </template>
       </div>
     </DisclosurePanel>
   </Disclosure>
