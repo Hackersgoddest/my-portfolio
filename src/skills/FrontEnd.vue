@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="flex flex-wrap justify-center gap-8">
     <figure>
       <figcaption>VUE JS</figcaption>
       <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +55,7 @@
     </figure>
     <figure>
       <figcaption>CSS</figcaption>
-      <svg class="css-size" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         x="0px" y="0px" viewBox="0 0 56 56" style="enable-background:new 0 0 56 56;" xml:space="preserve">
         <g>
           <path style="fill:#E9E9E0;" d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074
@@ -138,7 +138,7 @@
     </figure>
     <figure>
       <figcaption>HTML</figcaption>
-      <svg class="reduce-size" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
         <path style="fill:#FB8028;" d="M46.917,10.199c-4.518,0-7.885,3.682-7.484,8.182l38.091,427.247c0.401,4.5,4.29,9.171,8.646,10.381
 	l161.636,44.879c4.354,1.21,11.478,1.21,15.833,0.003l162.127-44.953c4.354-1.208,8.248-5.879,8.649-10.377l38.153-427.179
@@ -219,26 +219,12 @@
 </script>
 
 <style scoped>
-.main-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-
-figure {
- margin: 0px 20px;
-}
 
 figure svg {
   width: 40px;
 }
 
-figure .reduce-size {
-  width: 32px;
-}
-
-figure .css-size {
+.reduce-size {
   width: 35px;
 }
 </style>

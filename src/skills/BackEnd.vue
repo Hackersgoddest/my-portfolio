@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="flex flex-wrap justify-center gap-8">
     <figure>
       <figcaption>C#</figcaption>
       <svg  viewBox="-16 0 288 288" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -174,18 +174,6 @@
 </script>
 
 <style scoped>
-.main-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-
-
-figure {
- margin: 0px 20px;
-}
-
 figure svg {
   width: 40px;
 }

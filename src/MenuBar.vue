@@ -1,256 +1,109 @@
 <template>
-  <n-grid cols="20 s:20 m:22 l:24 xl:24 2xl:24" responsive="screen">
-    <n-gi class="first-span"></n-gi>
-    <n-gi class="second-span"></n-gi>
-    <n-gi class="avatar" :span="4">
-      <a href="#app" class="center-avatar" @click="closeMenu = false">
-        <span @click="selectAndExpand('go-back-home')" class="center-avatar">
-          <n-avatar>
-            <n-icon>
-              <md-cash />
-            </n-icon>
-          </n-avatar>
-          <a class="header-title">Hackersgoddest</a>
-        </span>
-      </a>
+  <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <!-- Mobile menu button-->
+          <DisclosureButton
+            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+            <span class="sr-only">Open main menu</span>
+            <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
+            <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
+          </DisclosureButton>
+        </div>
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex flex-shrink-0 items-center">
+            <img class="block h-8 w-auto lg:hidden" src="https://tailwindui.com/img/logos/mark.svg?color=cyan&shade=500"
+              alt="Your Company" />
+            <img class="hidden h-8 w-auto lg:block" src="https://tailwindui.com/img/logos/mark.svg?color=cyan&shade=500"
+              alt="Your Company" />
+          </div>
+          <div class="hidden sm:ml-6 sm:block">
+            <div class="flex space-x-4" v-if="mount">
+            <template 
+            v-for="(item, index) in navigation" :key="item.name"
+            >
+            <a 
+            @click="changeCurrent(index)"
+             :aria-current="item.current ? 'page' : undefined"
+                :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
+                :href="item.href">{{ item.name }}</a>
+            </template>
+            </div>
+          </div>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <!-- Profile dropdown -->
+          <Menu as="div" class="relative ml-3">
+            <div>
+              <MenuButton
+                class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <span class="sr-only">Open user menu</span>
+                <img class="h-8 w-8 rounded-full" src="/frank.jpg" alt="My Picture" />
+              </MenuButton>
+            </div>
+            <transition enter-active-class="transition ease-out duration-100"
+              enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+              leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100"
+              leave-to-class="transform opacity-0 scale-95">
+              <MenuItems
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <MenuItem v-slot="{ active }">
+                <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Curriculum
+                  Vitae</a>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                <a href="#portfolio"
+                  :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Porfolio</a>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                <a href="#contact"
+                  :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Contact</a>
+                </MenuItem>
+              </MenuItems>
+            </transition>
+          </Menu>
+        </div>
+      </div>
+    </div>
 
-    </n-gi>
-    <n-gi :span="2"></n-gi>
-    <n-gi class="is-end menu" :span="14">
-    <template class="svg-container" @click="toggleSideMenu">
-      <a :class="(closeMenu) ? 'close' : 'open'">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
-          data-v-64fbeb85="">
-          <path fill="#fff" stroke="#7a7a7a" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"
-            d="M80 160h352"></path>
-          <path fill="#fff" stroke="#7a7a7a" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"
-            d="M80 256h352"></path>
-          <path fill="#fff" stroke="#7a7a7a" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"
-            d="M80 352h352"></path>
-        </svg>
-      </a>
-      <a :class="(closeMenu) ? 'open':'close'">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#7a7a7a"
-          class="block h-6 w-6" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </a>
-    </template>
-      <n-menu @click="toggleSideMenu" :class="(closeMenu) ? 'open' : 'close'" :mode="(changeToVerticalMode) ? 'vertical' : 'horizontal'" ref="menuInstRef"
-        v-model:value="selectedKeyRef" :options="menuOptions" :accordion="accordionRef" />
-    </n-gi>
-    <n-gi class="first-span"></n-gi>
-    <n-gi class="second-span"></n-gi>
-  </n-grid>
-
+    <DisclosurePanel class="sm:hidden">
+      <div class="space-y-1 px-2 pt-2 pb-3">
+          <DisclosureButton 
+          v-for="item in navigation" :key="item.name"
+           :aria-current="item.current ? 'page' : undefined"
+            :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
+            :href="item.href" as="a">{{ item.name }}</DisclosureButton>
+      </div>
+    </DisclosurePanel>
+  </Disclosure>
 </template>
 
 <script setup>
-import { h, ref, watch } from "vue";
-import { NIcon, NMenu, NGrid, NGi, NAvatar} from "naive-ui";
-import {
-  PersonOutline as PersonIcon,
-  PeopleOutline as ServiceIcon,
-  CallOutline as ContactIcon,
-  LaptopOutline as WorkIcon,
-  HomeOutline as HomeIcon,
-} from "@vicons/ionicons5";
-import { MdCash } from "@vicons/ionicons4";
+import { ref } from 'vue'
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+let mount = ref(true);
+const navigation = ref([
+  { name: 'Home', href: '#home', current: true },
+  { name: 'Services', href: '#service', current: false },
+  { name: 'Skills', href: '#skills', current: false },
+  { name: 'Portfolio', href: '#portfolio', current: false },
+  { name: 'Contact', href: '#contact', current: false },
+]);
 
-function renderIcon(icon) {
-  return () => h(NIcon, null, { default: () => h(icon) });
-}
-
-const accordionRef = ref(true);
-const selectedKeyRef = ref("go-back-home");
-const menuInstRef = ref(null);
-const selectAndExpand = (key) => {
-  selectedKeyRef.value = key;
-  menuInstRef.value?.showOption(key);
-}
-
-
-const menuOptions = [
-  {
-    label: () =>
-      h(
-        'a',
-        {
-          href: '#home',
-        },
-        'Home'
-      ),
-    key: "go-back-home",
-    icon: renderIcon(HomeIcon),
-  },
-  {
-    label: () =>
-      h(
-        'a',
-        {
-          href: '#service',
-        },
-        'Service'
-      ),
-    key: "go-to-service",
-    icon: renderIcon(ServiceIcon),
-  },
-  {
-    label: () =>
-      h(
-        'a',
-        {
-          href: '#skills',
-        },
-        'Skills'
-      ),
-    key: "go-to-skills",
-    icon: renderIcon(WorkIcon),
-  },
-  {
-    label: () =>
-      h(
-        'a',
-        {
-          href: '#portfolio',
-        },
-        'Portfolio'
-      ),
-    key: "go-to-portfolio",
-    icon: renderIcon(PersonIcon),
-  },
-  {
-    label: () =>
-      h(
-        'a',
-        {
-          href: '#contact',
-        },
-        'Contact'
-      ),
-    key: "go-to-contact",
-    icon: renderIcon(ContactIcon),
-  },
-];
-
-
-// for toggling and manipulating the menubar
-let closeMenu = ref(false);
-
-function toggleSideMenu() {
-  closeMenu.value = !closeMenu.value;
-}
-
-
-let screenWidth = window.innerWidth;
-let changeToVerticalMode = ref(false);
-watch(
-  screenWidth,
-  (newValue) => {
-    if(newValue.value < 901) {
-      changeToVerticalMode.value = true;
+function changeCurrent(index) {
+  navigation.value.forEach((value) => {
+    if(navigation.value.indexOf(value) == index) {
+      value.current = true;
+      mount.value = false;
+      setTimeout(()=>{mount.value = true},0)
     }
-    else {
-      changeToVerticalMode.value = false;
+    else{
+      value.current = false;
     }
-  }
-  );
+  })
+}
+
 
 </script>
-<style scoped>
-.svg-container {
-  display: none;
-}
-
-
-.n-grid {
-  height: 64px;
-  display: flex;
-  align-items: center;
-}
-
-
-.is-end {
-  text-align: end;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.n-gradient-text {
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.n-avatar {
-  height: 25px;
-  margin-right: 5px;
-}
-
-.center-avatar {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.header-title {
-  font-size: 1.2rem;
-  color: #777;
-}
-
-@media only screen and (max-width: 850px) {
-  .svg-container {
-    display: block;
-    position: absolute;
-    right: 10px;
-    top: 11px;
-  }
-
-  .svg-container .close {
-    display: none;
-  }
-
-  .svg-container .open {
-    display: block;
-  }
-
-  .svg-container svg {
-    width: 40px;
-    padding: 5px;
-    cursor: pointer;
-  }
-
-  .n-menu {
-    display: none;
-    position: absolute;
-    background-color: white;
-    width: 300px;
-  }
-
-  .is-end {
-    text-align: start;
-  }
-
-  .n-menu .n-menu-item {
-    margin-top: 6px;
-  }
-  
-
-  .n-menu.open {
-    display: block;
-    z-index: 5;
-    left: 0;
-    top: 60px;
-  }
-
-  .n-menu.close {
-    display: none;
-  }
-
-
-
-}
-</style>

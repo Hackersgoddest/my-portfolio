@@ -24,7 +24,9 @@ import Footer from "./Footer.vue";
 </script>
 <style>
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .menu-bar {
@@ -36,28 +38,6 @@ import Footer from "./Footer.vue";
 }
 
 
-
-@media only screen and (max-width: 1025px) {
-  .first-span, .second-span {
-  display: none;
-}
-.avatar, .author {
-  margin-left: 10px;
-}
-
-.menu {
-  margin-right: 10px;
-}
-
-}
-
-
-@media only screen and (max-width: 1281px) {
-  .second-span {
-  display: none;
-}
-
-}
 
 
 

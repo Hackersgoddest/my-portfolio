@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="flex flex-wrap justify-center gap-8">
     <figure>
       <figcaption>VUE JS</figcaption>
       <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +27,7 @@
     </figure>
     <figure>
       <figcaption>NAIVE-UI</figcaption>
-      <svg class="reduce-size" viewBox="0 0 256 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      <svg class="css-size" viewBox="0 0 256 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
         <title>Naive</title>
         <g>
@@ -67,7 +67,7 @@
     </figure>
     <figure>
       <figcaption>CSS</figcaption>
-      <svg class="css-size" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 56 56"
         style="enable-background:new 0 0 56 56;" xml:space="preserve">
         <g>
@@ -413,22 +413,13 @@
 </script>
 
 <style scoped>
-.main-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-figure {
- margin: 0px 20px;
-}
 
 figure svg {
   width: 40px;
 }
 
 figure .reduce-size {
-  width: 32px;
+  width: 38px;
 }
 
 figure .css-size {

@@ -17,13 +17,13 @@ onMounted(() => isMounted.value = !isMounted.value);
 
 .author {
   position: absolute;
-  top: 200px;
+  top: 150px;
   /* left: 20px; */
 }
 
 @media only screen and (max-width: 800px) {
   .author {
-    top: 120px;
+    top: 100px;
   }
 }
 </style>
