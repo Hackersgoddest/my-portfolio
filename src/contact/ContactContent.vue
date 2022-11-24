@@ -1,16 +1,6 @@
 <template>
-    <div class="grid place-content-center bg-gray-200 py-8">
-      <div class="mx-auto max-w-screen-xl container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 px-8 md:px-5">
-        <a href="mailto: hackersgoddest@gmail.com">
-          <span class="flex items-center">
-            <mail-icon />
-            <span class="font-semibold">EMAIL</span>
-          </span>
-          <span class="flex items-center">
-            <span class="text-sm font-medium">hackersgoddest@gmail.com</span>
-            <open-icon />
-          </span>
-        </a>
+    <div class="grid place-content-center bg-gray-200 py-8 truncate">
+      <div class="mx-auto max-w-screen-xl container grid grid-cols-2  md:grid-cols-3 lg:grid-cols-6 gap-8 px-8 md:px-5">
         <a href="tel:+233256287192">
           <span class="flex items-center">
             <call-icon />
@@ -18,6 +8,16 @@
           </span>
           <span class="flex items-center">
             <span class="text-sm font-medium">0256287192</span>
+            <open-icon />
+          </span>
+        </a>
+        <a href="mailto: hackersgoddest@gmail.com">
+          <span class="flex items-center">
+            <mail-icon />
+            <span class="font-semibold">EMAIL</span>
+          </span>
+          <span class="flex items-center">
+            <span class="text-sm font-medium">hackersgoddest@gmail.com</span>
             <open-icon />
           </span>
         </a>
