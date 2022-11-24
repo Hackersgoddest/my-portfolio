@@ -4,10 +4,7 @@
       SKILLS
     </button>
     <p class="text-2xl font-normal text-center">The Stack I Work With</p>
-  <n-grid cols="20 s:20 m:22 l:24 xl:24 2xl:24" responsive="screen">
-      <n-gi class="hidden md:block"></n-gi>
-    <n-gi class="hidden lg:block"></n-gi>
-      <n-gi :span="20">
+    <div class="container mx-auto mt-1">
         <n-tabs type="bar" size="large" trigger="hover" justify-content="center">
           <n-tab-pane name="frontend" tab="Frontend" class="text-center">
             <FrontEnd />
@@ -19,15 +16,12 @@
             <FullStack />
           </n-tab-pane>
         </n-tabs>
-      </n-gi>
-      <n-gi class="hidden md:block"></n-gi>
-    <n-gi class="hidden lg:block"></n-gi>
-    </n-grid>
+    </div>
 
   </div>
 </template>
 <script setup>
-import { NTabs, NTabPane, NGrid, NGi } from "naive-ui";
+import { NTabs, NTabPane } from "naive-ui";
 import FrontEnd from "./FrontEnd.vue";
 import BackEnd from "./BackEnd.vue";
 import FullStack from "./FullStack.vue";
