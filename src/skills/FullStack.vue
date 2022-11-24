@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-wrap justify-center gap-8">
-    <figure>
+  <div class="flex flex-wrap justify-evenly md:justify-center gap-8">
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>VUE JS</figcaption>
       <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
         <title>file_type_vue</title>
@@ -9,7 +9,7 @@
         <path d="M7.53,3.925,16,18.485l8.4-14.56H19.22L16,9.525l-3.29-5.6Z" style="fill:#35495e" />
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>REEACT JS</figcaption>
       <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
         <title>file_type_reactjs</title>
@@ -25,7 +25,7 @@
           style="fill:#00d8ff" />
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>NAIVE-UI</figcaption>
       <svg class="css-size" viewBox="0 0 256 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -44,7 +44,7 @@
       </svg>
 
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>JAVASCRIPT</figcaption>
       <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
         <title>file_type_js</title>
@@ -53,7 +53,7 @@
           style="fill:#f5de19" />
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>BULMA</figcaption>
       <svg viewBox="-58.5 0 373 373" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -65,7 +65,7 @@
       </svg>
 
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>CSS</figcaption>
       <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 56 56"
@@ -149,7 +149,7 @@
       </svg>
 
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>HTML</figcaption>
       <svg class="reduce-size" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
@@ -224,7 +224,7 @@
       </svg>
 
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>C#</figcaption>
       <svg viewBox="-16 0 288 288" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -247,7 +247,7 @@
         </g>
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>GOLANG</figcaption>
       <svg xmlns="http://www.w3.org/2000/svg" aria-label="Go" role="img" viewBox="0 0 512 512">
         <rect width="512" height="512" rx="15%" fill="#fff" />
@@ -257,7 +257,7 @@
 
     </figure>
 
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>PHP</figcaption>
       <svg viewBox="0 -60.5 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -300,7 +300,7 @@
       </svg>
 
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>PYTHON</figcaption>
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-label="Python" role="img"
         viewBox="0 0 512 512">
@@ -338,7 +338,7 @@
         </g>
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>FIREBASE</figcaption>
       <svg viewBox="-47.5 0 351 351" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -396,7 +396,7 @@
         </g>
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>MySQL</figcaption>
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path fill="#00758F" fill-rule="evenodd"
@@ -419,10 +419,10 @@ figure svg {
 }
 
 figure .reduce-size {
-  width: 38px;
+  width: 32px;
 }
 
 figure .css-size {
-  width: 35px;
+  width: 30px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-wrap justify-center gap-8">
-    <figure>
+  <div class="flex flex-wrap items-center justify-center gap-8">
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>C#</figcaption>
       <svg  viewBox="-16 0 288 288" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -23,7 +23,7 @@
         </g>
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>GOLANG</figcaption>
       <svg xmlns="http://www.w3.org/2000/svg" aria-label="Go" role="img" viewBox="0 0 512 512">
         <rect width="512" height="512" rx="15%" fill="#fff" />
@@ -32,7 +32,7 @@
       </svg>
 
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>JAVASCRIPT</figcaption>
       <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
         <title>file_type_js</title>
@@ -41,7 +41,7 @@
           style="fill:#f5de19" />
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>PHP</figcaption>
       <svg viewBox="0 -60.5 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -84,7 +84,7 @@
       </svg>
 
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>PYTHON</figcaption>
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-label="Python" role="img"
         viewBox="0 0 512 512">
@@ -96,7 +96,7 @@
         <use xlink:href="#p" fill="#ffd43b" transform="rotate(180,256,255)" />
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>JAVA</figcaption>
       <svg viewBox="0 0 192.756 192.756" xmlns="http://www.w3.org/2000/svg">
         <g fill-rule="evenodd" clip-rule="evenodd">
@@ -122,7 +122,7 @@
         </g>
       </svg>
     </figure>
-    <figure>
+    <figure class="flex flex-col justify-center items-center">
       <figcaption>FIREBASE</figcaption>
       <svg viewBox="-47.5 0 351 351" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
     <defs>
