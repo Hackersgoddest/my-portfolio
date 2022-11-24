@@ -1,6 +1,6 @@
 <template>
   <MenuBar class="menu-bar" />
-  <div id="home">
+  <div id="home" class="bg-gray-100">
     <HomeView />
     <ServiceView />
     <SkillsView />

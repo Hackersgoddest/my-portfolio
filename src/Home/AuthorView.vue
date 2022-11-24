@@ -1,10 +1,12 @@
 <template>
-  <div class="ml-5 lg:ml-10 xl:ml-[8%] 2xl:ml-40 2xl:pl-4">
+  <div class=" container mx-auto max-w-screen-xl px-5">
+    <div class="relative flex items-start justify-start flex-col">
       <button class="p-2 outline-none rounded text-green-700 text-lg hover:bg-green-600/[0.2] ... cursor-auto">
         Software Developer
       </button>
-      <p class="text-white text-2xl font-semibold md:text-3xl">I am Frank Oppong Konadu</p>
-      <p class="text-white text-sm md:text-base mt-3.5">I am a passionate software developer with a year of experience</p>
+      <p class="text-white text-xl font-semibold md:text-3xl">I am Frank Oppong Konadu</p>
+      <p class="text-white text-sm md:text-base mt-3.5">I am a passionate software developer with a year of experience
+      </p>
       <span class="location__container">
         <div class="text-gray-400 flex items-baseline h-6 leading-7 mt-2">
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="mr-1"
@@ -16,9 +18,10 @@
         </div>
       </span>
       <div class="mt-6 text-sm h-9">
-        <a @mouseover="Portfolio" @mouseout="out" class="px-6 py-2 rounded-full hover:text-indigo-600 font-bold mr-4" :class="onPortfolio ? 'color-white' : 'color-green'"
-          href="#portfolio">My Portfilio</a>
-        <a @mouseover="CV" @mouseout="out" class="cv px-6 py-2 rounded-full hover:text-indigo-600 font-bold" :class="onCv ? 'color-white' : 'color-green'" href="#">My CV
+        <a @mouseover="Portfolio" @mouseout="out" class="px-6 py-2 rounded-full hover:text-indigo-600 font-bold mr-4"
+          :class="onPortfolio ? 'color-white' : 'color-green'" href="#portfolio">My Portfilio</a>
+        <a @mouseover="CV" @mouseout="out" class="cv px-6 py-2 rounded-full hover:text-indigo-600 font-bold"
+          :class="onCv ? 'color-white' : 'color-green'" href="#">My CV
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="ml-2"
             height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -35,6 +38,8 @@
         </div>
       </div>
     </div>
+
+  </div>
 </template>
 
 <script setup>
@@ -78,5 +83,4 @@ function CV() {
   width: 1em;
   height: 1em;
 }
-
 </style>
