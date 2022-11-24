@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap  gap-8">
+  <div class="flex flex-wrap justify-center items-baseline gap-4 md:gap-8">
     <figure class="flex flex-col justify-center items-center">
       <figcaption>VUE JS</figcaption>
       <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
