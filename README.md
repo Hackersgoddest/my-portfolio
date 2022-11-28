@@ -1,6 +1,6 @@
-# My-portfolio
+# my-portfolio
 
-This is Hackersgoddest Portfolio
+This is hackersgoddest portfolio
 
 ## How to clone the project onto your local machine
 Create a folder
