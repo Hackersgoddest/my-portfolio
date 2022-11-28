@@ -436,7 +436,7 @@ figure svg {
 }
 
 figure .reduce-size {
-  width: 32px;
+  width: 35px;
 }
 
 figure .css-size {
