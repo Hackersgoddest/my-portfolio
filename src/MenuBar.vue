@@ -13,10 +13,14 @@
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex flex-shrink-0 items-center">
-            <img class="block h-8 w-auto lg:hidden" src="../public/main-logo.png"
-              alt="Hackersgoddest logo" />
-            <img class="hidden h-8 w-auto lg:block" src="../public/main-logo.png"
-              alt="Hackersgoddest logo" />
+            <a href="#home" @click="changeCurrentMenu(0)">
+              <img class="block h-8 w-auto lg:hidden" src="../public/main-logo.png"
+                alt="Hackersgoddest logo" />
+            </a>
+            <a href="#home" @click="changeCurrentMenu(0)">
+              <img class="hidden h-8 w-auto lg:block" src="../public/main-logo.png"
+                alt="Hackersgoddest logo" />
+            </a>
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4" v-if="mount">
@@ -24,7 +28,7 @@
             v-for="(item, index) in navigation" :key="item.name"
             >
             <a 
-            @click="changeCurrent(index)"
+            @click="changeCurrentMenu(index)"
              :aria-current="item.current ? 'page' : undefined"
                 :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
                 :href="item.href">{{ item.name }}</a>
@@ -49,16 +53,16 @@
               <MenuItems
                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <MenuItem v-slot="{ active }">
-                <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Curriculum
+                <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']" @click="changeCurrentMenu(0)">Curriculum
                   Vitae</a>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                 <a href="#portfolio"
-                  :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Porfolio</a>
+                  :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']" @click="changeCurrentMenu(3)">Porfolio</a>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                 <a href="#contact"
-                  :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Contact</a>
+                  :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']" @click="changeCurrentMenu(4)">Contact</a>
                 </MenuItem>
               </MenuItems>
             </transition>
@@ -73,7 +77,7 @@
       v-for="(item, index) in navigation" :key="item.name"
       >
       <DisclosureButton 
-    @click="changeCurrent(index)"
+    @click="changeCurrentMenu(index)"
     :aria-current="item.current ? 'page' : undefined"
      :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
      :href="item.href" as="a">{{ item.name }}</DisclosureButton>
@@ -97,7 +101,7 @@ const navigation = ref([
   { name: 'Contact', href: '#contact', current: false },
 ]);
 
-function changeCurrent(index) {
+function changeCurrentMenu(index) {
   navigation.value.forEach((value) => {
     if(navigation.value.indexOf(value) == index) {
       value.current = true;
