@@ -1,6 +1,6 @@
 <template>
     <div class="grid place-content-center bg-gray-200 py-8 truncate">
-      <div class="mx-auto max-w-screen-xl container grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 px-8 md:px-5">
+      <div class="mx-auto max-w-screen-xl container grid grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 px-8 md:px-5">
         <a href="tel:+233256287192">
           <span class="flex items-center">
             <call-icon />
