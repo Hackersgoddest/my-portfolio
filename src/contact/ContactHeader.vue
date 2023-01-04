@@ -3,6 +3,6 @@
   <button class="cursor-auto hover:bg-none text-base p-2 text-green-700 font-semibold">
       CONTACT
     </button>
-<p class="text-xl font-semibold text-center">CHECK ME OUT</p>
+<p class="text-2xl font-normal text-center">Check Me Out</p>
 </div>
 </template>
