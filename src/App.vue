@@ -1,5 +1,5 @@
 <template>
-  <MenuBar class="menu-bar" />
+  <MenuBarOne class="menu-bar" />
   <div id="home" class="bg-gray-100">
     <HomeView />
     <ServiceView />
@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import MenuBar from './MenuBar.vue';
+import MenuBarOne from './MenuBarOne.vue';
 import HomeView from './Home/HomeView.vue';
 import ServiceView from './service/ServiceView.vue';
 import SkillsView from './skills/SkillsView.vue';
