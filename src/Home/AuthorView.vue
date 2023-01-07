@@ -18,9 +18,9 @@
         </div>
       </span>
       <div class="mt-6 text-sm h-9">
-        <a @mouseover="Portfolio" @mouseout="out" class="px-6 py-2 rounded-full hover:text-indigo-600 font-bold mr-4"
+        <a @mouseover="Portfolio" @mouseout="out" class="px-6 py-2 rounded-full font-bold mr-4"
           :class="onPortfolio ? 'color-white' : 'color-green'" href="#portfolio">My Portfilio</a>
-        <a @mouseover="CV" @mouseout="out" class="cv px-6 py-2 rounded-full hover:text-indigo-600 font-bold"
+        <a @mouseover="CV" @mouseout="out" class="cv px-6 py-2 rounded-full font-bold"
           :class="onCv ? 'color-white' : 'color-green'" href="#">My CV
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="ml-2"
             height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
