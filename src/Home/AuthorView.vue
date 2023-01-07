@@ -1,7 +1,7 @@
 <template>
   <div class=" container mx-auto max-w-screen-xl px-5">
     <div class="relative flex items-start justify-start flex-col">
-      <button class="p-2 outline-none rounded text-green-700 text-lg hover:bg-green-600/[0.2] ... cursor-auto">
+      <button class="px-2 mb-2 py-1 outline-none bg-gradient-to-r from-pink-500 to-indigo-500 rounded text-white text-base font-semibold cursor-auto">
         Software Developer
       </button>
       <p class="text-white text-xl font-semibold md:text-3xl">I am Frank Oppong Konadu</p>
@@ -17,11 +17,9 @@
           </svg>Accra - Ghana | Remote
         </div>
       </span>
-      <div class="mt-6 text-sm h-9">
-        <a @mouseover="Portfolio" @mouseout="out" class="px-6 py-2 rounded-full font-bold mr-4"
-          :class="onPortfolio ? 'color-white' : 'color-green'" href="#portfolio">My Portfilio</a>
-        <a @mouseover="CV" @mouseout="out" class="cv px-6 py-2 rounded-full font-bold"
-          :class="onCv ? 'color-white' : 'color-green'" href="#">My CV
+      <div class="my-4 text-sm h-9">
+        <a class="text-white bg-gradient-to-r from-sky-500 to-blue-500 hover:from-white hover:to-gray-300 hover:text-indigo-700 px-6 py-2 rounded-full font-bold mr-4 sm:transition-colors sm:duration-1000 sm:ease-in-out" href="#portfolio">My Portfolio</a>
+        <a class="inline-flex items-center text-white bg-gradient-to-r from-sky-500 to-blue-500 hover:from-gray-300 hover:to-white hover:text-indigo-700 px-6 py-2 rounded-full font-bold sm:transition-colors sm:duration-1000 sm:ease-in-out" href="#">My CV
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="ml-2"
             height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -41,46 +39,3 @@
 
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-
-let onPortfolio = ref(true);
-let onCv = ref(false);
-
-function Portfolio() {
-  onCv.value = false;
-  onPortfolio.value = true;
-}
-
-function CV() {
-  onPortfolio.value = false;
-  onCv.value = true;
-}
-
-
-</script>
-
-<style scoped>
-.color-white {
-  color: white;
-  background-color: rgba(52, 53, 52, 0.3);
-  transition: background-color 0.3s ease-in-out 0.3s, color 0.3s ease-in-out 0.3s;
-}
-
-.color-green {
-  background-color: rgba(24, 160, 88, 0.2);
-  color: rgb(24, 160, 88);
-  transition: background-color 0.3s ease-in-out 0.3s, color 0.3s ease-in-out 0.3s;
-}
-
-.cv svg {
-  margin-left: 8px;
-  margin-bottom: 4px;
-  display: inline-block;
-  vertical-align: middle;
-  align-content: center;
-  width: 1em;
-  height: 1em;
-}
-</style>

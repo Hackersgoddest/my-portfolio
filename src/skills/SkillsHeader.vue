@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center items-center bg-gray-100 pt-40 pb-12 sm:pb-20">
-    <button class="cursor-auto hover:bg-none text-base p-2 text-green-700 font-semibold">
+    <button class="cursor-auto hover:bg-none text-base p-2 text-sky-500 font-semibold">
       SKILLS
     </button>
     <p class="text-2xl font-normal text-center">The Stack I Work With</p>
