@@ -1,7 +1,7 @@
 <template>
-    <div class="grid shadow-2xl place-content-center bg-gradient-to-r from-white to-gray-50 py-8 truncate">
-      <div class="mx-auto max-w-screen-xl container grid grid-cols-2 xs:grid-cols-3  md:grid-cols-4 lg:grid-cols-6 gap-8 px-8 md:px-5 text-blue-500">
-        <a href="mailto: hackersgoddest@gmail.com" class="hover:text-indigo-700">
+    <div class="grid place-content-center bg-gray-200 py-8 truncate">
+      <div class="mx-auto max-w-screen-xl container grid grid-cols-2 xs:grid-cols-3  md:grid-cols-4 lg:grid-cols-6 gap-8 px-8 md:px-5">
+        <a href="mailto: hackersgoddest@gmail.com">
           <span class="flex justify-center">
             <mail-icon />
             <span class="font-semibold">EMAIL</span>
@@ -10,7 +10,7 @@
             <span class="text-sm font-medium">hackersgoddest@gmail.com</span>
           </span>
         </a>
-        <a href="tel:+233256287192" class="hover:text-indigo-700">
+        <a href="tel:+233256287192">
           <span class="flex justify-center">
             <call-icon />
             <span class="font-semibold">PHONE</span>
@@ -19,7 +19,7 @@
             <span class="text-sm font-medium">0256287192</span>
           </span>
         </a>
-        <a href="https://stackoverflow.com/users/17446079/frank-oppong-konadu" target="_blank" class="hover:text-indigo-700">
+        <a href="https://stackoverflow.com/users/17446079/frank-oppong-konadu" target="_blank">
           <span class="flex justify-center">
             <stack-icon />
             <span class="font-semibold">STACKOVERFLOW</span>
@@ -28,7 +28,7 @@
             <span class="text-sm font-medium">Frank Oppong Konadu</span>
           </div>
         </a>
-        <a href="https://github.com/Hackersgoddest" target="_blank" class="hover:text-indigo-700">
+        <a href="https://github.com/Hackersgoddest" target="_blank">
           <span class="flex justify-center">
             <github-icon />
             <span class="font-semibold">GITHUB</span>
@@ -37,7 +37,7 @@
             <span class="text-sm font-medium">Hackersgoddest</span>
           </span>
         </a>
-        <a href="https://www.linkedin.com/in/frank-oppong-konadu-9286b523b/" target="_blank" class="hover:text-indigo-700">
+        <a href="https://www.linkedin.com/in/frank-oppong-konadu-9286b523b/" target="_blank">
           <span class="flex justify-center">
             <linkedin-icon />
             <span class="font-semibold">LINKEDIN</span>
@@ -46,7 +46,7 @@
             <span class="text-sm font-medium">Frank Oppong Konadu</span>
           </span>
         </a>
-        <a href="https://twitter.com/UndefineHacker" target="_blank" class="hover:text-indigo-700">
+        <a href="https://twitter.com/UndefineHacker" target="_blank">
           <span class="flex justify-center">
             <twitter-icon />
             <span class="font-semibold">TWITTER</span>
@@ -77,4 +77,9 @@ import { NGrid, NGi } from "naive-ui";
 div svg {
   width: 20px;
 }
+
+a:hover {
+  color: #18A058;
+}
+
 </style>
