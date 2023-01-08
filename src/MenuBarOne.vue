@@ -10,7 +10,7 @@
           class="block absolute left-0 top-16 bg-gray-800 w-screen transition-transform pb-3 pl-2 pr-4 sm:px-0 sm:translate-x-0 sm:w-auto sm:static gap-2 sm:inline-flex sm:items-center sm:pb-0">
           <template v-for="(item, index) in navigation" :key="item.index">
             <li>
-              <a @click="changeActiveMenu(item.name)" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 mb-2 sm:mb-0 rounded-md text-base font-medium']"
+              <a @click="changeActiveMenu(item.name)" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 mb-2 sm:mb-0 rounded-md text-base font-medium transition-colors duration-1000 ease-in-out']"
                 :href="item.href">{{ item.name }}
               </a>
             </li>
@@ -18,8 +18,8 @@
         </ul>
       </nav>
     </div>
-    <button @click="openMenu = !openMenu" class="absolute  top-2.5 right-2 outline-none ">
-      <template v-show="!openMenu" class="bar inline-flex items-center rounded-md p-3  hover:bg-gray-700 z-10 sm:hidden w-10 flex-col justify-center">
+    <button @click="openMenu = !openMenu" class="absolute  top-2.5 right-2 outline-none">
+      <template v-show="!openMenu" class="bar inline-flex items-center rounded-md p-3  hover:bg-gray-700 z-10 sm:hidden w-10 flex-col justify-center transition-colors duration-1000 ease-in-out">
         <div class="bg-gray-400 h-0.5 w-5 mb-1 rounded-xl"></div>
         <div class="bg-gray-400 h-0.5 w-5 mb-1 rounded-xl"></div>
         <div class="bg-gray-400 h-0.5 w-5 mb-0 rounded-xl"></div>
