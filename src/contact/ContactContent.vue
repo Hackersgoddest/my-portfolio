@@ -1,5 +1,5 @@
 <template>
-    <div class="grid place-content-center bg-gradient-to-r from-gray-400 to-gray-500 py-8 truncate">
+    <div class="grid place-content-center bg-gray-400 py-8 truncate">
       <div class="mx-auto max-w-screen-xl container grid grid-cols-2 xs:grid-cols-3  md:grid-cols-4 lg:grid-cols-6 gap-8 px-8 text-gray-900 md:px-5">
         <a href="mailto: hackersgoddest@gmail.com">
           <span class="flex justify-center">
