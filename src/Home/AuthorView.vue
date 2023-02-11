@@ -1,7 +1,7 @@
 <template>
   <div class=" container mx-auto max-w-screen-xl px-5">
     <div class="relative flex items-start justify-start flex-col">
-      <button class="px-2 py-1 outline-none rounded text-white text-base font-semibold bg-gradient-to-r from-gray-500 to-gray-900 cursor-auto">
+      <button class="shadow-2xl px-2 py-1 mb-1 sm:mb-2 outline-none rounded text-white text-base font-semibold bg-gradient-to-r from-gray-500 to-gray-900 cursor-auto">
         Software Developer
       </button>
       <p class="text-white text-xl font-semibold md:text-2xl">I am Frank Oppong Konadu</p>
