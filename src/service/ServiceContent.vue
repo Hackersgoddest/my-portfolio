@@ -36,7 +36,7 @@ const serviceOptions = shallowRef([
   {
     title: "Mobile App Development",
     description:
-      "I develop both both hybrid and native mobile application for android and ios",
+      "I develop both hybrid and native mobile application for android and ios",
     icon: PhoneIcon
   },
   {

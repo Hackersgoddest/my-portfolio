@@ -4,7 +4,7 @@
       <n-text class="shadow-2xl px-2 py-1 mb-1 sm:mb-2 outline-none rounded text-white text-sm bg-gradient-to-r from-[#0d0d0e] to-[#0f0f14] brightness-200">
         <n-gradient-text type="success" class="font-bold">Software Developer</n-gradient-text>
       </n-text>
-      <n-text class="text-white text-lg font-medium md:text-xl">I am Frank Oppong Konadu</n-text>
+      <n-text class="text-white text-lg font-medium md:text-xl">Frank Oppong Konadu</n-text>
       <n-text class="text-white text-sm md:text-base mt-3.5">I am a passionate software developer with a year of experience
       </n-text>
       <span class="location__container">
