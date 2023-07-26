@@ -27,6 +27,7 @@ import {
   LogoGithub as GithubIcon,
   LogoLinkedin as LinkedinIcon,
   LogoTwitter as TwitterIcon,
+  LogoInstagram as InstagramIcon,
 } from "@vicons/ionicons5";
 import { NIcon } from "naive-ui";
 import { shallowRef } from "vue";
@@ -45,6 +46,24 @@ const contactOptions = shallowRef([
     icon: CallIcon,
   },
   {
+    name: "INSTAGRAM",
+    link: "https://www.instagram.com/hackersgoddest/",
+    description: "Hackersgoddest",
+    icon: InstagramIcon
+  },
+  {
+    name: "TWITTER",
+    link: "https://twitter.com/UndefineHacker",
+    description: "Hackersgoddest",
+    icon: CallIcon,
+  },
+  {
+    name: "LINKEDIN",
+    link: "https://www.linkedin.com/in/frank-oppong-konadu-9286b523b/",
+    description: "Frank Oppong Konadu",
+    icon: LinkedinIcon,
+  },
+  {
     name: "STACKOVERFLOW",
     link: "https://stackoverflow.com/users/17446079/frank-oppong-konadu",
     description: "Frank Oppong Konadu",
@@ -55,18 +74,6 @@ const contactOptions = shallowRef([
     link: "https://github.com/Hackersgoddest",
     description: "Hackersgoddest",
     icon: GithubIcon,
-  },
-  {
-    name: "LINKEDIN",
-    link: "https://www.linkedin.com/in/frank-oppong-konadu-9286b523b/",
-    description: "Frank Oppong Konadu",
-    icon: LinkedinIcon,
-  },
-  {
-    name: "TWITTER",
-    link: "https://twitter.com/UndefineHacker",
-    description: "Hackersgoddest",
-    icon: CallIcon,
   }
 ]);
 </script>
