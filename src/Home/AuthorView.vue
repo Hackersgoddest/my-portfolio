@@ -1,12 +1,12 @@
 <template>
   <div class=" container mx-auto max-w-screen-xl px-5">
     <div class="relative flex items-start justify-start flex-col">
-      <button class="shadow-2xl px-2 py-1 mb-1 sm:mb-2 outline-none rounded text-white text-base font-semibold bg-gradient-to-r from-gray-500 to-gray-900 cursor-auto">
-        Software Developer
-      </button>
-      <p class="text-white text-xl font-semibold md:text-2xl">I am Frank Oppong Konadu</p>
-      <p class="text-white text-sm md:text-base mt-3.5">I am a passionate software developer with a year of experience
-      </p>
+      <n-text class="shadow-2xl px-2 py-1 mb-1 sm:mb-2 outline-none rounded text-white text-sm bg-gradient-to-r from-[#0d0d0e] to-[#0f0f14] brightness-200">
+        <n-gradient-text type="success" class="font-bold">Software Developer</n-gradient-text>
+      </n-text>
+      <n-text class="text-white text-lg font-medium md:text-xl">I am Frank Oppong Konadu</n-text>
+      <n-text class="text-white text-sm md:text-base mt-3.5">I am a passionate software developer with a year of experience
+      </n-text>
       <span class="location__container">
         <div class="text-gray-400 flex items-baseline h-6 leading-7 mt-2">
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" class="mr-1"
@@ -31,10 +31,10 @@
         </a>
       </div>
       <div class="flex order-5 mt-1">
-        <p class="mr-3 text-4xl text-white leading-9 order-0">1+</p>
+        <n-text class="mr-3 text-4xl text-white leading-9 order-0">1+</n-text>
         <div class="flex flex-col justify-center">
-          <p class="text-gray-400 text-xs">YEARS</p>
-          <P class="text-gray-400 text-xs">EXPERIENCE</P>
+          <n-text class="text-gray-400 text-xs">YEARS</n-text>
+          <n-text class="text-gray-400 text-xs">EXPERIENCE</n-text>
         </div>
       </div>
     </div>
@@ -44,6 +44,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { NText, NGradientText } from "naive-ui";
 
 let onPortfolio = ref(true);
 let onCv = ref(false);

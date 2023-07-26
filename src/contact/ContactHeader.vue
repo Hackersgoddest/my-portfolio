@@ -1,8 +1,11 @@
 <template>
-<div class="flex flex-col justify-center items-center bg-gray-100 pt-40 pb-5 sm:pb-20">
-  <button class="cursor-auto hover:bg-none text-base p-2 text-green-700 font-semibold">
-      CONTACT
-    </button>
-<p class="text-2xl font-normal text-center">Check Me Out</p>
-</div>
+  <div
+    class="flex flex-col justify-center items-center bg-[#101014] pt-20 pb-20"
+  >
+    <n-h4 class="text-green-300 mb-1"> CONTACT </n-h4>
+    <n-p class="text-xl font-normal mb-1 text-white">Check Me Out</n-p>
+  </div>
 </template>
+<script setup>
+import { NP, NH4 } from "naive-ui";
+</script>

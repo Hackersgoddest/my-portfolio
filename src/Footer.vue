@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-gray-800 flex items-center h-14">
+    <footer class="bg-[#18171c] flex items-center h-14">
       <!-- <marquee behavior="" direction="ltr" class="h-14 flex items-center"> -->
         <div class="w-full flex justify-center items-baseline">
             <span class="text-sm md:text-base font-semibold text-white mr-2">Oppong Frank Konadu</span>

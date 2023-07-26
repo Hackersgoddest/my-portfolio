@@ -1,24 +1,26 @@
 <template>
+  <main>
     <ServiceHeader id="service" />
     <ServiceContent class="service-content" />
+  </main>
 </template>
 
 <script setup>
-import ServiceHeader from './ServiceHeader.vue';
-import ServiceContent from './ServiceContent.vue';
+import ServiceHeader from "./ServiceHeader.vue";
+import ServiceContent from "./ServiceContent.vue";
 </script>
 
 <style scoped>
-.service-content {
-    padding-bottom: 100px;
+main {
+  background-color: #101014;
 }
-
+.service-content {
+  padding-bottom: 100px;
+}
 
 @media only screen and (max-width: 500px) {
   .service-content {
     padding-bottom: 50px;
   }
 }
-
-
 </style>

@@ -1,62 +1,21 @@
 <template>
-    <div class="grid place-content-center bg-gray-400 py-8 truncate">
-      <div class="mx-auto max-w-screen-xl container grid grid-cols-2 xs:grid-cols-3  md:grid-cols-4 lg:grid-cols-6 gap-8 px-8 text-gray-900 md:px-5">
-        <a href="mailto: hackersgoddest@gmail.com">
-          <span class="flex justify-center">
-            <mail-icon />
-            <span class="font-semibold">EMAIL</span>
+  <div class="grid place-content-center bg-[#101014] py-8 truncate">
+    <div
+      class="mx-auto max-w-screen-xl container grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 px-8 text-white md:px-5"
+    >
+      <template v-for="item in contactOptions" :key="item.name">
+        <a :href="item.link">
+          <span class="flex justify-center gap-1">
+            <n-icon size="20" :component="item.icon" />
+            <span class="font-semibold">{{ item.name }}</span>
           </span>
           <span class="flex justify-center">
-            <span class="text-sm font-medium">hackersgoddest@gmail.com</span>
-          </span>
-        </a>
-        <a href="tel:+233256287192">
-          <span class="flex justify-center">
-            <call-icon />
-            <span class="font-semibold">PHONE</span>
-          </span>
-          <span class="flex justify-center">
-            <span class="text-sm font-medium">0256287192</span>
+            <span class="text-sm font-medium">{{ item.description }}</span>
           </span>
         </a>
-        <a href="https://stackoverflow.com/users/17446079/frank-oppong-konadu" target="_blank">
-          <span class="flex justify-center">
-            <stack-icon />
-            <span class="font-semibold">STACKOVERFLOW</span>
-          </span>
-          <div class="flex justify-center">
-            <span class="text-sm font-medium">Frank Oppong Konadu</span>
-          </div>
-        </a>
-        <a href="https://github.com/Hackersgoddest" target="_blank">
-          <span class="flex justify-center">
-            <github-icon />
-            <span class="font-semibold">GITHUB</span>
-          </span>
-          <span class="flex justify-center">
-            <span class="text-sm font-medium">Hackersgoddest</span>
-          </span>
-        </a>
-        <a href="https://www.linkedin.com/in/frank-oppong-konadu-9286b523b/" target="_blank">
-          <span class="flex justify-center">
-            <linkedin-icon />
-            <span class="font-semibold">LINKEDIN</span>
-          </span>
-          <span class="flex justify-center">
-            <span class="text-sm font-medium">Frank Oppong Konadu</span>
-          </span>
-        </a>
-        <a href="https://twitter.com/UndefineHacker" target="_blank">
-          <span class="flex justify-center">
-            <twitter-icon />
-            <span class="font-semibold">TWITTER</span>
-          </span>
-          <span class="flex justify-center">
-            <span class="text-sm font-medium">Hackersgoddest</span>
-          </span>
-        </a>
-      </div>
+      </template>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -69,18 +28,56 @@ import {
   LogoLinkedin as LinkedinIcon,
   LogoTwitter as TwitterIcon,
 } from "@vicons/ionicons5";
-import { NGrid, NGi } from "naive-ui";
+import { NIcon } from "naive-ui";
+import { shallowRef } from "vue";
+
+const contactOptions = shallowRef([
+  {
+    name: "EMAIL",
+    link: "mailto: hackersgoddest@gmail.com",
+    description: "hackersgoddest@gmail.com",
+    icon: MailIcon,
+  },
+  {
+    name: "PHONE",
+    link: "tel:+233256287192",
+    description: "0256287192",
+    icon: CallIcon,
+  },
+  {
+    name: "STACKOVERFLOW",
+    link: "https://stackoverflow.com/users/17446079/frank-oppong-konadu",
+    description: "Frank Oppong Konadu",
+    icon: StackIcon,
+  },
+  {
+    name: "GITHUB",
+    link: "https://github.com/Hackersgoddest",
+    description: "Hackersgoddest",
+    icon: GithubIcon,
+  },
+  {
+    name: "LINKEDIN",
+    link: "https://www.linkedin.com/in/frank-oppong-konadu-9286b523b/",
+    description: "Frank Oppong Konadu",
+    icon: LinkedinIcon,
+  },
+  {
+    name: "TWITTER",
+    link: "https://twitter.com/UndefineHacker",
+    description: "Hackersgoddest",
+    icon: CallIcon,
+  }
+]);
 </script>
 
 <style scoped>
-
 div svg {
   width: 20px;
 }
 
 a:hover {
-  color: white;
+  color: #57e9b1;
   transition: color 0.7s ease-in-out;
 }
-
 </style>

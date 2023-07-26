@@ -1,9 +1,14 @@
 <template>
-<div  class="flex flex-col justify-center items-center bg-gray-100 pt-40 pb-20">
-  <button class="cursor-auto hover:bg-none text-base p-2 text-green-700 font-semibold">
-      PORTFOLIO
-    </button>
-<p class="text-2xl font-normal">My Latest Projects</p>
-<p class="text-base text-center">These are the some of my lastest projects.</p>
-</div>
+  <div
+    class="flex flex-col justify-center items-center bg-[#101014] pt-20 pb-20"
+  >
+    <n-h4 class="text-green-300 mb-1"> PORTFOLIO </n-h4>
+    <n-p class="text-xl font-normal mb-1 text-white">My Latest Projects</n-p>
+    <n-p class="text-base text-center mb-1 text-white"
+      >These are the some of my lastest projects.</n-p
+    >
+  </div>
 </template>
+<script setup>
+import { NP, NH4 } from "naive-ui";
+</script>

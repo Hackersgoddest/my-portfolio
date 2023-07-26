@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col justify-center items-center bg-gray-100 pt-40 pb-12 sm:pb-20">
-    <button class="cursor-auto hover:bg-none text-base p-2 text-green-700 font-semibold">
+  <div class="mx-auto max-w-screen-xl container flex flex-col justify-center items-center bg-[#101014] pt-40 pb-12 sm:pb-20">
+    <n-h4 class="text-green-300">
       SKILLS
-    </button>
-    <p class="text-2xl font-normal text-center">The Stack I Work With</p>
+    </n-h4>
+    <n-text class="text-xl font-normal text-center text-white">The Stack I Work With</n-text>
     <div class="container mx-auto mt-1">
-        <n-tabs type="bar" size="large" trigger="hover" justify-content="center">
-          <n-tab-pane name="frontend" tab="Frontend" class="text-center">
+        <n-tabs :animated="true" type="bar" size="large" trigger="hover" justify-content="center" :tab-style="`color: #79787b`">
+          <n-tab-pane name="frontend" tab="Frontend" class="text-center text-white">
             <FrontEnd />
           </n-tab-pane>
           <n-tab-pane name="backend" tab="Backend" class="text-center">
@@ -21,7 +21,7 @@
   </div>
 </template>
 <script setup>
-import { NTabs, NTabPane } from "naive-ui";
+import { NTabs, NTabPane, NH4, NText } from "naive-ui";
 import FrontEnd from "./FrontEnd.vue";
 import BackEnd from "./BackEnd.vue";
 import FullStack from "./FullStack.vue";
