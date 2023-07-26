@@ -4,7 +4,7 @@
       class="mx-auto max-w-screen-xl container grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 px-8 text-white md:px-5"
     >
       <template v-for="item in contactOptions" :key="item.name">
-        <a :href="item.link">
+        <a :href="item.link" target="_blank">
           <span class="flex justify-center gap-1">
             <n-icon size="20" :component="item.icon" />
             <span class="font-semibold">{{ item.name }}</span>
