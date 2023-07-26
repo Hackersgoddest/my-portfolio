@@ -21,7 +21,7 @@
         <a @mouseover="Portfolio" @mouseout="out" class="px-6 py-2 rounded-full font-bold mr-4 transition-colors duration-1000 ease-in-out"
           :class="onPortfolio ? 'color-white' : 'color-green'" href="#portfolio">My Portfilio</a>
         <a @mouseover="CV" @mouseout="out" class="cv px-6 py-2 rounded-full font-bold transition-colors duration-1000 ease-in-out"
-          :class="onCv ? 'color-white' : 'color-green'" href="https://drive.google.com/file/d/1YiMw6cE80ZHNG22eFGooqVuEKd-8TD-A/view?usp=sharing" target="_blank">My CV
+          :class="onCv ? 'color-white' : 'color-green'" href="https://drive.google.com/file/d/1aVsyfJdYw4dNsF9rwsEVnGPV62DRS8Xo/view?usp=sharing" target="_blank">My CV
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="ml-2"
             height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
             <path
