@@ -12,7 +12,7 @@
         <figcaption class="text-white font-bold text-center text-base md:text-lg mt-2 mb-0">
           {{ service.title }}
         </figcaption>
-        <n-p class="text-gray-300 text-center mt-[6px]">{{ service.description }}</n-p>
+        <n-p class="text-[#727174] text-center mt-[6px]">{{ service.description }}</n-p>
       </figure>
     </div>
   </div>
