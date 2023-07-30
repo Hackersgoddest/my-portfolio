@@ -10,7 +10,7 @@
             <span class="font-semibold">{{ item.name }}</span>
           </span>
           <span class="flex justify-center">
-            <span class="text-[#727174] text-sm font-medium">{{ item.description }}</span>
+            <span class="text-sm font-medium">{{ item.description }}</span>
           </span>
         </a>
       </template>
