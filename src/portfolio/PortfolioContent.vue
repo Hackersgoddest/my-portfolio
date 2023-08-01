@@ -27,13 +27,13 @@
               <n-modal
                 transform-origin="center"
                 v-model:show="showModal"
-                class="custom-card w-full md:w-3/4"
+                class="custom-card w-full lg:w-[80%]"
                 preset="card"
                 title="Eban Register"
                 :bordered="false"
               >
-                <d class="flex gap-4 w-full flex-wrap">
-                  <n-carousel show-arrow autoplay class="flex flex-1">
+                <div class="flex gap-4 w-full flex-wrap">
+                  <n-carousel show-arrow autoplay class="flex flex-1 w-full">
                     <n-image
                       v-for="image in project.images"
                       :key="image"
@@ -97,7 +97,7 @@
                       </n-button>
                     </a>
                   </div>
-                </d>
+                </div>
               </n-modal>
             </div>
             <n-p
