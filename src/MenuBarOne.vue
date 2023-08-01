@@ -87,11 +87,13 @@ const isActiveSection = (index) => {
 };
 
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("wheel", handleScroll, { passive: true });
+  window.addEventListener("touchmove", handleScroll, { passive: true });
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("touchmove", handleScroll);
 });
 </script>
 
