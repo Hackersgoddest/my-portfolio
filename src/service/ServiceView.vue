@@ -1,6 +1,6 @@
 <template>
   <main>
-    <ServiceHeader id="service" />
+    <ServiceHeader id="Services" ref="Services" />
     <ServiceContent class="service-content" />
   </main>
 </template>

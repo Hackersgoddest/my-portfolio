@@ -63,13 +63,7 @@ import { NIcon, NCarousel } from "naive-ui";
   object-fit: cover;
 }
 
-@media only screen and (max-width: 800px) {
-  .carousel-img {
-    height: 550px;
-  }
-}
-
-@media only screen and (min-width: 801px) and (max-width: 1025px) {
+@media only screen and (max-width: 1025px) {
   .carousel-img {
     height: 600px;
   }

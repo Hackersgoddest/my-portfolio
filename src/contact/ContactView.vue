@@ -1,5 +1,5 @@
 <template>
-    <ContactHeader id="contact" />
+    <ContactHeader id="Contact" ref="Contact" />
     <ContactContent />
 </template>
 

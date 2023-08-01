@@ -1,5 +1,5 @@
 <template>
-  <div class="grid place-content-center bg-[#101014] py-8 truncate">
+  <div class="grid place-content-center bg-[#101014] pt-8 pb-16 truncate">
     <div
       class="mx-auto max-w-screen-xl container grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 px-8 text-white md:px-5"
     >

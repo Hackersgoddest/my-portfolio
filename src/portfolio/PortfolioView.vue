@@ -1,6 +1,6 @@
 <template>
   <main>
-    <PortfolioHeader id="portfolio" />
+    <PortfolioHeader id="Portfolio" ref="Portfolio" />
     <PortfolioContent />
   </main>
 </template>

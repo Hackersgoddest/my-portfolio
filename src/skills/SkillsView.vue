@@ -1,6 +1,6 @@
 <template>
   <main>
-    <SkillsHeader id="skills" />
+    <SkillsHeader id="Skills" ref="Skills"/>
   </main>
 </template>
 

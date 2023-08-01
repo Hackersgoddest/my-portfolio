@@ -10,33 +10,27 @@
             gradient="linear-gradient(90deg, white 0%, gray 50%, green 100%)"
             class="font-medium text-lg lg:text-xl"
           >
-          Hackersgoddest
+            Hackersgoddest
           </n-gradient-text>
         </div>
         <ul
           :class="[openMenu ? 'translate-x-0' : 'translate-x-[-100vw]']"
           class="block absolute left-0 top-16 bg-[#101014] w-screen transition-transform pb-3 pl-2 pr-4 sm:px-0 sm:translate-x-0 sm:w-auto sm:static gap-2 sm:inline-flex sm:items-center sm:pb-0"
         >
-          <template v-for="(item, index) in navigation" :key="item.index">
-            <li>
-              <n-a
-                @click="changeActiveMenu(item.name)"
-                :class="[
-                  item.current
-                    ? 'bg-[#213733] text-[#57e9b1]'
-                    : 'text-gray-300 hover:text-[#57e9b1]',
-                  'block px-3 py-1 mb-2 sm:mb-0 rounded-md text-sm font-medium transition-colors duration-1000 ease-in-out',
-                ]"
-                :href="item.href"
-                >{{ item.name }}
-              </n-a>
-            </li>
-          </template>
+          <li v-for="(section, index) in sections" :key="index">
+            <n-a
+              @click.passive="$emit('scrollToSection', section, index)"
+              :href="`#${section}`"
+              class="hover:text-[#57e9b1] block px-3 py-1 mb-2 sm:mb-0 rounded-md text-sm font-medium transition-colors duration-1000 ease-in-out"
+              :class="{ 'bg-[#213733] text-[#57e9b1]': isActiveSection(index) }"
+              >{{ section }}
+            </n-a>
+          </li>
         </ul>
       </nav>
     </div>
     <button
-      @click="openMenu = !openMenu"
+      @click="$emit('toggleMenu', !openMenu)"
       class="absolute top-2.5 right-2 outline-none"
     >
       <template
@@ -60,24 +54,45 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { NP, NA, NGradientText } from "naive-ui";
-const navigation = ref([
-  { name: "Home", href: "#home", current: true },
-  { name: "Services", href: "#service", current: false },
-  { name: "Skills", href: "#skills", current: false },
-  { name: "Portfolio", href: "#portfolio", current: false },
-  { name: "Contact", href: "#contact", current: false },
-]);
-let openMenu = ref(false);
+import { watch, onMounted, onUnmounted } from "vue";
+import { NA, NGradientText } from "naive-ui";
 
-function changeActiveMenu(element) {
-  navigation.value.forEach((menu) => {
-    if (menu.name === element) menu.current = true;
-    else menu.current = false;
-    openMenu.value = false;
-  });
-}
+const props = defineProps(["openMenu", "activeSectionIndex"]);
+const emit = defineEmits(["updateActiveSectionIndex", "scrollToSection"]);
+
+const sections = ["Home", "Services", "Skills", "Portfolio", "Contact"];
+
+const handleScroll = () => {
+  const sectionRefs = sections.map((_, index) =>
+    document.getElementById(sections[index])
+  );
+  for (let i = sectionRefs.length - 1; i >= 0; i--) {
+    const rect = sectionRefs[i].getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.5) {
+      emit('updateActiveSectionIndex', i);
+      break;
+    }
+  }
+};
+
+watch(
+  () => props.activeSectionIndex,
+  () => {
+    isActiveSection(props.activeSectionIndex);
+  }
+);
+
+const isActiveSection = (index) => {
+  return props.activeSectionIndex === index;
+};
+
+onMounted(() => {
+  window.addEventListener("wheel", handleScroll, { passive: true });
+});
+
+onUnmounted(() => {
+  window.removeEventListener("wheel", handleScroll);
+});
 </script>
 
 <style scoped>
