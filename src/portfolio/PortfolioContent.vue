@@ -8,7 +8,7 @@
       :key="project.title"
     >
       <figure class="flex flex-col rounded-t-2xl w-full">
-        <n-image :src="project.images[0]" class="rounded-t-2xl h-40" />
+        <img @click="showModal = true" :src="project.images[0]" class="rounded-t-2xl h-40 hover:cursor-pointer" />
         <figcaption class="flex flex-col gap-8 p-4">
           <div>
             <div class="flex justify-between">
@@ -101,7 +101,8 @@
               </n-modal>
             </div>
             <n-p
-              class="text-[#727174] m-0"
+              class="text-[#727174] m-0 hover:text-green-700 hover:cursor-pointer"
+              @click="showModal = true"
               v-html="truncateText(project.description, 5) + '...'"
             ></n-p>
           </div>
