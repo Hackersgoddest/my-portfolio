@@ -1,13 +1,17 @@
 <template>
   <main>
-    <ServiceHeader id="Services" ref="Services" />
+    <Header :title="title" :description="description" id="Services" />
     <ServiceContent class="service-content" />
   </main>
 </template>
 
 <script setup>
-import ServiceHeader from "./ServiceHeader.vue";
 import ServiceContent from "./ServiceContent.vue";
+import Header from "../../layouts/Header.vue";
+import { shallowRef } from "vue";
+
+const title = shallowRef('SERVICES')
+const description = shallowRef('What i Offer')
 </script>
 
 <style scoped>

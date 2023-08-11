@@ -1,5 +1,5 @@
 <template>
-  <MenuBarOne
+  <MenuBar
     class="menu-bar"
     :open-menu="openMenu"
     :active-section-index="activeSectionIndex"
@@ -7,46 +7,46 @@
     @toggle-menu="toggleMenu"
     @updateActiveSectionIndex="updateActiveSectionIndex"
   />
-  <div id="Home" class="bg-gray-100" ref="Home">
-    <HomeView />
-    <ServiceView />
-    <SkillsView />
-    <PortfolioView />
-    <ContactView />
+  <div id="Home" class="bg-gray-100">
+    <HomeView ref="home" />
+    <ServiceView ref="services" />
+    <SkillsView ref="skills" />
+    <PortfolioView ref="portfolio" />
+    <ContactView ref="contact" />
     <Footer />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import MenuBarOne from "./MenuBarOne.vue";
-import HomeView from "./Home/HomeView.vue";
-import ServiceView from "./service/ServiceView.vue";
-import SkillsView from "./skills/SkillsView.vue";
-import PortfolioView from "./portfolio/PortfolioView.vue";
-import ContactView from "./contact/ContactView.vue";
-import Footer from "./Footer.vue";
+import MenuBar from "./views/MenuBar.vue";
+import HomeView from "./views/Home/HomeView.vue";
+import ServiceView from "./views/service/ServiceView.vue";
+import SkillsView from "./views/skills/SkillsView.vue";
+import PortfolioView from "./views/portfolio/PortfolioView.vue";
+import ContactView from "./views/contact/ContactView.vue";
+import Footer from "./views/Footer.vue";
 
 let openMenu = ref(false);
 let activeSectionIndex = ref(0);
 
-const sections = {
-  Home: ref(null),
-  Services: ref(null),
-  Skills: ref(null),
-  Portfolio: ref(null),
-  Contact: ref(null),
-};
+const home = ref(null);
+const services = ref(null);
+const skills = ref(null);
+const portfolio = ref(null);
+const contact = ref(null);
 
 const toggleMenu = (value) => {
   openMenu.value = value;
 };
 
 const scrollToSection = (sectionName, index) => {
-  const sectionRef = sections[sectionName];
-  if (sectionRef && sectionRef.value) {
-    sectionRef.value.scrollIntoView({ behavior: "smooth" });
-  }
+  if(sectionName === 'Home') home.value.$el.scrollIntoView({ behavior: "smooth" });
+  else if(sectionName === 'Services') services.value.$el.scrollIntoView({ behavior: "smooth" });
+  else if(sectionName === 'Skills') skills.value.$el.scrollIntoView({ behavior: "smooth" });
+  else if (sectionName === "Portfolio") portfolio.value.$el.scrollIntoView({ behavior: "smooth" });
+  else if(sectionName === 'Contact') contact.value.$el.scrollIntoView({ behavior: "smooth" });
+  console.log(contact.value.$el)
   openMenu.value = false;
   activeSectionIndex.value = index;
 };

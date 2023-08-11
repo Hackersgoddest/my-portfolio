@@ -20,7 +20,6 @@
           <li v-for="(section, index) in sections" :key="index">
             <n-a
               @click.passive="$emit('scrollToSection', section, index)"
-              :href="`#${section}`"
               class="hover:text-[#57e9b1] block px-3 py-1 mb-2 sm:mb-0 rounded-md text-sm font-medium transition-colors duration-1000 ease-in-out"
               :class="{ 'bg-[#213733] text-[#57e9b1]': isActiveSection(index) }"
               >{{ section }}

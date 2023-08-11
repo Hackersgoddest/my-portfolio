@@ -148,7 +148,7 @@ import {
 } from "naive-ui";
 import { OpenOutline, ArrowBack, ArrowForward } from "@vicons/ionicons5";
 import { shallowRef } from "vue";
-import { truncateText } from "../filters";
+import { truncateText } from "../../filters";
 import { ref } from "vue";
 
 let showModal = ref(false);

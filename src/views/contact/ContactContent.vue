@@ -21,7 +21,6 @@
 <script setup>
 import {
   MailOutline as MailIcon,
-  OpenOutline as OpenIcon,
   CallOutline as CallIcon,
   LogoStackoverflow as StackIcon,
   LogoGithub as GithubIcon,
@@ -49,13 +48,13 @@ const contactOptions = shallowRef([
     name: "INSTAGRAM",
     link: "https://www.instagram.com/hackersgoddest/",
     description: "Hackersgoddest",
-    icon: InstagramIcon
+    icon: InstagramIcon,
   },
   {
     name: "TWITTER",
     link: "https://twitter.com/UndefineHacker",
     description: "Hackersgoddest",
-    icon: CallIcon,
+    icon: TwitterIcon,
   },
   {
     name: "LINKEDIN",
@@ -74,7 +73,7 @@ const contactOptions = shallowRef([
     link: "https://github.com/Hackersgoddest",
     description: "Hackersgoddest",
     icon: GithubIcon,
-  }
+  },
 ]);
 </script>
 
