@@ -8,7 +8,7 @@
     @updateActiveSectionIndex="updateActiveSectionIndex"
   />
   <div id="Home" class="bg-gray-100">
-    <HomeView ref="home" />
+    <HomeView @scroll-to-section="scrollToSection" ref="home" />
     <ServiceView ref="services" />
     <SkillsView ref="skills" />
     <PortfolioView ref="portfolio" />
@@ -41,12 +41,16 @@ const toggleMenu = (value) => {
 };
 
 const scrollToSection = (sectionName, index) => {
-  if(sectionName === 'Home') home.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if(sectionName === 'Services') services.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if(sectionName === 'Skills') skills.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if (sectionName === "Portfolio") portfolio.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if(sectionName === 'Contact') contact.value.$el.scrollIntoView({ behavior: "smooth" });
-  console.log(contact.value.$el)
+  if (sectionName === "Home")
+    home.value.$el.scrollIntoView({ behavior: "smooth" });
+  else if (sectionName === "Services")
+    services.value.$el.scrollIntoView({ behavior: "smooth" });
+  else if (sectionName === "Skills")
+    skills.value.$el.scrollIntoView({ behavior: "smooth" });
+  else if (sectionName === "Portfolio")
+    portfolio.value.$el.scrollIntoView({ behavior: "smooth" });
+  else if (sectionName === "Contact")
+    contact.value.$el.scrollIntoView({ behavior: "smooth" });
   openMenu.value = false;
   activeSectionIndex.value = index;
 };

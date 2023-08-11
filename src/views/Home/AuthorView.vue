@@ -21,7 +21,15 @@
         </div>
       </span>
       <n-space align="center" class="my-1">
-        <n-button type="success" strong ghost round> My Porfolio </n-button>
+        <n-button
+          type="success"
+          strong
+          ghost
+          round
+          @click.passive="$emit('scrollToSection')"
+        >
+          My Porfolio
+        </n-button>
         <n-button strong ghost round icon-placement="right" color="#fff">
           <template #icon>
             <n-icon size="14" v-html="skillsSvgs.Home[1].svg"></n-icon>

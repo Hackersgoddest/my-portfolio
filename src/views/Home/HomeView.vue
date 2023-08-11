@@ -7,7 +7,7 @@ import AuthorView from "./AuthorView.vue";
   <main>
     <HomeCarousel />
     <div class="w-full author">
-      <AuthorView />
+      <AuthorView @scroll-to-section="$emit('scrollToSection', 'Portfolio', 3)" />
     </div>
   </main>
 </template>
