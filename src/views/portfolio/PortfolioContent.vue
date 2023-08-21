@@ -3,12 +3,16 @@
     class="bg-[#101014] mx-auto max-w-screen-xl container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-10 lg:px-5"
   >
     <div
-      class="flex bg-gradient-to-r from-[#0d0d0e] to-[#0f0f14] rounded shadow-2xl"
+      class="flex bg-[#0000003F] rounded shadow-sm"
       v-for="project in portfolioOptions"
       :key="project.title"
     >
       <figure class="flex flex-col rounded-t-2xl w-full">
-        <img @click="showModal = true" :src="project.images[0]" class="rounded-t-2xl h-40 hover:cursor-pointer" />
+        <img
+          @click="showModal = true"
+          :src="project.images[0]"
+          class="rounded-t-2xl h-40 hover:cursor-pointer"
+        />
         <figcaption class="flex flex-col gap-8 p-4">
           <div>
             <div class="flex justify-between">
@@ -29,7 +33,7 @@
                 v-model:show="showModal"
                 class="custom-card w-full lg:w-[80%]"
                 preset="card"
-                title="Eban Register"
+                title="Eban Register(Web Admin)"
                 :bordered="false"
               >
                 <div class="flex gap-4 w-full flex-wrap">
@@ -70,8 +74,11 @@
                     </template>
                   </n-carousel>
                   <div class="flex flex-col md:w-1/2">
-                    <n-h3>{{ project.title }}</n-h3>
-                    <n-space>
+                    <n-p
+                      class="text-[#727174]"
+                      v-html="project.description"
+                    ></n-p>
+                    <n-space class="mb-5">
                       <n-tag
                         round
                         :bordered="false"
@@ -82,12 +89,8 @@
                         {{ tool }}
                       </n-tag>
                     </n-space>
-                    <n-p
-                      class="text-[#727174]"
-                      v-html="project.description"
-                    ></n-p>
                     <a :href="`${project.links[0]}`" target="_blank">
-                      <n-button type="success" class="w-28 text-green-700">
+                      <n-button type="success" class="w-28 text-[#18A058]">
                         <template #icon>
                           <n-icon>
                             <open-outline />
@@ -100,11 +103,12 @@
                 </div>
               </n-modal>
             </div>
-            <n-p
-              class="text-[#727174] m-0 hover:text-green-700 hover:cursor-pointer"
+            <n-button
+              text
+              class="text-[#727174]"
               @click="showModal = true"
               v-html="truncateText(project.description, 5) + '...'"
-            ></n-p>
+            ></n-button>
           </div>
           <n-space>
             <n-tag
@@ -118,7 +122,7 @@
             </n-tag>
           </n-space>
           <a :href="`${project.links[0]}`" target="_blank" class="w-full">
-            <n-button type="primary" ghost class="w-full">
+            <n-button type="success" class="w-full text-[#18A058]">
               <template #icon>
                 <n-icon>
                   <open-outline />
