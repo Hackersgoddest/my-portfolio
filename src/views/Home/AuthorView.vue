@@ -1,13 +1,15 @@
 <template>
   <div class="container mx-auto max-w-screen-xl px-5">
     <div class="relative flex items-start justify-start flex-col gap-3">
-      <n-text
-        class="shadow-2xl px-2 py-1 mb-1 sm:mb-2 outline-none rounded text-white text-sm"
+      <n-button
+        color="#fff"
+        dashed
+        size="small"
+        ghost
+        class="shadow-sm px-2 py-1 mb-1 hover:cursor-auto font-mono"
       >
-        <n-gradient-text type="success" class="font-mono font-semibold"
-          >Software Developer</n-gradient-text
-        >
-      </n-text>
+        Software Developer
+      </n-button>
       <n-text class="text-white text-lg font-medium md:text-xl"
         >Frank Oppong Konadu</n-text
       >
@@ -22,15 +24,19 @@
       </span>
       <n-space align="center" class="my-1">
         <n-button
-          type="success"
-          strong
           ghost
           round
+          class="text-white"
           @click.passive="$emit('scrollToSection')"
         >
           My Porfolio
         </n-button>
-        <n-button strong ghost round icon-placement="right" color="#fff">
+        <n-button
+          round
+          ghost
+          icon-placement="right"
+          class="text-white"
+        >
           <template #icon>
             <n-icon size="14" v-html="skillsSvgs.Home[1].svg"></n-icon>
           </template>
