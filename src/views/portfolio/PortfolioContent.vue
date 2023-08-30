@@ -3,7 +3,7 @@
     class="bg-[#101014] mx-auto max-w-screen-xl container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-10 lg:px-5"
   >
     <div
-      class="flex bg-[#0000003F] rounded shadow-sm"
+      class="flex bg-[#212121] rounded shadow-sm"
       v-for="project in portfolioOptions"
       :key="project.title"
     >

@@ -3,7 +3,7 @@
     class="bg-[#101014] mx-auto max-w-screen-xl container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-10 lg:px-5"
   >
     <div
-      class="flex justify-center items-center h-52 px-2 sm:px-10 bg-[#0000003F] rounded shadow-sm"
+      class="flex justify-center items-center h-52 px-2 sm:px-10 bg-[#212121] rounded shadow-sm"
       v-for="service in serviceOptions"
       :key="service.title"  
     >
