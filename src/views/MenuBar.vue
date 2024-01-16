@@ -3,14 +3,11 @@
     <div class="container mx-auto max-w-screen-xl px-5">
       <nav class="flex justify-between h-16 items-center">
         <div class="flex items-center">
-          <!-- <n-p class="font-medium text-white text-lg lg:text-xl"
-            >Hackersgoddest</n-p
-          > -->
           <n-gradient-text
             gradient="linear-gradient(90deg, white 0%, gray 50%, green 100%)"
             class="font-medium text-lg lg:text-xl"
           >
-            Hackersgoddest
+            Frank Oppong Konadu
           </n-gradient-text>
         </div>
         <ul
@@ -21,7 +18,9 @@
             <n-a
               @click.passive="$emit('scrollToSection', section, index)"
               class="hover:text-[#57e9b1] block px-3 py-1 mb-2 sm:mb-0 rounded-md text-sm font-medium transition-colors duration-500 ease-in-out"
-              :class="{ 'bg-[#18A0581F] text-[#57e9b1]': isActiveSection(index) }"
+              :class="{
+                'bg-[#18A0581F] text-[#57e9b1]': isActiveSection(index),
+              }"
               >{{ section }}
             </n-a>
           </li>
@@ -45,7 +44,9 @@
         class="bar inline-flex items-center rounded-md px-1 py-2 hover:bg-[#18A0581F] z-10 sm:hidden w-10 flex-col justify-center"
       >
         <div class="h-0.5 rounded-xl mb-1"></div>
-        <div class="bg-gray-400 h-0.5 w-4 rounded-xl -rotate-45 translate-y-[1px]"></div>
+        <div
+          class="bg-gray-400 h-0.5 w-4 rounded-xl -rotate-45 translate-y-[1px]"
+        ></div>
         <div class="bg-gray-400 h-0.5 w-4 mb-1 rounded-xl rotate-45"></div>
       </template>
     </button>
@@ -68,7 +69,7 @@ const handleScroll = () => {
   for (let i = sectionRefs.length - 1; i >= 0; i--) {
     const rect = sectionRefs[i].getBoundingClientRect();
     if (rect.top < window.innerHeight * 0.5) {
-      emit('updateActiveSectionIndex', i);
+      emit("updateActiveSectionIndex", i);
       break;
     }
   }
@@ -98,6 +99,6 @@ onUnmounted(() => {
 
 <style scoped>
 .bar:hover div {
-  background-color: #18A058;
+  background-color: #18a058;
 }
 </style>
