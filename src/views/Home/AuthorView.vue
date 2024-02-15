@@ -14,7 +14,8 @@
         >Frank Oppong Konadu</n-text
       >
       <n-text class="text-white text-sm md:text-base"
-        >I am a passionate software developer with a year of experience
+        >I am a passionate software developer with
+        {{ new Date().getFullYear() - 2022 }} years of experience
       </n-text>
       <span class="location__container">
         <div class="text-gray-400 flex items-baseline h-6 leading-7">
@@ -31,12 +32,7 @@
         >
           My Porfolio
         </n-button>
-        <n-button
-          round
-          ghost
-          icon-placement="right"
-          class="text-white"
-        >
+        <n-button round ghost icon-placement="right" class="text-white">
           <template #icon>
             <n-icon size="14" v-html="skillsSvgs.Home[1].svg"></n-icon>
           </template>
@@ -49,7 +45,9 @@
         </n-button>
       </n-space>
       <div class="flex order-5 mt-1">
-        <n-text class="mr-3 text-4xl text-white leading-9 order-0">1+</n-text>
+        <n-text class="mr-3 text-4xl text-white leading-9 order-0"
+          >{{ new Date().getFullYear() - 2022 }}+</n-text
+        >
         <div class="flex flex-col justify-center">
           <n-text class="text-gray-400 text-xs">YEARS</n-text>
           <n-text class="text-gray-400 text-xs">EXPERIENCE</n-text>
