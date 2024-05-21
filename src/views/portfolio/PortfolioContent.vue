@@ -90,7 +90,7 @@
                       </n-tag>
                     </n-space>
                     <a :href="`${project.links[0]}`" target="_blank">
-                      <n-button type="success" class="w-28 text-[#18A058]">
+                      <n-button type="success" class="w-28">
                         <template #icon>
                           <n-icon>
                             <open-outline />
@@ -122,7 +122,7 @@
             </n-tag>
           </n-space>
           <a :href="`${project.links[0]}`" target="_blank" class="w-full">
-            <n-button type="success" class="w-full text-[#18A058]">
+            <n-button type="success" class="w-full">
               <template #icon>
                 <n-icon>
                   <open-outline />
@@ -143,7 +143,6 @@ import {
   NP,
   NSpace,
   NTag,
-  NCard,
   NImage,
   NH3,
   NButton,
