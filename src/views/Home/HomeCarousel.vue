@@ -8,7 +8,7 @@
     >
     <img
       class="carousel-img"
-      src="frank_two.jpg"
+      src="/frank_two.jpg"
       style="object-position: center 20px"
     >
     <img
