@@ -7,7 +7,7 @@
     @toggle-menu="toggleMenu"
     @updateActiveSectionIndex="updateActiveSectionIndex"
   />
-  <div id="Home" class="bg-gray-100">
+  <div id="Home">
     <HomeView @scroll-to-section="scrollToSection" ref="home" />
     <ServiceView ref="services" />
     <SkillsView ref="skills" />
