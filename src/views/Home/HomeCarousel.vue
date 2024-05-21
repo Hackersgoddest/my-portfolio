@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="absolute bg-black bg-opacity-50 left-0 top-0 w-full h-screen z-10"></div>
+    <div class="absolute bg-black bg-opacity-50 left-0 top-0 w-full h-full z-10"></div>
     <n-carousel show-arrow autoplay>
     <img
       class="carousel-img"
