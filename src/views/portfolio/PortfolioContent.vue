@@ -33,7 +33,7 @@
                 v-model:show="showModal"
                 class="custom-card w-full lg:w-[80%]"
                 preset="card"
-                title="Eban Register(Web Admin)"
+                :title="project.title"
                 :bordered="false"
               >
                 <div class="flex gap-4 w-full flex-wrap">
@@ -166,6 +166,17 @@ const portfolioOptions = shallowRef([
     ],
     tools: ["VueJs", "Bootstrap", "FeatherJs", "Typescript", "more"],
     links: ["https://www.ebanregister.com/"],
+  },
+  {
+    title: "Promptopia",
+    description: `<p>Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts. The application allows one to:</br><ul><li>Discover AI prompts</li><li>Create AI prompts</li><li>Edit AI prompts</li><li>Delete AI prompts</li></ul></p>`,
+    images: [
+      "/public/login.png",
+      "/public/homepage.png",
+      "/public/profile.png",
+    ],
+    tools: ["NextJs", "Tailwind", "DaisyUI", "Typescript", "more"],
+    links: ["https://github.com/Hackersgoddest/promptopia"],
   },
 ]);
 </script>
