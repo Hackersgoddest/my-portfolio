@@ -9,7 +9,7 @@
     >
       <figure class="flex flex-col rounded-t-2xl w-full">
         <img
-          @click="showModal = true"
+          @click="() => project.showModal = true"
           :src="project.images[0]"
           class="rounded-t-2xl h-40 hover:cursor-pointer"
         />
@@ -24,13 +24,13 @@
                 type="tertiary"
                 size="small"
                 class="text-[#fff]"
-                @click="showModal = true"
+                @click="() => project.showModal = true"
               >
                 details
               </n-button>
               <n-modal
                 transform-origin="center"
-                v-model:show="showModal"
+                v-model:show="project.showModal"
                 class="custom-card w-full lg:w-[80%]"
                 preset="card"
                 :title="project.title"
@@ -108,7 +108,7 @@
             <n-button
               text
               class="text-[#727174]"
-              @click="showModal = true"
+              @click="project.showModal = true"
               v-html="truncateText(project.description, 5) + '...'"
             ></n-button>
           </div>
@@ -156,12 +156,10 @@ import {
   NCarousel,
 } from "naive-ui";
 import { OpenOutline, ArrowBack, ArrowForward } from "@vicons/ionicons5";
-import { shallowRef } from "vue";
 import { truncateText } from "../../filters";
 import { ref } from "vue";
 
-let showModal = ref(false);
-const portfolioOptions = shallowRef([
+const portfolioOptions = ref([
   {
     title: "Eban Register(Web Admin)",
     description: `<p>An Electronic attendance system with employee and membership management modules. 70 organizations has enrolled on the platform since it's deployment in december 2020. The system allows employees or members of organizations to take attendance with their phone by:</br><ul><li>Scanning a QR-Code</li><li>Using their GPS</li><li>Scanning an NFC tag</li></ul></p>`,
@@ -172,6 +170,7 @@ const portfolioOptions = shallowRef([
     ],
     tools: ["VueJs", "Bootstrap", "FeatherJs", "Typescript", "more"],
     links: [{name: "LINK", link: "https://www.ebanregister.com/"}],
+    showModal: ref(false),
   },
   {
     title: "Promptopia",
@@ -183,6 +182,7 @@ const portfolioOptions = shallowRef([
     ],
     tools: ["NextJs", "Tailwind", "DaisyUI", "Typescript", "more"],
     links: [{name: "GITHUB", link: "https://github.com/Hackersgoddest/promptopia"}],
+    showModal: ref(false),
   },
 ]);
 </script>
