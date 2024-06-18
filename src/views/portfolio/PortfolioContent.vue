@@ -171,9 +171,9 @@ const portfolioOptions = shallowRef([
     title: "Promptopia",
     description: `<p>Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts. The application allows one to:</br><ul><li>Discover AI prompts</li><li>Create AI prompts</li><li>Edit AI prompts</li><li>Delete AI prompts</li></ul></p>`,
     images: [
-      "/public/login.png",
-      "/public/homepage.png",
-      "/public/profile.png",
+      "/login.png",
+      "/homepage.png",
+      "/profile.png",
     ],
     tools: ["NextJs", "Tailwind", "DaisyUI", "Typescript", "more"],
     links: ["https://github.com/Hackersgoddest/promptopia"],
