@@ -121,16 +121,20 @@
               {{ tool }}
             </n-tag>
           </n-space>
-          <a :href="`${project.links[0]}`" target="_blank" class="w-full">
-            <n-button type="success" class="w-full">
-              <template #icon>
-                <n-icon>
-                  <open-outline />
-                </n-icon>
-              </template>
-              LINK
-            </n-button>
-          </a>
+          <div class="flex w-full gap-2">
+            <template v-for="link in project.links" :key="link.name">
+              <a :href="`${link.link}`" target="_blank" class="w-full flex">
+                <n-button type="success" class="w-full flex flex-1">
+                  <template #icon>
+                    <n-icon>
+                      <open-outline />
+                    </n-icon>
+                  </template>
+                  {{ link.name }}
+                </n-button>
+              </a>
+            </template>
+          </div>
         </figcaption>
       </figure>
     </div>
@@ -165,7 +169,7 @@ const portfolioOptions = shallowRef([
       "https://res.cloudinary.com/jolsoft/image/upload/v1634248046/portfolio/eban-admin/eban-admin-screen-3_licoyr.png",
     ],
     tools: ["VueJs", "Bootstrap", "FeatherJs", "Typescript", "more"],
-    links: ["https://www.ebanregister.com/"],
+    links: [{name: "LINK", link: "https://www.ebanregister.com/"}],
   },
   {
     title: "Promptopia",
@@ -176,7 +180,7 @@ const portfolioOptions = shallowRef([
       "/profile.png",
     ],
     tools: ["NextJs", "Tailwind", "DaisyUI", "Typescript", "more"],
-    links: ["https://github.com/Hackersgoddest/promptopia"],
+    links: [{name: "GITHUB", link: "https://github.com/Hackersgoddest/promptopia"}],
   },
 ]);
 </script>
