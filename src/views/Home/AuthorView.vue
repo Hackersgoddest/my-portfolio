@@ -37,7 +37,7 @@
             <n-icon size="14" v-html="skillsSvgs.Home[1].svg"></n-icon>
           </template>
           <a
-            href="https://drive.google.com/file/d/1aVsyfJdYw4dNsF9rwsEVnGPV62DRS8Xo/view?usp=sharing"
+            href="https://drive.google.com/file/d/1vokKezr3mUj57Cze3UFYRU3keZvanRA7/view?usp=sharing"
             target="_blank"
           >
             My CV
