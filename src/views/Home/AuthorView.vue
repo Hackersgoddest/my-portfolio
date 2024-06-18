@@ -32,17 +32,14 @@
         >
           My Porfolio
         </n-button>
-        <n-button round ghost icon-placement="right" class="text-white">
-          <template #icon>
-            <n-icon size="14" v-html="skillsSvgs.Home[1].svg"></n-icon>
-          </template>
-          <a
-            href="https://drive.google.com/file/d/1vokKezr3mUj57Cze3UFYRU3keZvanRA7/view?usp=sharing"
-            target="_blank"
-          >
-            My CV
-          </a>
-        </n-button>
+        <a href="https://drive.google.com/file/d/1vokKezr3mUj57Cze3UFYRU3keZvanRA7/view?usp=sharing" target="_blank">
+          <n-button round ghost icon-placement="right" class="text-white">
+            <template #icon>
+              <n-icon size="14" v-html="skillsSvgs.Home[1].svg"></n-icon>
+            </template>
+              My CV
+          </n-button>
+        </a>
       </n-space>
       <div class="flex order-5 mt-1">
         <n-text class="mr-3 text-4xl text-white leading-9 order-0"
@@ -58,7 +55,7 @@
 </template>
 
 <script setup>
-import { NText, NGradientText, NIcon, NButton, NSpace } from "naive-ui";
+import { NText, NIcon, NButton, NSpace } from "naive-ui";
 import skillsSvgs from "../../assets/svgs/svg";
 </script>
 
