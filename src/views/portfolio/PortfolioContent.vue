@@ -89,16 +89,18 @@
                         {{ tool }}
                       </n-tag>
                     </n-space>
-                    <a :href="`${project.links[0]}`" target="_blank">
-                      <n-button type="success" class="w-28">
-                        <template #icon>
-                          <n-icon>
-                            <open-outline />
-                          </n-icon>
-                        </template>
-                        LINK
-                      </n-button>
-                    </a>
+                    <template v-for="link in project.links" :key="link.name">
+                      <a :href="`${link.link}`" target="_blank">
+                        <n-button type="success" class="w-28">
+                          <template #icon>
+                            <n-icon>
+                              <open-outline />
+                            </n-icon>
+                          </template>
+                          {{ link.name}}
+                        </n-button>
+                      </a>
+                    </template>
                   </div>
                 </div>
               </n-modal>
