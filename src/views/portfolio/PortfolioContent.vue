@@ -1,126 +1,84 @@
 <template>
   <div
-    class="bg-[#101014] mx-auto max-w-screen-xl container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-10 lg:px-5"
-  >
-    <div
-      class="flex bg-[#212121] rounded shadow-sm"
-      v-for="project in portfolioOptions"
-      :key="project.title"
-    >
+    class="bg-[#101014] mx-auto max-w-screen-xl container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-10 lg:px-5">
+    <div class="flex bg-[#212121] rounded shadow-sm" v-for="project in portfolioOptions" :key="project.title">
       <figure class="flex flex-col rounded-t-2xl w-full">
-        <img
-          @click="() => project.showModal = true"
-          :src="project.images[0]"
-          class="rounded-t-2xl h-40 hover:cursor-pointer"
-        />
+        <img @click="() => project.showModal = true" :src="project.images[0]"
+          class="rounded-t-2xl h-40 hover:cursor-pointer" />
         <figcaption class="flex flex-col gap-8 p-4">
           <div>
             <div class="flex justify-between">
               <n-h3 class="text-white m-0">{{ project.title }}</n-h3>
-              <n-button
-                strong
-                dashed
-                round
-                type="tertiary"
-                size="small"
-                class="text-[#fff]"
-                @click="() => project.showModal = true"
-              >
+              <n-button strong dashed round type="tertiary" size="small" class="text-[#fff]"
+                @click="() => project.showModal = true">
                 details
               </n-button>
-              <n-modal
-                transform-origin="center"
-                v-model:show="project.showModal"
-                class="custom-card w-full lg:w-[80%] max-w-screen-xl"
-                preset="card"
-                :title="project.title"
-                :bordered="false"
-              >
-                <div class="flex gap-4 flex-wrap">
-                  <n-carousel show-arrow autoplay class="flex flex-1">
-                    <n-image
-                      v-for="image in project.images"
-                      class="md:min-h-80"
-                      :key="image"
-                      :src="image"
-                    />
-                    <template #arrow="{ prev, next }">
-                      <div class="custom-arrow">
-                        <button
-                          type="button"
-                          class="custom-arrow--btn hover:bg-[#867A7A33]"
-                          @click="prev"
-                        >
-                          <n-icon><ArrowBack /></n-icon>
-                        </button>
-                        <button
-                          type="button"
-                          class="custom-arrow--btn hover:bg-[#867A7A33]"
-                          @click="next"
-                        >
-                          <n-icon><ArrowForward /></n-icon>
-                        </button>
-                      </div>
-                    </template>
-                    <template #dots="{ total, currentIndex, to }">
-                      <ul class="custom-dots">
-                        <li
-                          v-for="index of total"
-                          :key="index"
-                          class="custom-dots--li active:w-10 active:bg-[#242425] z-10"
-                          :class="{ ['is-active']: currentIndex === index - 1 }"
-                          @click="to(index - 1)"
-                        />
-                      </ul>
-                    </template>
-                  </n-carousel>
-                  <div class="flex flex-col md:w-1/2">
-                    <n-p
-                      class="text-[#727174]"
-                      v-html="project.description"
-                    ></n-p>
-                    <n-space class="mb-5">
-                      <n-tag
-                        round
-                        :bordered="false"
-                        type="success"
-                        v-for="tool in project.tools"
-                        :key="tool"
-                      >
-                        {{ tool }}
-                      </n-tag>
-                    </n-space>
-                    <template v-for="link in project.links" :key="link.name">
-                      <a :href="`${link.link}`" target="_blank">
-                        <n-button type="success" class="w-28">
-                          <template #icon>
-                            <n-icon>
-                              <open-outline />
-                            </n-icon>
-                          </template>
-                          {{ link.name}}
-                        </n-button>
-                      </a>
-                    </template>
+              <n-modal transform-origin="center" v-model:show="project.showModal"
+                class="custom-card w-full lg:w-[80%] max-w-screen-xl">
+                <n-card :content-style="{ background: '#212121' }" :header-style="{ background: '#212121' }"
+                  :bordered="false">
+                  <template #header>
+                    <n-h3 class="text-gray-300 m-0">{{ project.title }}</n-h3>
+                  </template>
+                  <template #header-extra>
+                    <n-button @click="project.showModal = false" dashed circle color="#a3a3a3">
+                      <template #icon>
+                        <n-icon size="24" :component="Close" />
+                      </template>
+                    </n-button>
+                  </template>
+                  <div class="flex gap-4 flex-wrap">
+                    <n-carousel show-arrow autoplay class="flex flex-1">
+                      <n-image v-for="image in project.images" class="md:min-h-80" :key="image" :src="image" />
+                      <template #arrow="{ prev, next }">
+                        <div class="custom-arrow">
+                          <n-icon-wrapper :size="28" :border-radius="10" class="custom-arrow--btn hover:bg-[#867A7A33]"
+                            @click="prev">
+                            <n-icon :size="18" :component="ArrowBack" />
+                          </n-icon-wrapper>
+                          <n-icon-wrapper :size="28" :border-radius="10" class="custom-arrow--btn hover:bg-[#867A7A33]"
+                            @click="next">
+                            <n-icon :size="18" :component="ArrowForward" />
+                          </n-icon-wrapper>
+                        </div>
+                      </template>
+                      <template #dots="{ total, currentIndex, to }">
+                        <ul class="custom-dots">
+                          <li v-for="index of total" :key="index"
+                            class="custom-dots--li active:w-10 active:bg-[#242425] z-10"
+                            :class="{ ['is-active']: currentIndex === index - 1 }" @click="to(index - 1)" />
+                        </ul>
+                      </template>
+                    </n-carousel>
+                    <div class="flex flex-col md:w-1/2">
+                      <n-p class="text-neutral-400 mb-5" v-html="project.description"></n-p>
+                      <n-space class="mb-5">
+                        <n-tag round :bordered="false" type="success" v-for="tool in project.tools" :key="tool">
+                          {{ tool }}
+                        </n-tag>
+                      </n-space>
+                      <template v-for="link in project.links" :key="link.name">
+                        <a :href="`${link.link}`" target="_blank">
+                          <n-button type="success" class="w-28">
+                            <template #icon>
+                              <n-icon>
+                                <open-outline />
+                              </n-icon>
+                            </template>
+                            {{ link.name }}
+                          </n-button>
+                        </a>
+                      </template>
+                    </div>
                   </div>
-                </div>
+                </n-card>
               </n-modal>
             </div>
-            <n-button
-              text
-              class="text-[#727174]"
-              @click="project.showModal = true"
-              v-html="truncateText(project.description, 40)"
-            ></n-button>
+            <n-button text class="text-[#727174]" @click="project.showModal = true"
+              v-html="truncateText(project.description, 40)"></n-button>
           </div>
           <n-space>
-            <n-tag
-              round
-              :bordered="false"
-              type="success"
-              v-for="tool in project.tools"
-              :key="tool"
-            >
+            <n-tag round :bordered="false" type="success" v-for="tool in project.tools" :key="tool">
               {{ tool }}
             </n-tag>
           </n-space>
@@ -147,6 +105,7 @@
 <script setup>
 import {
   NIcon,
+  NIconWrapper,
   NP,
   NSpace,
   NTag,
@@ -154,9 +113,10 @@ import {
   NH3,
   NButton,
   NModal,
+  NCard,
   NCarousel,
 } from "naive-ui";
-import { OpenOutline, ArrowBack, ArrowForward } from "@vicons/ionicons5";
+import { OpenOutline, ArrowBack, ArrowForward, Close } from "@vicons/ionicons5";
 import { truncateText } from "../../filters";
 import { ref } from "vue";
 
@@ -170,7 +130,7 @@ const portfolioOptions = ref([
       "https://res.cloudinary.com/jolsoft/image/upload/v1634248046/portfolio/eban-admin/eban-admin-screen-3_licoyr.png",
     ],
     tools: ["VueJs", "Bootstrap", "FeatherJs", "Typescript", "more"],
-    links: [{name: "LINK", link: "https://www.ebanregister.com/"}],
+    links: [{ name: "LINK", link: "https://www.ebanregister.com/" }],
     showModal: ref(false),
   },
   {
@@ -182,19 +142,19 @@ const portfolioOptions = ref([
       "/profile.png",
     ],
     tools: ["NextJs", "Tailwind", "DaisyUI", "Typescript", "more"],
-    links: [{name: "GITHUB", link: "https://github.com/Hackersgoddest/promptopia"}],
+    links: [{ name: "GITHUB", link: "https://github.com/Hackersgoddest/promptopia" }],
     showModal: ref(false),
   },
 ]);
 </script>
 
 <style scoped>
-.custom-arrow{
-  @apply flex absolute bottom-[25px] right-[10px];
+.custom-arrow {
+  @apply flex absolute bottom-4 right-3 gap-2;
 }
 
 .custom-arrow--btn {
-  @apply inline-flex items-center justify-center w-7 h-7 mr-3 text-[#101014] bg-[#CAC5C51A] rounded-lg border-0 transition cursor-pointer;
+  @apply inline-flex items-center justify-center text-[#101014] bg-[#CAC5C51A] rounded-lg border-0 transition cursor-pointer;
 }
 
 .custom-dots {
