@@ -21,9 +21,9 @@
                     <n-h3 class="text-gray-300 m-0">{{ project.title }}</n-h3>
                   </template>
                   <template #header-extra>
-                    <n-button @click="project.showModal = false" dashed circle color="#a3a3a3">
+                    <n-button @click="project.showModal = false" size="small" dashed circle color="#a3a3a3">
                       <template #icon>
-                        <n-icon size="24" :component="Close" />
+                        <n-icon size="20" :component="Close" />
                       </template>
                     </n-button>
                   </template>
