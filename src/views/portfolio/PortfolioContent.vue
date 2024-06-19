@@ -9,7 +9,7 @@
           <div>
             <div class="flex justify-between">
               <n-h3 class="text-white m-0">{{ project.title }}</n-h3>
-              <n-button strong dashed round type="tertiary" size="small" class="text-[#fff]"
+              <n-button strong dashed round size="small" class="text-neutral-200"
                 @click="() => project.showModal = true">
                 details
               </n-button>
