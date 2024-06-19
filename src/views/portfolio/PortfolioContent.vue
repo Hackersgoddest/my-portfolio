@@ -31,31 +31,31 @@
               <n-modal
                 transform-origin="center"
                 v-model:show="project.showModal"
-                class="custom-card w-full lg:w-[80%]"
+                class="custom-card w-full lg:w-[80%] max-w-screen-xl"
                 preset="card"
                 :title="project.title"
                 :bordered="false"
               >
-                <div class="flex gap-4 w-full flex-wrap">
-                  <n-carousel show-arrow autoplay class="flex flex-1 w-full">
+                <div class="flex gap-4 flex-wrap">
+                  <n-carousel show-arrow autoplay class="flex flex-1">
                     <n-image
                       v-for="image in project.images"
+                      class="md:min-h-80"
                       :key="image"
-                      class="carousel-img"
                       :src="image"
                     />
                     <template #arrow="{ prev, next }">
                       <div class="custom-arrow">
                         <button
                           type="button"
-                          class="custom-arrow--left"
+                          class="custom-arrow--btn hover:bg-[#867A7A33]"
                           @click="prev"
                         >
                           <n-icon><ArrowBack /></n-icon>
                         </button>
                         <button
                           type="button"
-                          class="custom-arrow--right"
+                          class="custom-arrow--btn hover:bg-[#867A7A33]"
                           @click="next"
                         >
                           <n-icon><ArrowForward /></n-icon>
@@ -67,6 +67,7 @@
                         <li
                           v-for="index of total"
                           :key="index"
+                          class="custom-dots--li active:w-10 active:bg-[#242425] z-10"
                           :class="{ ['is-active']: currentIndex === index - 1 }"
                           @click="to(index - 1)"
                         />
@@ -188,67 +189,20 @@ const portfolioOptions = ref([
 </script>
 
 <style scoped>
-.carousel-img {
-  width: 100%;
-  height: 400px;
-  object-fit: fill;
+.custom-arrow{
+  @apply flex absolute bottom-[25px] right-[10px];
 }
 
-@media screen and (max-width: 767px) {
-  .carousel-img {
-    height: 300px;
-  }
-}
-
-.custom-arrow {
-  display: flex;
-  position: absolute;
-  bottom: 25px;
-  right: 10px;
-}
-
-.custom-arrow button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  margin-right: 12px;
-  color: #101014;
-  background-color: rgba(202, 197, 197, 0.1);
-  border-width: 0;
-  border-radius: 8px;
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-}
-
-.custom-arrow button:hover {
-  background-color: rgba(134, 122, 122, 0.2);
-}
-
-.custom-arrow button:active {
-  transform: scale(0.95);
-  transform-origin: center;
+.custom-arrow--btn {
+  @apply inline-flex items-center justify-center w-7 h-7 mr-3 text-[#101014] bg-[#CAC5C51A] rounded-lg border-0 transition cursor-pointer;
 }
 
 .custom-dots {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
+  @apply flex m-0 p-0 absolute bottom-5 left-5;
 }
 
-.custom-dots li {
-  display: inline-block;
-  width: 12px;
-  height: 4px;
-  margin: 0 3px;
-  border-radius: 4px;
-  background-color: rgba(71, 70, 70, 0.4);
-  transition: width 0.3s, background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
+.custom-dots--li {
+  @apply inline-block w-3 h-1 my-0 mx-[3px] rounded bg-[#47464666] transition cursor-pointer;
 }
 
 .custom-dots li.is-active {
