@@ -110,7 +110,7 @@
               text
               class="text-[#727174]"
               @click="project.showModal = true"
-              v-html="truncateText(project.description, 5) + '...'"
+              v-html="truncateText(project.description, 40)"
             ></n-button>
           </div>
           <n-space>

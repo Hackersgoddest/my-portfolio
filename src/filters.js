@@ -1,7 +1,8 @@
 // filters.js
 export const truncateText = (text, numWords) => {
-    const words = text.trim().split(/\s+/);
-    const truncatedWords = words.slice(0, numWords);
-    return truncatedWords.join(' ');
+  if (text.length <= numWords) {
+    return text;
+  }
+  return text.slice(0, numWords) + '...';
   };
   
