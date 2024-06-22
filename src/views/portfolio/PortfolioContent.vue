@@ -18,7 +18,7 @@
                 <n-card :content-style="{ background: '#212121' }" :header-style="{ background: '#212121' }"
                   :bordered="false">
                   <template #header>
-                    <n-h3 class="text-gray-300 m-0">{{ project.title }}</n-h3>
+                    <n-h3 class="text-neutral-400 m-0">{{ project.title }}</n-h3>
                   </template>
                   <template #header-extra>
                     <n-button @click="project.showModal = false" size="small" dashed circle color="#a3a3a3">
