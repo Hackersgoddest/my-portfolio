@@ -1,6 +1,6 @@
 <template>
     <n-flex justify="center" size="large" align="baseline">
-        <div class="lg:hidden flex gap-4 flex-wrap justify-center items-center">
+        <div class="lg:hidden flex gap-4 flex-wrap justify-center items-center px-2">
             <div v-for="item in skillName" :key="item.name" class="flex flex-col justify-center items-center">
                 <n-tag :bordered="false" strong>
                     {{ item.name }}
