@@ -2,7 +2,7 @@
     <n-flex justify="center" size="large" align="baseline">
         <div class="lg:hidden flex gap-4 flex-wrap justify-center items-center">
             <div v-for="item in skillName" :key="item.name" class="flex flex-col justify-center items-center">
-                <n-tag round :bordered="false" strong>
+                <n-tag :bordered="false" strong>
                     {{ item.name }}
                     <template #icon>
                         <n-icon v-html="item.svg"></n-icon>
