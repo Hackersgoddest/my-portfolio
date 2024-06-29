@@ -12,7 +12,7 @@
         </div>
         <div class="hidden lg:flex gap-8 flex-wrap justify-center items-center">
             <div v-for="item in skillName" :key="item.name" class="flex">
-                <n-tooltip trigger="hover" :raw="true">
+                <n-tooltip trigger="hover" :raw="true" :show-arrow="false">
                     <template #trigger>
                         <n-button quaternary circle>
                             <template #icon>
