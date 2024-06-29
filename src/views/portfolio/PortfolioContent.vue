@@ -27,7 +27,7 @@
                       </template>
                     </n-button>
                   </template>
-                  <div class="flex gap-4 flex-wrap mt-4 lg:mt-2">
+                  <div class="flex gap-4 flex-wrap mt-2">
                     <n-carousel show-arrow autoplay class="flex flex-1">
                       <n-image v-for="image in project.images" class="md:min-h-80" :key="image" :src="image" />
                       <template #arrow="{ prev, next }">
