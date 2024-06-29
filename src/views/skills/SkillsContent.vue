@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mx-auto max-w-screen-xl container flex justify-center items-center bg-[#101014] pb-12 sm:pb-20"
+    class="mx-auto max-w-screen-md container flex justify-center items-center bg-[#101014] pb-12 sm:pb-20"
   >
     <div class="container mx-auto mt-1">
       <n-tabs
