@@ -14,7 +14,7 @@
                 details
               </n-button>
               <n-modal transform-origin="center" v-model:show="project.showModal"
-                class="custom-card w-full lg:w-[80%] max-w-screen-xl">
+                class="custom-card w-full max-md:h-screen md:m-4 lg:m-auto lg:w-[80%] max-w-screen-xl">
                 <n-card :content-style="{ background: '#212121' }" :header-style="{ background: '#212121' }"
                   :bordered="false">
                   <template #header>
@@ -27,7 +27,7 @@
                       </template>
                     </n-button>
                   </template>
-                  <div class="flex gap-4 flex-wrap">
+                  <div class="flex gap-4 flex-wrap mt-4 lg:mt-2">
                     <n-carousel show-arrow autoplay class="flex flex-1">
                       <n-image v-for="image in project.images" class="md:min-h-80" :key="image" :src="image" />
                       <template #arrow="{ prev, next }">
