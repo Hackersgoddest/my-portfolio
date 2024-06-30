@@ -1,12 +1,12 @@
 <template>
-  <main>
+  <section>
     <Header
       :title="title"
       :description="description"
       id="Skills"
     />
     <SkillsContent />
-  </main>
+  </section>
 </template>
 
 <script setup>

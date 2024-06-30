@@ -1,8 +1,8 @@
 <template>
-  <main>
+  <section>
     <Header :title="title" :description="description" id="Portfolio" />
     <PortfolioContent />
-  </main>
+  </section>
 </template>
 <script setup>
 import PortfolioContent from "./PortfolioContent.vue";

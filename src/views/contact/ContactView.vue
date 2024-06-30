@@ -1,8 +1,8 @@
 <template>
-  <main>
+  <section>
     <Header :title="title" :description="description" id="Contact" />
     <ContactContent />
-  </main>
+  </section>
 </template>
 <script setup>
 import ContactContent from "./ContactContent.vue";
