@@ -1,9 +1,6 @@
 <template>
-  <div class="container mx-auto max-w-screen-xl px-5">
+  <div class="container mx-auto w-full max-w-screen-xl px-5">
     <div class="relative flex items-start justify-start flex-col gap-3">
-      <!-- <n-button color="#fff" dashed size="small" ghost class="shadow-sm px-2 py-1 mb-1 hover:cursor-auto font-mono">
-        Software Developer
-      </n-button> -->
       <n-tag round :bordered="false" strong>
         Software Developer
         <template #icon>

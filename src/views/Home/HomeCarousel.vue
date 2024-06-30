@@ -1,10 +1,10 @@
 <template>
-  <div class="relative">
-    <div class="absolute bg-black bg-opacity-50 left-0 top-0 w-full h-full z-10"></div>
+  <div class="relative w-full">
+    <div class="absolute bg-black bg-opacity-50 inset-0 w-full h-full z-10"></div>
     <n-carousel show-arrow autoplay>
     <img v-for="(src, index) in images" key="index"
       class="h-[600px] lg:h-[700px] xl:h-[725px] w-full object-cover object-center bg-fixed"
-      :style="[{objectPosition: 'center 20px'}]"
+      :style="[index == 1 && {objectPosition: 'center 20px'}]"
       :src="src"
     >
     <template #arrow="{ prev, next }">

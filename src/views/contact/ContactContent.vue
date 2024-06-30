@@ -1,10 +1,9 @@
 <template>
-  <div class="grid place-content-center bg-[#101014] pt-8 pb-16 truncate">
-    <div
-      class="mx-auto max-w-screen-xl container grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 px-8 text-white md:px-5"
-    >
+  <div class="flex bg-[#101014] pt-8 pb-16 justify-center">
+    <div class="w-full max-w-screen-xl flex flex-wrap gap-8 xl:gap-12 justify-center">
       <template v-for="item in contactOptions" :key="item.name">
-        <a :href="item.link" target="_blank" class="hover:text-[#18A058] hover:transition-colors hover:duration-700 hover:ease-in-out">
+        <a :href="item.link" target="_blank"
+          class="text-white hover:text-[#18A058] hover:transition-colors hover:duration-700 hover:ease-in-out">
           <span class="flex justify-center gap-1">
             <n-icon size="20" :component="item.icon" />
             <span class="font-semibold">{{ item.name }}</span>
@@ -77,5 +76,4 @@ const contactOptions = shallowRef([
 ]);
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

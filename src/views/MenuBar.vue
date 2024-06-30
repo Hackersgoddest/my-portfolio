@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-[#101014] fixed">
-    <div class="container mx-auto max-w-screen-xl px-5">
-      <nav class="flex justify-between h-16 items-center">
+  <div class="bg-[#101014] flex justify-center fixed">
+    <div class="container flex w-full max-w-screen-xl px-5">
+      <nav class="flex w-full justify-between h-16 items-center">
         <div class="flex items-center">
           <n-gradient-text
             gradient="linear-gradient(90deg, white 0%, gray 50%, green 100%)"
@@ -11,8 +11,8 @@
           </n-gradient-text>
         </div>
         <ul
-          :class="[openMenu ? 'translate-x-0' : 'translate-x-[-100vw]']"
-          class="block absolute left-0 top-16 bg-[#101014] w-screen transition-transform pb-3 pl-2 pr-4 sm:px-0 sm:translate-x-0 sm:w-auto sm:static gap-2 sm:inline-flex sm:items-center sm:pb-0"
+          :class="[openMenu ? 'translate-x-0' : 'translate-x-[-100%]']"
+          class="block absolute left-0 top-16 bg-[#101014] w-full transition-transform pb-3 pl-2 pr-4 sm:px-0 sm:translate-x-0 sm:w-auto sm:static gap-2 sm:inline-flex sm:items-center sm:pb-0"
         >
           <li v-for="(section, index) in sections" :key="index">
             <n-a

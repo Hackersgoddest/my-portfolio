@@ -1,18 +1,15 @@
 <template>
-  <MenuBar
-    class="menu-bar"
-    :open-menu="openMenu"
-    :active-section-index="activeSectionIndex"
-    @scroll-to-section="scrollToSection"
-    @toggle-menu="toggleMenu"
-    @updateActiveSectionIndex="updateActiveSectionIndex"
-  />
-  <div id="Home">
-    <HomeView @scroll-to-section="scrollToSection" ref="home" />
-    <ServiceView ref="services" />
-    <SkillsView ref="skills" />
-    <PortfolioView ref="portfolio" />
-    <ContactView ref="contact" />
+  <div class="w-fit h-full">
+    <MenuBar class="menu-bar" :open-menu="openMenu" :active-section-index="activeSectionIndex"
+      @scroll-to-section="scrollToSection" @toggle-menu="toggleMenu"
+      @updateActiveSectionIndex="updateActiveSectionIndex" />
+    <div id="Home" class="w-fit">
+      <HomeView @scroll-to-section="scrollToSection" ref="home" />
+      <ServiceView ref="services" />
+      <SkillsView ref="skills" />
+      <PortfolioView ref="portfolio" />
+      <ContactView ref="contact" />
+    </div>
     <Footer />
   </div>
 </template>
@@ -70,7 +67,6 @@ const updateActiveSectionIndex = (index) => {
   width: 100%;
   position: fixed;
   top: 0;
-  background-color: white;
   z-index: 40;
 }
 </style>
