@@ -4,7 +4,7 @@
 
 <script setup>
 import skillsSvgs from "../../assets/svgs/svg";
-import DisplaySkill from "./DisplaySkill.vue";
+import DisplaySkill from "../../components/DisplaySkill.vue";
 </script>
 
 <style scoped></style>

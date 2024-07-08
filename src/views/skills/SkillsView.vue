@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="bg-[#101014]">
     <Header
       :title="title"
       :description="description"
@@ -12,14 +12,11 @@
 <script setup>
 import { shallowRef } from "vue";
 import SkillsContent from "./SkillsContent.vue";
-import Header from "../../layouts/Header.vue";
+import Header from "../../components/Header.vue";
 
 const title = shallowRef("SKILLS");
 const description = shallowRef("The Stack I Work With");
 </script>
 
 <style scoped>
-main {
-  background-color: #101014;
-}
 </style>
