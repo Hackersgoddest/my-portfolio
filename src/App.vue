@@ -1,15 +1,13 @@
 <template>
-  <div class="w-fit h-full">
-    <MenuBar class="menu-bar" :open-menu="openMenu" :active-section-index="activeSectionIndex"
-      @scroll-to-section="scrollToSection" @toggle-menu="toggleMenu"
-      @updateActiveSectionIndex="updateActiveSectionIndex" />
-    <div id="Home" class="w-fit">
-      <HomeView @scroll-to-section="scrollToSection" ref="home" />
-      <ServiceView ref="services" />
-      <SkillsView ref="skills" />
-      <PortfolioView ref="portfolio" />
-      <ContactView ref="contact" />
-    </div>
+  <MenuBar class="menu-bar"
+    @scroll-to-section="scrollToSection" 
+  />
+  <div id="Home" class="w-full min-w-80">
+    <HomeView @scroll-to-section="scrollToSection" ref="home" />
+    <ServiceView ref="services" />
+    <SkillsView ref="skills" />
+    <PortfolioView ref="portfolio" />
+    <ContactView ref="contact" />
     <Footer />
   </div>
 </template>
@@ -25,36 +23,26 @@ import ContactView from "./views/contact/ContactView.vue";
 import Footer from "./views/Footer.vue";
 
 let openMenu = ref(false);
-let activeSectionIndex = ref(0);
-
 const home = ref(null);
 const services = ref(null);
 const skills = ref(null);
 const portfolio = ref(null);
 const contact = ref(null);
 
-const toggleMenu = (value) => {
-  openMenu.value = value;
-};
-
-const scrollToSection = (sectionName, index) => {
-  if (sectionName === "Home")
+const scrollToSection = (activeMenuKey) => {
+  if (activeMenuKey === "home")
     home.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if (sectionName === "Services")
+  else if (activeMenuKey === "services")
     services.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if (sectionName === "Skills")
+  else if (activeMenuKey === "skills")
     skills.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if (sectionName === "Portfolio")
+  else if (activeMenuKey === "portfolio")
     portfolio.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if (sectionName === "Contact")
+  else if (activeMenuKey === "contact")
     contact.value.$el.scrollIntoView({ behavior: "smooth" });
   openMenu.value = false;
-  activeSectionIndex.value = index;
 };
 
-const updateActiveSectionIndex = (index) => {
-  activeSectionIndex.value = index;
-};
 </script>
 <style>
 * {

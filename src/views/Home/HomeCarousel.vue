@@ -1,34 +1,31 @@
 <template>
-  <div class="relative w-full">
-    <div class="absolute bg-black bg-opacity-50 inset-0 w-full h-full z-10"></div>
+  <div class="relative">
+    <div class="absolute bg-black bg-opacity-50 inset-0 z-10"></div>
     <n-carousel show-arrow autoplay>
-    <img v-for="(src, index) in images" key="index"
-      class="h-[600px] lg:h-[700px] xl:h-[725px] w-full object-cover object-center bg-fixed"
-      :style="[index == 1 && {objectPosition: 'center 20px'}]"
-      :src="src"
-    >
-    <template #arrow="{ prev, next }">
-      <div class="custom-arrow z-20">
-        <button type="button" class="custom-arrow--btn hover:bg-[#00000080]" @click="prev">
-          <n-icon><ArrowBack /></n-icon>
-        </button>
-        <button type="button" class="custom-arrow--btn hover:bg-[#00000080]" @click="next">
-          <n-icon><ArrowForward /></n-icon>
-        </button>
-      </div>
-    </template>
-    <template #dots="{ total, currentIndex, to }">
-      <ul class="custom-dots z-20">
-        <li
-          v-for="index of total"
-          :key="index"
-          class="custom-dots--li"
-          :class="{ ['is-active']: currentIndex === index - 1 }"
-          @click="to(index - 1)"
-        />
-      </ul>
-    </template>
-  </n-carousel>
+      <img v-for="(src, index) in images" key="index"
+        class="h-[600px] lg:h-[700px] xl:h-[725px] w-full object-cover object-center bg-fixed"
+        :style="[index == 1 && { objectPosition: 'center 20px' }]" :src="src">
+      <template #arrow="{ prev, next }">
+        <div class="custom-arrow z-20">
+          <button type="button" class="custom-arrow--btn hover:bg-[#00000080]" @click="prev">
+            <n-icon>
+              <ArrowBack />
+            </n-icon>
+          </button>
+          <button type="button" class="custom-arrow--btn hover:bg-[#00000080]" @click="next">
+            <n-icon>
+              <ArrowForward />
+            </n-icon>
+          </button>
+        </div>
+      </template>
+      <template #dots="{ total, currentIndex, to }">
+        <ul class="custom-dots z-20">
+          <li v-for="index of total" :key="index" class="custom-dots--li"
+            :class="{ ['is-active']: currentIndex === index - 1 }" @click="to(index - 1)" />
+        </ul>
+      </template>
+    </n-carousel>
   </div>
 </template>
 

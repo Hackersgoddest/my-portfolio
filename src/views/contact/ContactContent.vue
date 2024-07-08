@@ -1,6 +1,5 @@
 <template>
-  <div class="flex bg-[#101014] pt-8 pb-16 justify-center">
-    <div class="w-full max-w-screen-xl flex flex-wrap gap-8 xl:gap-12 justify-center">
+    <div class="max-w-screen-xl mx-auto flex flex-wrap gap-8 xl:gap-12 justify-center pb-20">
       <template v-for="item in contactOptions" :key="item.name">
         <a :href="item.link" target="_blank"
           class="text-white hover:text-[#18A058] hover:transition-colors hover:duration-700 hover:ease-in-out">
@@ -14,7 +13,6 @@
         </a>
       </template>
     </div>
-  </div>
 </template>
 
 <script setup>
