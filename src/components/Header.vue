@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex flex-col justify-center items-center bg-[#101014] pt-20 pb-20"
-  >
+  <div class="max-w-screen-xl mx-auto flex flex-col items-center pt-20 pb-20">
     <n-h4 class="text-[#18A058] mb-1"> {{ title }} </n-h4>
     <n-p class="text-xl font-normal mb-1 text-white">{{ description }}</n-p>
   </div>
