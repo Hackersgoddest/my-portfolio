@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto w-full max-w-screen-xl px-5">
-    <div class="relative flex items-start justify-start flex-col gap-3">
+  <div class="mx-auto max-w-screen-xl px-5">
+    <div class="w-full relative flex items-start justify-start flex-col gap-3">
       <n-tag round :bordered="false" strong>
         Software Developer
         <template #icon>
