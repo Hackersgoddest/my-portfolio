@@ -110,9 +110,9 @@ import skillsSvgs from "../../assets/svgs/svg";
 import { Code } from "@vicons/ionicons5"
 
 const images = [
-  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487611/frank_one_ei67ny.jpg", class: "h-screen w-full object-cover"},
-  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487654/frank_three_r9jvfd.jpg", class: "h-screen w-full object-cover"},
-  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487678/frank_four_hiqps6.jpg", class: "h-screen w-full object-cover"},
+  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487611/frank_one_ei67ny.jpg", class: "h-[80vh] sm:h-screen w-full object-cover"},
+  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487654/frank_three_r9jvfd.jpg", class: "h-[80vh] sm:h-screen w-full object-cover"},
+  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487678/frank_four_hiqps6.jpg", class: "h-[80vh] sm:h-screen w-full object-cover"},
 ];
 </script>
 
