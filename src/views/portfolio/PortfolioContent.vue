@@ -15,7 +15,7 @@
               </n-button>
               <n-modal transform-origin="center" v-model:show="project.showModal"
                 class="custom-card w-full max-md:h-screen md:m-4 lg:m-auto lg:w-[80%] max-w-screen-xl">
-                <n-card :content-style="{ background: '#212121' }" :header-style="{ background: '#212121' }"
+                <n-card :content-style="{ background: '#212121', borderRadius: '0 0 4px 4px' }" :header-style="{ background: '#212121', borderRadius: '4px 4px 0 0' }"  class="rounded-md"
                   :bordered="false">
                   <template #header>
                     <n-h3 class="text-neutral-400 m-0">{{ project.title }}</n-h3>
@@ -137,9 +137,9 @@ const portfolioOptions = ref([
     title: "Promptopia",
     description: `<p>Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts. The application allows one to:</br><ul><li>Discover AI prompts</li><li>Create AI prompts</li><li>Edit AI prompts</li><li>Delete AI prompts</li></ul></p>`,
     images: [
-      "/login.png",
-      "/homepage.png",
-      "/profile.png",
+      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734491174/login_d2wlty.png",
+      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734491191/homepage_abswnc.png",
+      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734491206/profile_glj8lb.png",
     ],
     tools: ["NextJs", "Tailwind", "DaisyUI", "Typescript", "more"],
     links: [{ name: "GITHUB", link: "https://github.com/Hackersgoddest/promptopia" }],

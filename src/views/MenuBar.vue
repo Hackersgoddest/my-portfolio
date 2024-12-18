@@ -8,13 +8,8 @@
             Frank Oppong Konadu
           </n-gradient-text>
         </div>
-        <!-- For Desktop -->
-        <div class="justify-end items-center hidden lg:flex">
-          <n-menu v-model:value="activeMenuKey" mode="horizontal" :options="menuOptions" responsive
-            :theme-overrides="darkTheme" :on-update:value="(key, item) => updateActiveMenuKey(key)" />
-        </div>
-        <!-- For Tablet -->
-        <div class="justify-end items-center hidden md:flex lg:hidden">
+        <!-- For Desktop and Tablet -->
+        <div class="justify-end items-center hidden md:flex">
           <n-menu v-model:value="activeMenuKey" mode="horizontal" :options="mdMenuOptions" responsive
             :theme-overrides="darkTheme" :on-update:value="(key, item) => updateActiveMenuKey(key)" />
         </div>
