@@ -38,7 +38,7 @@ const serviceOptions = shallowRef([
   },
   {
     title: "Desktop App Development",
-    description: "I develop desktop applications for windows in Java",
+    description: "I develop desktop applications for windows in C#",
     icon: DesktopIcon
   },
 ]);
