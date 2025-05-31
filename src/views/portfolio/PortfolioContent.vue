@@ -5,6 +5,7 @@
     responsive="screen"
     :x-gap="32"
     :y-gap="32"
+    :item-responsive="true"
   >
     <n-grid-item v-for="project in portfolioOptions" :key="project.title">
       <figure class="flex flex-wrap bg-[#212121] flex-col rounded-t-2xl justify-between w-full">
