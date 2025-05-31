@@ -31,7 +31,7 @@
               ghost
               round
               class="text-white"
-              @click.passive="$emit('scrollToSection')"
+              @click.passive="$emit('scrollToSection', 'portfolio')"
             >
               My Porfolio
             </n-button>
