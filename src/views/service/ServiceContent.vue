@@ -13,7 +13,7 @@
         size="large"
         :bordered="false"
         :theme-overrides="darkTheme"
-        class="min-h-[300px]"
+        class="rounded-lg bg-[#212121]"
       >
         <template #header-extra>
           <n-icon size="40" color="#18A058" :component="service.icon" />
