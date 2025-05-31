@@ -1,8 +1,13 @@
 <template>
-  <div
-    class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-10 lg:px-5 pb-20">
-    <div class="flex rounded shadow-sm justify-center" v-for="project in portfolioOptions" :key="project.title">
-      <figure class="flex flex-wrap bg-[#212121] flex-col rounded-t-2xl justify-between w-full min-w-80 max-w-96">
+  <n-grid
+    class="max-w-screen-xl mx-auto px-5"
+    cols="1 s:2 m:3"
+    responsive="screen"
+    :x-gap="32"
+    :y-gap="32"
+  >
+    <n-grid-item v-for="project in portfolioOptions" :key="project.title">
+      <figure class="flex flex-wrap bg-[#212121] flex-col rounded-t-2xl justify-between w-full">
         <img @click="() => project.showModal = true" :src="project.images[0]"
           class="rounded-t-2xl h-40 hover:cursor-pointer" />
         <figcaption class="flex flex-col gap-8 p-4">
@@ -98,8 +103,8 @@
           </div>
         </figcaption>
       </figure>
-    </div>
-  </div>
+    </n-grid-item>
+  </n-grid>
 </template>
 
 <script setup>
@@ -115,6 +120,8 @@ import {
   NModal,
   NCard,
   NCarousel,
+  NGrid,
+  NGridItem,
 } from "naive-ui";
 import { OpenOutline, ArrowBack, ArrowForward, Close } from "@vicons/ionicons5";
 import { truncateText } from "../../filters";
