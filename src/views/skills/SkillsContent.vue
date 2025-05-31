@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-xl mx-auto pb-20">
+  <div class="max-w-screen-xl mx-auto px-5">
     <n-tabs :animated="true" type="bar" size="large" trigger="hover" justify-content="center"
       :theme-overrides="darkTheme">
       <n-tab-pane name="frontend" tab="Frontend" class="text-center text-white">
