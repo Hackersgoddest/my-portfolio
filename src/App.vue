@@ -2,18 +2,19 @@
   <MenuBar class="menu-bar"
     @scroll-to-section="scrollToSection" 
   />
-  <div id="Home" class="w-full min-w-80">
+  <n-space vertical :size="80" id="Home" class="w-full min-w-80 bg-[#101014]">
     <HomeView @scroll-to-section="scrollToSection" ref="home" />
     <ServiceView ref="services" />
     <SkillsView ref="skills" />
     <PortfolioView ref="portfolio" />
     <ContactView ref="contact" />
     <Footer />
-  </div>
+  </n-space>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { NSpace } from "naive-ui";
 import MenuBar from "./views/MenuBar.vue";
 import HomeView from "./views/Home/HomeView.vue";
 import ServiceView from "./views/service/ServiceView.vue";
@@ -30,16 +31,24 @@ const portfolio = ref(null);
 const contact = ref(null);
 
 const scrollToSection = (activeMenuKey) => {
-  if (activeMenuKey === "home")
-    home.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if (activeMenuKey === "services")
-    services.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if (activeMenuKey === "skills")
-    skills.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if (activeMenuKey === "portfolio")
-    portfolio.value.$el.scrollIntoView({ behavior: "smooth" });
-  else if (activeMenuKey === "contact")
-    contact.value.$el.scrollIntoView({ behavior: "smooth" });
+  let targetElement = null;
+  
+  if (activeMenuKey === "home") targetElement = home.value.$el;
+  else if (activeMenuKey === "services") targetElement = services.value.$el;
+  else if (activeMenuKey === "skills") targetElement = skills.value.$el;
+  else if (activeMenuKey === "portfolio") targetElement = portfolio.value.$el;
+  else if (activeMenuKey === "contact") targetElement = contact.value.$el;
+  
+  if (targetElement) {
+    const elementPosition = targetElement.offsetTop;
+    const offsetPosition = elementPosition - 80;
+    
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  }
+  
   openMenu.value = false;
 };
 
