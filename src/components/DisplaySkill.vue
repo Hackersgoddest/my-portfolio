@@ -27,14 +27,14 @@
           <template #trigger>
             <n-button quaternary circle>
               <template #icon>
-                <n-icon size="40" v-html="item.svg"></n-icon>
+                <n-icon size="40" v-html="item.svg" />
               </template>
             </n-button>
           </template>
           <n-tag :bordered="false" strong>
             {{ item.name }}
             <template #icon>
-              <n-icon v-html="item.svg"></n-icon>
+              <n-icon v-html="item.svg" />
             </template>
           </n-tag>
         </n-tooltip>
