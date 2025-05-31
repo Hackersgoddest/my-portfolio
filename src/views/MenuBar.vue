@@ -3,39 +3,77 @@
     <div class="container flex w-full max-w-screen-xl px-5">
       <nav class="flex w-full justify-between h-16 items-center">
         <div class="flex items-center flex-1">
-          <n-gradient-text gradient="linear-gradient(90deg, white 0%, gray 50%, green 100%)"
-            class="font-medium text-lg lg:text-xl">
+          <n-gradient-text
+            gradient="linear-gradient(90deg, white 0%, gray 50%, green 100%)"
+            class="font-medium text-lg lg:text-xl"
+          >
             Frank Oppong Konadu
           </n-gradient-text>
         </div>
         <!-- For Desktop and Tablet -->
-        <div class="justify-end items-center hidden md:flex">
-          <n-menu v-model:value="activeMenuKey" mode="horizontal" :options="mdMenuOptions" responsive
-            :theme-overrides="darkTheme" :on-update:value="(key, item) => updateActiveMenuKey(key)" />
+        <div class="hidden md:flex justify-end items-center">
+          <n-menu
+            v-model:value="activeMenuKey"
+            mode="horizontal"
+            :options="mdMenuOptions"
+            responsive
+            :theme-overrides="darkTheme"
+            :on-update:value="(key, item) => updateActiveMenuKey(key)"
+          />
         </div>
-        <!-- For Mobile -->
-        <div :class="[openMenu ? 'translate-x-0' : 'translate-x-[-100%]']"
-          class="block absolute left-0 top-16 bg-[#101014] w-full transition-transform md:hidden">
-          <n-menu v-model:value="activeMenuKey" mode="vertical" :options="menuOptions" responsive
-            :theme-overrides="darkTheme" :on-update:value="(key, item) => updateActiveMenuKey(key)" />
-        </div>
+        <n-button
+          strong
+          secondary
+          circle
+          color="#a3a3a3"
+          @click="openMenu = !openMenu"
+          class="outline-none md:hidden"
+        >
+          <template #icon>
+            <n-icon size="24" :component="MenuSharp" />
+          </template>
+        </n-button>
+        <n-drawer
+          v-model:show="openMenu"
+          :width="'100%'"
+          class="md:hidden bg-[#101014]"
+          :theme-overrides="darkTheme"
+        >
+          <n-drawer-content title="Menu" closable header-class="bg-[#101014]">
+            <n-menu
+              v-model:value="activeMenuKey"
+              mode="vertical"
+              :options="menuOptions"
+              responsive
+              :theme-overrides="darkTheme"
+              :on-update:value="(key) => updateActiveMenuKey(key)"
+            />
+          </n-drawer-content>
+        </n-drawer>
       </nav>
     </div>
-    <n-button strong secondary circle color="#a3a3a3" @click="openMenu = !openMenu"
-      class="absolute top-2.5 right-2 outline-none md:hidden">
-      <template #icon class="z-10">
-        <n-icon v-if="!openMenu" size="24" :component="MenuSharp" />
-        <n-icon v-else size="24" :component="Close" />
-      </template>
-    </n-button>
   </div>
 </template>
 
 <script setup>
-import { darkTheme } from 'naive-ui'
+import { darkTheme } from "naive-ui";
 import { onMounted, onUnmounted, ref, h } from "vue";
-import { NGradientText, NButton, NIcon, NMenu } from "naive-ui";
-import { Close, MenuSharp, HomeOutline, FolderOutline, LinkOutline, BriefcaseOutline, CodeOutline } from "@vicons/ionicons5";
+import {
+  NGradientText,
+  NButton,
+  NIcon,
+  NMenu,
+  NDrawer,
+  NDrawerContent,
+} from "naive-ui";
+import {
+  MenuSharp,
+  HomeOutline,
+  FolderOutline,
+  LinkOutline,
+  BriefcaseOutline,
+  CodeOutline,
+} from "@vicons/ionicons5";
 
 const emit = defineEmits(["scrollToSection"]);
 
@@ -45,7 +83,7 @@ const openMenu = ref(false);
 function updateActiveMenuKey(key) {
   activeMenuKey.value = key;
   openMenu.value = false;
-  emit('scrollToSection', key)
+  emit("scrollToSection", key);
 }
 
 function renderIcon(icon) {
@@ -66,24 +104,24 @@ const menuOptions = [
   {
     label: "Skills",
     key: "skills",
-    icon: renderIcon(CodeOutline)
+    icon: renderIcon(CodeOutline),
   },
   {
     label: "Portfolio",
     key: "portfolio",
-    icon: renderIcon(FolderOutline)
+    icon: renderIcon(FolderOutline),
   },
   {
     label: "Contact",
     key: "contact",
-    icon: renderIcon(LinkOutline)
+    icon: renderIcon(LinkOutline),
   },
 ];
 
 const mdMenuOptions = menuOptions.map((option) => ({
   label: option.label,
   key: option.key,
-}))
+}));
 
 const handleScroll = () => {
   const sectionRefs = menuOptions.map((_, index) =>
@@ -100,7 +138,6 @@ const handleScroll = () => {
     }
   }
 };
-
 
 onMounted(() => {
   handleScroll();
