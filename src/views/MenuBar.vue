@@ -31,16 +31,16 @@
           class="outline-none md:hidden"
         >
           <template #icon>
-            <n-icon size="24" :component="MenuSharp" />
+            <n-icon class="text-[#a3a3a3] hover:text-[#18A058] hover:transition-colors hover:duration-700 hover:ease-in-out" size="24" :component="MenuSharp" />
           </template>
         </n-button>
         <n-drawer
           v-model:show="openMenu"
           :width="'100%'"
-          class="md:hidden bg-[#101014]"
-          :theme-overrides="darkTheme"
+          class="md:hidden"
+          :theme-overrides="customDrawerTheme"
         >
-          <n-drawer-content title="Menu" closable header-class="bg-[#101014]">
+          <n-drawer-content title="Menu" closable :header-style="{ borderBottomColor: '#2d2d2d' }">
             <n-menu
               v-model:value="activeMenuKey"
               mode="vertical"
@@ -57,7 +57,6 @@
 </template>
 
 <script setup>
-import { darkTheme } from "naive-ui";
 import { onMounted, onUnmounted, ref, h } from "vue";
 import {
   NGradientText,
@@ -89,6 +88,18 @@ const customMenuTheme = {
   arrowColor: '#a3a3a3', // Arrow color for submenus
   arrowColorHover: '#18A058', // Arrow color on hover
 }
+
+const customDrawerTheme = {
+  color: '#101014', // Drawer background color
+  headerColor: '#101014', // Header background color
+  footerColor: '#101014', // Footer background color
+  bodyColor: '#101014', // Body background color
+  titleTextColor: '#ffffff', // Title text color
+  closeIconColor: '#ffffff', // Close icon color
+  closeIconColorHover: '#18A058', // Close icon color on hover
+  closeIconColorPressed: '#18A058', // Close icon color when pressed
+  resizableTriggerColor: '#2d2d2d', // Resizable trigger color
+};
 
 
 const emit = defineEmits(["scrollToSection"]);
