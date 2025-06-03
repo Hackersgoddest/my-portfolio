@@ -225,6 +225,20 @@ const portfolioOptions = ref([
     ],
     showModal: ref(false),
   },
+  {
+  title: "E-VotePro",
+  description: `<p>A comprehensive voting system built using C# Windows Forms and MySQL, designed to facilitate secure, efficient, and transparent elections. Perfect for educational institutions, organizations, and small-scale elections. The system features:</br><ul><li>Secure user authentication for students and admins</li><li>Real-time voting results and analytics</li><li>Comprehensive admin dashboard for election management</li><li>Candidate management system</li></ul></p>`,
+  images: [
+    "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968512/Screenshot_2025-06-03_at_4.30.45_PM_iygotw.png",
+    "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968505/Screenshot_2025-06-03_at_4.30.30_PM_bqnl7e.png",
+    "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968497/Screenshot_2025-06-03_at_4.30.18_PM_xma9og.png"
+  ],
+  tools: ["C#", "Windows Forms", ".NET Framework", "MySQL", "MySQL Connector"],
+  links: [
+    { name: "GITHUB", link: "https://github.com/Hackersgoddest/E-VotePro" }
+  ],
+  showModal: ref(false),
+},
 ]);
 </script>
 
