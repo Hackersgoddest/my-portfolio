@@ -2,7 +2,7 @@
   <MenuBar class="menu-bar" @scroll-to-section="scrollToSection" />
   <n-back-top
     :bottom="50"
-    :theme-overrides="darkTheme"
+    :theme-overrides="customBackTopTheme"
     :visibility-height="10"
     :style="{
       transition: 'all .3s cubic-bezier(.4, 0, .2, 1)',
@@ -20,7 +20,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { NSpace, NBackTop, darkTheme } from "naive-ui";
+import { NSpace, NBackTop } from "naive-ui";
 import MenuBar from "./views/MenuBar.vue";
 import HomeView from "./views/Home/HomeView.vue";
 import ServiceView from "./views/service/ServiceView.vue";
@@ -28,6 +28,18 @@ import SkillsView from "./views/skills/SkillsView.vue";
 import PortfolioView from "./views/portfolio/PortfolioView.vue";
 import ContactView from "./views/contact/ContactView.vue";
 import Footer from "./views/Footer.vue";
+
+const customBackTopTheme = {
+  iconColor: '#ffffff', // Default icon color
+  iconColorHover: '#18A058', // Icon color on hover
+  iconColorPressed: '#18A058', // Icon color when pressed
+  color: 'rgba(16, 16, 20, 0.8)', // Background color
+  colorHover: 'rgba(24, 160, 88, 0.2)', // Background color on hover
+  colorPressed: 'rgba(24, 160, 88, 0.3)', // Background color when pressed
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)', // Shadow
+  boxShadowHover: '0 4px 16px rgba(24, 160, 88, 0.3)', // Shadow on hover
+  borderRadius: '50%', // Border radius
+};
 
 let openMenu = ref(false);
 const home = ref(null);
