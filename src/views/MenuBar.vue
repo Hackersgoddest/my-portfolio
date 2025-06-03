@@ -17,7 +17,7 @@
             mode="horizontal"
             :options="mdMenuOptions"
             responsive
-            :theme-overrides="darkTheme"
+            :theme-overrides="customMenuTheme"
             :on-update:value="(key, item) => updateActiveMenuKey(key)"
           />
         </div>
@@ -46,7 +46,7 @@
               mode="vertical"
               :options="menuOptions"
               responsive
-              :theme-overrides="darkTheme"
+              :theme-overrides="customMenuTheme"
               :on-update:value="(key) => updateActiveMenuKey(key)"
             />
           </n-drawer-content>
@@ -75,6 +75,21 @@ import {
   BriefcaseOutline,
   CodeOutline,
 } from "@vicons/ionicons5";
+
+const customMenuTheme = {
+  itemTextColor: '#ffffff', // Default text color
+  itemTextColorHover: '#18A058', // Text color on hover
+  itemTextColorActive: '#18A058', // Active item text color
+  itemColorHover: 'rgba(24, 160, 88, 0.1)', // Background color on hover
+  itemColorActive: 'rgba(24, 160, 88, 0.2)', // Active item background color
+  itemIconColor: '#a3a3a3', // Default icon color
+  itemIconColorHover: '#18A058', // Icon color on hover
+  itemIconColorActive: '#18A058', // Active icon color
+  dividerColor: '#2d2d2d', // Divider color (for vertical menu)
+  arrowColor: '#a3a3a3', // Arrow color for submenus
+  arrowColorHover: '#18A058', // Arrow color on hover
+}
+
 
 const emit = defineEmits(["scrollToSection"]);
 
