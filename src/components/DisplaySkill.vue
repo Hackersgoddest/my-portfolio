@@ -1,26 +1,11 @@
 <template>
-  <div class="lg:hidden">
-    <n-flex justify="center" size="large" align="baseline">
-      <n-tag
-        v-for="item in skillName"
-        :key="item.name"
-        :bordered="false"
-        strong
-      >
-        {{ item.name }}
-        <template #icon>
-          <n-icon v-html="item.svg"></n-icon>
-        </template>
-      </n-tag>
-    </n-flex>
-  </div>
-  <div class="hidden lg:grid">
     <n-grid
-      cols="8 l:10 xl:12 2xl:14"
+      cols="5 s:6 m:8 l:10 xl:12 2xl:14"
       responsive="screen"
       :x-gap="32"
       :y-gap="32"
       :item-responsive="true"
+      class="mt-4"
     >
       <n-grid-item v-for="item in skillName" :key="item.name">
         <n-tooltip trigger="hover" :raw="true" :show-arrow="false">
@@ -40,7 +25,6 @@
         </n-tooltip>
       </n-grid-item>
     </n-grid>
-  </div>
 </template>
 <script setup>
 import {
@@ -50,7 +34,6 @@ import {
   NTooltip,
   NButton,
   NTag,
-  NFlex,
 } from "naive-ui";
 
 defineProps(["skillName"]);
