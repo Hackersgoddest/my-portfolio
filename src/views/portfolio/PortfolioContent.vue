@@ -14,12 +14,15 @@
         :bordered="false"
         :theme-overrides="darkTheme"
         class="rounded-lg bg-[#212121]"
+        :header-style="{
+          padding: '23px 32px 0px'
+        }"
       >
         <template #cover>
           <img
             @click="() => (project.showModal = true)"
             :src="project.images[0]"
-            class="rounded-t-2xl hover:cursor-pointer h-64"
+            class="rounded-t-2xl hover:cursor-pointer h-48"
           />
         </template>
         <template #header-extra>
@@ -40,6 +43,7 @@
             class="custom-card w-full max-md:h-screen md:m-4 lg:m-auto lg:w-[80%] max-w-screen-xl"
           >
             <n-card
+              :title="project.title"
               :content-style="{
                 background: '#212121',
                 borderRadius: '0 0 4px 4px',
@@ -47,13 +51,13 @@
               :header-style="{
                 background: '#212121',
                 borderRadius: '4px 4px 0 0',
+                padding: '19px 24px 10px',
+                color: '#ffffff',
               }"
               class="rounded-md"
               :bordered="false"
+              :theme-overrides="darkTheme"
             >
-              <template #header>
-                <n-h3 class="text-neutral-400 m-0">{{ project.title }}</n-h3>
-              </template>
               <template #header-extra>
                 <n-button
                   @click="project.showModal = false"
