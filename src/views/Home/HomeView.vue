@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div
-      class="absolute bg-black bg-opacity-50 inset-0 z-10 w-full flex items-center"
+      class="absolute bg-black bg-opacity-50 inset-0 z-10 w-full h-[90vh] xs:h-[80vh] sm:h-screen flex items-center"
     >
       <div class="w-full mx-auto max-w-screen-xl px-5">
         <div
@@ -110,9 +110,9 @@ import skillsSvgs from "../../assets/svgs/svg";
 import { Code } from "@vicons/ionicons5"
 
 const images = [
-  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487611/frank_one_ei67ny.jpg", class: "h-[80vh] sm:h-screen w-full object-cover"},
-  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487654/frank_three_r9jvfd.jpg", class: "h-[80vh] sm:h-screen w-full object-cover"},
-  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487678/frank_four_hiqps6.jpg", class: "h-[80vh] sm:h-screen w-full object-cover"},
+  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487611/frank_one_ei67ny.jpg", class: "h-[90vh] xs:h-[80vh] sm:h-screen w-full object-cover"},
+  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487654/frank_three_r9jvfd.jpg", class: "h-[90vh] xs:h-[80vh] sm:h-screen w-full object-cover"},
+  {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487678/frank_four_hiqps6.jpg", class: "h-[90vh] xs:h-[80vh] sm:h-screen w-full object-cover"},
 ];
 </script>
 
