@@ -126,7 +126,7 @@ const serviceOptions = shallowRef([
   {
     title: "Mobile App Development",
     description:
-      "Cross-platform mobile application development for iOS and Android using React Native and Expo framework, delivering native performance with faster development cycles and seamless deployment.",
+      "Cross-platform mobile application development for iOS and Android using React Native and Expo framework, delivering native performance with faster development and seamless deployment.",
     icon: PhoneIcon,
     tools: [
       {
