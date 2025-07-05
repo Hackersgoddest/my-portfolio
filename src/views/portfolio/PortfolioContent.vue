@@ -237,7 +237,7 @@ const portfolioOptions = ref([
     "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968505/Screenshot_2025-06-03_at_4.30.30_PM_bqnl7e.png",
     "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968497/Screenshot_2025-06-03_at_4.30.18_PM_xma9og.png"
   ],
-  tools: ["C#", "Windows Forms", ".NET Framework", "MySQL", "MySQL Connector"],
+  tools: ["C#", "Windows Forms", ".NET", "MySQL", "more"],
   links: [
     { name: "GITHUB", link: "https://github.com/Hackersgoddest/E-VotePro" }
   ],
