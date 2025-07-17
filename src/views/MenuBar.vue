@@ -5,7 +5,7 @@
         <div class="flex items-center flex-1">
           <n-gradient-text
             gradient="linear-gradient(90deg, white 0%, gray 50%, green 100%)"
-            class="font-medium text-lg lg:text-xl"
+            class="font-light text-lg lg:text-xl"
           >
             Frank Oppong Konadu
           </n-gradient-text>
