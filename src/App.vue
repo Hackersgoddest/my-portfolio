@@ -9,11 +9,11 @@
     }"
   />
   <n-space vertical :size="80" id="Home" class="w-full min-w-80 bg-[#101014]">
-    <HomeView @scroll-to-section="scrollToSection" ref="home" />
-    <ServiceView ref="services" />
-    <SkillsView ref="skills" />
-    <PortfolioView ref="portfolio" />
-    <ContactView ref="contact" />
+    <HomeSection @scroll-to-section="scrollToSection" ref="home" />
+    <ServiceSection ref="services" />
+    <SkillsSection ref="skills" />
+    <PortfolioSection ref="portfolio" />
+    <ContactSection ref="contact" />
     <Footer />
   </n-space>
 </template>
@@ -21,13 +21,13 @@
 <script setup>
 import { ref } from "vue";
 import { NSpace, NBackTop } from "naive-ui";
-import MenuBar from "./views/MenuBar.vue";
-import HomeView from "./views/Home/HomeView.vue";
-import ServiceView from "./views/service/ServiceView.vue";
-import SkillsView from "./views/skills/SkillsView.vue";
-import PortfolioView from "./views/portfolio/PortfolioView.vue";
-import ContactView from "./views/contact/ContactView.vue";
-import Footer from "./views/Footer.vue";
+import MenuBar from "./components/MenuBar.vue";
+import HomeSection from "./components/sections/HomeSection.vue";
+import ServiceSection from "./components/sections/ServiceSection.vue";
+import SkillsSection from "./components/sections/SkillsSection.vue";
+import PortfolioSection from "./components/sections/PortfolioSection.vue";
+import ContactSection from "./components/sections/ContactSection.vue";
+import Footer from "./components/Footer.vue";
 
 const customBackTopTheme = {
   iconColor: '#ffffff', // Default icon color

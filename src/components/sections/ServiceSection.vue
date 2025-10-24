@@ -1,45 +1,50 @@
 <template>
-  <n-grid
-    class="max-w-screen-xl mx-auto px-5"
-    cols="1 s:2 m:3"
-    responsive="screen"
-    :x-gap="32"
-    :y-gap="32"
-    :item-responsive="true"
-  >
-    <n-grid-item v-for="service in serviceOptions" :key="service.title">
-      <n-card
-        :title="service.title"
-        size="large"
-        :bordered="false"
-        :theme-overrides="darkTheme"
-        class="rounded-lg bg-[#212121]"
-      >
-        <template #header-extra>
-          <n-icon size="40" color="#18A058" :component="service.icon" />
-        </template>
-        <n-p class="text-[#727174]">{{ service.description }}</n-p>
-        <n-avatar-group :options="service.tools" :size="40" :max="5" theme-overrides="darkTheme">
-          <template #avatar="{ option: { name, src } }">
-            <n-tooltip>
-              <template #trigger>
-                <n-avatar :src="src" :theme-overrides="darkTheme" class="bg-white border-0" />
-              </template>
-              {{ name }}
-            </n-tooltip>
+  <section class="bg-[#101014]">
+    <Header :title="title" :description="description" id="Services" />
+    
+    <!-- Service Content -->
+    <n-grid
+      class="max-w-screen-xl mx-auto px-5"
+      cols="1 s:2 m:3"
+      responsive="screen"
+      :x-gap="32"
+      :y-gap="32"
+      :item-responsive="true"
+    >
+      <n-grid-item v-for="service in serviceOptions" :key="service.title">
+        <n-card
+          :title="service.title"
+          size="large"
+          :bordered="false"
+          :theme-overrides="darkTheme"
+          class="rounded-lg bg-[#212121]"
+        >
+          <template #header-extra>
+            <n-icon size="40" color="#18A058" :component="service.icon" />
           </template>
-          <template #rest="{ options: restOptions, rest }">
-            <n-dropdown
-              :options="createDropdownOptions(restOptions)"
-              placement="top"
-            >
-              <n-avatar :theme-overrides="darkTheme">+{{ rest }}</n-avatar>
-            </n-dropdown>
-          </template>
-        </n-avatar-group>
-      </n-card>
-    </n-grid-item>
-  </n-grid>
+          <n-p class="text-[#727174]">{{ service.description }}</n-p>
+          <n-avatar-group :options="service.tools" :size="40" :max="5" theme-overrides="darkTheme">
+            <template #avatar="{ option: { name, src } }">
+              <n-tooltip>
+                <template #trigger>
+                  <n-avatar :src="src" :theme-overrides="darkTheme" class="bg-white border-0" />
+                </template>
+                {{ name }}
+              </n-tooltip>
+            </template>
+            <template #rest="{ options: restOptions, rest }">
+              <n-dropdown
+                :options="createDropdownOptions(restOptions)"
+                placement="top"
+              >
+                <n-avatar :theme-overrides="darkTheme">+{{ rest }}</n-avatar>
+              </n-dropdown>
+            </template>
+          </n-avatar-group>
+        </n-card>
+      </n-grid-item>
+    </n-grid>
+  </section>
 </template>
 
 <script setup>
@@ -60,7 +65,11 @@ import {
   NTooltip,
   NDropdown,
 } from "naive-ui";
+import Header from "../Header.vue";
 import { shallowRef } from "vue";
+
+const title = shallowRef('SERVICES');
+const description = shallowRef('What i Offer');
 
 const serviceOptions = shallowRef([
   {
