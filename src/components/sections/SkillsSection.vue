@@ -52,6 +52,3 @@ const fullStackSkills = [...skillsSvgs.frontEnd, ...skillsSvgs.backEnd].reduce(
   []
 );
 </script>
-
-<style scoped>
-</style>

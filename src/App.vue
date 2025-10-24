@@ -1,5 +1,5 @@
 <template>
-  <MenuBar class="menu-bar" @scroll-to-section="scrollToSection" />
+  <MenuBar class="w-full fixed top-0 z-40" @scroll-to-section="scrollToSection" />
   <n-back-top
     :bottom="50"
     :theme-overrides="customBackTopTheme"
@@ -70,17 +70,3 @@ const scrollToSection = (activeMenuKey) => {
   openMenu.value = false;
 };
 </script>
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.menu-bar {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 40;
-}
-</style>

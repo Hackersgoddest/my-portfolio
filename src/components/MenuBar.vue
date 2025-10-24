@@ -177,5 +177,3 @@ onUnmounted(() => {
   window.removeEventListener("touchmove", handleScroll);
 });
 </script>
-
-<style scoped></style>

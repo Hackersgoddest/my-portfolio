@@ -84,11 +84,11 @@
                       :src="image"
                     />
                     <template #arrow="{ prev, next }">
-                      <div class="custom-arrow">
+                      <div class="flex absolute bottom-4 right-3 gap-2">
                         <n-icon-wrapper
                           :size="28"
                           :border-radius="10"
-                          class="custom-arrow--btn hover:bg-[#867A7A33]"
+                          class="inline-flex items-center justify-center text-[#101014] bg-[#CAC5C51A] rounded-lg border-0 transition cursor-pointer hover:bg-[#867A7A33]"
                           @click="prev"
                         >
                           <n-icon :size="18" :component="ArrowBack" />
@@ -96,7 +96,7 @@
                         <n-icon-wrapper
                           :size="28"
                           :border-radius="10"
-                          class="custom-arrow--btn hover:bg-[#867A7A33]"
+                          class="inline-flex items-center justify-center text-[#101014] bg-[#CAC5C51A] rounded-lg border-0 transition cursor-pointer hover:bg-[#867A7A33]"
                           @click="next"
                         >
                           <n-icon :size="18" :component="ArrowForward" />
@@ -104,12 +104,12 @@
                       </div>
                     </template>
                     <template #dots="{ total, currentIndex, to }">
-                      <ul class="custom-dots">
+                      <ul class="flex m-0 p-0 absolute bottom-5 left-5">
                         <li
                           v-for="index of total"
                           :key="index"
-                          class="custom-dots--li active:w-10 active:bg-[#242425] z-10"
-                          :class="{ ['is-active']: currentIndex === index - 1 }"
+                          class="inline-block w-3 h-1 my-0 mx-[3px] rounded bg-[#47464666] transition cursor-pointer active:w-10 active:bg-[#242425] z-10"
+                          :class="{ 'w-10 bg-[#242425]': currentIndex === index - 1 }"
                           @click="to(index - 1)"
                         />
                       </ul>
@@ -254,30 +254,3 @@ const portfolioOptions = ref([
 },
 ]);
 </script>
-
-<style scoped>
-main {
-    background-color: #101014;
-}
-
-.custom-arrow {
-  @apply flex absolute bottom-4 right-3 gap-2;
-}
-
-.custom-arrow--btn {
-  @apply inline-flex items-center justify-center text-[#101014] bg-[#CAC5C51A] rounded-lg border-0 transition cursor-pointer;
-}
-
-.custom-dots {
-  @apply flex m-0 p-0 absolute bottom-5 left-5;
-}
-
-.custom-dots--li {
-  @apply inline-block w-3 h-1 my-0 mx-[3px] rounded bg-[#47464666] transition cursor-pointer;
-}
-
-.custom-dots li.is-active {
-  width: 40px;
-  background: #242425;
-}
-</style>

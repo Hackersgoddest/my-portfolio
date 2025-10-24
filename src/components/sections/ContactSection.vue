@@ -92,5 +92,3 @@ const contactOptions = shallowRef([
   },
 ]);
 </script>
-
-<style scoped></style>

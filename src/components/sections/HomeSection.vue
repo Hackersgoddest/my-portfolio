@@ -67,10 +67,10 @@
         :src="image.src"
       />
       <template #arrow="{ prev, next }">
-        <div class="custom-arrow z-20">
+        <div class="flex absolute bottom-6 right-3 z-20">
           <button
             type="button"
-            class="custom-arrow--btn hover:bg-[#00000080]"
+            class="inline-flex items-center w-7 h-7 mr-3 justify-center text-white bg-[#0000004d] rounded-lg border-0 transition cursor-pointer hover:bg-[#00000080]"
             @click="prev"
           >
             <n-icon>
@@ -79,7 +79,7 @@
           </button>
           <button
             type="button"
-            class="custom-arrow--btn hover:bg-[#00000080]"
+            class="inline-flex items-center w-7 h-7 mr-3 justify-center text-white bg-[#0000004d] rounded-lg border-0 transition cursor-pointer hover:bg-[#00000080]"
             @click="next"
           >
             <n-icon>
@@ -89,12 +89,12 @@
         </div>
       </template>
       <template #dots="{ total, currentIndex, to }">
-        <ul class="custom-dots z-20">
+        <ul class="flex m-0 p-0 absolute bottom-5 left-5 z-20">
           <li
             v-for="index of total"
             :key="index"
-            class="custom-dots--li"
-            :class="{ ['is-active']: currentIndex === index - 1 }"
+            class="inline-block w-3 h-1 my-0 mx-[3px] rounded bg-[#ffffff66] transition cursor-pointer"
+            :class="{ 'w-10 bg-white': currentIndex === index - 1 }"
             @click="to(index - 1)"
           />
         </ul>
@@ -115,26 +115,3 @@ const images = [
   {src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487678/frank_four_hiqps6.jpg", class: "h-[90vh] xs:h-[80vh] sm:h-screen w-full object-cover"},
 ];
 </script>
-
-<style scoped>
-.custom-arrow {
-  @apply flex absolute bottom-6 right-3;
-}
-
-.custom-arrow--btn {
-  @apply inline-flex items-center w-7 h-7 mr-3 justify-center text-white bg-[#0000004d] rounded-lg border-0 transition cursor-pointer;
-}
-
-.custom-dots {
-  @apply flex m-0 p-0 absolute bottom-5 left-5;
-}
-
-.custom-dots--li {
-  @apply inline-block w-3 h-1 my-0 mx-[3px] rounded bg-[#ffffff66] transition cursor-pointer;
-}
-
-.custom-dots li.is-active {
-  width: 40px;
-  background: #fff;
-}
-</style>
