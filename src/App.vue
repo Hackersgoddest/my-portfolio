@@ -21,6 +21,7 @@
 <script setup>
 import { ref } from "vue";
 import { NSpace, NBackTop } from "naive-ui";
+import { useScrollAnimations } from "./composables/useScrollAnimations";
 import MenuBar from "./components/MenuBar.vue";
 import HomeSection from "./components/sections/HomeSection.vue";
 import ServiceSection from "./components/sections/ServiceSection.vue";
@@ -28,6 +29,9 @@ import SkillsSection from "./components/sections/SkillsSection.vue";
 import PortfolioSection from "./components/sections/PortfolioSection.vue";
 import ContactSection from "./components/sections/ContactSection.vue";
 import Footer from "./components/Footer.vue";
+
+// Initialize scroll animations
+const { isLoaded } = useScrollAnimations();
 
 const customBackTopTheme = {
   iconColor: '#ffffff', // Default icon color

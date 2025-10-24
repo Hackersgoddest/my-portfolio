@@ -1,49 +1,107 @@
 <template>
-  <section class="bg-[#101014]">
-    <Header :title="title" :description="description" id="Services" />
-    
-    <!-- Service Content -->
-    <n-grid
-      class="max-w-screen-xl mx-auto px-5"
-      cols="1 s:2 m:3"
-      responsive="screen"
-      :x-gap="32"
-      :y-gap="32"
-      :item-responsive="true"
-    >
-      <n-grid-item v-for="service in serviceOptions" :key="service.title">
-        <n-card
-          :title="service.title"
-          size="large"
-          :bordered="false"
-          :theme-overrides="darkTheme"
-          class="rounded-lg bg-[#212121]"
+  <section class="py-section bg-background-secondary">
+    <div class="container-custom">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-h2 font-bold text-white mb-4">
+          Services
+        </h2>
+        <p class="text-body-lg text-gray-300 max-w-2xl mx-auto">
+          Comprehensive solutions from web applications to mobile apps and desktop software
+        </p>
+      </div>
+      
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div 
+          v-for="(service, index) in serviceOptions" 
+          :key="service.title"
+          class="group service-card animate-fade-in-up"
+          :style="{ animationDelay: `${index * 0.1}s` }"
         >
-          <template #header-extra>
-            <n-icon size="40" color="#18A058" :component="service.icon" />
-          </template>
-          <n-p class="text-[#727174]">{{ service.description }}</n-p>
-          <n-avatar-group :options="service.tools" :size="40" :max="5" theme-overrides="darkTheme">
-            <template #avatar="{ option: { name, src } }">
-              <n-tooltip>
-                <template #trigger>
-                  <n-avatar :src="src" :theme-overrides="darkTheme" class="bg-white border-0" />
-                </template>
-                {{ name }}
-              </n-tooltip>
-            </template>
-            <template #rest="{ options: restOptions, rest }">
-              <n-dropdown
-                :options="createDropdownOptions(restOptions)"
-                placement="top"
-              >
-                <n-avatar :theme-overrides="darkTheme">+{{ rest }}</n-avatar>
-              </n-dropdown>
-            </template>
-          </n-avatar-group>
-        </n-card>
-      </n-grid-item>
-    </n-grid>
+          <div class="glass-card h-full p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-white/10">
+            <!-- Service Icon -->
+            <div class="flex items-center mb-6">
+              <div class="p-3 rounded-xl bg-primary-green/10 mr-4">
+                <n-icon 
+                  size="32" 
+                  :component="service.icon" 
+                  class="text-primary-green"
+                />
+              </div>
+              <h3 class="text-h4 font-semibold text-white">
+                {{ service.title }}
+              </h3>
+            </div>
+
+            <!-- Service Description -->
+            <p class="text-body text-gray-300 mb-8 leading-relaxed">
+              {{ service.description }}
+            </p>
+
+            <!-- Technology Stack -->
+            <div class="space-y-4">
+              <h4 class="text-caption text-gray-400 font-medium uppercase tracking-wider">
+                Technologies Used
+              </h4>
+              <div class="flex flex-wrap gap-3">
+                <n-tooltip
+                  v-for="tool in service.tools.slice(0, 6)"
+                  :key="tool.name"
+                  placement="top"
+                  :delay="300"
+                >
+                  <template #trigger>
+                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 p-2 transition-all duration-200 hover:bg-white/10 hover:scale-110 cursor-pointer">
+                      <img
+                        :src="tool.src"
+                        :alt="tool.name"
+                        class="w-full h-full object-contain"
+                      />
+                    </div>
+                  </template>
+                  <span class="text-sm">{{ tool.name }}</span>
+                </n-tooltip>
+                
+                <n-popover
+                  v-if="service.tools.length > 6"
+                  placement="top"
+                  trigger="hover"
+                  :delay="300"
+                  :style="{
+                    '--n-color': 'none',
+                    '--n-border': 'none',
+                  }"
+                >
+                  <template #trigger>
+                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 text-xs font-medium hover:bg-white/10 hover:scale-110 transition-all duration-200 cursor-pointer">
+                      +{{ service.tools.length - 6 }}
+                    </div>
+                  </template>
+                  <div class="space-y-2 max-w-56 glass-card border border-white/10 rounded-lg p-3">
+                    <div class="text-sm font-medium text-white mb-3">Additional Technologies:</div>
+                    <div class="space-y-2">
+                      <div
+                        v-for="tool in service.tools.slice(6)"
+                        :key="tool.name"
+                        class="flex items-center gap-3 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-200"
+                      >
+                        <img
+                          :src="tool.src"
+                          :alt="tool.name"
+                          class="w-6 h-6 object-contain flex-shrink-0"
+                        />
+                        <span class="text-sm text-gray-300">{{ tool.name }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </n-popover>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -53,23 +111,8 @@ import {
   PhonePortraitOutline as PhoneIcon,
   DesktopOutline as DesktopIcon,
 } from "@vicons/ionicons5";
-import {
-  NIcon,
-  NP,
-  NGrid,
-  NGridItem,
-  NCard,
-  darkTheme,
-  NAvatar,
-  NAvatarGroup,
-  NTooltip,
-  NDropdown,
-} from "naive-ui";
-import Header from "../Header.vue";
+import { NIcon, NTooltip, NPopover } from "naive-ui";
 import { shallowRef } from "vue";
-
-const title = shallowRef('SERVICES');
-const description = shallowRef('What i Offer');
 
 const serviceOptions = shallowRef([
   {
@@ -83,28 +126,12 @@ const serviceOptions = shallowRef([
         src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748681711/reactjs-svgrepo-com_ay2juw.svg",
       },
       {
-        name: "Nest",
-        src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748684787/nestjs-svgrepo-com_osupei.svg",
-      },
-      {
-        name: "PostgreSQL",
-        src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748684933/postgresql-logo-svgrepo-com_zg0lca.svg",
-      },
-      {
-        name: "Node",
-        src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748685426/nodejs-1-logo-svgrepo-com_q4uvtf.svg",
-      },
-      {
-        name: "Django",
-        src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748685417/django-fill-svgrepo-com_drlint.svg",
-      },
-      {
         name: "Vue",
         src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748684957/vue-svgrepo-com_u7evpd.svg",
       },
       {
-        name: "Tailwind CSS",
-        src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748685190/tailwindcss-icon-svgrepo-com_fewqn7.svg",
+        name: "Node",
+        src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748685426/nodejs-1-logo-svgrepo-com_q4uvtf.svg",
       },
       {
         name: "Next",
@@ -115,12 +142,16 @@ const serviceOptions = shallowRef([
         src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748684916/nuxt-svgrepo-com_yc2var.svg",
       },
       {
+        name: "Nest",
+        src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748684787/nestjs-svgrepo-com_osupei.svg",
+      },
+      {
         name: "Express",
         src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748684756/express-svgrepo-com_d26izs.svg",
       },
       {
-        name: "Fastify",
-        src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748684773/fastify-svgrepo-com_fa3mg5.svg",
+        name: "PostgreSQL",
+        src: "https://res.cloudinary.com/dfm07q3n0/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1748684933/postgresql-logo-svgrepo-com_zg0lca.svg",
       },
       {
         name: "MySQL",
@@ -169,10 +200,4 @@ const serviceOptions = shallowRef([
     ],
   },
 ]);
-
-const createDropdownOptions = (options) =>
-  options.map((option) => ({
-    key: option.name,
-    label: option.name,
-  }));
 </script>

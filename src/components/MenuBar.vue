@@ -1,14 +1,19 @@
 <template>
-  <div class="bg-[#101014] flex justify-center fixed">
+  <div 
+    :class="[
+      'glass-card backdrop-blur-md flex justify-center fixed w-full z-50 transition-all duration-300',
+      isScrolled ? 'shadow-lg' : ''
+    ]"
+    style="top: 0; position: fixed;"
+  >
     <div class="container flex w-full max-w-screen-xl px-5">
       <nav class="flex w-full justify-between h-16 items-center">
         <div class="flex items-center flex-1">
-          <n-gradient-text
-            gradient="linear-gradient(90deg, white 0%, gray 50%, green 100%)"
-            class="font-light text-lg lg:text-xl"
+          <n-text
+            class="text-white text-lg lg:text-xl magnetic-hover cursor-pointer"
           >
             Frank Oppong Konadu
-          </n-gradient-text>
+          </n-text>
         </div>
         <!-- For Desktop and Tablet -->
         <div class="hidden md:flex justify-end items-center">
@@ -59,7 +64,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref, h } from "vue";
 import {
-  NGradientText,
+  NText,
   NButton,
   NIcon,
   NMenu,
@@ -106,6 +111,7 @@ const emit = defineEmits(["scrollToSection"]);
 
 const activeMenuKey = ref("home");
 const openMenu = ref(false);
+const isScrolled = ref(false);
 
 function updateActiveMenuKey(key) {
   activeMenuKey.value = key;
@@ -151,6 +157,10 @@ const mdMenuOptions = menuOptions.map((option) => ({
 }));
 
 const handleScroll = () => {
+  // Update navbar scroll state
+  isScrolled.value = window.scrollY > 50;
+  
+  // Update active menu based on section visibility
   const sectionRefs = menuOptions.map((_, index) =>
     document.getElementById(menuOptions[index].label)
   );
@@ -168,7 +178,7 @@ const handleScroll = () => {
 
 onMounted(() => {
   handleScroll();
-  window.addEventListener("wheel", handleScroll, { passive: true });
+  window.addEventListener("scroll", handleScroll, { passive: true });
   window.addEventListener("touchmove", handleScroll, { passive: true });
 });
 
