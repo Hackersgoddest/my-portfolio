@@ -239,6 +239,16 @@ body {
   }
 }
 
+/* Scrollbar utilities */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
