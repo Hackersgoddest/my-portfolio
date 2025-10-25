@@ -79,8 +79,8 @@
             <n-grid 
               cols="2 xs:3 s:4 m:5 l:6 xl:8"
               responsive="screen"
-              :x-gap="16"
-              :y-gap="16"
+              :x-gap="8"
+              :y-gap="12"
             >
               <n-grid-item 
                 v-for="skill in tab.skills" 
@@ -93,21 +93,21 @@
                   @mouseleave="hoveredSkill = null"
                 >
                   <!-- Simple Skill Card - Clean Design -->
-                  <div class="skill-card glass-card rounded-xl p-4 text-center cursor-pointer border border-white/10 hover:border-primary-green/50 transition-all duration-300 hover:transform hover:translate-y-[-2px] hover:shadow-lg hover:bg-white/[0.05]">
+                  <div class="skill-card glass-card rounded-lg xs:rounded-xl p-2 xs:p-3 sm:p-4 text-center cursor-pointer border border-white/10 hover:border-primary-green/50 transition-all duration-300 hover:transform hover:translate-y-[-2px] hover:shadow-lg hover:bg-white/[0.05]">
                     <!-- Skill Icon -->
-                    <div class="flex justify-center mb-3">
+                    <div class="flex justify-center mb-1.5 xs:mb-2 sm:mb-3">
                       <div 
-                        class="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                        class="w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
                       >
                         <img 
                           v-if="skill.src"
                           :src="skill.src" 
                           :alt="skill.name"
-                          class="w-8 h-8 object-contain"
+                          class="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 object-contain"
                         />
                         <div 
                           v-else
-                          class="w-8 h-8 bg-gray-600 rounded-md flex items-center justify-center text-xs text-gray-300"
+                          class="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 bg-gray-600 rounded-md flex items-center justify-center text-xs text-gray-300"
                         >
                           {{ skill.name.charAt(0) }}
                         </div>
@@ -115,7 +115,7 @@
                     </div>
                     
                     <!-- Skill Name -->
-                    <div class="text-xs text-gray-300 font-medium">
+                    <div class="text-xs text-gray-300 font-medium leading-tight text-center px-0.5">
                       {{ skill.name }}
                     </div>
                   </div>
@@ -123,22 +123,22 @@
                   <!-- Enhanced Details Card on Hover - Cleaner Animation -->
                   <div 
                     v-if="hoveredSkill === skill"
-                    class="absolute top-0 left-0 w-full z-20 pointer-events-none"
+                    class="absolute top-0 left-0 w-full max-w-xs z-20 pointer-events-none"
                   >
-                    <div class="skill-detail-card glass-card border border-primary-green/50 rounded-xl p-4 shadow-2xl transition-all duration-300 ease-out transform">
+                    <div class="skill-detail-card glass-card border border-primary-green/50 rounded-lg xs:rounded-xl p-3 xs:p-4 shadow-2xl transition-all duration-300 ease-out transform overflow-hidden">
                       <div class="text-center">
                         <!-- Enhanced Icon -->
-                        <div class="flex justify-center mb-3">
-                          <div class="w-16 h-16 flex items-center justify-center bg-primary-green/10 rounded-xl">
+                        <div class="flex justify-center mb-2 xs:mb-3">
+                          <div class="w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-primary-green/10 rounded-lg xs:rounded-xl">
                             <img 
                               v-if="skill.src"
                               :src="skill.src" 
                               :alt="skill.name"
-                              class="w-10 h-10 object-contain"
+                              class="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 object-contain"
                             />
                             <div 
                               v-else
-                              class="w-10 h-10 bg-gray-600 rounded-md flex items-center justify-center text-sm text-gray-300"
+                              class="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 bg-gray-600 rounded-md flex items-center justify-center text-xs xs:text-sm text-gray-300"
                             >
                               {{ skill.name.charAt(0) }}
                             </div>
@@ -146,33 +146,33 @@
                         </div>
                         
                         <!-- Skill Name -->
-                        <h4 class="text-sm font-semibold text-white mb-2">
+                        <h4 class="text-xs xs:text-sm font-semibold text-white mb-1.5 xs:mb-2 overflow-hidden text-ellipsis">
                           {{ skill.name }}
                         </h4>
                         
                         <!-- Skill Description -->
-                        <p class="text-xs text-gray-300 mb-3 leading-relaxed">
+                        <p class="text-xs text-gray-300 mb-2 xs:mb-3 leading-relaxed overflow-hidden line-clamp-2">
                           {{ getSkillDescription(skill.name) }}
                         </p>
                         
                         <!-- Experience Level -->
-                        <div class="mb-3">
+                        <div class="mb-2 xs:mb-3">
                           <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs text-gray-400">Experience</span>
-                            <span class="text-xs text-primary-green font-medium">{{ getSkillLevel(skill.name) }}</span>
+                            <span class="text-xs text-gray-400 truncate">Experience</span>
+                            <span class="text-xs text-primary-green font-medium truncate">{{ getSkillLevel(skill.name) }}</span>
                           </div>
-                          <div class="w-full bg-white/10 rounded-full h-1.5">
+                          <div class="w-full bg-white/10 rounded-full h-1 xs:h-1.5">
                             <div 
-                              class="bg-gradient-to-r from-primary-green to-primary-green-light h-1.5 rounded-full transition-all duration-700 ease-out"
+                              class="bg-gradient-to-r from-primary-green to-primary-green-light h-1 xs:h-1.5 rounded-full transition-all duration-700 ease-out"
                               :style="{ width: getSkillPercentage(skill.name) + '%' }"
                             ></div>
                           </div>
                         </div>
                         
                         <!-- Projects Count -->
-                        <div class="flex items-center justify-center gap-2 text-xs">
-                          <div class="w-2 h-2 bg-primary-green rounded-full"></div>
-                          <span class="text-gray-300">{{ getProjectCount(skill.name) }}+ projects</span>
+                        <div class="flex items-center justify-center gap-1.5 xs:gap-2 text-xs overflow-hidden">
+                          <div class="w-1.5 h-1.5 xs:w-2 xs:h-2 bg-primary-green rounded-full flex-shrink-0"></div>
+                          <span class="text-gray-300 truncate">{{ getProjectCount(skill.name) }}+ projects</span>
                         </div>
                       </div>
                     </div>
@@ -184,30 +184,30 @@
         </div>
 
         <!-- Skill Summary -->
-        <div class="mt-16">
-          <div class="glass-card p-8 rounded-2xl">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div class="text-3xl font-bold text-primary-green mb-2">
+        <div class="mt-12 xs:mt-14 sm:mt-16">
+          <div class="glass-card p-4 xs:p-6 sm:p-8 rounded-xl xs:rounded-2xl overflow-hidden">
+            <div class="grid grid-cols-1 xs:grid-cols-3 gap-4 xs:gap-6 sm:gap-8 text-center">
+              <div class="overflow-hidden">
+                <div class="text-2xl xs:text-3xl font-bold text-primary-green mb-1 xs:mb-2 truncate">
                   {{ getTotalSkills() }}+
                 </div>
-                <div class="text-caption text-gray-400">
+                <div class="text-xs xs:text-sm sm:text-caption text-gray-400 truncate">
                   Technologies
                 </div>
               </div>
-              <div>
-                <div class="text-3xl font-bold text-primary-green mb-2">
+              <div class="overflow-hidden">
+                <div class="text-2xl xs:text-3xl font-bold text-primary-green mb-1 xs:mb-2 truncate">
                   {{ new Date().getFullYear() - 2022 }}+
                 </div>
-                <div class="text-caption text-gray-400">
+                <div class="text-xs xs:text-sm sm:text-caption text-gray-400 truncate">
                   Years Experience
                 </div>
               </div>
-              <div>
-                <div class="text-3xl font-bold text-primary-green mb-2">
+              <div class="overflow-hidden">
+                <div class="text-2xl xs:text-3xl font-bold text-primary-green mb-1 xs:mb-2 truncate">
                   10+
                 </div>
-                <div class="text-caption text-gray-400">
+                <div class="text-xs xs:text-sm sm:text-caption text-gray-400 truncate">
                   Projects Completed
                 </div>
               </div>
