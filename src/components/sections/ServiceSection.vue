@@ -46,7 +46,7 @@
               </h4>
               <div class="flex flex-wrap gap-3">
                 <n-tooltip
-                  v-for="tool in service.tools.slice(0, 6)"
+                  v-for="tool in service.tools.slice(0, 4)"
                   :key="tool.name"
                   placement="top"
                   :delay="300"
@@ -64,7 +64,7 @@
                 </n-tooltip>
                 
                 <n-popover
-                  v-if="service.tools.length > 6"
+                  v-if="service.tools.length > 4"
                   placement="top"
                   trigger="hover"
                   :delay="300"
