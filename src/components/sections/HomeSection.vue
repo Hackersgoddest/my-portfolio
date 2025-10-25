@@ -7,7 +7,6 @@
           <!-- Status badge -->
           <div class="hero-tag animate-fade-in-scale mb-4 md:mb-6">
             <div class="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-primary-green-500/10 to-primary-green-600/10 border border-primary-green-400/20 rounded-full backdrop-blur-lg">
-              <div class="w-2 h-2 bg-primary-green-400 rounded-full animate-pulse"></div>
               <div class="flex items-center gap-1.5 md:gap-2">
                 <n-icon :component="Code" size="16" class="text-primary-green-400 md:w-[18px] md:h-[18px]" />
                 <span class="text-xs md:text-sm font-medium text-primary-green-400 tracking-wide">Software Developer</span>
