@@ -25,11 +25,39 @@ import { NSpace, NBackTop } from "naive-ui";
 import { useScrollAnimations } from "./composables/useScrollAnimations";
 import MenuBar from "./components/MenuBar.vue";
 import HomeSection from "./components/sections/HomeSection.vue";
-import ServiceSection from "./components/sections/ServiceSection.vue";
-import SkillsSection from "./components/sections/SkillsSection.vue";
-import PortfolioSection from "./components/sections/PortfolioSection.vue";
-import ContactSection from "./components/sections/ContactSection.vue";
-import Footer from "./components/Footer.vue";
+import LoadingSection from "./components/LoadingSection.vue";
+// Lazy load non-critical sections for better performance
+import { defineAsyncComponent } from 'vue';
+
+const ServiceSection = defineAsyncComponent({
+  loader: () => import("./components/sections/ServiceSection.vue"),
+  loadingComponent: LoadingSection,
+  delay: 200
+});
+
+const SkillsSection = defineAsyncComponent({
+  loader: () => import("./components/sections/SkillsSection.vue"),
+  loadingComponent: LoadingSection,
+  delay: 200
+});
+
+const PortfolioSection = defineAsyncComponent({
+  loader: () => import("./components/sections/PortfolioSection.vue"),
+  loadingComponent: LoadingSection,
+  delay: 200
+});
+
+const ContactSection = defineAsyncComponent({
+  loader: () => import("./components/sections/ContactSection.vue"),
+  loadingComponent: LoadingSection,
+  delay: 200
+});
+
+const Footer = defineAsyncComponent({
+  loader: () => import("./components/Footer.vue"),
+  loadingComponent: LoadingSection,
+  delay: 200
+});
 
 // Initialize scroll animations
 const { isLoaded } = useScrollAnimations();
