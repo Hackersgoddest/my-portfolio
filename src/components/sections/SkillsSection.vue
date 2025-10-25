@@ -13,23 +13,57 @@
       
       <!-- Skills Content -->
       <div class="max-w-6xl mx-auto">
-        <!-- Custom Tab Navigation -->
-        <div class="flex justify-center mb-12">
-          <div class="glass-card p-2 rounded-2xl">
-            <div class="flex gap-2">
-              <button
+        <!-- Responsive Tab Navigation -->
+        <div class="flex justify-center mb-8 md:mb-12 px-4">
+          <div class="w-full max-w-4xl">
+            <div class="p-1 md:p-2 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden">
+              <!-- Mobile: Scrollable tabs -->
+              <div class="flex md:hidden overflow-x-auto scrollbar-hide gap-1 pb-1">
+                <button
+                  v-for="(tab, index) in skillTabs"
+                  :key="tab.name"
+                  @click="activeTab = tab.name"
+                  :class="[
+                    'flex-shrink-0 px-4 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 whitespace-nowrap',
+                    activeTab === tab.name
+                      ? 'bg-emerald-500 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-white hover:bg-white/10'
+                  ]"
+                >
+                  {{ tab.label }}
+                </button>
+              </div>
+              
+              <!-- Desktop: Centered grid -->
+              <div class="hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-2">
+                <button
+                  v-for="(tab, index) in skillTabs"
+                  :key="tab.name"
+                  @click="activeTab = tab.name"
+                  :class="[
+                    'px-4 lg:px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300 text-center',
+                    activeTab === tab.name
+                      ? 'bg-emerald-500 text-white shadow-lg'
+                      : 'text-slate-400 hover:text-white hover:bg-white/10'
+                  ]"
+                >
+                  {{ tab.label }}
+                </button>
+              </div>
+            </div>
+            
+            <!-- Mobile: Tab indicator dots -->
+            <div class="flex md:hidden justify-center mt-3 gap-1">
+              <div
                 v-for="(tab, index) in skillTabs"
-                :key="tab.name"
-                @click="activeTab = tab.name"
+                :key="`dot-${tab.name}`"
                 :class="[
-                  'px-6 py-3 rounded-xl font-medium transition-all duration-300',
+                  'w-2 h-2 rounded-full transition-all duration-300',
                   activeTab === tab.name
-                    ? 'bg-primary-green text-white shadow-lg'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    ? 'bg-emerald-500 w-6'
+                    : 'bg-white/30'
                 ]"
-              >
-                {{ tab.label }}
-              </button>
+              ></div>
             </div>
           </div>
         </div>
@@ -43,10 +77,10 @@
             class="transition-opacity duration-300"
           >
             <n-grid 
-              cols="3 s:4 m:6 l:8 xl:10"
+              cols="2 xs:3 s:4 m:5 l:6 xl:8"
               responsive="screen"
-              :x-gap="20"
-              :y-gap="20"
+              :x-gap="16"
+              :y-gap="16"
             >
               <n-grid-item 
                 v-for="skill in tab.skills" 
