@@ -205,7 +205,7 @@
               </div>
               <div>
                 <div class="text-3xl font-bold text-primary-green mb-2">
-                  50+
+                  10+
                 </div>
                 <div class="text-caption text-gray-400">
                   Projects Completed
