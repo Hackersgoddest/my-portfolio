@@ -6,6 +6,7 @@
     :visibility-height="10"
     :style="{
       transition: 'all .3s cubic-bezier(.4, 0, .2, 1)',
+      zIndex: '9999',
     }"
   />
   <n-space vertical :size="80" id="Home" class="w-full min-w-80 bg-[#101014]">
