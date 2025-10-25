@@ -11,11 +11,11 @@
       </div>
 
       <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-7 sm:gap-8 md:gap-9 lg:gap-10">
         <div
           v-for="(project, index) in portfolioOptions"
           :key="project.title"
-          class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 backdrop-blur-xl border border-white/20 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-400/30 animate-fade-in-up"
+          class="group relative overflow-hidden rounded-2xl xs:rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 backdrop-blur-xl border border-white/20 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-400/30 animate-fade-in-up"
           :style="{ animationDelay: `${index * 0.1}s` }"
         >
           <!-- Animated Top Border -->
@@ -24,7 +24,7 @@
           ></div>
 
           <!-- Project Image -->
-          <div class="relative h-48 overflow-hidden rounded-t-3xl">
+          <div class="relative h-40 xs:h-44 sm:h-48 overflow-hidden rounded-t-2xl xs:rounded-t-3xl">
             <img
               :src="project.images[0]"
               :alt="project.title"
@@ -43,50 +43,50 @@
             >
               <button
                 @click="openProjectModal(project)"
-                class="px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white text-sm font-medium flex items-center gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-200 hover:scale-105"
+                class="px-3 xs:px-4 py-1.5 xs:py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg xs:rounded-xl text-white text-xs xs:text-sm font-medium flex items-center gap-1.5 xs:gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-200 hover:scale-105"
               >
-                <n-icon :component="EyeOutline" size="16" />
+                <n-icon :component="EyeOutline" size="14" class="xs:w-4 xs:h-4" />
                 Quick View
               </button>
               <a
                 v-if="project.links[0]"
                 :href="project.links[0].link"
                 target="_blank"
-                class="px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white text-sm font-medium flex items-center gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-200 hover:scale-105"
+                class="px-3 xs:px-4 py-1.5 xs:py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg xs:rounded-xl text-white text-xs xs:text-sm font-medium flex items-center gap-1.5 xs:gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-200 hover:scale-105"
               >
-                <n-icon :component="OpenOutline" size="16" />
+                <n-icon :component="OpenOutline" size="14" class="xs:w-4 xs:h-4" />
                 Live Demo
               </a>
             </div>
           </div>
 
           <!-- Project Content -->
-          <div class="p-6">
+          <div class="p-4 xs:p-5 sm:p-6">
             <!-- Project Title -->
             <h3
-              class="text-xl font-bold text-white mb-3 tracking-tight leading-tight"
+              class="text-lg xs:text-xl sm:text-2xl font-bold text-white mb-2 xs:mb-3 tracking-tight leading-tight"
             >
               {{ project.title }}
             </h3>
 
             <!-- Project Description -->
-            <p class="text-slate-300 text-sm leading-relaxed mb-4 line-clamp-2">
+            <p class="text-slate-300 text-xs xs:text-sm leading-relaxed mb-3 xs:mb-4 line-clamp-2">
               {{ getProjectSummary(project.description) }}
             </p>
 
             <!-- Tech Stack -->
-            <div class="flex flex-wrap gap-2 mb-6">
+            <div class="flex flex-wrap gap-1.5 xs:gap-2 mb-4 xs:mb-5 sm:mb-6">
               <span
                 v-for="(tool, toolIndex) in project.tools.slice(0, 4)"
                 :key="tool"
                 :style="{ animationDelay: `${toolIndex * 50}ms` }"
-                class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-medium rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/40 hover:-translate-y-0.5 hover:shadow-md hover:shadow-emerald-500/20 transition-all duration-200 cursor-default animate-fade-in-up"
+                class="px-2 xs:px-2.5 sm:px-3 py-0.5 xs:py-1 bg-emerald-500/10 text-emerald-400 text-xs font-medium rounded-md xs:rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/40 hover:-translate-y-0.5 hover:shadow-md hover:shadow-emerald-500/20 transition-all duration-200 cursor-default animate-fade-in-up"
               >
                 {{ tool }}
               </span>
               <span
                 v-if="project.tools.length > 4"
-                class="px-3 py-1 bg-slate-700/50 text-slate-400 text-xs font-medium rounded-lg border border-slate-600/50 hover:bg-slate-600/50 transition-all duration-200 cursor-help"
+                class="px-2 xs:px-2.5 sm:px-3 py-0.5 xs:py-1 bg-slate-700/50 text-slate-400 text-xs font-medium rounded-md xs:rounded-lg border border-slate-600/50 hover:bg-slate-600/50 transition-all duration-200 cursor-help"
                 :title="`${project.tools.slice(4).join(', ')}`"
               >
                 +{{ project.tools.length - 4 }} more
@@ -94,23 +94,25 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex gap-3">
+            <div class="flex gap-2 xs:gap-2.5 sm:gap-3">
               <button
                 @click="openProjectModal(project)"
-                class="flex-1 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white text-sm font-medium rounded-xl transition-all duration-200 flex items-center justify-center gap-2 hover:-translate-y-0.5"
+                class="flex-1 px-3 xs:px-4 py-2 xs:py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white text-xs xs:text-sm font-medium rounded-lg xs:rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 xs:gap-2 hover:-translate-y-0.5"
               >
-                <n-icon :component="EyeOutline" size="16" />
-                View Details
+                <n-icon :component="EyeOutline" size="14" class="xs:w-4 xs:h-4" />
+                <span class="hidden xs:inline">View Details</span>
+                <span class="xs:hidden">Details</span>
               </button>
 
               <a
                 v-if="project.links[0]"
                 :href="project.links[0].link"
                 target="_blank"
-                class="flex-1 px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-sm font-medium rounded-xl transition-all duration-200 flex items-center justify-center gap-2 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/25"
+                class="flex-1 px-3 xs:px-4 py-2 xs:py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-xs xs:text-sm font-medium rounded-lg xs:rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 xs:gap-2 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/25"
               >
-                <n-icon :component="OpenOutline" size="16" />
-                {{ project.links[0].name }}
+                <n-icon :component="OpenOutline" size="14" class="xs:w-4 xs:h-4" />
+                <span class="hidden sm:inline">{{ project.links[0].name }}</span>
+                <span class="sm:hidden">{{ project.links[0].name.includes('VIEW') ? 'Code' : 'Live' }}</span>
               </a>
             </div>
           </div>

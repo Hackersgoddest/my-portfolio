@@ -6,11 +6,11 @@
     ]"
     style="top: 0; position: fixed;"
   >
-    <div class="container flex w-full max-w-screen-xl px-5">
-      <nav class="flex w-full justify-between h-16 items-center">
+    <div class="container flex w-full max-w-screen-xl px-3 sm:px-5">
+      <nav class="flex w-full justify-between h-10 sm:h-16 items-center">
         <div class="flex items-center flex-1">
           <n-text
-            class="text-white text-lg lg:text-xl magnetic-hover cursor-pointer"
+            class="text-white text-base sm:text-lg lg:text-xl magnetic-hover cursor-pointer font-semibold"
           >
             Frank Oppong Konadu
           </n-text>

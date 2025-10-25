@@ -12,39 +12,39 @@
       </div>
       
       <!-- Services Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-7 sm:gap-8 md:gap-9 lg:gap-10">
         <div 
           v-for="(service, index) in serviceOptions" 
           :key="service.title"
           class="group service-card animate-fade-in-up"
           :style="{ animationDelay: `${index * 0.1}s` }"
         >
-          <div class="glass-card h-full p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-white/10">
+          <div class="glass-card h-full p-4 xs:p-5 sm:p-6 md:p-7 lg:p-8 rounded-xl xs:rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-white/10">
             <!-- Service Icon -->
-            <div class="flex items-center mb-6">
-              <div class="p-3 rounded-xl bg-primary-green/10 mr-4">
+            <div class="flex items-center mb-4 xs:mb-5 sm:mb-6">
+              <div class="p-2 xs:p-2.5 sm:p-3 rounded-lg xs:rounded-xl bg-primary-green/10 mr-3 xs:mr-3.5 sm:mr-4">
                 <n-icon 
-                  size="32" 
+                  size="24" 
                   :component="service.icon" 
-                  class="text-primary-green"
+                  class="text-primary-green xs:w-7 xs:h-7 sm:w-8 sm:h-8"
                 />
               </div>
-              <h3 class="text-h4 font-semibold text-white">
+              <h3 class="text-lg xs:text-xl sm:text-2xl md:text-h4 font-semibold text-white leading-tight">
                 {{ service.title }}
               </h3>
             </div>
 
             <!-- Service Description -->
-            <p class="text-body text-gray-300 mb-8 leading-relaxed">
+            <p class="text-sm xs:text-base sm:text-body text-gray-300 mb-5 xs:mb-6 sm:mb-7 md:mb-8 leading-relaxed">
               {{ service.description }}
             </p>
 
             <!-- Technology Stack -->
-            <div class="space-y-4">
-              <h4 class="text-caption text-gray-400 font-medium uppercase tracking-wider">
+            <div class="space-y-3 xs:space-y-3.5 sm:space-y-4">
+              <h4 class="text-xs xs:text-sm sm:text-caption text-gray-400 font-medium uppercase tracking-wider">
                 Technologies Used
               </h4>
-              <div class="flex flex-wrap gap-3">
+              <div class="flex flex-wrap gap-2 xs:gap-2.5 sm:gap-3">
                 <n-tooltip
                   v-for="tool in service.tools.slice(0, 4)"
                   :key="tool.name"
@@ -52,7 +52,7 @@
                   :delay="300"
                 >
                   <template #trigger>
-                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 p-2 transition-all duration-200 hover:bg-white/10 hover:scale-110 cursor-pointer">
+                    <div class="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 border border-white/10 p-1.5 xs:p-2 transition-all duration-200 hover:bg-white/10 hover:scale-110 cursor-pointer">
                       <img
                         :src="tool.src"
                         :alt="tool.name"
@@ -74,7 +74,7 @@
                   }"
                 >
                   <template #trigger>
-                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 text-xs font-medium hover:bg-white/10 hover:scale-110 transition-all duration-200 cursor-pointer">
+                    <div class="w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 text-xs font-medium hover:bg-white/10 hover:scale-110 transition-all duration-200 cursor-pointer">
                       +{{ service.tools.length - 4 }}
                     </div>
                   </template>

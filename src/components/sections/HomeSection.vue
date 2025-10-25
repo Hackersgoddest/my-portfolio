@@ -5,22 +5,22 @@
       class="absolute inset-0 z-10 bg-gradient-to-br from-black/60 via-black/50 to-transparent"
     >
       <div
-        class="container-custom min-h-screen flex flex-col justify-center pt-32 sm:pt-28 md:pt-16 lg:pt-8 pb-8 md:pb-16"
+        class="container-custom min-h-screen flex flex-col justify-center pt-20 xs:pt-24 sm:pt-28 md:pt-20 lg:pt-16 xl:pt-8 pb-8 md:pb-16"
       >
         <div class="max-w-4xl w-full">
           <!-- Status badge -->
-          <div class="hero-tag animate-fade-in-scale mb-4 md:mb-6">
+          <div class="hero-tag animate-fade-in-scale mb-4 sm:mb-5 md:mb-6">
             <div
-              class="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-primary-green-500/10 to-primary-green-600/10 border border-primary-green-400/20 rounded-full backdrop-blur-lg"
+              class="inline-flex items-center gap-2 sm:gap-2.5 md:gap-3 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-primary-green-500/10 to-primary-green-600/10 border border-primary-green-400/20 rounded-full backdrop-blur-lg"
             >
-              <div class="flex items-center gap-1.5 md:gap-2">
+              <div class="flex items-center gap-1.5 sm:gap-2 md:gap-2.5">
                 <n-icon
                   :component="Code"
-                  size="16"
-                  class="text-primary-green-400 md:w-[18px] md:h-[18px]"
+                  size="14"
+                  class="text-primary-green-400 sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]"
                 />
                 <span
-                  class="text-xs md:text-sm font-medium text-primary-green-400 tracking-wide"
+                  class="text-xs sm:text-sm md:text-base lg:text-sm xl:text-sm font-medium text-primary-green-400 tracking-wide"
                   >Software Developer</span
                 >
               </div>
@@ -29,14 +29,14 @@
 
           <!-- Main heading -->
           <div
-            class="hero-name animate-fade-in-up mb-6"
+            class="hero-name animate-fade-in-up mb-5 sm:mb-6 md:mb-7"
             style="animation-delay: 0.2s"
           >
-            <h1 class="text-h1 text-white font-bold mb-4">
+            <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-6xl text-white font-bold mb-3 sm:mb-4 md:mb-5 leading-tight">
               Hi, I'm <span class="gradient-text">Frank Oppong Konadu</span>
             </h1>
             <p
-              class="hero-description text-body-lg text-gray-300 max-w-2xl leading-relaxed"
+              class="text-sm xs:text-base sm:text-lg md:text-xl lg:text-lg xl:text-xl 2xl:text-xl text-gray-300 max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-2xl xl:max-w-3xl leading-relaxed"
             >
               A passionate full-stack and mobile developer with
               {{ new Date().getFullYear() - 2022 }}+ years of experience
@@ -48,18 +48,18 @@
 
           <!-- Location -->
           <div
-            class="hero-location animate-fade-in-up mb-8"
+            class="hero-location animate-fade-in-up mb-6 sm:mb-7 md:mb-8"
             style="animation-delay: 0.4s"
           >
             <div
-              class="inline-flex items-center glass-card px-4 py-2 rounded-full"
+              class="inline-flex items-center glass-card px-3 xs:px-4 sm:px-5 py-2 xs:py-2.5 sm:py-3 rounded-full"
             >
               <n-icon
-                size="16"
+                size="14"
                 :component="skillsData.personal[0].icon"
-                class="text-green-400 mr-2"
+                class="text-green-400 mr-2 xs:mr-2.5 sm:mr-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
               ></n-icon>
-              <span class="text-caption text-gray-300"
+              <span class="text-xs xs:text-sm sm:text-base lg:text-sm xl:text-base text-gray-300"
                 >Accra, Ghana • Available Worldwide</span
               >
             </div>
@@ -67,11 +67,11 @@
 
           <!-- CTA Buttons -->
           <div
-            class="hero-buttons animate-fade-in-up flex gap-3 sm:gap-4 md:gap-6 mb-12"
+            class="hero-buttons animate-fade-in-up flex flex-col xs:flex-row gap-3 xs:gap-3 sm:gap-4 md:gap-6 mb-10 sm:mb-12"
             style="animation-delay: 0.6s"
           >
             <button
-              class="btn-primary flex-1 md:flex-initial text-sm sm:text-base px-3 sm:px-6 md:px-8 py-3 sm:py-4"
+              class="btn-primary w-full xs:flex-1 md:flex-initial lg:w-auto text-sm xs:text-base sm:text-lg lg:text-sm xl:text-base px-4 xs:px-5 sm:px-6 md:px-8 lg:px-5 xl:px-6 py-3 xs:py-3.5 sm:py-4 md:py-5 lg:py-2.5 xl:py-3"
               @click.passive="$emit('scrollToSection', 'portfolio')"
             >
               View My Work
@@ -80,15 +80,15 @@
             <a
               href="https://drive.google.com/file/d/14Arynr8EpfjBji6YJuez8fW3q8HXpoFq/view?usp=sharing"
               target="_blank"
-              class="flex-1 md:flex-initial"
+              class="w-full xs:flex-1 md:flex-initial lg:w-auto"
             >
               <button
-                class="btn-secondary w-full flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-base px-3 sm:px-6 md:px-8 py-3 sm:py-4"
+                class="btn-secondary w-full lg:w-auto flex items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 text-sm xs:text-base sm:text-lg lg:text-sm xl:text-base px-4 xs:px-5 sm:px-6 md:px-8 lg:px-5 xl:px-6 py-3 xs:py-3.5 sm:py-4 md:py-5 lg:py-2.5 xl:py-3"
               >
                 <n-icon
-                  size="14"
+                  size="16"
                   :component="skillsData.personal[1].icon"
-                  class="sm:w-4 sm:h-4"
+                  class="xs:w-4 xs:h-4 sm:w-5 sm:h-5 lg:w-4 lg:h-4 xl:w-5 xl:h-5"
                 ></n-icon>
                 Download CV
               </button>
@@ -101,14 +101,14 @@
             style="animation-delay: 0.8s"
           >
             <div
-              class="inline-flex items-center glass-card px-6 py-4 rounded-xl"
+              class="inline-flex items-center glass-card px-4 xs:px-5 sm:px-6 lg:px-5 xl:px-6 py-3 xs:py-3.5 sm:py-4 lg:py-3 xl:py-3.5 rounded-xl"
             >
-              <div class="text-3xl font-bold text-green-400 mr-4">
+              <div class="text-2xl xs:text-3xl sm:text-4xl lg:text-3xl xl:text-4xl font-bold text-green-400 mr-3 xs:mr-4 sm:mr-5">
                 {{ new Date().getFullYear() - 2022 }}+
               </div>
               <div class="text-left">
-                <div class="text-caption text-gray-400">YEARS</div>
-                <div class="text-caption text-gray-400">EXPERIENCE</div>
+                <div class="text-xs xs:text-sm lg:text-xs xl:text-sm text-gray-400">YEARS</div>
+                <div class="text-xs xs:text-sm lg:text-xs xl:text-sm text-gray-400">EXPERIENCE</div>
               </div>
             </div>
           </div>
@@ -116,12 +116,12 @@
 
         <!-- Scroll indicator -->
         <div
-          class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+          class="absolute bottom-6 xs:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
         >
           <div class="flex flex-col items-center text-white/70">
-            <span class="text-caption mb-2">Scroll</span>
+            <span class="text-xs xs:text-sm mb-2">Scroll</span>
             <div
-              class="w-px h-8 bg-gradient-to-b from-white/70 to-transparent"
+              class="w-px h-6 xs:h-8 bg-gradient-to-b from-white/70 to-transparent"
             ></div>
           </div>
         </div>
