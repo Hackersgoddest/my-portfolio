@@ -16,122 +16,111 @@
         <div
           v-for="(project, index) in portfolioOptions"
           :key="project.title"
-          class="group project-card animate-fade-in-up"
+          class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 backdrop-blur-xl border border-white/20 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-400/30 animate-fade-in-up"
           :style="{ animationDelay: `${index * 0.1}s` }"
         >
-          <div class="glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl border border-white/10 hover:border-primary-green/20">
-            <!-- Project Image -->
-            <div class="relative overflow-hidden">
-              <img
-                :src="project.images[0]"
-                :alt="project.title"
-                class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div
-                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer"
+          <!-- Animated Top Border -->
+          <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          
+          <!-- Project Image -->
+          <div class="relative h-48 overflow-hidden rounded-t-3xl">
+            <img
+              :src="project.images[0]"
+              :alt="project.title"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+            
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            <!-- Quick Actions -->
+            <div class="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+              <button 
                 @click="openProjectModal(project)"
+                class="px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white text-sm font-medium flex items-center gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-200 hover:scale-105"
               >
-                <n-button 
-                  type="primary" 
-                  size="large" 
-                  round
-                  class="shadow-lg"
-                >
-                  <template #icon>
-                    <n-icon :component="EyeOutline" />
-                  </template>
-                  Quick View
-                </n-button>
-              </div>
-              
-              <!-- Project Status Badge -->
-              <div class="absolute top-4 right-4">
-                <n-tag
-                  :type="project.status === 'completed' ? 'success' : project.status === 'in-progress' ? 'warning' : 'info'"
-                  size="small"
-                  round
-                  class="backdrop-blur-sm"
-                >
-                  {{ project.status === 'completed' ? 'Live' : project.status === 'in-progress' ? 'In Progress' : 'Concept' }}
-                </n-tag>
+                <n-icon :component="EyeOutline" size="16" />
+                Quick View
+              </button>
+              <a
+                v-if="project.links[0]"
+                :href="project.links[0].link"
+                target="_blank"
+                class="px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white text-sm font-medium flex items-center gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-200 hover:scale-105"
+              >
+                <n-icon :component="OpenOutline" size="16" />
+                Live Demo
+              </a>
+            </div>
+            
+            <!-- Status Badge -->
+            <div class="absolute top-4 right-4">
+              <div 
+                :class="[
+                  'px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border transition-all duration-200',
+                  project.status === 'completed' 
+                    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' 
+                    : project.status === 'in-progress' 
+                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/30' 
+                    : 'bg-blue-500/20 text-blue-300 border-blue-500/30'
+                ]"
+              >
+                {{ project.status === 'completed' ? '🟢 Live' : project.status === 'in-progress' ? '🟡 In Progress' : '🔵 Concept' }}
               </div>
             </div>
+          </div>
 
-            <!-- Project Content -->
-            <div class="p-6">
-              <!-- Project Title -->
-              <h3 class="text-h4 font-semibold text-white mb-3">
-                {{ project.title }}
-              </h3>
+          <!-- Project Content -->
+          <div class="p-6">
+            <!-- Project Title -->
+            <h3 class="text-xl font-bold text-white mb-3 tracking-tight leading-tight">
+              {{ project.title }}
+            </h3>
 
-              <!-- Project Description -->
-              <p class="text-body text-gray-300 mb-4 leading-relaxed">
-                {{ getProjectSummary(project.description) }}
-              </p>
+            <!-- Project Description -->
+            <p class="text-slate-300 text-sm leading-relaxed mb-4 line-clamp-2">
+              {{ getProjectSummary(project.description) }}
+            </p>
 
-              <!-- Technologies -->
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span
-                  v-for="tool in project.tools.slice(0, 4)"
-                  :key="tool"
-                  class="text-xs px-3 py-1 bg-primary-green/10 text-primary-green rounded-full border border-primary-green/20"
-                >
-                  {{ tool }}
-                </span>
-                <span
-                  v-if="project.tools.length > 4"
-                  class="text-xs px-3 py-1 bg-white/5 text-gray-400 rounded-full border border-white/10"
-                >
-                  +{{ project.tools.length - 4 }} more
-                </span>
-              </div>
+            <!-- Tech Stack -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span
+                v-for="(tool, toolIndex) in project.tools.slice(0, 4)"
+                :key="tool"
+                :style="{ animationDelay: `${toolIndex * 50}ms` }"
+                class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-medium rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/40 hover:-translate-y-0.5 hover:shadow-md hover:shadow-emerald-500/20 transition-all duration-200 cursor-default animate-fade-in-up"
+              >
+                {{ tool }}
+              </span>
+              <span
+                v-if="project.tools.length > 4"
+                class="px-3 py-1 bg-slate-700/50 text-slate-400 text-xs font-medium rounded-lg border border-slate-600/50 hover:bg-slate-600/50 transition-all duration-200 cursor-help"
+                :title="`${project.tools.slice(4).join(', ')}`"
+              >
+                +{{ project.tools.length - 4 }} more
+              </span>
+            </div>
 
-              <!-- Action Buttons -->
-              <div class="flex gap-3">
-                <n-button
-                  secondary
-                  size="medium"
-                  @click="openProjectModal(project)"
-                  class="flex-1"
-                  :style="{
-                    '--n-border': '1px solid rgba(255, 255, 255, 0.1)',
-                    '--n-border-hover': '1px solid rgba(255, 255, 255, 0.2)',
-                    '--n-border-pressed': '1px solid rgba(255, 255, 255, 0.3)',
-                    '--n-color': 'rgba(255, 255, 255, 0.05)',
-                    '--n-color-hover': 'rgba(255, 255, 255, 0.1)',
-                    '--n-color-pressed': 'rgba(255, 255, 255, 0.15)',
-                    '--n-text-color': 'rgb(209, 213, 219)',
-                    '--n-text-color-hover': 'rgb(255, 255, 255)',
-                    '--n-text-color-pressed': 'rgb(255, 255, 255)',
-                  }"
-                >
-                  <template #icon>
-                    <n-icon :component="EyeOutline" />
-                  </template>
-                  View Details
-                </n-button>
-                <n-button
-                  v-if="project.links[0]"
-                  type="primary"
-                  size="medium"
-                  tag="a"
-                  :href="project.links[0].link"
-                  target="_blank"
-                  class="flex-1"
-                  :style="{
-                    '--n-color': 'rgb(52, 211, 153)',
-                    '--n-color-hover': 'rgb(34, 197, 94)',
-                    '--n-color-pressed': 'rgb(22, 163, 74)',
-                  }"
-                >
-                  <template #icon>
-                    <n-icon :component="OpenOutline" />
-                  </template>
-                  {{ project.links[0].name }}
-                </n-button>
-              </div>
+            <!-- Action Buttons -->
+            <div class="flex gap-3">
+              <button
+                @click="openProjectModal(project)"
+                class="flex-1 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white text-sm font-medium rounded-xl transition-all duration-200 flex items-center justify-center gap-2 hover:-translate-y-0.5"
+              >
+                <n-icon :component="EyeOutline" size="16" />
+                View Details
+              </button>
+              
+              <a
+                v-if="project.links[0]"
+                :href="project.links[0].link"
+                target="_blank"
+                class="flex-1 px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-sm font-medium rounded-xl transition-all duration-200 flex items-center justify-center gap-2 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/25"
+              >
+                <n-icon :component="OpenOutline" size="16" />
+                {{ project.links[0].name }}
+              </a>
             </div>
           </div>
         </div>
