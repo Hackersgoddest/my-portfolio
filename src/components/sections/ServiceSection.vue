@@ -82,7 +82,7 @@
                     <div class="text-sm font-medium text-white mb-3">Additional Technologies:</div>
                     <div class="space-y-2">
                       <div
-                        v-for="tool in service.tools.slice(6)"
+                        v-for="tool in service.tools.slice(4)"
                         :key="tool.name"
                         class="flex items-center gap-3 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-200"
                       >
