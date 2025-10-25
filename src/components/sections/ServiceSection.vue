@@ -75,7 +75,7 @@
                 >
                   <template #trigger>
                     <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 text-xs font-medium hover:bg-white/10 hover:scale-110 transition-all duration-200 cursor-pointer">
-                      +{{ service.tools.length - 6 }}
+                      +{{ service.tools.length - 4 }}
                     </div>
                   </template>
                   <div class="space-y-2 max-w-56 glass-card border border-white/10 rounded-lg p-3">
