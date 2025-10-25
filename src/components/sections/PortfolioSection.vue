@@ -53,22 +53,6 @@
                 Live Demo
               </a>
             </div>
-            
-            <!-- Status Badge -->
-            <div class="absolute top-4 right-4">
-              <div 
-                :class="[
-                  'px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border transition-all duration-200',
-                  project.status === 'completed' 
-                    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' 
-                    : project.status === 'in-progress' 
-                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/30' 
-                    : 'bg-blue-500/20 text-blue-300 border-blue-500/30'
-                ]"
-              >
-                {{ project.status === 'completed' ? '🟢 Live' : project.status === 'in-progress' ? '🟡 In Progress' : '🔵 Concept' }}
-              </div>
-            </div>
           </div>
 
           <!-- Project Content -->
@@ -261,7 +245,6 @@ const portfolioOptions = ref([
     ],
     tools: ["VueJs", "Bootstrap", "FeatherJs", "Typescript", "NodeJS", "MongoDB"],
     links: [{ name: "VISIT SITE", link: "https://www.ebanregister.com/" }],
-    status: "completed"
   },
   {
     title: "Promptopia",
@@ -275,7 +258,6 @@ const portfolioOptions = ref([
     links: [
       { name: "VIEW CODE", link: "https://github.com/Hackersgoddest/promptopia" },
     ],
-    status: "completed"
   },
   {
     title: "E-VotePro",
@@ -289,7 +271,6 @@ const portfolioOptions = ref([
     links: [
       { name: "VIEW CODE", link: "https://github.com/Hackersgoddest/E-VotePro" }
     ],
-    status: "completed"
   },
 ]);
 
