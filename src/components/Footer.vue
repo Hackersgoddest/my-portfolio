@@ -9,10 +9,10 @@
     <div class="relative z-10">
       <!-- Top Section -->
       <div class="container-custom py-8 sm:py-12 md:py-16 lg:py-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12 lg:gap-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-16 lg:gap-20 xl:gap-24 place-items-start">
           
           <!-- Brand & Bio Section -->
-          <div class="md:col-span-2 lg:col-span-1">
+          <div class="md:col-span-1 justify-self-start md:justify-self-end">
             <div class="space-y-4 sm:space-y-6">
               <!-- Logo/Name -->
               <div class="flex items-center space-x-3">
@@ -39,27 +39,8 @@
             </div>
           </div>
           
-          <!-- Quick Links -->
-          <div class="lg:col-span-1">
-            <h4 class="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6">Quick Links</h4>
-            <nav class="space-y-3 sm:space-y-4">
-              <a
-                v-for="link in quickLinks"
-                :key="link.name"
-                :href="link.href"
-                class="block text-gray-300 hover:text-primary-green-400 transition-colors duration-300 text-xs sm:text-sm group"
-                @click="link.action && link.action()"
-              >
-                <div class="flex items-center space-x-2">
-                  <div class="w-1 h-1 bg-primary-green-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span>{{ link.name }}</span>
-                </div>
-              </a>
-            </nav>
-          </div>
-          
           <!-- Contact & Social -->
-          <div class="lg:col-span-1">
+          <div class="md:col-span-1 justify-self-start">
             <h4 class="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6">Let's Connect</h4>
             <div class="space-y-4 sm:space-y-6">
               
@@ -157,39 +138,7 @@ import {
 // Current year for copyright
 const currentYear = computed(() => new Date().getFullYear())
 
-// Quick navigation links
-const quickLinks = [
-  {
-    name: 'Home',
-    href: '#home',
-    action: () => scrollToSection('home')
-  },
-  {
-    name: 'About',
-    href: '#about',
-    action: () => scrollToSection('about')
-  },
-  {
-    name: 'Skills',
-    href: '#skills',
-    action: () => scrollToSection('skills')
-  },
-  {
-    name: 'Services',
-    href: '#services',
-    action: () => scrollToSection('services')
-  },
-  {
-    name: 'Portfolio',
-    href: '#portfolio',
-    action: () => scrollToSection('portfolio')
-  },
-  {
-    name: 'Contact',
-    href: '#contact',
-    action: () => scrollToSection('contact')
-  }
-]
+
 
 // Social media links
 const socialLinks = [
@@ -215,11 +164,5 @@ const socialLinks = [
   }
 ]
 
-// Smooth scroll functions
-const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
-  }
-}
+
 </script>
