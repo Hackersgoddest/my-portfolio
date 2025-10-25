@@ -3,11 +3,10 @@
     <div class="container-custom">
       <!-- Section Header -->
       <div class="text-center mb-16">
-        <h2 class="text-h2 font-bold text-white mb-4">
-          Featured Projects
-        </h2>
+        <h2 class="text-h2 font-bold text-white mb-4">Featured Projects</h2>
         <p class="text-body-lg text-gray-300 max-w-2xl mx-auto">
-          A showcase of innovative solutions and creative implementations across various platforms
+          A showcase of innovative solutions and creative implementations across
+          various platforms
         </p>
       </div>
 
@@ -20,8 +19,10 @@
           :style="{ animationDelay: `${index * 0.1}s` }"
         >
           <!-- Animated Top Border -->
-          <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          
+          <div
+            class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          ></div>
+
           <!-- Project Image -->
           <div class="relative h-48 overflow-hidden rounded-t-3xl">
             <img
@@ -30,13 +31,17 @@
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               loading="lazy"
             />
-            
+
             <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            ></div>
+
             <!-- Quick Actions -->
-            <div class="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-              <button 
+            <div
+              class="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
+            >
+              <button
                 @click="openProjectModal(project)"
                 class="px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white text-sm font-medium flex items-center gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-200 hover:scale-105"
               >
@@ -58,7 +63,9 @@
           <!-- Project Content -->
           <div class="p-6">
             <!-- Project Title -->
-            <h3 class="text-xl font-bold text-white mb-3 tracking-tight leading-tight">
+            <h3
+              class="text-xl font-bold text-white mb-3 tracking-tight leading-tight"
+            >
               {{ project.title }}
             </h3>
 
@@ -95,7 +102,7 @@
                 <n-icon :component="EyeOutline" size="16" />
                 View Details
               </button>
-              
+
               <a
                 v-if="project.links[0]"
                 :href="project.links[0].link"
@@ -121,7 +128,9 @@
           @click.stop
         >
           <!-- Modal Header -->
-          <div class="flex items-center justify-between p-6 border-b border-white/10">
+          <div
+            class="flex items-center justify-between p-6 border-b border-white/10"
+          >
             <h3 class="text-h3 font-bold text-white">
               {{ selectedProject.title }}
             </h3>
@@ -129,8 +138,18 @@
               @click="closeProjectModal"
               class="text-gray-400 hover:text-white transition-colors duration-200"
             >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
               </svg>
             </button>
           </div>
@@ -147,35 +166,63 @@
                     class="w-full h-64 object-cover"
                   />
                   <!-- Image Navigation -->
-                  <div v-if="selectedProject.images.length > 1" class="absolute inset-0 flex items-center justify-between p-4">
+                  <div
+                    v-if="selectedProject.images.length > 1"
+                    class="absolute inset-0 flex items-center justify-between p-4"
+                  >
                     <button
                       @click="previousImage"
                       class="bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors duration-200"
                     >
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 19l-7-7 7-7"
+                        ></path>
                       </svg>
                     </button>
                     <button
                       @click="nextImage"
                       class="bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors duration-200"
                     >
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        ></path>
                       </svg>
                     </button>
                   </div>
                 </div>
-                
+
                 <!-- Image Dots -->
-                <div v-if="selectedProject.images.length > 1" class="flex justify-center gap-2">
+                <div
+                  v-if="selectedProject.images.length > 1"
+                  class="flex justify-center gap-2"
+                >
                   <button
                     v-for="(image, index) in selectedProject.images"
                     :key="index"
                     @click="currentImageIndex = index"
                     :class="[
                       'w-2 h-2 rounded-full transition-colors duration-200',
-                      currentImageIndex === index ? 'bg-primary-green' : 'bg-white/30'
+                      currentImageIndex === index
+                        ? 'bg-primary-green'
+                        : 'bg-white/30',
                     ]"
                   ></button>
                 </div>
@@ -184,11 +231,16 @@
               <!-- Project Details -->
               <div>
                 <!-- Description -->
-                <div class="text-body text-gray-300 mb-6 leading-relaxed" v-html="selectedProject.description"></div>
+                <div
+                  class="text-body text-gray-300 mb-6 leading-relaxed"
+                  v-html="selectedProject.description"
+                ></div>
 
                 <!-- Technologies -->
                 <div class="mb-6">
-                  <h4 class="text-caption text-gray-400 font-medium uppercase tracking-wider mb-3">
+                  <h4
+                    class="text-caption text-gray-400 font-medium uppercase tracking-wider mb-3"
+                  >
                     Technologies Used
                   </h4>
                   <div class="flex flex-wrap gap-2">
@@ -211,8 +263,18 @@
                     target="_blank"
                     class="btn-primary inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors duration-200"
                   >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      ></path>
                     </svg>
                     {{ link.name }}
                   </a>
@@ -243,8 +305,41 @@ const portfolioOptions = ref([
       "https://res.cloudinary.com/jolsoft/image/upload/v1634247513/portfolio/eban-admin/eban-admin-screen-2_pcvgyu.png",
       "https://res.cloudinary.com/jolsoft/image/upload/v1634248046/portfolio/eban-admin/eban-admin-screen-3_licoyr.png",
     ],
-    tools: ["VueJs", "Bootstrap", "FeatherJs", "Typescript", "NodeJS", "MongoDB"],
+    tools: [
+      "VueJs",
+      "Bootstrap",
+      "FeatherJs",
+      "Typescript",
+      "NodeJS",
+      "MongoDB",
+    ],
     links: [{ name: "VISIT SITE", link: "https://www.ebanregister.com/" }],
+  },
+  {
+    title: "GreenGold Ghana",
+    description: `<p>GreenGold Ghana is an eco-innovation company that transforms discarded plantain waste into high-quality, eco-friendly fibers. The platform showcases their sustainable manufacturing process and allows users to:</br><ul><li>Explore eco-friendly products (wigs, hair extensions, sanitary pads, bags)</li><li>Learn about environmental impact and sustainability</li><li>Connect with the team and investors</li><li>Partner with the company for sustainable solutions</li><li>View real-time impact statistics (CO₂ saved, jobs created)</li></ul></p>`,
+    images: [
+      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389446/Screenshot_2025-10-25_at_10.48.37_AM_jpiop6.png",
+      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389447/Screenshot_2025-10-25_at_10.49.00_AM_hdv5oi.png",
+      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389447/Screenshot_2025-10-25_at_10.49.18_AM_rsbvwx.png",
+      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389446/Screenshot_2025-10-25_at_10.49.30_AM_rs1psj.png",
+    ],
+    tools: [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS v4",
+      "Framer Motion",
+      "React Router",
+      "Lucide Icons",
+    ],
+    links: [
+      {
+        name: "VIEW CODE",
+        link: "https://github.com/Hackersgoddest/greengold",
+      },
+      { name: "LIVE DEMO", link: "https://greengold-ghana.netlify.app" },
+    ],
   },
   {
     title: "Promptopia",
@@ -254,9 +349,19 @@ const portfolioOptions = ref([
       "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734491191/homepage_abswnc.png",
       "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734491206/profile_glj8lb.png",
     ],
-    tools: ["NextJs", "Tailwind", "DaisyUI", "Typescript", "MongoDB", "NextAuth"],
+    tools: [
+      "NextJs",
+      "Tailwind",
+      "DaisyUI",
+      "Typescript",
+      "MongoDB",
+      "NextAuth",
+    ],
     links: [
-      { name: "VIEW CODE", link: "https://github.com/Hackersgoddest/promptopia" },
+      {
+        name: "VIEW CODE",
+        link: "https://github.com/Hackersgoddest/promptopia",
+      },
     ],
   },
   {
@@ -265,11 +370,14 @@ const portfolioOptions = ref([
     images: [
       "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968512/Screenshot_2025-06-03_at_4.30.45_PM_iygotw.png",
       "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968505/Screenshot_2025-06-03_at_4.30.30_PM_bqnl7e.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968497/Screenshot_2025-06-03_at_4.30.18_PM_xma9og.png"
+      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968497/Screenshot_2025-06-03_at_4.30.18_PM_xma9og.png",
     ],
     tools: ["C#", "Windows Forms", ".NET", "MySQL", "Entity Framework"],
     links: [
-      { name: "VIEW CODE", link: "https://github.com/Hackersgoddest/E-VotePro" }
+      {
+        name: "VIEW CODE",
+        link: "https://github.com/Hackersgoddest/E-VotePro",
+      },
     ],
   },
 ]);
@@ -277,17 +385,20 @@ const portfolioOptions = ref([
 const openProjectModal = (project) => {
   selectedProject.value = project;
   currentImageIndex.value = 0;
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
 };
 
 const closeProjectModal = () => {
   selectedProject.value = null;
   currentImageIndex.value = 0;
-  document.body.style.overflow = 'auto';
+  document.body.style.overflow = "auto";
 };
 
 const nextImage = () => {
-  if (selectedProject.value && currentImageIndex.value < selectedProject.value.images.length - 1) {
+  if (
+    selectedProject.value &&
+    currentImageIndex.value < selectedProject.value.images.length - 1
+  ) {
     currentImageIndex.value++;
   } else {
     currentImageIndex.value = 0;
@@ -304,13 +415,13 @@ const previousImage = () => {
 
 const getProjectSummary = (description) => {
   // Extract text content from HTML and limit to first sentence or 120 characters
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   div.innerHTML = description;
-  const textContent = div.textContent || div.innerText || '';
-  
-  const firstSentence = textContent.split('.')[0];
-  return firstSentence.length > 120 
-    ? textContent.substring(0, 120) + '...'
-    : firstSentence + '.';
+  const textContent = div.textContent || div.innerText || "";
+
+  const firstSentence = textContent.split(".")[0];
+  return firstSentence.length > 120
+    ? textContent.substring(0, 120) + "..."
+    : firstSentence + ".";
 };
 </script>
