@@ -160,19 +160,32 @@ const handleScroll = () => {
   // Update navbar scroll state
   isScrolled.value = window.scrollY > 50;
   
-  // Update active menu based on section visibility
-  const sectionRefs = menuOptions.map((_, index) =>
-    document.getElementById(menuOptions[index].label)
-  );
-  for (let i = sectionRefs.length - 1; i >= -1; i--) {
-    const section = sectionRefs[i];
-    if (section) {
-      const rect = section.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.5) {
-        activeMenuKey.value = menuOptions[i].key;
-        break;
+  // Update active menu based on section visibility using scroll position
+  const scrollPosition = window.scrollY + 150; // Add offset for navbar height
+  
+  // Get all sections
+  const allSections = document.querySelectorAll('section');
+  
+  let currentSection = 'home'; // Default to home
+  
+  allSections.forEach((section, index) => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+    const sectionBottom = sectionTop + sectionHeight;
+    
+    // Map sections to menu keys based on their order
+    const sectionKeys = ['home', 'services', 'skills', 'portfolio', 'contact'];
+    
+    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+      if (sectionKeys[index]) {
+        currentSection = sectionKeys[index];
       }
     }
+  });
+  
+  // Update active menu key if it changed
+  if (activeMenuKey.value !== currentSection) {
+    activeMenuKey.value = currentSection;
   }
 };
 
