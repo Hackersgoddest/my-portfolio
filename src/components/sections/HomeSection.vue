@@ -2,22 +2,17 @@
   <section class="relative min-h-screen overflow-hidden">
     <!-- Hero overlay -->
     <div class="absolute inset-0 z-10 bg-gradient-to-br from-black/60 via-black/50 to-transparent">
-      <div class="container-custom h-screen flex items-center">
-        <div class="max-w-4xl">
+      <div class="container-custom min-h-screen flex flex-col justify-center pt-32 sm:pt-28 md:pt-16 lg:pt-8 pb-8 md:pb-16">
+        <div class="max-w-4xl w-full">
           <!-- Status badge -->
-          <div class="hero-tag animate-fade-in-scale mb-6">
-            <n-tag 
-              round 
-              :bordered="false" 
-              type="success"
-              size="large"
-              class="text-caption font-medium px-4 py-2"
-            >
-              <template #icon>
-                <n-icon :component="Code" size="16" />
-              </template>
-              Software Developer
-            </n-tag>
+          <div class="hero-tag animate-fade-in-scale mb-4 md:mb-6">
+            <div class="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-primary-green-500/10 to-primary-green-600/10 border border-primary-green-400/20 rounded-full backdrop-blur-lg">
+              <div class="w-2 h-2 bg-primary-green-400 rounded-full animate-pulse"></div>
+              <div class="flex items-center gap-1.5 md:gap-2">
+                <n-icon :component="Code" size="16" class="text-primary-green-400 md:w-[18px] md:h-[18px]" />
+                <span class="text-xs md:text-sm font-medium text-primary-green-400 tracking-wide">Software Developer</span>
+              </div>
+            </div>
           </div>
 
           <!-- Main heading -->
@@ -27,7 +22,7 @@
             </h1>
             <p class="hero-description text-body-lg text-gray-300 max-w-2xl leading-relaxed">
               A passionate full-stack developer with {{ new Date().getFullYear() - 2022 }}+ years of experience 
-              creating digital solutions that make a difference. I specialize in modern web technologies 
+              creating digital solutions that make a difference. I specialize in modern web and mobile technologies 
               and love turning ideas into reality.
             </p>
           </div>
@@ -41,45 +36,23 @@
           </div>
 
           <!-- CTA Buttons -->
-          <div class="hero-buttons animate-fade-in-up flex flex-wrap gap-4 mb-12" style="animation-delay: 0.6s">
-            <n-button
-              type="primary"
-              size="large"
-              round
-              class="btn-primary text-base font-medium px-8 py-3 shadow-lg"
+          <div class="hero-buttons animate-fade-in-up flex gap-3 sm:gap-4 md:gap-6 mb-12" style="animation-delay: 0.6s">
+            <button
+              class="btn-primary flex-1 md:flex-initial text-sm sm:text-base px-3 sm:px-6 md:px-8 py-3 sm:py-4"
               @click.passive="$emit('scrollToSection', 'portfolio')"
             >
               View My Work
-            </n-button>
+            </button>
             
             <a
               href="https://drive.google.com/file/d/1VL6bg9-IDgQjeOILcW3j-2SRQPhiezsK/view?usp=sharing"
               target="_blank"
-              class="inline-block"
+              class="flex-1 md:flex-initial"
             >
-              <n-button 
-                secondary
-                size="large"
-                round
-                icon-placement="right"
-                class="text-base font-medium px-8 py-3"
-                :style="{
-                  '--n-border': '1px solid rgba(52, 211, 153, 0.3)',
-                  '--n-border-hover': '1px solid rgba(52, 211, 153, 0.6)',
-                  '--n-border-pressed': '1px solid rgba(52, 211, 153, 0.8)',
-                  '--n-color': 'transparent',
-                  '--n-color-hover': 'rgba(52, 211, 153, 0.1)',
-                  '--n-color-pressed': 'rgba(52, 211, 153, 0.2)',
-                  '--n-text-color': 'rgb(52, 211, 153)',
-                  '--n-text-color-hover': 'rgb(52, 211, 153)',
-                  '--n-text-color-pressed': 'rgb(52, 211, 153)',
-                }"
-              >
-                <template #icon>
-                  <n-icon size="16" :component="skillsData.personal[1].icon"></n-icon>
-                </template>
+              <button class="btn-secondary w-full flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-base px-3 sm:px-6 md:px-8 py-3 sm:py-4">
+                <n-icon size="14" :component="skillsData.personal[1].icon" class="sm:w-4 sm:h-4"></n-icon>
                 Download CV
-              </n-button>
+              </button>
             </a>
           </div>
 
