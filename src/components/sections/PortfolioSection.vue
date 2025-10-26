@@ -291,7 +291,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { NButton, NTag, NIcon } from "naive-ui";
+import { NIcon } from "naive-ui";
 import { EyeOutline, OpenOutline } from "@vicons/ionicons5";
 
 const selectedProject = ref(null);
@@ -339,7 +339,7 @@ const portfolioOptions = ref([
         name: "VIEW CODE",
         link: "https://github.com/Hackersgoddest/greengold",
       },
-      { name: "LIVE DEMO", link: "https://greengold-ghana.netlify.app" },
+      { name: "VISIT SITE", link: "https://greengold-ghana.netlify.app" },
     ],
   },
   {
