@@ -11,7 +11,9 @@
       </div>
 
       <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-7 sm:gap-8 md:gap-9 lg:gap-10">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-7 sm:gap-8 md:gap-9 lg:gap-10"
+      >
         <div
           v-for="(project, index) in portfolioOptions"
           :key="project.title"
@@ -23,7 +25,9 @@
           ></div>
 
           <!-- Project Image -->
-          <div class="relative h-40 xs:h-44 sm:h-48 overflow-hidden rounded-t-2xl xs:rounded-t-3xl">
+          <div
+            class="relative h-40 xs:h-44 sm:h-48 overflow-hidden rounded-t-2xl xs:rounded-t-3xl"
+          >
             <img
               :src="project.images[0]"
               :alt="project.title"
@@ -44,7 +48,11 @@
                 @click="openProjectModal(project)"
                 class="px-3 xs:px-4 py-1.5 xs:py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg xs:rounded-xl text-white text-xs xs:text-sm font-medium flex items-center gap-1.5 xs:gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-200 hover:scale-105"
               >
-                <n-icon :component="EyeOutline" size="14" class="xs:w-4 xs:h-4" />
+                <n-icon
+                  :component="EyeOutline"
+                  size="14"
+                  class="xs:w-4 xs:h-4"
+                />
                 Quick View
               </button>
               <a
@@ -53,7 +61,11 @@
                 target="_blank"
                 class="px-3 xs:px-4 py-1.5 xs:py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg xs:rounded-xl text-white text-xs xs:text-sm font-medium flex items-center gap-1.5 xs:gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all duration-200 hover:scale-105"
               >
-                <n-icon :component="OpenOutline" size="14" class="xs:w-4 xs:h-4" />
+                <n-icon
+                  :component="OpenOutline"
+                  size="14"
+                  class="xs:w-4 xs:h-4"
+                />
                 Live Demo
               </a>
             </div>
@@ -69,7 +81,9 @@
             </h3>
 
             <!-- Project Description -->
-            <p class="text-slate-300 text-xs xs:text-sm leading-relaxed mb-3 xs:mb-4 line-clamp-2">
+            <p
+              class="text-slate-300 text-xs xs:text-sm leading-relaxed mb-3 xs:mb-4 line-clamp-2"
+            >
               {{ getProjectSummary(project.description) }}
             </p>
 
@@ -98,7 +112,11 @@
                 @click="openProjectModal(project)"
                 class="flex-1 px-3 xs:px-4 py-2 xs:py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white text-xs xs:text-sm font-medium rounded-lg xs:rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 xs:gap-2 hover:-translate-y-0.5"
               >
-                <n-icon :component="EyeOutline" size="14" class="xs:w-4 xs:h-4" />
+                <n-icon
+                  :component="EyeOutline"
+                  size="14"
+                  class="xs:w-4 xs:h-4"
+                />
                 <span class="hidden xs:inline">View Details</span>
                 <span class="xs:hidden">Details</span>
               </button>
@@ -109,9 +127,17 @@
                 target="_blank"
                 class="flex-1 px-3 xs:px-4 py-2 xs:py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-xs xs:text-sm font-medium rounded-lg xs:rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 xs:gap-2 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/25"
               >
-                <n-icon :component="OpenOutline" size="14" class="xs:w-4 xs:h-4" />
-                <span class="hidden sm:inline">{{ project.links[0].name }}</span>
-                <span class="sm:hidden">{{ project.links[0].name.includes('VIEW') ? 'Code' : 'Live' }}</span>
+                <n-icon
+                  :component="OpenOutline"
+                  size="14"
+                  class="xs:w-4 xs:h-4"
+                />
+                <span class="hidden sm:inline">{{
+                  project.links[0].name
+                }}</span>
+                <span class="sm:hidden">{{
+                  project.links[0].name.includes("VIEW") ? "Code" : "Live"
+                }}</span>
               </a>
             </div>
           </div>
@@ -335,11 +361,11 @@ const portfolioOptions = ref([
       "Lucide Icons",
     ],
     links: [
+      { name: "VISIT SITE", link: "https://greengoldghanalimited.netlify.app" },
       {
         name: "VIEW CODE",
         link: "https://github.com/Hackersgoddest/greengold",
       },
-      { name: "VISIT SITE", link: "https://greengold-ghana.netlify.app" },
     ],
   },
   {
