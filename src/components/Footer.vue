@@ -131,7 +131,8 @@ import {
   CallOutline,
   LogoGithub,
   LogoLinkedin,
-  LogoInstagram
+  LogoInstagram,
+  LogoXing,
 } from '@vicons/ionicons5'
 
 // Current year for copyright
