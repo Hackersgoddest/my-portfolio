@@ -1,22 +1,41 @@
 <template>
-  <MenuBar class="w-full fixed top-0 z-40" @scroll-to-section="scrollToSection" />
-  <n-back-top
-    :bottom="50"
-    :theme-overrides="customBackTopTheme"
-    :visibility-height="10"
-    :style="{
-      transition: 'all .3s cubic-bezier(.4, 0, .2, 1)',
-      zIndex: '9999',
-    }"
-  />
-  <n-space vertical :size="80" id="Home" class="w-full min-w-80 bg-[#101014]">
-    <HomeSection @scroll-to-section="scrollToSection" ref="home" />
-    <ServiceSection ref="services" />
-    <SkillsSection ref="skills" />
-    <PortfolioSection ref="portfolio" />
-    <ContactSection ref="contact" />
-    <Footer />
-  </n-space>
+  <!-- Loading Screen -->
+  <div 
+    v-if="!isLoaded" 
+    class="fixed inset-0 z-50 bg-[#101014] flex items-center justify-center"
+  >
+    <div class="text-center">
+      <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary-green mx-auto mb-4"></div>
+      <div class="text-white text-lg font-medium">Loading Portfolio...</div>
+      <div class="text-gray-400 text-sm mt-2">Initializing animations</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div 
+    v-show="isLoaded"
+    :class="{ 'opacity-0': !isLoaded, 'opacity-100': isLoaded }"
+    class="transition-opacity duration-500"
+  >
+    <MenuBar class="navbar w-full fixed top-0 z-40" @scroll-to-section="scrollToSection" />
+    <n-back-top
+      :bottom="50"
+      :theme-overrides="customBackTopTheme"
+      :visibility-height="10"
+      :style="{
+        transition: 'all .3s cubic-bezier(.4, 0, .2, 1)',
+        zIndex: '9999',
+      }"
+    />
+    <n-space vertical :size="80" id="Home" class="w-full min-w-80 bg-[#101014]">
+      <HomeSection @scroll-to-section="scrollToSection" ref="home" />
+      <ServiceSection ref="services" />
+      <SkillsSection ref="skills" />
+      <PortfolioSection ref="portfolio" />
+      <ContactSection ref="contact" />
+      <Footer />
+    </n-space>
+  </div>
 </template>
 
 <script setup>

@@ -1,13 +1,13 @@
 <template>
   <div 
     :class="[
-      'glass-card backdrop-blur-md flex justify-center fixed w-full z-50 transition-all duration-300',
+      'navbar glass-card glass-card-menubar backdrop-blur-md flex justify-center fixed w-full z-50 transition-all duration-300',
       isScrolled ? 'shadow-lg' : ''
     ]"
     style="top: 0; position: fixed;"
   >
     <div class="container flex w-full max-w-screen-xl px-3 sm:px-5">
-      <nav class="flex w-full justify-between h-10 sm:h-16 items-center">
+      <nav class="flex w-full justify-between h-10 sm:h-16 short-screen:h-8 short-screen:sm:h-12 items-center">
         <div class="flex items-center flex-1">
           <n-text
             class="text-white text-base sm:text-lg lg:text-xl magnetic-hover cursor-pointer font-semibold"

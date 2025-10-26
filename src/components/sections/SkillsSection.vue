@@ -2,7 +2,7 @@
   <section class="py-section bg-background-primary">
     <div class="container-custom">
       <!-- Section Header -->
-      <div class="text-center mb-16">
+      <div class="section-header text-center mb-16">
         <h2 class="text-h2 font-bold text-white mb-4">
           Skills & Technologies
         </h2>

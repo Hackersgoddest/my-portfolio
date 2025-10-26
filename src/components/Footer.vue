@@ -131,7 +131,6 @@ import {
   CallOutline,
   LogoGithub,
   LogoLinkedin,
-  LogoTwitter,
   LogoInstagram
 } from '@vicons/ionicons5'
 
@@ -144,22 +143,22 @@ const currentYear = computed(() => new Date().getFullYear())
 const socialLinks = [
   {
     name: 'GitHub',
-    url: 'https://github.com/frankoppongkonadu',
+    url: 'https://github.com/Hackersgoddest',
     icon: LogoGithub
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/frankoppongkonadu',
+    url: 'https://www.linkedin.com/in/frank-oppong-9286b523b/',
     icon: LogoLinkedin
   },
   {
-    name: 'Twitter',
-    url: 'https://twitter.com/frankoppongkonadu',
-    icon: LogoTwitter
+    name: 'X',
+    url: 'https://x.com/_hackersgoddest',
+    icon: LogoXing
   },
   {
     name: 'Instagram',
-    url: 'https://instagram.com/frankoppongkonadu',
+    url: 'https://www.instagram.com/hackersgoddest/',
     icon: LogoInstagram
   }
 ]

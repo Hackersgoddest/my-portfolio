@@ -2,7 +2,7 @@
   <section class="py-section bg-background-secondary">
     <div class="container-custom">
       <!-- Section Header -->
-      <div class="text-center mb-16">
+      <div class="section-header text-center mb-16">
         <h2 class="text-h2 font-bold text-white mb-4">Featured Projects</h2>
         <p class="text-body-lg text-gray-300 max-w-2xl mx-auto">
           A showcase of innovative solutions and creative implementations across
@@ -15,8 +15,7 @@
         <div
           v-for="(project, index) in portfolioOptions"
           :key="project.title"
-          class="group relative overflow-hidden rounded-2xl xs:rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 backdrop-blur-xl border border-white/20 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-400/30 animate-fade-in-up"
-          :style="{ animationDelay: `${index * 0.1}s` }"
+          class="portfolio-card group relative overflow-hidden rounded-2xl xs:rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 backdrop-blur-xl border border-white/20 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-400/30"
         >
           <!-- Animated Top Border -->
           <div

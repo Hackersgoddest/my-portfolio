@@ -5,7 +5,7 @@
       class="absolute inset-0 z-10 bg-gradient-to-br from-black/60 via-black/50 to-transparent"
     >
       <div
-        class="container-custom min-h-screen flex flex-col justify-center pt-20 xs:pt-24 sm:pt-28 md:pt-20 lg:pt-16 xl:pt-8 pb-8 md:pb-16"
+        class="container-custom min-h-screen flex flex-col justify-center pt-20 xs:pt-24 sm:pt-28 md:pt-20 lg:pt-16 xl:pt-8 pb-8 md:pb-16 short-screen:pt-24 short-screen:xs:pt-28 short-screen:sm:pt-32"
       >
         <div class="max-w-4xl w-full">
           <!-- Status badge -->

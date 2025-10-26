@@ -2,7 +2,7 @@
   <section class="py-section bg-background-primary">
     <div class="container-custom">
       <!-- Section Header -->
-      <div class="text-center mb-16">
+      <div class="section-header text-center mb-16">
         <h2 class="text-h2 font-bold text-white mb-4">
           Let's Work Together
         </h2>
@@ -29,7 +29,7 @@
                 <div class="space-y-4">
                   <a
                     href="mailto:frankoppongkonadu930@gmail.com"
-                    class="flex items-center gap-4 text-gray-300 hover:text-primary-green transition-colors duration-200"
+                    class="contact-item flex items-center gap-4 text-gray-300 hover:text-primary-green transition-colors duration-200"
                   >
                     <div class="w-12 h-12 bg-primary-green/10 rounded-xl flex items-center justify-center">
                       <svg class="w-6 h-6 text-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@
                   
                   <a
                     href="tel:+233256287192"
-                    class="flex items-center gap-4 text-gray-300 hover:text-primary-green transition-colors duration-200"
+                    class="contact-item flex items-center gap-4 text-gray-300 hover:text-primary-green transition-colors duration-200"
                   >
                     <div class="w-12 h-12 bg-primary-green/10 rounded-xl flex items-center justify-center">
                       <svg class="w-6 h-6 text-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,16 +106,16 @@ import ContactForm from "../ContactForm.vue";
 import {
   LogoLinkedin,
   LogoGithub,
-  LogoTwitter,
   LogoInstagram,
   LogoStackoverflow,
+  LogoXing,
 } from "@vicons/ionicons5";
 
 const socialOptions = [
   {
     name: "LinkedIn",
     label: "LinkedIn",
-    link: "https://www.linkedin.com/in/frank-oppong-konadu-9286b523b/",
+    link: "https://www.linkedin.com/in/frank-oppong-9286b523b/",
     icon: LogoLinkedin
   },
   {
@@ -125,10 +125,10 @@ const socialOptions = [
     icon: LogoGithub
   },
   {
-    name: "Twitter",
-    label: "Twitter",
-    link: "https://twitter.com/UndefineHacker",
-    icon: LogoTwitter
+    name: "X",
+    label: "X",
+    link: "https://x.com/_hackersgoddest",
+    icon: LogoXing
   },
   {
     name: "Instagram",

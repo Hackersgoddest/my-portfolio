@@ -342,6 +342,47 @@ body {
   border-radius: 12px !important;
 }
 
+/* Short Screen Height Utilities - For mobile/tablet landscape mode */
+@media (max-height: 800px) {
+  /* Reduce MenuBar height on short screens */
+  .short-screen\:h-8 {
+    height: 2rem !important; /* 32px - reduced from default */
+  }
+  
+  .short-screen\:sm\:h-12 {
+    height: 3rem !important; /* 48px - reduced from default */
+  }
+  
+  /* Moderate padding increase (less than before since MenuBar is smaller) */
+  .short-screen\:pt-24 {
+    padding-top: 4rem !important; /* 64px - moderate increase */
+  }
+  
+  .short-screen\:xs\:pt-28 {
+    padding-top: 5rem !important; /* 80px - moderate increase */
+  }
+  
+  .short-screen\:sm\:pt-32 {
+    padding-top: 6rem !important; /* 96px - moderate increase */
+  }
+}
+
+@media (max-height: 800px) and (min-width: 480px) {
+  .short-screen\:xs\:pt-28 {
+    padding-top: 5rem !important;
+  }
+}
+
+@media (max-height: 800px) and (min-width: 640px) {
+  .short-screen\:sm\:h-12 {
+    height: 3rem !important;
+  }
+  
+  .short-screen\:sm\:pt-32 {
+    padding-top: 6rem !important;
+  }
+}
+
 /* Responsive Design Enhancements */
 @media (max-width: 768px) {
   .container-custom {
@@ -365,6 +406,11 @@ body {
   .glass-card {
     padding: 1.5rem;
   }
+
+  .glass-card-menubar {
+    padding: 1rem;
+  }
+
 }
 
 @media (max-width: 640px) {

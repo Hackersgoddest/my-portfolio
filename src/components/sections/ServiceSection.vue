@@ -2,7 +2,7 @@
   <section class="py-section bg-background-secondary">
     <div class="container-custom">
       <!-- Section Header -->
-      <div class="text-center mb-16">
+      <div class="section-header text-center mb-16">
         <h2 class="text-h2 font-bold text-white mb-4">
           Services
         </h2>
@@ -16,8 +16,7 @@
         <div 
           v-for="(service, index) in serviceOptions" 
           :key="service.title"
-          class="group service-card animate-fade-in-up"
-          :style="{ animationDelay: `${index * 0.1}s` }"
+          class="group service-card"
         >
           <div class="glass-card h-full p-4 xs:p-5 sm:p-6 md:p-7 lg:p-8 rounded-xl xs:rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-white/10">
             <!-- Service Icon -->
