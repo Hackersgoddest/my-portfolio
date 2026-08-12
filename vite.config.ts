@@ -1,10 +1,11 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -21,15 +22,12 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Manual chunking for better code splitting
-        manualChunks: {
-          // Vendor chunk for large libraries
-          vendor: ['vue', '@vueuse/motion'],
-          // UI library chunk
-          ui: ['naive-ui'],
-          // Icons chunk
-          icons: ['@vicons/ionicons5'],
-          // Animation libraries
-          animations: ['gsap', 'lenis']
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          if (id.includes('/vue/')) return 'vendor'
+          if (id.includes('/reka-ui/')) return 'ui'
+          if (id.includes('/@vicons/') || id.includes('/@lucide/')) return 'icons'
+          if (id.includes('/gsap/') || id.includes('/lenis/')) return 'animations'
         }
       }
     },
