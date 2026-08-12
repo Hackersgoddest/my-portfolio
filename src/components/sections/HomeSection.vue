@@ -1,201 +1,107 @@
 <template>
-  <section class="relative min-h-screen overflow-hidden">
-    <!-- Hero overlay -->
-    <div
-      class="absolute inset-0 z-10 bg-gradient-to-br from-black/60 via-black/50 to-transparent"
-    >
-      <div
-        class="container-custom min-h-screen flex flex-col justify-center pt-20 xs:pt-24 sm:pt-28 md:pt-20 lg:pt-16 xl:pt-8 pb-8 md:pb-16 short-screen:pt-24 short-screen:xs:pt-28 short-screen:sm:pt-32"
-      >
-        <div class="max-w-4xl w-full">
-          <!-- Status badge -->
-          <div class="hero-tag animate-fade-in-scale mb-4 sm:mb-5 md:mb-6">
-            <div
-              class="inline-flex items-center gap-2 sm:gap-2.5 md:gap-3 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-primary-green-500/10 to-primary-green-600/10 border border-primary-green-400/20 rounded-full backdrop-blur-lg"
-            >
-              <div class="flex items-center gap-1.5 sm:gap-2 md:gap-2.5">
-                <n-icon
-                  :component="Code"
-                  size="14"
-                  class="text-primary-green-400 sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]"
-                />
-                <span
-                  class="text-xs sm:text-sm md:text-base lg:text-sm xl:text-sm font-medium text-primary-green-400 tracking-wide"
-                  >Software Developer</span
-                >
-              </div>
-            </div>
-          </div>
+  <section class="relative flex min-h-screen flex-col justify-center overflow-hidden pt-20 pb-16 short-screen:pt-14">
+    <div class="container-custom relative z-10">
+      <div class="max-w-3xl">
+        <!-- Terminal kicker -->
+        <p class="hero-kicker mb-6 font-mono text-xs xs:text-sm text-fg-faint">
+          <span class="text-primary-green">frank@hackersgoddest</span>:~$
+          <span class="text-fg">whoami</span>
+          <span class="text-primary-green">_</span>
+        </p>
 
-          <!-- Main heading -->
-          <div
-            class="hero-name animate-fade-in-up mb-5 sm:mb-6 md:mb-7"
-            style="animation-delay: 0.2s"
-          >
-            <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-6xl text-white font-bold mb-3 sm:mb-4 md:mb-5 leading-tight">
-              Hi, I'm <span class="gradient-text">Frank Oppong Konadu</span>
-            </h1>
-            <p
-              class="text-sm xs:text-base sm:text-lg md:text-xl lg:text-lg xl:text-xl 2xl:text-xl text-gray-300 max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-2xl xl:max-w-3xl leading-relaxed"
-            >
-              A passionate full-stack and mobile developer with
-              {{ new Date().getFullYear() - 2022 }}+ years of experience
-              creating web and mobile solutions that make a difference. I
-              specialize in React.js, Vue.js, Node.js, and React Native with a
-              passion for exploring Flutter and Machine Learning.
-            </p>
-          </div>
-
-          <!-- Location -->
-          <div
-            class="hero-location animate-fade-in-up mb-6 sm:mb-7 md:mb-8"
-            style="animation-delay: 0.4s"
-          >
-            <div
-              class="inline-flex items-center glass-card px-3 xs:px-4 sm:px-5 py-2 xs:py-2.5 sm:py-3 rounded-full"
-            >
-              <n-icon
-                size="14"
-                :component="skillsData.personal[0].icon"
-                class="text-green-400 mr-2 xs:mr-2.5 sm:mr-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
-              ></n-icon>
-              <span class="text-xs xs:text-sm sm:text-base lg:text-sm xl:text-base text-gray-300"
-                >Accra, Ghana • Available Worldwide</span
-              >
-            </div>
-          </div>
-
-          <!-- CTA Buttons -->
-          <div
-            class="hero-buttons animate-fade-in-up flex flex-col xs:flex-row gap-3 xs:gap-3 sm:gap-4 md:gap-6 mb-10 sm:mb-12"
-            style="animation-delay: 0.6s"
-          >
-            <button
-              class="btn-primary w-full xs:flex-1 md:flex-initial lg:w-auto text-sm xs:text-base sm:text-lg lg:text-sm xl:text-base px-4 xs:px-5 sm:px-6 md:px-8 lg:px-5 xl:px-6 py-3 xs:py-3.5 sm:py-4 md:py-5 lg:py-2.5 xl:py-3"
-              @click.passive="$emit('scrollToSection', 'portfolio')"
-            >
-              View My Work
-            </button>
-
-            <a
-              href="https://drive.google.com/file/d/14Arynr8EpfjBji6YJuez8fW3q8HXpoFq/view?usp=sharing"
-              target="_blank"
-              class="w-full xs:flex-1 md:flex-initial lg:w-auto"
-            >
-              <button
-                class="btn-secondary w-full lg:w-auto flex items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 text-sm xs:text-base sm:text-lg lg:text-sm xl:text-base px-4 xs:px-5 sm:px-6 md:px-8 lg:px-5 xl:px-6 py-3 xs:py-3.5 sm:py-4 md:py-5 lg:py-2.5 xl:py-3"
-              >
-                <n-icon
-                  size="16"
-                  :component="skillsData.personal[1].icon"
-                  class="xs:w-4 xs:h-4 sm:w-5 sm:h-5 lg:w-4 lg:h-4 xl:w-5 xl:h-5"
-                ></n-icon>
-                Download CV
-              </button>
-            </a>
-          </div>
-
-          <!-- Experience badge -->
-          <div
-            class="hero-experience animate-fade-in-up"
-            style="animation-delay: 0.8s"
-          >
-            <div
-              class="inline-flex items-center glass-card px-4 xs:px-5 sm:px-6 lg:px-5 xl:px-6 py-3 xs:py-3.5 sm:py-4 lg:py-3 xl:py-3.5 rounded-xl"
-            >
-              <div class="text-2xl xs:text-3xl sm:text-4xl lg:text-3xl xl:text-4xl font-bold text-green-400 mr-3 xs:mr-4 sm:mr-5">
-                {{ new Date().getFullYear() - 2022 }}+
-              </div>
-              <div class="text-left">
-                <div class="text-xs xs:text-sm lg:text-xs xl:text-sm text-gray-400">YEARS</div>
-                <div class="text-xs xs:text-sm lg:text-xs xl:text-sm text-gray-400">EXPERIENCE</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scroll indicator -->
-        <div
-          class="absolute bottom-6 xs:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+        <!-- Name -->
+        <h1
+          class="hero-name mb-4 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] text-fg"
         >
-          <div class="flex flex-col items-center text-white/70">
-            <span class="text-xs xs:text-sm mb-2">Scroll</span>
-            <div
-              class="w-px h-6 xs:h-8 bg-gradient-to-b from-white/70 to-transparent"
-            ></div>
-          </div>
+          {{ scrambledName }}
+        </h1>
+
+        <!-- Tagline -->
+        <p class="hero-tagline mb-6 font-mono text-sm sm:text-base tracking-wide text-primary-green">
+          full-stack &amp; mobile engineer
+          <span class="text-fg-faint">/</span> Accra, Ghana
+          <span class="text-fg-faint">/</span> {{ yearsExperience }}+ yrs
+        </p>
+
+        <!-- Description -->
+        <p class="hero-description mb-10 max-w-xl text-base sm:text-lg leading-relaxed text-fg-subtle">
+          I build web and mobile products end to end with React, Vue, Node
+          and Go — and I'm fully immersed in applied Machine Learning these
+          days. Known online, and now on record, as
+          <span class="text-fg">hackersgoddest</span>.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-buttons flex flex-wrap gap-4">
+          <AppButton variant="primary" @click.passive="$emit('scrollToSection', 'portfolio')">
+            View My Work
+          </AppButton>
+
+          <AppButton
+            tag="a"
+            variant="secondary"
+            href="https://drive.google.com/file/d/14Arynr8EpfjBji6YJuez8fW3q8HXpoFq/view?usp=sharing"
+          >
+            <template #icon>
+              <Download :size="16" />
+            </template>
+            Download CV
+          </AppButton>
         </div>
       </div>
     </div>
 
-    <!-- Background carousel -->
-    <n-carousel
-      show-arrow
-      autoplay
-      :autoplay-duration="6000"
-      class="absolute inset-0"
-    >
-      <img
-        v-for="(image, index) in images"
-        key="index"
-        :class="image.class"
-        :src="image.src"
-      />
-      <template #arrow="{ prev, next }">
-        <div class="flex absolute bottom-6 right-3 z-20">
-          <button
-            type="button"
-            class="inline-flex items-center w-7 h-7 mr-3 justify-center text-white bg-[#0000004d] rounded-lg border-0 transition cursor-pointer hover:bg-[#00000080]"
-            @click="prev"
-          >
-            <n-icon>
-              <ArrowBack />
-            </n-icon>
-          </button>
-          <button
-            type="button"
-            class="inline-flex items-center w-7 h-7 mr-3 justify-center text-white bg-[#0000004d] rounded-lg border-0 transition cursor-pointer hover:bg-[#00000080]"
-            @click="next"
-          >
-            <n-icon>
-              <ArrowForward />
-            </n-icon>
-          </button>
-        </div>
-      </template>
-      <template #dots="{ total, currentIndex, to }">
-        <ul class="flex m-0 p-0 absolute bottom-5 left-5 z-20">
-          <li
-            v-for="index of total"
-            :key="index"
-            class="inline-block w-3 h-1 my-0 mx-[3px] rounded bg-[#ffffff66] transition cursor-pointer"
-            :class="{ 'w-10 bg-white': currentIndex === index - 1 }"
-            @click="to(index - 1)"
-          />
-        </ul>
-      </template>
-    </n-carousel>
+    <!-- Scroll cue -->
+    <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
+      <div class="flex flex-col items-center gap-2 font-mono text-xs text-fg-faint">
+        scroll
+        <div class="h-8 w-px bg-linear-to-b from-fg-faint to-transparent"></div>
+      </div>
+    </div>
   </section>
 </template>
 
-<script setup>
-import { ArrowBack, ArrowForward } from "@vicons/ionicons5";
-import { NCarousel, NText, NIcon, NButton, NSpace, NTag } from "naive-ui";
-import skillsData from "../../data/skills";
-import { Code } from "@vicons/ionicons5";
+<script setup lang="ts">
+import { onMounted, onUnmounted, ref } from "vue";
+import { Download } from "@lucide/vue";
+import AppButton from "../AppButton.vue";
 
-const images = [
-  {
-    src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487611/frank_one_ei67ny.jpg",
-    class: "h-[90vh] xs:h-[80vh] sm:h-screen w-full object-cover",
-  },
-  {
-    src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487654/frank_three_r9jvfd.jpg",
-    class: "h-[90vh] xs:h-[80vh] sm:h-screen w-full object-cover",
-  },
-  {
-    src: "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734487678/frank_four_hiqps6.jpg",
-    class: "h-[90vh] xs:h-[80vh] sm:h-screen w-full object-cover",
-  },
-];
+defineEmits<{ scrollToSection: [key: string] }>();
+
+const FULL_NAME = "Frank Oppong Konadu";
+const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!<>-_\\/[]{}=+*^?#";
+
+const scrambledName = ref(FULL_NAME);
+const yearsExperience = new Date().getFullYear() - 2022;
+
+let scrambleTimer: ReturnType<typeof setTimeout> | undefined;
+
+const runScramble = () => {
+  const totalFrames = 24;
+  let frame = 0;
+
+  clearInterval(scrambleTimer);
+  scrambleTimer = setInterval(() => {
+    frame++;
+    const revealCount = Math.floor((frame / totalFrames) * FULL_NAME.length);
+
+    scrambledName.value = FULL_NAME.split("")
+      .map((char, i) => {
+        if (char === " " || i < revealCount) return char;
+        return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      })
+      .join("");
+
+    if (frame >= totalFrames) {
+      scrambledName.value = FULL_NAME;
+      clearInterval(scrambleTimer);
+    }
+  }, 40);
+};
+
+onMounted(() => {
+  scrambleTimer = setTimeout(runScramble, 550);
+});
+
+onUnmounted(() => clearInterval(scrambleTimer));
 </script>

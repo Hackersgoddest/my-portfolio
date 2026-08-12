@@ -1,239 +1,292 @@
 <template>
-  <section class="py-section bg-background-secondary">
+  <section class="py-section">
     <div class="container-custom">
-      <!-- Section Header -->
-      <div class="section-header text-center mb-16">
-        <h2 class="text-h2 font-bold text-white mb-4">Featured Projects</h2>
-        <p class="text-body-lg text-gray-300 max-w-2xl mx-auto">
-          A showcase of innovative solutions and creative implementations across
-          various platforms
-        </p>
-      </div>
+      <SectionHeader
+        index="04"
+        eyebrow="Selected Work"
+        title="Featured Projects"
+        description="A showcase of innovative solutions and creative implementations across various platforms"
+      />
 
-      <!-- Projects Grid -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-7 sm:gap-8 md:gap-9 lg:gap-10"
-      >
-        <div
-          v-for="project in portfolioOptions"
+      <!-- Projects -->
+      <div class="border-t border-border/20 dark:border-border/10">
+        <article
+          v-for="(project, i) in projects"
           :key="project.title"
-          class="portfolio-card group relative overflow-hidden rounded-2xl xs:rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 backdrop-blur-xl border border-white/20 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-400/30"
+          class="project-row group grid grid-cols-1 items-center gap-8 border-b border-border/20 dark:border-border/10 py-12 sm:py-16 lg:grid-cols-2 lg:gap-16"
         >
-          <!-- Top Border -->
-          <div
-            class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          />
-
           <!-- Image -->
           <div
-            class="relative h-40 xs:h-44 sm:h-48 overflow-hidden rounded-t-2xl xs:rounded-t-3xl"
+            :class="['relative cursor-pointer overflow-hidden rounded-xl', i % 2 === 1 ? 'lg:order-2' : '']"
+            @click="openProjectModal(project)"
           >
-            <img
-              :src="project.images[0]"
-              :alt="project.title"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-            />
-
-            <!-- Overlay -->
+            <div class="relative aspect-4/3">
+              <!-- Blurred echo fills the frame behind mismatched-aspect images
+                   (e.g. a portrait phone photo) instead of leaving empty bars. -->
+              <img
+                :src="project.images[0]"
+                alt=""
+                aria-hidden="true"
+                class="absolute inset-0 h-full w-full scale-110 object-cover object-center blur-2xl grayscale transition-all duration-500 group-hover:grayscale-0"
+                loading="lazy"
+              />
+              <img
+                :src="project.images[0]"
+                :alt="project.title"
+                class="relative h-full w-full object-contain grayscale transition-all duration-500 group-hover:scale-[1.02] group-hover:grayscale-0"
+                loading="lazy"
+              />
+            </div>
             <div
-              class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
-
-            <!-- Actions -->
-            <div
-              class="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
+              class="absolute inset-0 flex items-end justify-end p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             >
-              <button
-                @click="openProjectModal(project)"
-                class="px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white text-sm flex items-center gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition"
-              >
-                <n-icon :component="EyeOutline" size="16" />
-                Quick View
-              </button>
-
-              <a
-                v-if="project.links[0]"
-                :href="project.links[0].link"
-                target="_blank"
-                class="px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white text-sm flex items-center gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition"
-              >
-                <n-icon :component="OpenOutline" size="16" />
-                Live
-              </a>
+              <span class="flex items-center gap-1.5 rounded-lg bg-black/70 px-3 py-1.5 font-mono text-xs text-white backdrop-blur-sm">
+                <Eye :size="12" />
+                View project
+              </span>
             </div>
           </div>
 
           <!-- Content -->
-          <div class="p-5">
-            <h3 class="text-xl font-bold text-white mb-2">
+          <div :class="i % 2 === 1 ? 'lg:order-1' : ''">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-sm text-fg-faint">{{ String(i + 1).padStart(2, "0") }}</span>
+              <span class="font-mono text-xs uppercase tracking-widest text-primary-green/70">{{ project.category }}</span>
+            </div>
+
+            <h3 class="mb-3 mt-2 text-2xl font-bold text-fg sm:text-3xl">
               {{ project.title }}
             </h3>
 
-            <p class="text-slate-300 text-sm mb-4 line-clamp-2">
+            <p class="mb-5 max-w-lg text-sm leading-relaxed text-fg-subtle sm:text-base">
               {{ getProjectSummary(project.description) }}
             </p>
 
-            <!-- Tech -->
-            <div class="flex flex-wrap gap-2 mb-5">
+            <div class="mb-6 flex flex-wrap gap-2">
               <span
-                v-for="tool in project.tools.slice(0, 4)"
+                v-for="tool in project.tools"
                 :key="tool"
-                class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-xs rounded-lg border border-emerald-500/20"
+                class="rounded border border-border/20 dark:border-border/10 px-2 py-1 font-mono text-xs text-fg-faint"
               >
                 {{ tool }}
               </span>
-
-              <span
-                v-if="project.tools.length > 4"
-                class="px-2.5 py-1 bg-slate-700/50 text-slate-400 text-xs rounded-lg"
-              >
-                +{{ project.tools.length - 4 }}
-              </span>
             </div>
 
-            <!-- Buttons -->
-            <div class="flex gap-3">
+            <div class="flex flex-wrap items-center gap-5">
               <button
+                type="button"
                 @click="openProjectModal(project)"
-                class="flex-1 py-2 bg-white/5 border border-white/10 text-sm rounded-xl text-white hover:bg-white/10 transition"
+                class="flex items-center gap-1.5 font-mono text-sm text-fg transition-colors duration-200 hover:text-primary-green"
               >
                 Details
+                <ArrowRight :size="14" />
               </button>
 
               <a
-                v-if="project.links[0]"
-                :href="project.links[0].link"
+                v-for="link in project.links"
+                :key="link.name"
+                :href="link.link"
                 target="_blank"
-                class="flex-1 py-2 bg-emerald-500 text-white text-sm rounded-xl text-center hover:bg-emerald-600 transition"
+                rel="noopener noreferrer"
+                class="flex items-center gap-1.5 font-mono text-sm text-primary-green transition-colors duration-200 hover:text-primary-green-400"
               >
-                {{ project.links[0].name.includes("VIEW") ? "Code" : "Live" }}
+                {{ LINK_LABELS[link.type] }}
+                <component :is="LINK_ICONS[link.type]" :size="14" />
               </a>
             </div>
           </div>
-        </div>
+        </article>
       </div>
 
       <!-- MODAL -->
-      <div
-        v-if="selectedProject"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-        @click.self="closeProjectModal"
-      >
-        <div
-          class="glass-card rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-        >
-          <!-- Header -->
-          <div
-            class="flex justify-between items-center p-6 border-b border-white/10"
+      <DialogRoot :open="!!selectedProject" @update:open="(open) => !open && closeProjectModal()">
+        <DialogPortal>
+          <DialogOverlay
+            data-lenis-prevent
+            class="fixed inset-0 z-90 bg-black/80 backdrop-blur-sm transition-opacity duration-200 data-[state=closed]:opacity-0 data-[state=open]:opacity-100"
+          />
+          <DialogContent
+            data-lenis-prevent
+            class="fixed top-1/2 left-1/2 z-100 max-h-[90vh] w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto border border-border/20 dark:border-border/10 bg-surface-elevated shadow-2xl focus:outline-none"
           >
-            <h3 class="text-xl font-bold text-white">
-              {{ selectedProject.title }}
-            </h3>
-            <button
-              @click="closeProjectModal"
-              class="text-gray-400 hover:text-white"
-            >
-              ✕
-            </button>
-          </div>
+            <template v-if="selectedProject">
+              <!-- Header -->
+              <div class="sticky top-0 z-10 flex items-center justify-between border-b border-border/20 dark:border-border/10 bg-surface-elevated p-6">
+                <div>
+                  <p class="font-mono text-xs uppercase tracking-widest text-primary-green/70">
+                    {{ selectedProject.category }}
+                  </p>
+                  <DialogTitle class="mt-1 text-xl font-bold text-fg">
+                    {{ selectedProject.title }}
+                  </DialogTitle>
+                </div>
+                <DialogDescription class="sr-only">Project details</DialogDescription>
+                <DialogClose aria-label="Close" class="text-fg-subtle transition-colors hover:text-fg">
+                  <X :size="20" />
+                </DialogClose>
+              </div>
 
-          <!-- Body -->
-          <div class="p-6 grid lg:grid-cols-2 gap-8">
-            <!-- Images -->
-            <div>
-              <img
-                :src="selectedProject.images[currentImageIndex]"
-                :alt="selectedProject.title"
-                class="w-full h-64 object-cover rounded-xl mb-4"
-              />
-
-              <div class="flex justify-center gap-2">
-                <button
-                  v-for="(img, i) in selectedProject.images"
-                  :key="i"
-                  @click="currentImageIndex = i"
-                  :class="[
-                    'w-2 h-2 rounded-full',
-                    i === currentImageIndex ? 'bg-emerald-400' : 'bg-white/30',
-                  ]"
+              <!-- Image -->
+              <div class="relative aspect-video overflow-hidden bg-surface">
+                <!-- Blurred echo fills the frame behind mismatched-aspect images
+                     (e.g. a portrait phone photo) instead of leaving empty bars. -->
+                <img
+                  :src="selectedProject.images[currentImageIndex]"
+                  alt=""
+                  aria-hidden="true"
+                  class="absolute inset-0 h-full w-full scale-110 object-cover object-center blur-2xl"
                 />
+                <img
+                  :src="selectedProject.images[currentImageIndex]"
+                  :alt="selectedProject.title"
+                  class="relative h-full w-full object-contain"
+                />
+
+                <template v-if="selectedProject.images.length > 1">
+                  <button
+                    type="button"
+                    aria-label="Previous image"
+                    @click="prevImage"
+                    class="absolute left-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center bg-black/60 text-white transition-colors duration-200 hover:bg-black/80"
+                  >
+                    <ChevronLeft :size="16" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next image"
+                    @click="nextImage"
+                    class="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center bg-black/60 text-white transition-colors duration-200 hover:bg-black/80"
+                  >
+                    <ChevronRight :size="16" />
+                  </button>
+                  <span class="absolute bottom-3 right-3 bg-black/70 px-2 py-1 font-mono text-xs text-white">
+                    {{ String(currentImageIndex + 1).padStart(2, "0") }} / {{ String(selectedProject.images.length).padStart(2, "0") }}
+                  </span>
+                </template>
               </div>
-            </div>
 
-            <!-- Details -->
-            <div>
-              <div
-                class="text-gray-300 mb-6"
-                v-html="selectedProject.description"
-              />
+              <!-- Details -->
+              <div class="p-6 sm:p-8">
+                <p class="text-sm leading-relaxed text-fg-muted sm:text-base">
+                  {{ selectedDescription.intro }}
+                </p>
 
-              <div class="flex flex-wrap gap-2 mb-6">
-                <span
-                  v-for="tool in selectedProject.tools"
-                  :key="tool"
-                  class="px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full text-sm"
+                <div
+                  v-if="selectedDescription.items.length"
+                  class="mt-6 space-y-3 border-t border-border/20 dark:border-border/10 pt-6"
                 >
-                  {{ tool }}
-                </span>
-              </div>
+                  <div v-for="(item, i) in selectedDescription.items" :key="i" class="flex gap-3">
+                    <span class="shrink-0 pt-0.5 font-mono text-xs text-primary-green">
+                      {{ String(i + 1).padStart(2, "0") }}
+                    </span>
+                    <p class="text-sm leading-relaxed text-fg-subtle">{{ item }}</p>
+                  </div>
+                </div>
 
-              <div class="flex gap-3">
-                <a
-                  v-for="link in selectedProject.links"
-                  :key="link.name"
-                  :href="link.link"
-                  target="_blank"
-                  class="px-4 py-2 bg-emerald-500 rounded-lg text-white text-sm"
+                <blockquote
+                  v-if="selectedDescription.quote"
+                  class="mt-6 border-l-2 border-primary-green/40 pl-4"
                 >
-                  {{ link.name }}
-                </a>
+                  <p class="text-sm italic leading-relaxed text-fg-muted sm:text-base">
+                    &ldquo;{{ selectedDescription.quote.text }}&rdquo;
+                  </p>
+                  <footer class="mt-2 font-mono text-xs text-fg-faint">
+                    &mdash; {{ selectedDescription.quote.attribution }}
+                  </footer>
+                </blockquote>
+
+                <div class="mt-6 flex flex-wrap gap-2 border-t border-border/20 dark:border-border/10 pt-6">
+                  <span
+                    v-for="tool in selectedProject.tools"
+                    :key="tool"
+                    class="border border-border/20 dark:border-border/10 px-2 py-1 font-mono text-xs text-fg-faint"
+                  >
+                    {{ tool }}
+                  </span>
+                </div>
+
+                <div class="mt-6 flex flex-wrap gap-3">
+                  <AppButton
+                    v-for="link in selectedProject.links"
+                    :key="link.name"
+                    tag="a"
+                    variant="primary"
+                    :href="link.link"
+                  >
+                    {{ link.name }}
+                  </AppButton>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </template>
+          </DialogContent>
+        </DialogPortal>
+      </DialogRoot>
     </div>
   </section>
 </template>
 
-<script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import { NIcon } from "naive-ui";
-import { EyeOutline, OpenOutline } from "@vicons/ionicons5";
+<script setup lang="ts">
+import { computed, ref } from "vue";
+import SectionHeader from "../SectionHeader.vue";
+import {
+  DialogRoot,
+  DialogPortal,
+  DialogOverlay,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from "reka-ui";
+import { Eye, ExternalLink, ArrowRight, ChevronLeft, ChevronRight, Smartphone, Code2, X } from "@lucide/vue";
+import AppButton from "../AppButton.vue";
+import projects from "../../data/projects";
+import type { Project, ProjectLinkType } from "../../types";
 
-const selectedProject = ref(null);
+const LINK_LABELS: Record<ProjectLinkType, string> = {
+  site: "Live",
+  code: "Code",
+  ios: "iOS",
+  android: "Android",
+};
+
+const LINK_ICONS: Record<ProjectLinkType, typeof ExternalLink> = {
+  site: ExternalLink,
+  code: Code2,
+  ios: Smartphone,
+  android: Smartphone,
+};
+
+const selectedProject = ref<Project | null>(null);
 const currentImageIndex = ref(0);
 
 /* MODAL */
-const openProjectModal = (project) => {
+const openProjectModal = (project: Project) => {
   selectedProject.value = project;
   currentImageIndex.value = 0;
-  document.body.style.overflow = "hidden";
 };
 
 const closeProjectModal = () => {
   selectedProject.value = null;
   currentImageIndex.value = 0;
-  document.body.style.overflow = "";
 };
 
-/* ESC SUPPORT */
-const handleKeydown = (e) => {
-  if (e.key === "Escape") closeProjectModal();
+const prevImage = () => {
+  if (!selectedProject.value) return;
+  const total = selectedProject.value.images.length;
+  currentImageIndex.value = (currentImageIndex.value - 1 + total) % total;
 };
 
-onMounted(() => window.addEventListener("keydown", handleKeydown));
-onUnmounted(() => {
-  window.removeEventListener("keydown", handleKeydown);
-  document.body.style.overflow = "";
-});
+const nextImage = () => {
+  if (!selectedProject.value) return;
+  const total = selectedProject.value.images.length;
+  currentImageIndex.value = (currentImageIndex.value + 1) % total;
+};
 
 /* SUMMARY */
-const getProjectSummary = (html) => {
+const getProjectSummary = (html: string) => {
   const div = document.createElement("div");
   div.innerHTML = html;
-  const text = div.textContent || "";
+  const text = div.querySelector("p")?.textContent ?? "";
 
   const firstSentence = text.split(".")[0];
   return firstSentence.length > 120
@@ -241,111 +294,38 @@ const getProjectSummary = (html) => {
     : firstSentence + ".";
 };
 
-const portfolioOptions = ref([
-  {
-    title: "Memora",
-    description: `
-    <p>
-    Memora is a modern donations and event management platform that unifies payments, communication, and event coordination into one seamless system.</p>`,
-    images: [
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1774948354/Screenshot_2026-03-31_at_9.11.47_AM_lu05oh.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1774948354/Screenshot_2026-03-31_at_9.11.21_AM_eoewkh.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1774948443/dashboard-light_kf2tzk.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1774948443/dashboard-dark_obxqrc.png",
-    ],
-    tools: [
-      "TypeScript",
-      "Next.js",
-      "React",
-      "NestJS",
-      "PostgreSQL",
-      "TypeORM",
-      "Tailwind CSS",
-    ],
-    links: [{ name: "VISIT SITE", link: "https://memora.joetech247.com" }],
-  },
-  {
-    title: "Eban Register",
-    description: `<p>An Electronic attendance system with employee and membership management modules. 70 organizations has enrolled on the platform since it's deployment in december 2020. The system allows employees or members of organizations to take attendance with their phone by:</br><ul><li>Scanning a QR-Code</li><li>Using their GPS</li><li>Scanning an NFC tag</li></ul></p>`,
-    images: [
-      "https://res.cloudinary.com/jolsoft/image/upload/v1634246757/portfolio/eban-admin/eban-admin-screen-1_zmjbnx.png",
-      "https://res.cloudinary.com/jolsoft/image/upload/v1634247513/portfolio/eban-admin/eban-admin-screen-2_pcvgyu.png",
-      "https://res.cloudinary.com/jolsoft/image/upload/v1634248046/portfolio/eban-admin/eban-admin-screen-3_licoyr.png",
-    ],
-    tools: [
-      "VueJs",
-      "Bootstrap",
-      "FeatherJs",
-      "Typescript",
-      "NodeJS",
-      "MongoDB",
-    ],
-    links: [{ name: "VISIT SITE", link: "https://www.ebanregister.com/" }],
-  },
-  {
-    title: "GreenGold Ghana",
-    description: `<p>GreenGold Ghana is an eco-innovation company that transforms discarded plantain waste into high-quality, eco-friendly fibers. The platform showcases their sustainable manufacturing process and allows users to:</br><ul><li>Explore eco-friendly products (wigs, hair extensions, sanitary pads, bags)</li><li>Learn about environmental impact and sustainability</li><li>Connect with the team and investors</li><li>Partner with the company for sustainable solutions</li><li>View real-time impact statistics (CO₂ saved, jobs created)</li></ul></p>`,
-    images: [
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389446/Screenshot_2025-10-25_at_10.48.37_AM_jpiop6.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389447/Screenshot_2025-10-25_at_10.49.00_AM_hdv5oi.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389447/Screenshot_2025-10-25_at_10.49.18_AM_rsbvwx.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389446/Screenshot_2025-10-25_at_10.49.30_AM_rs1psj.png",
-    ],
-    tools: [
-      "React 19",
-      "TypeScript",
-      "Vite",
-      "Tailwind CSS v4",
-      "Framer Motion",
-      "React Router",
-      "Lucide Icons",
-    ],
-    links: [
-      { name: "VISIT SITE", link: "https://greengoldghanalimited.netlify.app" },
-      {
-        name: "VIEW CODE",
-        link: "https://github.com/Hackersgoddest/greengold",
-      },
-    ],
-  },
-  {
-    title: "Promptopia",
-    description: `<p>Promptopia is an open-source AI prompting tool for modern world to discover, create and share creative prompts. The application allows one to:</br><ul><li>Discover AI prompts</li><li>Create AI prompts</li><li>Edit AI prompts</li><li>Delete AI prompts</li></ul></p>`,
-    images: [
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734491174/login_d2wlty.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734491191/homepage_abswnc.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1734491206/profile_glj8lb.png",
-    ],
-    tools: [
-      "NextJs",
-      "Tailwind",
-      "DaisyUI",
-      "Typescript",
-      "MongoDB",
-      "NextAuth",
-    ],
-    links: [
-      {
-        name: "VIEW CODE",
-        link: "https://github.com/Hackersgoddest/promptopia",
-      },
-    ],
-  },
-  {
-    title: "E-VotePro",
-    description: `<p>A comprehensive voting system built using C# Windows Forms and MySQL, designed to facilitate secure, efficient, and transparent elections. Perfect for educational institutions, organizations, and small-scale elections. The system features:</br><ul><li>Secure user authentication for students and admins</li><li>Real-time voting results and analytics</li><li>Comprehensive admin dashboard for election management</li><li>Candidate management system</li></ul></p>`,
-    images: [
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968512/Screenshot_2025-06-03_at_4.30.45_PM_iygotw.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968505/Screenshot_2025-06-03_at_4.30.30_PM_bqnl7e.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1748968497/Screenshot_2025-06-03_at_4.30.18_PM_xma9og.png",
-    ],
-    tools: ["C#", "Windows Forms", ".NET", "MySQL", "Entity Framework"],
-    links: [
-      {
-        name: "VIEW CODE",
-        link: "https://github.com/Hackersgoddest/E-VotePro",
-      },
-    ],
-  },
-]);
+/* MODAL DESCRIPTION - split the raw HTML into an intro paragraph, a list of
+   items, and an optional testimonial quote so the modal can lay each out
+   with its own styling instead of dumping everything through v-html. A
+   testimonial is authored as <blockquote>quote text<cite>attribution</cite></blockquote>. */
+interface ParsedDescription {
+  intro: string;
+  items: string[];
+  quote: { text: string; attribution: string } | null;
+}
+
+const parseDescription = (html: string): ParsedDescription => {
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  const intro = div.querySelector("p")?.textContent?.trim() ?? "";
+  const items = Array.from(div.querySelectorAll("li")).map(
+    (li) => li.textContent?.trim() ?? ""
+  );
+
+  const blockquoteEl = div.querySelector("blockquote");
+  let quote: ParsedDescription["quote"] = null;
+  if (blockquoteEl) {
+    const attribution = blockquoteEl.querySelector("cite")?.textContent?.trim() ?? "";
+    const text = (blockquoteEl.textContent ?? "").replace(attribution, "").trim();
+    quote = { text, attribution };
+  }
+
+  return { intro, items, quote };
+};
+
+const selectedDescription = computed<ParsedDescription>(() =>
+  selectedProject.value
+    ? parseDescription(selectedProject.value.description)
+    : { intro: "", items: [], quote: null }
+);
 </script>
