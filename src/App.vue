@@ -1,52 +1,48 @@
 <template>
   <!-- Loading Screen -->
-  <div 
-    v-if="!isLoaded" 
-    class="fixed inset-0 z-50 bg-[#101014] flex items-center justify-center"
+  <div
+    v-if="!isLoaded"
+    class="fixed inset-0 z-50 bg-surface flex items-center justify-center"
   >
-    <div class="text-center">
-      <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary-green mx-auto mb-4"></div>
-      <div class="text-white text-lg font-medium">Loading Portfolio...</div>
-      <div class="text-gray-400 text-sm mt-2">Initializing animations</div>
+    <div class="text-center font-mono">
+      <div class="text-lg text-fg">
+        <span class="text-primary-green">&lt;</span>hackersgoddest<span class="text-primary-green">/&gt;</span>
+      </div>
+      <div class="mt-2 text-sm text-fg-subtle">booting portfolio<span class="loading-dots"></span></div>
     </div>
   </div>
 
   <!-- Main Content -->
-  <div 
+  <div
     v-show="isLoaded"
     :class="{ 'opacity-0': !isLoaded, 'opacity-100': isLoaded }"
     class="transition-opacity duration-500"
   >
     <MenuBar class="navbar w-full fixed top-0 z-40" @scroll-to-section="scrollToSection" />
-    <n-back-top
-      :bottom="50"
-      :theme-overrides="customBackTopTheme"
-      :visibility-height="10"
-      :style="{
-        transition: 'all .3s cubic-bezier(.4, 0, .2, 1)',
-        zIndex: '9999',
-      }"
-    />
-    <n-space vertical :size="80" id="Home" class="w-full min-w-80 bg-[#101014]">
+    <BackToTop />
+    <div id="Home" class="textured-surface flex w-full min-w-80 flex-col gap-20 bg-surface">
       <HomeSection @scroll-to-section="scrollToSection" ref="home" />
       <ServiceSection ref="services" />
       <SkillsSection ref="skills" />
       <PortfolioSection ref="portfolio" />
       <ContactSection ref="contact" />
-      <Footer />
-    </n-space>
+      <Footer @scroll-to-section="scrollToSection" />
+    </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
-import { NSpace, NBackTop } from "naive-ui";
+<script setup lang="ts">
+import { ref, type ComponentPublicInstance } from "vue";
 import { useScrollAnimations } from "./composables/useScrollAnimations";
 import MenuBar from "./components/MenuBar.vue";
+import BackToTop from "./components/BackToTop.vue";
 import HomeSection from "./components/sections/HomeSection.vue";
 import LoadingSection from "./components/LoadingSection.vue";
 // Lazy load non-critical sections for better performance
 import { defineAsyncComponent } from 'vue';
+
+type SectionKey = "home" | "services" | "skills" | "portfolio" | "contact";
+type SectionRef = ComponentPublicInstance | null;
 
 const ServiceSection = defineAsyncComponent({
   loader: () => import("./components/sections/ServiceSection.vue"),
@@ -81,33 +77,22 @@ const Footer = defineAsyncComponent({
 // Initialize scroll animations
 const { isLoaded } = useScrollAnimations();
 
-const customBackTopTheme = {
-  iconColor: '#ffffff', // Default icon color
-  iconColorHover: '#18A058', // Icon color on hover
-  iconColorPressed: '#18A058', // Icon color when pressed
-  color: 'rgba(16, 16, 20, 0.8)', // Background color
-  colorHover: 'rgba(24, 160, 88, 0.2)', // Background color on hover
-  colorPressed: 'rgba(24, 160, 88, 0.3)', // Background color when pressed
-  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)', // Shadow
-  boxShadowHover: '0 4px 16px rgba(24, 160, 88, 0.3)', // Shadow on hover
-  borderRadius: '50%', // Border radius
+const home = ref<SectionRef>(null);
+const services = ref<SectionRef>(null);
+const skills = ref<SectionRef>(null);
+const portfolio = ref<SectionRef>(null);
+const contact = ref<SectionRef>(null);
+
+const sectionRefs: Record<SectionKey, typeof home> = {
+  home,
+  services,
+  skills,
+  portfolio,
+  contact,
 };
 
-let openMenu = ref(false);
-const home = ref(null);
-const services = ref(null);
-const skills = ref(null);
-const portfolio = ref(null);
-const contact = ref(null);
-
-const scrollToSection = (activeMenuKey) => {
-  let targetElement = null;
-
-  if (activeMenuKey === "home") targetElement = home.value.$el;
-  else if (activeMenuKey === "services") targetElement = services.value.$el;
-  else if (activeMenuKey === "skills") targetElement = skills.value.$el;
-  else if (activeMenuKey === "portfolio") targetElement = portfolio.value.$el;
-  else if (activeMenuKey === "contact") targetElement = contact.value.$el;
+const scrollToSection = (activeMenuKey: string) => {
+  const targetElement = sectionRefs[activeMenuKey as SectionKey]?.value?.$el as HTMLElement | undefined;
 
   if (targetElement) {
     const elementPosition = targetElement.offsetTop;
@@ -118,7 +103,5 @@ const scrollToSection = (activeMenuKey) => {
       behavior: "smooth",
     });
   }
-
-  openMenu.value = false;
 };
 </script>
