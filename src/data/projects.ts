@@ -1,5 +1,10 @@
 import type { Project } from "../types";
 
+// TODO: swap for a real screenshot once one's available (same Cloudinary
+// pattern as the other projects) - this is a placeholder card only.
+const QA_PLACEHOLDER =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='900'%3E%3Crect width='1200' height='900' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='47%25' text-anchor='middle' font-family='monospace' font-size='48' font-weight='bold' fill='%2310b981'%3EQuality Assurance%3C/text%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-family='monospace' font-size='22' fill='%238b8ba7'%3EManagement System%3C/text%3E%3C/svg%3E";
+
 const projects: Project[] = [
   {
     title: "SchoolShield",
@@ -71,9 +76,32 @@ const projects: Project[] = [
     ],
   },
   {
+    title: "Quality Assurance Management System",
+    category: "School Project",
+    description: `<p>A full-stack quality assurance platform built for educational institutions, covering accreditation, assessment, and auditing workflows with role-based access control across web and native mobile clients.</p><ul><li>Multi-module system for accreditation, assessment, and auditing, with role-based access control and a real-time analytics dashboard with automated, exportable reports</li><li>A companion mobile app (React Native, Expo Router) handles dynamic, Zod-validated questionnaires for complex forms, offline data sync, and Cloudinary media uploads</li><li>Secure authentication and storage across both clients, with push notifications keeping reviewers and institutions in sync</li></ul>`,
+    images: [QA_PLACEHOLDER],
+    tools: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "React Native",
+      "Expo Router",
+      "Zod",
+      "React Hook Form",
+      "Cloudinary",
+    ],
+    links: [
+      {
+        name: "VIEW CODE",
+        type: "code",
+        link: "https://github.com/Hackersgoddest/quality-assurance",
+      },
+    ],
+  },
+  {
     title: "GreenGold Ghana",
     category: "Freelance Project",
-    description: `<p>GreenGold Ghana is an eco-innovation company that transforms discarded plantain waste into high-quality, eco-friendly fibers. The platform showcases their sustainable manufacturing process and allows users to:</br><ul><li>Explore eco-friendly products (wigs, hair extensions, sanitary pads, bags)</li><li>Learn about environmental impact and sustainability</li><li>Connect with the team and investors</li><li>Partner with the company for sustainable solutions</li><li>View real-time impact statistics (CO₂ saved, jobs created)</li></ul></p>`,
+    description: `<p>GreenGold Ghana is an eco-innovation company that transforms discarded plantain waste into high-quality, eco-friendly fibers. Rebuilt with Vite and Tailwind CSS v4, improving load performance by 40%. The platform showcases their sustainable manufacturing process and allows users to:</br><ul><li>Explore eco-friendly products (wigs, hair extensions, sanitary pads, bags)</li><li>Learn about environmental impact and sustainability</li><li>Connect with the team and investors</li><li>Partner with the company for sustainable solutions</li><li>View real-time impact statistics (CO₂ saved, jobs created)</li></ul></p>`,
     images: [
       "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389446/Screenshot_2025-10-25_at_10.48.37_AM_jpiop6.png",
       "https://res.cloudinary.com/dfm07q3n0/image/upload/v1761389447/Screenshot_2025-10-25_at_10.49.00_AM_hdv5oi.png",

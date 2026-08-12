@@ -40,7 +40,7 @@
           <AppButton
             tag="a"
             variant="secondary"
-            href="https://drive.google.com/file/d/14Arynr8EpfjBji6YJuez8fW3q8HXpoFq/view?usp=sharing"
+            href="https://drive.google.com/file/d/111tHR99S6vjlGwYtHTkxhDj1D3d84R_w/view?usp=sharing"
           >
             <template #icon>
               <Download :size="16" />
