@@ -1,142 +1,115 @@
 <template>
-  <div class="glass-card p-8 rounded-2xl">
-    <h3 class="text-h3 font-semibold text-white mb-6">
-      Send me a message
-    </h3>
-    
-    <form 
-      name="contact" 
-      method="POST" 
-      data-netlify="true" 
+  <div>
+    <h3 class="mb-6 font-mono text-sm uppercase tracking-widest text-fg-faint">Send a message</h3>
+
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
       data-netlify-honeypot="bot-field"
-      class="space-y-6" 
+      class="space-y-6"
       @submit.prevent="submitForm"
     >
       <!-- Honeypot field for spam protection -->
       <input type="hidden" name="form-name" value="contact" />
       <div style="display: none;">
         <label>
-          Don't fill this out if you're human: 
+          Don't fill this out if you're human:
           <input name="bot-field" />
         </label>
       </div>
 
-      <!-- Name Input -->
-      <div>
-        <label class="block text-caption text-gray-300 font-medium mb-2">
-          Your Name *
+      <div v-for="field in textFields" :key="field.name">
+        <label :for="field.name" class="mb-2 flex items-center gap-2 font-mono text-xs text-fg-faint">
+          <span class="text-primary-green">&gt;</span> {{ field.label }}
         </label>
         <input
-          v-model="form.name"
-          name="name"
-          type="text"
+          :id="field.name"
+          v-model="form[field.name]"
+          :name="field.name"
+          :type="field.type"
           required
-          class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-primary-green-400 focus:outline-none focus:ring-2 focus:ring-primary-green-400/20 transition-all duration-200"
-          placeholder="Enter your full name"
+          class="w-full border-b border-border/25 bg-transparent py-2 font-mono text-sm text-fg placeholder-fg-faint transition-colors duration-200 focus:border-primary-green focus:outline-none sm:text-base"
+          :placeholder="field.placeholder"
         />
       </div>
 
-      <!-- Email Input -->
+      <!-- Message -->
       <div>
-        <label class="block text-caption text-gray-300 font-medium mb-2">
-          Email Address *
-        </label>
-        <input
-          v-model="form.email"
-          name="email"
-          type="email"
-          required
-          class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-primary-green-400 focus:outline-none focus:ring-2 focus:ring-primary-green-400/20 transition-all duration-200"
-          placeholder="your.email@example.com"
-        />
-      </div>
-
-      <!-- Subject Input -->
-      <div>
-        <label class="block text-caption text-gray-300 font-medium mb-2">
-          Subject *
-        </label>
-        <input
-          v-model="form.subject"
-          name="subject"
-          type="text"
-          required
-          class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-primary-green-400 focus:outline-none focus:ring-2 focus:ring-primary-green-400/20 transition-all duration-200"
-          placeholder="What's this about?"
-        />
-      </div>
-
-      <!-- Message Input -->
-      <div>
-        <label class="block text-caption text-gray-300 font-medium mb-2">
-          Message *
+        <label for="message" class="mb-2 flex items-center gap-2 font-mono text-xs text-fg-faint">
+          <span class="text-primary-green">&gt;</span> message
         </label>
         <textarea
+          id="message"
           v-model="form.message"
           name="message"
           required
-          rows="5"
-          class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-primary-green-400 focus:outline-none focus:ring-2 focus:ring-primary-green-400/20 transition-all duration-200 resize-none"
+          rows="4"
+          class="w-full resize-none border-b border-border/25 bg-transparent py-2 font-mono text-sm text-fg placeholder-fg-faint transition-colors duration-200 focus:border-primary-green focus:outline-none sm:text-base"
           placeholder="Tell me about your project or inquiry..."
         ></textarea>
       </div>
 
       <!-- Success Message -->
-      <div v-if="showSuccess" class="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
-        <div class="flex items-center gap-3">
-          <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
-            <n-icon :component="CheckmarkOutline" size="16" class="text-white" />
-          </div>
-          <div>
-            <h4 class="text-emerald-400 font-medium">Message sent successfully!</h4>
-            <p class="text-emerald-300 text-sm">Thank you for reaching out. I'll get back to you soon.</p>
-          </div>
+      <div v-if="showSuccess" class="flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4">
+        <div class="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500">
+          <Check :size="16" class="text-white" />
+        </div>
+        <div>
+          <h4 class="font-medium text-emerald-700 dark:text-emerald-400">Message sent successfully!</h4>
+          <p class="text-sm text-emerald-600 dark:text-emerald-300">Thank you for reaching out. I'll get back to you soon.</p>
         </div>
       </div>
 
       <!-- Error Message -->
-      <div v-if="showError" class="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
-        <div class="flex items-center gap-3">
-          <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-            <n-icon :component="CloseOutline" size="16" class="text-white" />
-          </div>
-          <div>
-            <h4 class="text-red-400 font-medium">Something went wrong</h4>
-            <p class="text-red-300 text-sm">Please try again or contact me directly.</p>
-          </div>
+      <div v-if="showError" class="flex items-center gap-3 rounded-xl border border-red-500/20 bg-red-500/10 p-4">
+        <div class="flex h-6 w-6 items-center justify-center rounded-full bg-red-500">
+          <X :size="16" class="text-white" />
+        </div>
+        <div>
+          <h4 class="font-medium text-red-700 dark:text-red-400">Something went wrong</h4>
+          <p class="text-sm text-red-600 dark:text-red-300">Please try again or contact me directly.</p>
         </div>
       </div>
 
       <!-- Submit Button -->
-      <button
-        type="submit"
-        :disabled="isSubmitting"
-        class="w-full py-4 px-6 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-medium rounded-xl transition-all duration-200 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-      >
-        <span v-if="isSubmitting" class="flex items-center justify-center gap-2">
-          <n-icon :component="RefreshOutline" size="20" class="animate-spin" />
-          Sending...
-        </span>
-        <span v-else class="flex items-center gap-2">
-          <n-icon :component="PaperPlaneOutline" size="20" />
-          Send Message
-        </span>
-      </button>
+      <AppButton type="submit" variant="primary" block :disabled="isSubmitting">
+        <template #icon>
+          <Loader2 v-if="isSubmitting" :size="18" class="animate-spin" />
+          <Send v-else :size="18" />
+        </template>
+        {{ isSubmitting ? "Sending..." : "Send Message" }}
+      </AppButton>
     </form>
   </div>
 </template>
 
-<script setup>
-import { ref, reactive } from 'vue'
-import { NIcon } from 'naive-ui'
-import { 
-  CheckmarkOutline, 
-  CloseOutline, 
-  RefreshOutline, 
-  PaperPlaneOutline 
-} from '@vicons/ionicons5'
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
+import { Check, X, Loader2, Send } from '@lucide/vue'
+import AppButton from './AppButton.vue'
 
-const form = reactive({
+interface ContactFormState {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
+
+interface TextField {
+  name: 'name' | 'email' | 'subject'
+  label: string
+  type: string
+  placeholder: string
+}
+
+const textFields: TextField[] = [
+  { name: 'name', label: 'name', type: 'text', placeholder: 'Jane Doe' },
+  { name: 'email', label: 'email', type: 'email', placeholder: 'jane@example.com' },
+  { name: 'subject', label: 'subject', type: 'text', placeholder: "What's this about?" },
+]
+
+const form = reactive<ContactFormState>({
   name: '',
   email: '',
   subject: '',
@@ -147,7 +120,7 @@ const isSubmitting = ref(false)
 const showSuccess = ref(false)
 const showError = ref(false)
 
-const encode = (data) => {
+const encode = (data: Record<string, string>) => {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
     .join("&")
@@ -171,9 +144,10 @@ const submitForm = async () => {
     if (response.ok) {
       showSuccess.value = true
       // Reset form
-      Object.keys(form).forEach(key => {
-        form[key] = ''
-      })
+      form.name = ''
+      form.email = ''
+      form.subject = ''
+      form.message = ''
     } else {
       throw new Error('Form submission failed')
     }
