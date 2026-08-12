@@ -1,37 +1,88 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Design System - Typography */
+/* Escape hatch for one-off semantic-status colors (success/error text etc.)
+   that don't fit the surface/fg/border token model - ties Tailwind's dark:
+   variant to our manual [data-theme] toggle instead of prefers-color-scheme. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Tailwind v4 CSS-first theme: design tokens that need to generate utilities
+   (bg-*, text-*, border-*, and the xs/sm/... responsive variants).
+
+   Semantic surface/fg/border tokens resolve through plain CSS variables
+   (defined below, swapped per theme) rather than fixed hex values, so a
+   single set of Tailwind utilities (bg-surface, text-fg, border-border...)
+   works in both light and dark mode without a `dark:` variant on every class. */
+@theme {
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --color-primary-green: #10b981;
+  --color-primary-green-50: #ecfdf5;
+  --color-primary-green-100: #d1fae5;
+  --color-primary-green-200: #a7f3d0;
+  --color-primary-green-300: #6ee7b7;
+  --color-primary-green-400: #34d399;
+  --color-primary-green-500: #10b981;
+  --color-primary-green-600: #059669;
+  --color-primary-green-700: #047857;
+  --color-primary-green-800: #065f46;
+  --color-primary-green-900: #064e3b;
+
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-fg-faint: var(--fg-faint);
+  --color-border: var(--border);
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Theme tokens - dark is the default/brand look, .light overrides it */
 :root {
-  /* Colors */
+  --surface: #0f0f23;
+  --surface-elevated: #1a1a2e;
+  --fg: #ffffff;
+  --fg-muted: #cbd5e1;
+  --fg-subtle: #94a3b8;
+  --fg-faint: #64748b;
+  --border: #ffffff;
+  --texture-dot: rgba(16, 185, 129, 0.14);
+
   --primary-green: #10b981;
   --primary-green-dark: #059669;
   --primary-green-light: #34d399;
-  --background-primary: #0f0f23;
-  --background-secondary: #1a1a2e;
-  --background-card: #16213e;
-  --text-primary: #ffffff;
-  --text-secondary: #e2e8f0;
-  --text-muted: #94a3b8;
-  --text-accent: #10b981;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --shadow-color: rgba(0, 0, 0, 0.3);
-  
+
   /* Typography */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  
+
   /* Spacing */
   --section-padding: 5rem 0;
   --container-padding: 1.5rem;
-  
+
   /* Animations - Subtle and clean */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-gentle: all 0.25s ease;
+}
+
+:root[data-theme="light"] {
+  --surface: #f6f5f1;
+  --surface-elevated: #ffffff;
+  --fg: #14141f;
+  --fg-muted: #44454f;
+  --fg-subtle: #64646f;
+  --fg-faint: #8a8a94;
+  --border: #14141f;
+  --texture-dot: rgba(16, 185, 129, 0.14);
 }
 
 /* Base styles */
@@ -47,31 +98,19 @@ html {
 body {
   font-family: var(--font-primary);
   line-height: 1.6;
-  color: var(--text-secondary);
-  background: var(--background-primary);
+  color: var(--fg-muted);
+  background: var(--surface);
+  transition: background-color 0.2s ease, color 0.2s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Typography Scale */
-.text-h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
 .text-h2 {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.01em;
-}
-
-.text-h3 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 600;
-  line-height: 1.3;
 }
 
 .text-body-lg {
@@ -86,142 +125,16 @@ body {
   line-height: 1.6;
 }
 
-.text-caption {
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.4;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+@keyframes loadingDots {
+  0%, 20% { content: ""; }
+  40% { content: "."; }
+  60% { content: ".."; }
+  80%, 100% { content: "..."; }
 }
 
-/* Design Components */
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border-color);
-  border-radius: 1rem;
-  box-shadow: 0 8px 32px var(--shadow-color);
-}
-
-.glass-card-hover {
-  transition: var(--transition-smooth);
-}
-
-.glass-card-hover:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--primary-green);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px var(--shadow-color);
-}
-
-/* Buttons */
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
-  color: white;
-  border: none;
-  border-radius: 0.75rem;
-  padding: 0.875rem 2rem;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: var(--transition-smooth);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--text-primary);
-  border: 2px solid var(--primary-green);
-  border-radius: 0.75rem;
-  padding: 0.875rem 2rem;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: var(--transition-smooth);
-}
-
-.btn-secondary:hover {
-  background: var(--primary-green);
-  color: white;
-  transform: translateY(-2px);
-}
-
-/* Animations - Subtle and purposeful */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes gentleFloat {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.5s ease-out;
-}
-
-.animate-fade-in-scale {
-  animation: fadeInScale 0.4s ease-out;
-}
-
-.animate-gentle-float {
-  animation: gentleFloat 6s ease-in-out infinite;
-}
-
-/* Hover effects - Subtle and clean */
-.hover-lift {
-  transition: var(--transition-smooth);
-}
-
-.hover-lift:hover {
-  transform: translateY(-2px);
-}
-
-.hover-scale {
-  transition: var(--transition-smooth);
-}
-
-.hover-scale:hover {
-  transform: scale(1.02);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, var(--primary-green-light), var(--primary-green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Section spacing */
-.section-padding {
-  padding: var(--section-padding);
+.loading-dots::after {
+  content: "";
+  animation: loadingDots 1.2s steps(1) infinite;
 }
 
 /* Container */
@@ -231,22 +144,21 @@ body {
   padding: 0 var(--container-padding);
 }
 
+/* Subtle dot-grid texture applied once at the page-flow level (not per
+   section) so scrolling has consistent atmosphere instead of every section
+   being a flat, uninterrupted fill - most noticeable (and most needed) in
+   light mode, where a plain white background reads as sterile. */
+.textured-surface {
+  background-image: radial-gradient(var(--texture-dot) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   :root {
     --section-padding: 3rem 0;
     --container-padding: 1rem;
   }
-}
-
-/* Scrollbar utilities */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
 }
 
 /* Accessibility */
@@ -260,86 +172,8 @@ body {
   }
 }
 
-/* Remove overly complex animations */
-.simple-hover {
-  transition: var(--transition-smooth);
-}
-
-.simple-hover:hover {
-  color: var(--primary-green);
-}
-
-/* Social Icons */
-.social-icons {
-  display: inline-flex;
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-/* Skills Section Enhancements */
-.skill-card-wrapper {
-  position: relative;
-}
-
-.skill-card {
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
-}
-
 .skill-item {
-  cursor: pointer;
   position: relative;
-}
-
-/* Clean Skill Detail Card */
-.skill-detail-card {
-  background: rgba(15, 15, 35, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  box-shadow: 
-    0 12px 30px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(16, 185, 129, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transform-origin: center top;
-}
-
-/* Clean slide up animation for detail card */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* Clean progress bar animation */
-@keyframes progressFill {
-  from {
-    width: 0%;
-  }
-  to {
-    width: var(--progress-width);
-  }
-}
-
-.skill-detail-card .bg-gradient-to-r {
-  animation: progressFill 0.6s ease-out 0.1s forwards;
-}
-
-/* Ensure Naive UI components respect our theme */
-.n-card {
-  border-radius: 16px !important;
-}
-
-.n-tabs-tab {
-  border-radius: 12px !important;
 }
 
 /* Short Screen Height Utilities - For mobile/tablet landscape mode */
@@ -383,42 +217,24 @@ body {
   }
 }
 
-/* Responsive Design Enhancements */
+/* Section vertical rhythm */
+.py-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
 @media (max-width: 768px) {
   .container-custom {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
-  .text-h1 {
-    font-size: clamp(2.5rem, 8vw, 4rem);
-  }
-  
+
   .text-h2 {
     font-size: clamp(2rem, 6vw, 3rem);
   }
-  
+
   .py-section {
     padding-top: 4rem;
     padding-bottom: 4rem;
-  }
-  
-  .glass-card {
-    padding: 1.5rem;
-  }
-
-  .glass-card-menubar {
-    padding: 1rem;
-  }
-
-}
-
-@media (max-width: 640px) {
-  .text-h1 {
-    font-size: clamp(2rem, 10vw, 3rem);
-  }
-  
-  .grid {
-    gap: 1rem;
   }
 }
