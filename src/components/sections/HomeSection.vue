@@ -1,5 +1,5 @@
 <template>
-  <section class="relative flex min-h-screen flex-col justify-center overflow-hidden pt-20 pb-16 short-screen:pt-14">
+  <section class="relative flex min-h-screen flex-col overflow-hidden pt-24 pb-16 sm:pt-32">
     <div class="container-custom relative z-10">
       <div class="max-w-3xl">
         <!-- Terminal kicker -->
@@ -52,10 +52,12 @@
     </div>
 
     <!-- Scroll cue -->
-    <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
-      <div class="flex flex-col items-center gap-2 font-mono text-xs text-fg-faint">
+    <div class="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 sm:bottom-12">
+      <div class="scroll-cue flex flex-col items-center gap-2 font-mono text-xs text-fg-faint">
         scroll
-        <div class="h-8 w-px bg-linear-to-b from-fg-faint to-transparent"></div>
+        <div class="relative h-8 w-px overflow-hidden bg-fg-faint/20">
+          <div class="scroll-cue-beam absolute inset-x-0 h-8 w-px bg-linear-to-b from-transparent via-primary-green to-transparent"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -105,3 +107,40 @@ onMounted(() => {
 
 onUnmounted(() => clearInterval(scrambleTimer));
 </script>
+
+<style scoped>
+.scroll-cue {
+  animation: scroll-cue-float 2.4s ease-in-out infinite;
+}
+
+.scroll-cue-beam {
+  animation: scroll-cue-beam 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-cue-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes scroll-cue-beam {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue,
+  .scroll-cue-beam {
+    animation: none;
+  }
+}
+</style>
