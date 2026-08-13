@@ -115,8 +115,8 @@ export function useScrollAnimations() {
         { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
       )
       .fromTo('.hero-name',
-        { x: -30, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, "-=0.2"
+        { x: -30 },
+        { x: 0, duration: 0.6, ease: "power2.out" }, "-=0.2"
       )
       .fromTo('.hero-tagline',
         { x: -30, opacity: 0 },
