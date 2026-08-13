@@ -10,11 +10,39 @@
         </p>
 
         <!-- Name -->
-        <h1
-          class="hero-name mb-4 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] text-fg"
-        >
-          {{ scrambledName }}
-        </h1>
+        <div class="relative">
+          <h1
+            class="hero-name relative mb-4 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] text-fg"
+            aria-label="Frank Oppong Konadu"
+          >
+            <span
+              class="name-grain"
+              aria-hidden="true"
+              :style="{ animationDelay: `${baseDelay}ms`, animationDuration: `${grainDuration}ms` }"
+              >{{ FULL_NAME }}</span
+            >
+            <span aria-hidden="true">
+              <span
+                v-for="(char, i) in nameChars"
+                :key="i"
+                class="name-letter"
+                :style="{
+                  animationDelay: `${baseDelay + i * letterStagger}ms`,
+                  animationDuration: `${letterDuration}ms`,
+                }"
+                >{{ char }}</span
+              >
+            </span>
+          </h1>
+
+          <span
+            v-if="stepVisible"
+            class="step-readout pointer-events-none absolute left-0 top-full mt-1 block font-mono text-[10px] text-fg-faint sm:text-xs"
+            :class="{ 'step-readout--settled': stepSettled }"
+            aria-hidden="true"
+            >t={{ stepValue }}</span
+          >
+        </div>
 
         <!-- Tagline -->
         <p class="hero-tagline mb-6 font-mono text-sm sm:text-base tracking-wide text-primary-green">
@@ -71,44 +99,128 @@ import AppButton from "../AppButton.vue";
 defineEmits<{ scrollToSection: [key: string] }>();
 
 const FULL_NAME = "Frank Oppong Konadu";
-const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!<>-_\\/[]{}=+*^?#";
+const nameChars = FULL_NAME.split("");
 
-const scrambledName = ref(FULL_NAME);
+const baseDelay = 500;
+const letterStagger = 42;
+const letterDuration = 760;
+const grainDuration = (nameChars.length - 1) * letterStagger + letterDuration;
+
 const yearsExperience = new Date().getFullYear() - 2022;
 
-let scrambleTimer: ReturnType<typeof setTimeout> | undefined;
-
-const runScramble = () => {
-  const totalFrames = 24;
-  let frame = 0;
-
-  clearInterval(scrambleTimer);
-  scrambleTimer = setInterval(() => {
-    frame++;
-    const revealCount = Math.floor((frame / totalFrames) * FULL_NAME.length);
-
-    scrambledName.value = FULL_NAME.split("")
-      .map((char, i) => {
-        if (char === " " || i < revealCount) return char;
-        return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-      })
-      .join("");
-
-    if (frame >= totalFrames) {
-      scrambledName.value = FULL_NAME;
-      clearInterval(scrambleTimer);
-    }
-  }, 40);
-};
+// Reverse-diffusion step counter (t=20 -> t=0), ticking down in sync with
+// the name resolving out of grain/blur - echoes the ML line in the hero
+// description instead of just decorating the text.
+const stepValue = ref(20);
+const stepVisible = ref(false);
+const stepSettled = ref(false);
+let stepTimer: ReturnType<typeof setInterval> | undefined;
+let stepStartTimer: ReturnType<typeof setTimeout> | undefined;
+let stepSettleTimer: ReturnType<typeof setTimeout> | undefined;
 
 onMounted(() => {
-  scrambleTimer = setTimeout(runScramble, 550);
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  stepStartTimer = setTimeout(() => {
+    stepVisible.value = true;
+    const totalTicks = 10;
+    const tickInterval = Math.round(grainDuration / totalTicks);
+    let ticks = 0;
+
+    stepTimer = setInterval(() => {
+      ticks++;
+      stepValue.value = Math.max(0, 20 - ticks * 2);
+
+      if (ticks >= totalTicks) {
+        clearInterval(stepTimer);
+        stepSettleTimer = setTimeout(() => (stepSettled.value = true), 300);
+      }
+    }, tickInterval);
+  }, baseDelay);
 });
 
-onUnmounted(() => clearInterval(scrambleTimer));
+onUnmounted(() => {
+  clearTimeout(stepStartTimer);
+  clearTimeout(stepSettleTimer);
+  clearInterval(stepTimer);
+});
 </script>
 
 <style scoped>
+.name-letter {
+  opacity: 0.15;
+  filter: blur(9px);
+  color: var(--color-fg-faint);
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  animation-name: name-letter-denoise;
+  animation-timing-function: steps(5, jump-end);
+  animation-fill-mode: both;
+}
+
+@keyframes name-letter-denoise {
+  from {
+    opacity: 0.15;
+    filter: blur(9px);
+    color: var(--color-fg-faint);
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    color: var(--color-fg);
+    text-shadow: none;
+  }
+}
+
+/* Noise texture (SVG feTurbulence) clipped to the letterforms, so the
+   "grain" only shows through the glyph shapes rather than as a box. */
+.name-grain {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 90px 90px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: 0.6;
+  animation-name: name-grain-fade;
+  animation-timing-function: steps(5, jump-end);
+  animation-fill-mode: both;
+  user-select: none;
+}
+
+@keyframes name-grain-fade {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.step-readout {
+  opacity: 1;
+  transition: opacity 400ms ease;
+}
+
+.step-readout--settled {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-letter {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    color: var(--color-fg);
+    text-shadow: none;
+  }
+
+  .name-grain {
+    display: none;
+  }
+}
+
 .scroll-cue {
   animation: scroll-cue-float 2.4s ease-in-out infinite;
 }
