@@ -11,7 +11,7 @@ const projects: Project[] = [
     category: "Personal Project",
     description: `<p>Focus-first, theft-resistant device management: SchoolShield gives schools, parents, and businesses one dashboard to manage devices — content filtering, app control, remote lock, and theft protection.</p><ul><li>Kiosk-lock classroom tablets to approved apps and manage every device's policy from one dashboard (Schools)</li><li>Filter what a child's phone can reach, with Factory Reset Protection so a reset alone can't hand it to someone else (Families)</li><li>Lock company-issued phones and tablets to work-approved apps, with remote lock, wipe, and anti-theft protection (Businesses)</li></ul>`,
     images: [
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786560764/WhatsApp_Image_2026-08-12_at_18.45.45_lce16m.jpg",
+      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786946637/WhatsApp_Image_2026-08-17_at_05.56.55_cemgeh.jpg",
       "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786560777/Screenshot_2026-08-12_at_6.51.59_PM_gczdlh.png",
       "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786560776/Screenshot_2026-08-12_at_6.51.06_PM_utzeig.png",
       "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786560775/Screenshot_2026-08-12_at_6.50.44_PM_bdhqf9.png",
