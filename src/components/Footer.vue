@@ -10,16 +10,16 @@
         >
           <span class="text-primary-green">&lt;</span>hackersgoddest<span class="text-primary-green">/&gt;</span>
         </button>
-        <div class="flex items-center gap-2 font-mono text-xs text-fg-subtle">
-          <span class="h-2 w-2 rounded-full bg-primary-green animate-pulse"></span>
-          Available for new projects
+        <div class="flex items-center gap-2 font-mono text-xs text-fg-faint">
+          <Clock :size="14" class="shrink-0 text-primary-green" />
+          Accra, GH &mdash; {{ localTime }}
         </div>
       </div>
 
       <!-- Bio -->
       <p class="mt-6 max-w-xl text-sm leading-relaxed text-fg-subtle sm:text-base">
         Full-stack developer building web, mobile, and ML-driven products.
-        Based in Accra, Ghana &mdash; available worldwide.
+        Based in Accra, Ghana.
       </p>
 
       <!-- Nav echo -->
@@ -79,7 +79,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type Component } from 'vue'
+import { computed, onMounted, onUnmounted, ref, type Component } from 'vue'
+import { Clock } from '@lucide/vue'
 import {
   LogoGithub,
   LogoLinkedin,
@@ -97,6 +98,26 @@ interface SocialLink {
 const emit = defineEmits<{ scrollToSection: [key: string] }>()
 
 const currentYear = computed(() => new Date().getFullYear())
+
+const timeFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Africa/Accra',
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: true,
+})
+
+const localTime = ref(timeFormatter.format(new Date()))
+let timeInterval: ReturnType<typeof setInterval> | undefined
+
+onMounted(() => {
+  timeInterval = setInterval(() => {
+    localTime.value = timeFormatter.format(new Date())
+  }, 30_000)
+})
+
+onUnmounted(() => {
+  clearInterval(timeInterval)
+})
 
 const navigate = (key: string) => emit('scrollToSection', key)
 

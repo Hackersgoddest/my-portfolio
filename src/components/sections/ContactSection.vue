@@ -50,12 +50,6 @@
               <component :is="social.icon" class="h-4 w-4" />
             </a>
           </div>
-
-          <div class="contact-item flex items-center gap-2.5 font-mono text-sm text-fg-muted">
-            <span class="h-2 w-2 rounded-full bg-primary-green animate-pulse"></span>
-            Available for new projects
-          </div>
-          <p class="mt-1.5 font-mono text-xs text-fg-faint">I typically respond within 24 hours</p>
         </div>
       </div>
     </div>
