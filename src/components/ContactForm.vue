@@ -56,8 +56,8 @@
           <Check :size="16" class="text-white" />
         </div>
         <div>
-          <h4 class="font-medium text-emerald-700 dark:text-emerald-400">Message sent successfully!</h4>
-          <p class="text-sm text-emerald-600 dark:text-emerald-300">Thank you for reaching out. I'll get back to you soon.</p>
+          <h4 class="font-medium text-emerald-400">Message sent successfully!</h4>
+          <p class="text-sm text-emerald-300">Thank you for reaching out. I'll get back to you soon.</p>
         </div>
       </div>
 
@@ -67,8 +67,8 @@
           <X :size="16" class="text-white" />
         </div>
         <div>
-          <h4 class="font-medium text-red-700 dark:text-red-400">Something went wrong</h4>
-          <p class="text-sm text-red-600 dark:text-red-300">Please try again or contact me directly.</p>
+          <h4 class="font-medium text-red-400">Something went wrong</h4>
+          <p class="text-sm text-red-300">Please try again or contact me directly.</p>
         </div>
       </div>
 
@@ -143,6 +143,8 @@ const submitForm = async () => {
 
     if (response.ok) {
       showSuccess.value = true
+      // The doorstep scene answers with the next morning.
+      window.dispatchEvent(new CustomEvent('portfolio:message-sent'))
       // Reset form
       form.name = ''
       form.email = ''

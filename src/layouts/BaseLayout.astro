@@ -1,13 +1,25 @@
 ---
 import "../assets/style.css";
 
+interface Props {
+  /** Page title; the home page's when omitted. */
+  title?: string;
+  description?: string;
+  /** Path of this page, for the canonical URL (e.g. "/projects/memora"). */
+  path?: string;
+  /** Absolute URL of the social preview image. */
+  image?: string;
+}
+
 const SITE_URL = "https://frankoppongkonadu.netlify.app/";
-const TITLE = "Frank Oppong Konadu — hackersgoddest";
-const DESCRIPTION =
-  "Frank Oppong Konadu (hackersgoddest) — full-stack & mobile engineer building web, mobile, and ML-driven products with React, Vue, Node, and Go.";
-const SHORT_DESCRIPTION =
-  "Full-stack & mobile engineer building web, mobile, and ML-driven products with React, Vue, Node, and Go.";
-const OG_IMAGE = `${SITE_URL}landing-page.png`;
+const {
+  title: TITLE = "Frank Oppong Konadu — hackersgoddest",
+  description: DESCRIPTION = "Frank Oppong Konadu (hackersgoddest) — full-stack & mobile engineer building web, mobile, and ML-driven products with React, Vue, Node, and Go.",
+  path = "/",
+  image: OG_IMAGE = `${SITE_URL}landing-page.png`,
+} = Astro.props;
+const SHORT_DESCRIPTION = Astro.props.description ?? "Full-stack & mobile engineer building web, mobile, and ML-driven products with React, Vue, Node, and Go.";
+const PAGE_URL = new URL(path, SITE_URL).href;
 
 // Structured data for a Person rich result
 const personSchema = {
@@ -29,30 +41,26 @@ const personSchema = {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
     <link rel="icon" href="/logo.png" />
     <title>{TITLE}</title>
 
-    <!-- Runs before first paint: applies the saved/system theme so there's no
-         dark-to-light flash, and marks <html> with .js so scroll-reveal
+    <!-- Runs before first paint: marks <html> with .js so scroll-reveal
          targets start hidden (see style.css). If the motion script never
          arrives, .js is dropped again so content can't stay invisible. -->
     <script is:inline>
       (() => {
         const root = document.documentElement;
-        let theme = null;
+        let still = false;
         try {
-          theme = localStorage.getItem("portfolio-theme");
+          still = localStorage.getItem("still-mode") === "1";
         } catch {}
-        if (theme !== "light" && theme !== "dark") {
-          theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-        }
-        root.dataset.theme = theme;
-
-        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (still) root.classList.add("still");
+        if (!still && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
           root.classList.add("js");
           setTimeout(() => {
             if (!root.dataset.motion) root.classList.remove("js");
@@ -63,14 +71,14 @@ const personSchema = {
 
     <meta name="description" content={DESCRIPTION} />
     <meta name="author" content="Frank Oppong Konadu" />
-    <link rel="canonical" href={SITE_URL} />
+    <link rel="canonical" href={PAGE_URL} />
 
     <!-- Open Graph / Twitter Card -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Frank Oppong Konadu" />
     <meta property="og:title" content={TITLE} />
     <meta property="og:description" content={SHORT_DESCRIPTION} />
-    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:url" content={PAGE_URL} />
     <meta property="og:image" content={OG_IMAGE} />
     <meta property="og:image:width" content="3570" />
     <meta property="og:image:height" content="2048" />

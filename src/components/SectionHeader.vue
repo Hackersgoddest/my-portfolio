@@ -1,5 +1,5 @@
 <template>
-  <div class="section-header mb-16" :class="center ? 'text-center' : ''">
+  <div class="section-header mb-10 sm:mb-12" :class="center ? 'text-center' : ''">
     <div class="mb-4 flex items-center gap-3" :class="center ? 'justify-center' : ''">
       <span class="font-mono text-sm text-primary-green">{{ index }}.</span>
       <span class="font-mono text-xs uppercase tracking-[0.2em] text-fg-faint">{{ eyebrow }}</span>

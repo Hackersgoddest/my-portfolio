@@ -1,14 +1,18 @@
 <template>
   <section class="py-section">
-    <div class="container-custom">
+    <!-- A letter, written by the lantern on the steps at night. -->
+    <div class="container-custom grid lg:grid-cols-2 lg:gap-12">
+      <div class="hidden lg:block" aria-hidden="true"></div>
+      <div class="letter p-6 sm:p-10">
       <SectionHeader
         index="05"
         eyebrow="Get In Touch"
         title="Let's Work Together"
         description="Ready to bring your ideas to life? Let's connect and discuss how we can create something amazing together."
+        :center="false"
       />
 
-      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-16 lg:grid-cols-2">
+      <div class="grid grid-cols-1 gap-12">
         <!-- Contact Form -->
         <div>
           <ContactForm />
@@ -45,12 +49,13 @@
               rel="noopener noreferrer"
               :aria-label="social.label"
               :title="social.label"
-              class="contact-item flex h-10 w-10 items-center justify-center rounded-lg border border-border/20 dark:border-border/10 text-fg-subtle transition-colors duration-200 hover:border-primary-green/40 hover:text-primary-green"
+              class="contact-item flex h-10 w-10 items-center justify-center rounded-lg border border-border/10 text-fg-subtle transition-colors duration-200 hover:border-primary-green/40 hover:text-primary-green"
             >
               <component :is="social.icon" class="h-4 w-4" />
             </a>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </section>
