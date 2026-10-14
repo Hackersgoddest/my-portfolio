@@ -4,7 +4,7 @@ import { effectiveHour, notifySceneState, onSceneStateChange, PRE_DAWN_HOUR, sce
 import type { FrameRect, Tier } from "../scene/doorstep";
 import projects from "../data/projects";
 import { projectHour } from "../scene/hours";
-import { motionOK, onMotionPreferenceChange } from "../lib/preferences";
+import { isStill, motionOK, onMotionPreferenceChange } from "../lib/preferences";
 
 // Decides between the live 3D doorstep and the pre-rendered stills, then
 // keeps both in step with the scroll-driven hour of the day.
@@ -30,10 +30,17 @@ function showPosterFor(hour: number) {
     const prev = posterHours[i - 1] ?? -Infinity;
     const next = posterHours[i + 1] ?? Infinity;
     const at = posterHours[i];
+    // Each still holds, and hands over to the next in a short fade around
+    // the midpoint - a long crossfade between two different camera shots
+    // just looks like a double exposure.
+    const handover = (from: number, to: number) => {
+      const t = (h - from) / (to - from);
+      return Math.min(1, Math.max(0, (t - 0.4) / 0.2));
+    };
     let opacity = 0;
     if (h === at) opacity = 1;
-    else if (h > prev && h < at) opacity = (h - prev) / (at - prev);
-    else if (h > at && h < next) opacity = 1 - (h - at) / (next - at);
+    else if (h > prev && h < at) opacity = handover(prev, at);
+    else if (h > at && h < next) opacity = 1 - handover(at, next);
     if (opacity > 0 && !img.getAttribute("src")) {
       const portrait = matchMedia("(orientation: portrait)").matches;
       img.src = (portrait ? img.dataset.srcPortrait : img.dataset.srcLandscape) ?? "";
@@ -58,31 +65,38 @@ onSceneStateChange(() => showPosterFor(hourForPosters()));
 
 /* Capability check ------------------------------------------------------- */
 
+/** Says in the console why the stills were chosen (handy when testing). */
+const stills = (reason: string) => {
+  console.info(`[doorstep] showing the stills: ${reason}`);
+  return null;
+};
+
 function chooseTier(): Tier | null {
   if (posterMode) return "high";
   // Manual override for testing: ?scene=live or ?scene=still.
   const forced = params.get("scene");
   if (forced === "live") return "mid";
-  if (forced === "still") return null;
+  if (forced === "still") return stills("?scene=still in the address");
   // Reduced motion and Still mode both get the stills, which crossfade.
-  if (!motionOK()) return null;
+  if (isStill()) return stills('Still mode is on (the footer button reads "Motion off")');
+  if (!motionOK()) return stills("the system asks for reduced motion");
 
   const nav = navigator as Navigator & {
     connection?: { saveData?: boolean; effectiveType?: string };
     deviceMemory?: number;
   };
-  if (nav.connection?.saveData) return null;
-  if (/2g|3g/.test(nav.connection?.effectiveType ?? "")) return null;
+  if (nav.connection?.saveData) return stills("data saver is on");
+  if (/2g|3g/.test(nav.connection?.effectiveType ?? "")) return stills("slow connection");
   const memory = nav.deviceMemory ?? 4;
   const cores = nav.hardwareConcurrency ?? 4;
-  if (memory <= 2 || cores <= 2) return null;
+  if (memory <= 2 || cores <= 2) return stills("low-memory device");
 
   const probe = document.createElement("canvas").getContext("webgl2");
-  if (!probe) return null;
+  if (!probe) return stills("WebGL 2 isn't available");
   const info = probe.getExtension("WEBGL_debug_renderer_info");
   const gpu = info ? String(probe.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "";
   probe.getExtension("WEBGL_lose_context")?.loseContext();
-  if (/swiftshader|llvmpipe|software|basic render/i.test(gpu)) return null;
+  if (/swiftshader|llvmpipe|software|basic render/i.test(gpu)) return stills(`no graphics acceleration (${gpu})`);
 
   const mobile = matchMedia("(pointer: coarse)").matches;
   if (mobile) return memory >= 6 && cores >= 8 ? "mid" : "low";
@@ -105,7 +119,15 @@ let starting = false;
 async function startLive(tier: Tier) {
   if (!canvas || !layer || live || starting) return;
   starting = true;
-  const { startDoorstep } = await import("../scene/doorstep");
+  let startDoorstep: typeof import("../scene/doorstep").startDoorstep;
+  try {
+    ({ startDoorstep } = await import("../scene/doorstep"));
+  } catch (error) {
+    starting = false;
+    console.warn("[doorstep] couldn't load the 3D, keeping the stills", error);
+    usePosters();
+    return;
+  }
   starting = false;
   if (!posterMode && !motionOK()) return; // Still mode turned on meanwhile
   const scene = startDoorstep(canvas, {

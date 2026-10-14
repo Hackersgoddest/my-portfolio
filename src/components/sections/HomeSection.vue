@@ -13,7 +13,7 @@
         <div class="relative">
           <h1
             class="hero-name relative mb-4 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] text-fg"
-            aria-label="Frank Oppong Konadu"
+            aria-label="Frank Konadu Oppong"
           >
             <span
               class="name-grain"
@@ -87,7 +87,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { Download } from "@lucide/vue";
 import AppButton from "../AppButton.vue";
 
-const FULL_NAME = "Frank Oppong Konadu";
+const FULL_NAME = "Frank Konadu Oppong";
 const nameChars = FULL_NAME.split("");
 
 const baseDelay = 500;
