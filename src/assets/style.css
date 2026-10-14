@@ -1,17 +1,8 @@
 @import "tailwindcss";
 
-/* Escape hatch for one-off semantic-status colors (success/error text etc.)
-   that don't fit the surface/fg/border token model - ties Tailwind's dark:
-   variant to our manual [data-theme] toggle instead of prefers-color-scheme. */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
-/* Tailwind v4 CSS-first theme: design tokens that need to generate utilities
-   (bg-*, text-*, border-*, and the xs/sm/... responsive variants).
-
-   Semantic surface/fg/border tokens resolve through plain CSS variables
-   (defined below, swapped per theme) rather than fixed hex values, so a
-   single set of Tailwind utilities (bg-surface, text-fg, border-border...)
-   works in both light and dark mode without a `dark:` variant on every class. */
+/* Tailwind v4 CSS-first theme: design tokens that generate utilities
+   (bg-*, text-*, border-*, and the xs/sm/... responsive variants). Surface
+   and text colours resolve through the CSS variables defined below. */
 @theme {
   --breakpoint-xs: 480px;
   --breakpoint-sm: 640px;
@@ -44,7 +35,7 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* Theme tokens - dark is the default/brand look, .light overrides it */
+/* Colour tokens (the site is dark only, to sit with the doorstep scene) */
 :root {
   --surface: #0f0f23;
   --surface-elevated: #1a1a2e;
@@ -73,20 +64,34 @@
   --transition-gentle: all 0.25s ease;
 }
 
-:root[data-theme="light"] {
-  --surface: #f6f5f1;
-  --surface-elevated: #ffffff;
-  --fg: #14141f;
-  --fg-muted: #44454f;
-  --fg-subtle: #64646f;
-  --fg-faint: #8a8a94;
-  --border: #14141f;
-  --texture-dot: rgba(16, 185, 129, 0.14);
-}
-
 /* Base styles */
 * {
   box-sizing: border-box;
+}
+
+/* Thin, dark scrollbars everywhere (page, palette, modal) instead of the
+   browser's light default. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary-green) 35%, transparent) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--primary-green) 35%, transparent);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--primary-green) 60%, transparent);
 }
 
 html {
@@ -160,7 +165,7 @@ body {
   }
 }
 
-/* Accessibility */
+/* Accessibility: the OS setting and the site's own Still mode do the same. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -169,6 +174,14 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+html.still *,
+html.still *::before,
+html.still *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
 }
 
 .skill-item {
@@ -282,6 +295,779 @@ body {
   .short-screen\:sm\:pt-32 {
     padding-top: 6rem !important;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* The doorstep: a fixed scene behind the page                         */
+/* ------------------------------------------------------------------ */
+
+html {
+  /* Keeps the layout still when scrolling is frozen (eyes closed). */
+  scrollbar-gutter: stable;
+  /* Native anchor jumps (no JS) land below the nav bar. */
+  scroll-padding-top: 5rem;
+}
+
+/* The blink: a long trip fades to dark, jumps, and fades back. */
+.blink {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: #05060a;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+html.blinking .blink {
+  opacity: 1;
+}
+
+/* Headings receive focus on arrival; show where you are without a box. */
+h1[tabindex="-1"]:focus,
+h2[tabindex="-1"]:focus,
+h3[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.scene-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: #0b0d18;
+  pointer-events: none;
+}
+
+.scene-layer img,
+.scene-layer canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scene-layer img {
+  opacity: 0;
+  transition: opacity 0.6s linear;
+}
+
+/* The opening still shows until the live scene (or the fallback) takes over. */
+.scene-layer picture img {
+  opacity: 1;
+}
+
+.scene-layer canvas {
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+.scene-layer.is-live canvas {
+  opacity: 1;
+}
+
+/* Content floats over the house as glass: dark enough to read on, clear
+   enough to keep the scene present behind it. */
+.glass-panel {
+  position: relative;
+  border-radius: 1.25rem;
+  border: 1px solid rgb(255 255 255 / 0.07);
+  background: color-mix(in srgb, var(--surface) 64%, transparent);
+  backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.7);
+  transition: background-color 3s ease;
+}
+
+/* Live blur over a repainting WebGL canvas roughly doubles GPU frame time on
+   budget Android (measured: Galaxy A15, 7 panels, p95 11.2 -> 22.3 ms), so
+   phones get solid tints and only desktop chrome keeps a small blur. */
+@media (pointer: fine) and (min-width: 769px) {
+  .chrome-blur {
+    background-color: color-mix(in srgb, var(--surface) 78%, transparent);
+    backdrop-filter: blur(12px);
+  }
+}
+
+@media (pointer: coarse), (max-width: 768px) {
+  .glass-panel {
+    backdrop-filter: none;
+    background: color-mix(in srgb, var(--surface) 86%, transparent);
+  }
+}
+
+/* With the live scene the frosting happens in WebGL (reading mode blurs and
+   dims the scene behind the text), so the panels drop backdrop-filter and
+   are just tinted glass. Project cards sit over a sharp scene (the pictures
+   must stay crisp), so they get a firmer tint. */
+html.scene-live .glass-panel {
+  backdrop-filter: none;
+  background: color-mix(in srgb, var(--surface) 58%, transparent);
+}
+
+html.scene-live .project-row .glass-panel {
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+}
+
+/* Services: hand-painted signboards. Paint laid over a real wood photo
+   (the grain shows through), letters painted with a flat drop shadow the
+   way sign painters do it, two nails each, hung a little askew. Red, gold
+   and green - a quiet nod to the flag. */
+.signboards {
+  display: grid;
+  gap: 1.75rem;
+  perspective: 1100px;
+}
+
+.signboard {
+  --paint: #a8231b;
+  --ink: #f7d46a;
+  --text: #fbeed3;
+  rotate: -1.2deg;
+}
+
+/* In a row, the middle sign hangs a little lower - nailed up by hand. */
+@media (min-width: 1024px) {
+  .signboard--1 {
+    margin-top: 2.25rem;
+  }
+
+  .signboard--2 {
+    margin-top: 0.75rem;
+  }
+}
+
+.signboard--1 {
+  --paint: #f2c443;
+  --ink: #1f1405;
+  --text: #24190a;
+  rotate: 0.9deg;
+}
+
+/* Gold is a light paint: the grain shows more softly under it (otherwise the
+   wood turns it brown and the dark lettering sinks), and its letters get a
+   light painted edge instead of a dark one. */
+.signboard--1 .signboard__board {
+  background:
+    linear-gradient(rgb(242 196 67 / 0.55), rgb(242 196 67 / 0.55)),
+    linear-gradient(var(--paint), var(--paint)),
+    url("/scene/textures/door_diff.webp") center / 560px auto;
+  background-blend-mode: normal, soft-light;
+}
+
+.signboard--1 .signboard__title {
+  text-shadow: 1px 1px 0 rgb(255 245 210 / 0.45);
+}
+
+.signboard--2 {
+  --paint: #1d6340;
+  --ink: #f6eccf;
+  --text: #e9e3cb;
+  rotate: -0.5deg;
+}
+
+.signboard__board {
+  position: relative;
+  padding: 1.4rem 1.6rem 1.3rem;
+  border-radius: 3px;
+  background:
+    linear-gradient(var(--paint), var(--paint)),
+    url("/scene/textures/door_diff.webp") center / 560px auto;
+  background-blend-mode: overlay;
+  box-shadow:
+    inset 0 0 0 3px rgb(0 0 0 / 0.22),
+    inset 0 0 40px rgb(0 0 0 / 0.35),
+    0 22px 34px -14px rgb(0 0 0 / 0.85);
+  color: var(--text);
+  transform-origin: 0% 50%;
+}
+
+/* Sun-faded, chipped edges. */
+.signboard__board::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse 40% 30% at 92% 12%, rgb(255 255 255 / 0.12), transparent 70%),
+    radial-gradient(ellipse 30% 25% at 6% 88%, rgb(0 0 0 / 0.22), transparent 70%);
+  pointer-events: none;
+}
+
+.signboard__nail {
+  position: absolute;
+  top: 0.7rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #e8e4dc, #6d6a64 55%, #2e2c29);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.6);
+}
+
+.signboard__nail--left {
+  left: 0.7rem;
+}
+
+.signboard__nail--right {
+  right: 0.7rem;
+}
+
+.signboard__number {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.signboard__title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.35rem 0 0.55rem;
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-shadow: 2px 2px 0 rgb(0 0 0 / 0.35);
+}
+
+.signboard__text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.signboard__tools {
+  margin-top: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* Footer: a brass nameplate by the door, catching the lantern. The letters
+   are engraved (dark, with a light lip below); a highlight follows the
+   pointer across the metal (see initTilt in scripts/motion.ts). */
+.nameplate {
+  position: relative;
+  width: min(34rem, 100%);
+  padding: 1.8rem 2rem 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  background: linear-gradient(135deg, #8c6524 0%, #d9b55e 22%, #a27a31 46%, #e3c477 70%, #8a6324 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 240 200 / 0.6),
+    inset 0 -2px 5px rgb(60 35 5 / 0.45),
+    inset 0 0 0 1px rgb(70 45 10 / 0.5),
+    0 0 90px -20px rgb(255 170 80 / 0.45),
+    0 26px 40px -16px rgb(0 0 0 / 0.85);
+  color: #3a2808;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nameplate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--sx, 30%) var(--sy, 25%), rgb(255 248 225 / 0.55), transparent 42%);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  transition: background-position 0.3s ease;
+}
+
+.nameplate__screw {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background:
+    linear-gradient(45deg, transparent 44%, rgb(60 40 10 / 0.7) 46% 54%, transparent 56%),
+    radial-gradient(circle at 35% 30%, #f3dc9c, #9b7432 60%, #5c4114);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 0.5);
+}
+
+.nameplate__screw:nth-child(1) {
+  top: 9px;
+  left: 9px;
+}
+
+.nameplate__screw:nth-child(2) {
+  top: 9px;
+  right: 9px;
+}
+
+.nameplate__screw:nth-child(3) {
+  bottom: 9px;
+  left: 9px;
+}
+
+.nameplate__screw:nth-child(4) {
+  bottom: 9px;
+  right: 9px;
+}
+
+.nameplate__name,
+.nameplate__line {
+  /* Engraved: cut into the brass. */
+  text-shadow:
+    0 1px 0 rgb(255 236 185 / 0.6),
+    0 -1px 0 rgb(50 30 5 / 0.35);
+}
+
+.nameplate__name {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(1.25rem, 4vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #2f2006;
+}
+
+.nameplate__line {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: #3d2a0a;
+}
+
+.nameplate__line--small {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+/* An engraved line across the plate. */
+.nameplate__rule {
+  margin: 1.1rem auto 1rem;
+  width: 70%;
+  height: 2px;
+  border: 0;
+  background: linear-gradient(rgb(60 38 8 / 0.45), rgb(255 236 185 / 0.55));
+}
+
+.nameplate__contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.nameplate__contact a,
+.nameplate__controls :is(a, button) {
+  color: #2f2006;
+  text-shadow:
+    0 1px 0 rgb(255 236 185 / 0.6),
+    0 -1px 0 rgb(50 30 5 / 0.3);
+  text-decoration: underline transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.nameplate__contact a:hover,
+.nameplate__controls :is(a, button):hover {
+  text-decoration-color: currentColor;
+}
+
+.nameplate__row {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem 1.2rem;
+}
+
+/* Stamped brass studs for the socials. */
+.nameplate__stud {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  color: #33240a;
+  background: radial-gradient(circle at 35% 30%, #f1d78f, #b48a3c 60%, #7d5a1f);
+  box-shadow:
+    inset 0 1px 0 rgb(255 245 210 / 0.7),
+    inset 0 -2px 3px rgb(60 35 5 / 0.45),
+    0 2px 3px rgb(0 0 0 / 0.35);
+  transition: transform 0.2s ease;
+}
+
+.nameplate__stud:hover {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 2px 4px rgb(60 35 5 / 0.5),
+    0 1px 1px rgb(0 0 0 / 0.3);
+}
+
+.nameplate__controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.nameplate__controls a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+@media (max-width: 479px) {
+  .nameplate {
+    padding: 1.6rem 1.25rem 1.3rem;
+  }
+
+  .nameplate__row {
+    justify-content: center;
+  }
+}
+
+.nameplate :focus-visible {
+  outline: 2px solid #2f2006;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signboard,
+  .signboard--1,
+  .signboard--2 {
+    rotate: none;
+  }
+}
+
+/* Skills: a school slate in a wooden frame. Chalk-white text on dark green,
+   with the faint clouds of old, wiped-off lessons. */
+.slate {
+  position: relative;
+  border-radius: 6px;
+  border: 12px solid;
+  border-color: #6b4a2f #58391f #4a3019 #5e3f24;
+  background:
+    radial-gradient(ellipse 60% 40% at 28% 22%, rgb(255 255 255 / 0.05), transparent 70%),
+    radial-gradient(ellipse 50% 35% at 72% 78%, rgb(255 255 255 / 0.04), transparent 70%),
+    radial-gradient(ellipse 30% 20% at 80% 30%, rgb(255 255 255 / 0.025), transparent 70%),
+    #1c2a22;
+  box-shadow:
+    inset 0 0 70px rgb(0 0 0 / 0.5),
+    0 40px 80px -40px rgb(0 0 0 / 0.85);
+  --color-fg: #eef0e6;
+  --color-fg-muted: #d9ddd0;
+  --color-fg-subtle: #b7bdae;
+  --color-fg-faint: #8e9587;
+  --color-border: #eef0e6;
+}
+
+.slate :where(h2, h3, p, span, div) {
+  text-shadow: 0 0 1px rgb(255 255 255 / 0.25); /* a little chalk bloom */
+}
+
+/* The ledge with a stick of chalk. */
+.slate::after {
+  content: "";
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: -22px;
+  height: 8px;
+  border-radius: 2px;
+  background:
+    linear-gradient(90deg, transparent 62%, #f4f1e6 62% 69%, transparent 69%),
+    #5a3c22;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.5);
+}
+
+/* Contact: a letter on warm paper, lit by the lantern. Ink-dark text, ruled
+   lines for the fields, and it sits a touch askew, put down by hand. */
+.letter {
+  position: relative;
+  rotate: -0.6deg;
+  border-radius: 4px;
+  background:
+    radial-gradient(ellipse 120% 90% at 20% 10%, rgb(255 236 200 / 0.55), transparent 60%),
+    #ece2cc;
+  box-shadow:
+    0 40px 80px -30px rgb(0 0 0 / 0.85),
+    0 0 140px -30px rgb(255 160 70 / 0.35),
+    inset 0 0 50px rgb(120 80 30 / 0.18);
+  --color-fg: #2a2016;
+  --color-fg-muted: #3f3427;
+  --color-fg-subtle: #54473a;
+  --color-fg-faint: #75685a;
+  --color-border: #2a2016;
+  --color-surface: #ece2cc;
+  --color-primary-green: #0b6b4c;
+  --color-primary-green-400: #0f7f5a;
+}
+
+.letter :is(input, textarea) {
+  color: var(--color-fg);
+}
+
+.letter button[type="submit"] {
+  color: #fff;
+  box-shadow: none;
+}
+
+/* Askew only where there's room: on narrower screens it would poke past
+   the edge. */
+@media (prefers-reduced-motion: reduce), (max-width: 1023px) {
+  .letter {
+    rotate: none;
+  }
+}
+
+/* The palette sits a little down from the top and never runs off a short
+   screen (a phone held sideways): its list scrolls instead. */
+.palette-box {
+  top: clamp(1rem, 10vh, 6rem);
+  display: flex;
+  flex-direction: column;
+  max-height: min(32rem, calc(100dvh - 2 * clamp(1rem, 10vh, 6rem)));
+}
+
+/* Phones and short screens: the eyes button is just the eyes, so it never
+   sits over buttons or text (its name is still read out). */
+@media (max-width: 639px), (max-height: 500px) {
+  .eyes-button {
+    left: 1rem;
+    bottom: 1rem;
+    width: 2.75rem;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .eyes-button__label {
+    display: none;
+  }
+}
+
+/* A phone held sideways: the hero has to fit a short screen. */
+@media (max-height: 500px) and (orientation: landscape) {
+  #home {
+    padding-top: 5rem;
+    min-height: auto;
+    padding-bottom: 3rem;
+  }
+
+  #home .hero-name {
+    font-size: 2.5rem;
+  }
+}
+
+/* Dialogs (command palette, project details) are glass too, and open by
+   tilting up toward the viewer. Tailwind's translate utilities use the
+   separate CSS translate property, so this transform doesn't fight them. */
+.glass-dialog {
+  border: 1px solid rgb(255 255 255 / 0.08);
+  background: color-mix(in srgb, var(--surface-elevated) 97%, transparent);
+  transform-origin: 50% 0%;
+}
+
+.glass-dialog__header {
+  background: var(--surface-elevated);
+}
+
+.glass-dialog[data-state="open"] {
+  animation: dialog-tilt-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* The project sheet and the palette grow out of where they came from (in
+   JS). Closing has no animation to wait for, so dismissing never depends
+   on the frame rate. */
+.glass-dialog--flip[data-state="open"],
+.glass-dialog--flip[data-state="closed"] {
+  animation: none;
+  transform-origin: 50% 50%;
+}
+
+.glass-dialog[data-state="closed"] {
+  animation: dialog-tilt-in 0.2s ease-in reverse;
+}
+
+@keyframes dialog-tilt-in {
+  from {
+    opacity: 0;
+    transform: perspective(1100px) rotateX(16deg) translateZ(-60px) scale(0.97);
+  }
+}
+
+/* With the live scene on a wide screen, each project's picture is the framed
+   photo on the wall: the in-page image steps aside for it. */
+@media (min-width: 1024px) {
+  html.scene-live .project-slot {
+    display: none;
+  }
+}
+
+/* A real button laid over the picture on the wall (positioned from 3D). */
+.frame-hotspot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 20;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  background: transparent;
+  transition: box-shadow 0.3s ease;
+}
+
+.frame-hotspot.is-shown {
+  display: flex;
+}
+
+html.project-open .frame-hotspot,
+html.eyes-closed .frame-hotspot {
+  display: none;
+}
+
+.frame-hotspot:hover {
+  box-shadow: 0 0 0 2px color-mix(in srgb, #fcd34d 45%, transparent);
+}
+
+.frame-hotspot__pill {
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.78);
+  padding: 0.35rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.frame-hotspot:hover .frame-hotspot__pill {
+  opacity: 1;
+  transform: none;
+}
+
+.pillow {
+  height: 78vh;
+  min-height: 26rem;
+}
+
+/* Text that sits straight on the scene (hero, services, end credits): no
+   box behind it. A soft shadow that follows each letter's shape separates it
+   from whatever the camera is looking at. */
+.on-scene {
+  text-shadow:
+    0 1px 2px rgb(0 0 0 / 0.75),
+    0 0 18px rgb(0 0 0 / 0.6),
+    0 0 42px rgb(0 0 0 / 0.45);
+}
+
+.on-scene :where(svg) {
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.7));
+}
+
+/* "Close your eyes": the page fades away while the button is held. */
+.page-ui {
+  transition: opacity 0.9s ease;
+}
+
+html.project-open .page-ui {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+html.eyes-closed .page-ui {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.6s ease;
+}
+
+.eyes-button {
+  position: fixed;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 2.75rem;
+  padding: 0 0.8rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 18%, transparent);
+  background: color-mix(in srgb, var(--surface-elevated) 94%, transparent);
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: none;
+  transition:
+    opacity 0.6s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.eyes-button:hover,
+.eyes-button:focus-visible {
+  color: var(--fg);
+  border-color: color-mix(in srgb, var(--primary-green) 45%, transparent);
+}
+
+.eyes-button__label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition:
+    max-width 0.4s ease,
+    opacity 0.3s ease;
+}
+
+.eyes-button--hint .eyes-button__label,
+.eyes-button:hover .eyes-button__label,
+.eyes-button:focus-visible .eyes-button__label {
+  max-width: 14rem;
+  opacity: 1;
+}
+
+html.eyes-closed .eyes-button {
+  opacity: 0.3;
+}
+
+html.eyes-closed .eyes-button__label {
+  max-width: 0;
+  opacity: 0;
+}
+
+/* A quick tap shows the hint and lets the button glow once - an invitation
+   to hold, rather than a shake that reads as an error. */
+.eyes-button--nudge {
+  animation: eyes-glow 1.1s ease-out;
+}
+
+@keyframes eyes-glow {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary-green) 45%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 14px color-mix(in srgb, var(--primary-green) 0%, transparent);
+  }
+}
+
+/* Used only when rendering the stills: the scene alone, no page. */
+html.scene-poster-mode .page-ui,
+html.scene-poster-mode .eyes-button {
+  display: none;
 }
 
 /* Section vertical rhythm */

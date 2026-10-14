@@ -1,47 +1,35 @@
 <template>
   <section class="py-section">
+    <!-- Over the father's corner: the work, on hand-painted wooden signboards
+         like the ones on every roadside workshop in Ghana - nailed up and
+         hanging a little askew, paint over real wood grain. -->
     <div class="container-custom">
-      <SectionHeader
-        index="02"
-        eyebrow="What I Do"
-        title="Services"
-        description="Comprehensive solutions from web applications to mobile apps and desktop software"
-      />
+      <div class="on-scene max-w-2xl">
+        <SectionHeader
+          index="02"
+          eyebrow="What I Do"
+          title="Services"
+          description="Comprehensive solutions from web applications to mobile apps and desktop software"
+          :center="false"
+        />
+      </div>
 
-      <!-- Services -->
-      <div class="border-t border-border/20 dark:border-border/10">
-        <div
-          v-for="(service, i) in services"
-          :key="service.title"
-          class="service-row group -mx-2 grid grid-cols-1 gap-4 border-b border-border/20 dark:border-border/10 px-2 py-8 transition-colors duration-300 hover:bg-fg/2 sm:-mx-4 sm:grid-cols-[3rem_1fr_auto] sm:items-start sm:gap-8 sm:px-4"
-        >
-          <span
-            class="font-mono text-sm text-fg-faint transition-colors duration-300 group-hover:text-primary-green"
-          >
-            {{ String(i + 1).padStart(2, "0") }}
-          </span>
-
-          <div>
-            <h3 class="mb-2 flex items-center gap-3 text-xl font-bold text-fg sm:text-2xl">
-              <component :is="service.icon" :size="20" class="text-primary-green" />
+      <!-- Side by side on wide screens, like signs nailed along a wall. -->
+      <ol class="signboards lg:grid-cols-3 lg:items-start lg:gap-8">
+        <li v-for="(service, i) in services" :key="service.title" class="service-row signboard" :class="`signboard--${i}`">
+          <div class="signboard__board">
+            <span class="signboard__nail signboard__nail--left" aria-hidden="true"></span>
+            <span class="signboard__nail signboard__nail--right" aria-hidden="true"></span>
+            <p class="signboard__number" aria-hidden="true">No. {{ i + 1 }}</p>
+            <h3 class="signboard__title">
+              <component :is="service.icon" :size="22" aria-hidden="true" />
               {{ service.title }}
             </h3>
-            <p class="max-w-xl text-sm leading-relaxed text-fg-subtle sm:text-base">
-              {{ service.description }}
-            </p>
+            <p class="signboard__text">{{ service.description }}</p>
+            <p class="signboard__tools">{{ service.tools.join("  ·  ") }}</p>
           </div>
-
-          <div class="flex flex-wrap gap-2 sm:max-w-56 sm:justify-end">
-            <span
-              v-for="tool in service.tools"
-              :key="tool"
-              class="rounded border border-border/20 dark:border-border/10 px-2 py-1 font-mono text-xs text-fg-faint"
-            >
-              {{ tool }}
-            </span>
-          </div>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
   </section>
 </template>

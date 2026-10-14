@@ -3,8 +3,8 @@
     :is="tag"
     :type="tag === 'button' ? type : undefined"
     :href="href"
-    :target="href ? '_blank' : undefined"
-    :rel="href ? 'noopener noreferrer' : undefined"
+    :target="external ? '_blank' : undefined"
+    :rel="external ? 'noopener noreferrer' : undefined"
     :disabled="tag === 'button' ? disabled : undefined"
     :class="[
       'inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-mono text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:shadow-none sm:px-8 sm:py-3.5 sm:text-base',
@@ -21,7 +21,9 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(
+import { computed } from "vue";
+
+const props = withDefaults(
   defineProps<{
     tag?: "button" | "a";
     href?: string;
@@ -39,4 +41,7 @@ withDefaults(
     block: false,
   }
 );
+
+// In-page links (#portfolio) travel; only links off the site open a new tab.
+const external = computed(() => !!props.href && /^https?:/.test(props.href));
 </script>
