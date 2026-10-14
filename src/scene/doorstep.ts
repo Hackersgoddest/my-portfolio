@@ -53,7 +53,7 @@ import {
   taxiKeys,
   tinTowers,
 } from "./props";
-import { effectiveHour, onSceneStateChange, PRE_DAWN_HOUR, sceneState } from "./state";
+import { effectiveHour, NEXT_DAWN_HOUR, onSceneStateChange, PRE_DAWN_HOUR, sceneState } from "./state";
 import { blobShadowTexture, colorTexture, fbm } from "./textures";
 import { weather } from "./weathering";
 import { HOURS, projectHour } from "./hours";
@@ -433,16 +433,20 @@ interface Shot {
       for the page's content; portrait screens centre on it. */
   focus: Vector3;
   fov: number;
+  /** Portrait screens step back from the subject to fit it; some shots
+      only widen instead (looking out, the wall is right behind them). */
+  stepBack: boolean;
 }
 
 type V3 = [number, number, number];
 
-const shot = (hour: number, position: V3, target: V3, fov: number, focus: V3 = target): Shot => ({
+const shot = (hour: number, position: V3, target: V3, fov: number, focus: V3 = target, stepBack = true): Shot => ({
   hour,
   position: new Vector3(...position),
   target: new Vector3(...target),
   focus: new Vector3(...focus),
   fov,
+  stepBack,
 });
 
 /** x position of project i's frame along the veranda's back wall. */
@@ -468,11 +472,19 @@ const SHOTS: Shot[] = [
   shot(HOURS.hero, [-0.3, 0.6, 2.7], [-0.22, 0.3, 0], 50, [0.45, 0.35, 0.5]),
   shot(HOURS.sunrise, [0.45, 1.35, 5.4], [0.45, 0.75, 0.3], 46), // first light, the whole doorstep
   shot(HOURS.services, [0.2, 0.9, 2.3], [-0.35, 0.42, 0.35], 42, [-0.85, 0.38, 0.35]), // the father's corner
-  shot(HOURS.skills, [-2.3, 1.35, 2.9], [-2.25, 0.2, 0.4], 40, [-3.05, 0.15, 0.4]), // five pairs and a gap
+  // Low, the empty place in the middle of the row. (Portrait screens don't
+  // step back here: the shoes would shrink to nothing.)
+  shot(HOURS.shoes, [-3.0, 0.68, 2.3], [-3.02, 0.13, 0.3], 31, undefined, false), // five pairs and a gap
+  shot(HOURS.skills, [-2.3, 1.35, 2.9], [-2.25, 0.2, 0.4], 40, [-3.05, 0.15, 0.4]), // the blackboard over them
   ...projectShots, // the pictures on the wall
   shot(HOURS.dusk, [1.7, 1.15, 3.2], [2.45, 0.62, 0.55], 42), // the mother's oven and tins
   shot(HOURS.contact, [1.35, 1.1, 4.4], [1.4, 0.62, 0.4], 40, [0.6, 0.5, 0.4]), // by the lantern
-  shot(30.6, [0.45, 1.0, 0.42], [0.32, -1.25, 5.8], 60), // the next morning: past his shoes, the road
+  // Looking out past his shoes, down the road: in the last of the night at
+  // the end of the page, and in full morning after someone writes.
+  // (Portrait looks a little less steeply down: his shoes sit lower, below
+  // the footer's nameplate.)
+  shot(HOURS.firstLight, [0.45, 1.02, 0.4], [0.34, -1.2, 5.8], 62, [0.34, -0.92, 5.8], false),
+  shot(NEXT_DAWN_HOUR, [0.45, 1.0, 0.42], [0.32, -1.25, 5.8], 60, undefined, false),
 ];
 
 // Eyes closed: down by the father's boots and the mother's sandals.
@@ -487,7 +499,7 @@ function fitShot(source: Shot, portrait: boolean, outPosition: Vector3, outTarge
   }
   outPosition.add(source.focus).sub(source.target); // slide over to face the subject
   outTarget.copy(source.focus);
-  outPosition.sub(outTarget).multiplyScalar(1.35).add(outTarget);
+  if (source.stepBack) outPosition.sub(outTarget).multiplyScalar(1.35).add(outTarget);
   return source.fov + 12;
 }
 

@@ -6,10 +6,15 @@ export const HOURS = {
   hero: 4.6, // before dawn: the oven is lit
   sunrise: 6.2, // first light over the doorstep
   services: 7.0, // the father's corner
-  skills: 12.5, // the school shoes
+  shoes: 12.1, // a pause on the school shoes, and the empty place
+  skills: 12.5, // the blackboard over the shoes
   dusk: 17.5, // the mother's corner
   contact: 20.6, // by the lantern
-  footer: 21,
+  // The page ends as the night does: first light, the lantern still lit,
+  // the oven already going, the road out just visible. The full morning
+  // comes only after someone writes (NEXT_DAWN_HOUR).
+  firstLight: 29.25, // 5:15 the next day
+
 } as const;
 
 // Projects hang on the veranda wall; the camera walks past them one by one

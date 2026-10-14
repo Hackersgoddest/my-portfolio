@@ -49,10 +49,8 @@ function showPosterFor(hour: number) {
   });
 }
 
-const hourForPosters = () => {
-  const hour = effectiveHour();
-  return hour >= 24 ? hour - 24 : hour;
-};
+// The stills run past midnight too (first light, the next morning).
+const hourForPosters = () => effectiveHour();
 
 function usePosters() {
   livePosters = true;

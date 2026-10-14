@@ -8,15 +8,19 @@ import SkillsSection from "../components/sections/SkillsSection.vue";
 import PortfolioSection from "../components/sections/PortfolioSection.vue";
 import ContactSection from "../components/sections/ContactSection.vue";
 import { HOURS } from "../scene/hours";
+import { NEXT_DAWN_HOUR } from "../scene/state";
 
 // Stills of the doorstep at each hour the page pauses on. The first is the
 // page's opening image; the rest load only if the live 3D can't run.
 const posters = [
   { hour: HOURS.hero, name: "predawn" },
   { hour: HOURS.services, name: "morning" },
+  { hour: HOURS.shoes, name: "shoes" },
   { hour: HOURS.skills, name: "noon" },
   { hour: HOURS.dusk, name: "dusk" },
   { hour: HOURS.contact, name: "night" },
+  { hour: HOURS.firstLight, name: "first-light" },
+  { hour: NEXT_DAWN_HOUR, name: "next-morning" },
 ];
 const poster = (name: string, orientation: string) => `/scene/posters/${name}-${orientation}.webp`;
 const [first, ...rest] = posters;
@@ -69,6 +73,7 @@ const [first, ...rest] = posters;
     <HomeSection id="home" class="on-scene" data-hour={HOURS.hero} data-scene-window client:load />
     <div class="pillow" data-hour={HOURS.sunrise} data-scene-window></div>
     <ServiceSection id="services" data-hour={HOURS.services} data-reading data-scene-window />
+    <div class="pillow" data-hour={HOURS.shoes} data-scene-window></div>
     <SkillsSection id="skills" data-hour={HOURS.skills} data-reading data-scene-window />
     <PortfolioSection id="portfolio" data-scene-window client:visible={{ rootMargin: "300px" }} />
     <div class="pillow" data-hour={HOURS.dusk} data-scene-window></div>
@@ -79,7 +84,7 @@ const [first, ...rest] = posters;
       data-scene-window
       client:visible={{ rootMargin: "300px" }}
     />
-    <Footer data-hour={HOURS.footer} data-reading="0.6" data-scene-window client:visible />
+    <Footer data-hour={HOURS.firstLight} data-reading="0.35" data-scene-window client:visible />
   </div>
 
   <button type="button" class="eyes-button" aria-pressed="false" aria-label="Close your eyes (hold)">
