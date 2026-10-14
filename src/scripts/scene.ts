@@ -76,7 +76,7 @@ function chooseTier(): Tier | null {
   if (forced === "live") return "mid";
   if (forced === "still") return stills("?scene=still in the address");
   // Reduced motion and Still mode both get the stills, which crossfade.
-  if (isStill()) return stills('Still mode is on (the footer button reads "Motion off")');
+  if (isStill()) return stills('Still mode is on (the Motion switch on the footer nameplate is off)');
   if (!motionOK()) return stills("the system asks for reduced motion");
 
   const nav = navigator as Navigator & {
