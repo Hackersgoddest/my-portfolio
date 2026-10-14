@@ -1,10 +1,12 @@
 <template>
   <!-- The page ends at the door: a brass nameplate catching the lantern's
        light, with everything on it - name, how to reach me, where else to
-       find me. No slab of colour behind it: the night (or, after a message,
-       the morning) is the background. Plain HTML links throughout, so it all
+       find me. No slab of colour behind it: the scene is the background - the
+       night ending in first light (or, after a message, the full morning). Plain HTML links throughout, so it all
        works with no WebGL and no JavaScript. -->
-  <footer class="pt-40 pb-12 sm:pt-56">
+  <!-- Room below the plate: at the very end his shoes stand under it, at
+       the start of the road. -->
+  <footer class="pt-40 pb-44 sm:pt-56 sm:pb-40">
     <div class="container-custom flex flex-col items-center gap-6">
       <!-- After a message is sent, the night ends. -->
       <p role="status" class="on-scene font-mono text-xs text-amber-200 empty:hidden"><template v-if="morning">It's morning now. Thank you for writing - I'll be in touch.</template></p>

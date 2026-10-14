@@ -28,12 +28,15 @@ export function createDayTimeline(onHour: (hour: number, reading: number) => voi
   let reads: Array<{ top: number; bottom: number; strength: number }> = [];
 
   const measure = () => {
+    // The furthest the screen's centre can go: the last marker's hour must
+    // be reachable at the bottom of the page, however short it is.
+    const last = document.documentElement.scrollHeight - window.innerHeight / 2;
     zones = markers.map((el) => {
       const rect = el.getBoundingClientRect();
       const top = rect.top + window.scrollY;
       return {
-        start: top + rect.height * HOLD_BAND,
-        end: top + rect.height * (1 - HOLD_BAND),
+        start: Math.min(top + rect.height * HOLD_BAND, last),
+        end: Math.min(top + rect.height * (1 - HOLD_BAND), last),
         hour: Number(el.dataset.hour),
       };
     });
