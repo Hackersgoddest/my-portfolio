@@ -12,7 +12,7 @@
         </button>
         <div class="flex items-center gap-2 font-mono text-xs text-fg-faint">
           <Clock :size="14" class="shrink-0 text-primary-green" />
-          Accra, GH &mdash; {{ localTime }}
+          Accra, GH &mdash; {{ localTime || "--:--" }}
         </div>
       </div>
 
@@ -71,7 +71,7 @@
 
         <div class="mt-6 flex flex-col items-center justify-between gap-2 font-mono text-xs text-fg-faint sm:flex-row">
           <p>&copy; {{ currentYear }} Frank Oppong Konadu. All rights reserved.</p>
-          <p>Built with Vue.js</p>
+          <p>Built with Astro &amp; Vue</p>
         </div>
       </div>
     </div>
@@ -81,21 +81,18 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, type Component } from 'vue'
 import { Clock } from '@lucide/vue'
-import {
-  LogoGithub,
-  LogoLinkedin,
-  LogoInstagram,
-  LogoXing,
-} from '@vicons/ionicons5'
+import LogoGithub from '~icons/ri/github-fill'
+import LogoLinkedin from '~icons/ri/linkedin-box-fill'
+import LogoInstagram from '~icons/ri/instagram-fill'
+import LogoX from '~icons/ri/twitter-x-fill'
 import sections from '../data/navigation'
+import { scrollToSection } from '../lib/scroll'
 
 interface SocialLink {
   name: string
   url: string
   icon: Component
 }
-
-const emit = defineEmits<{ scrollToSection: [key: string] }>()
 
 const currentYear = computed(() => new Date().getFullYear())
 
@@ -106,10 +103,13 @@ const timeFormatter = new Intl.DateTimeFormat('en-US', {
   hour12: true,
 })
 
-const localTime = ref(timeFormatter.format(new Date()))
+// Empty until mounted: the page is rendered at build time, so any time
+// computed then would be stale (and mismatch on hydration).
+const localTime = ref('')
 let timeInterval: ReturnType<typeof setInterval> | undefined
 
 onMounted(() => {
+  localTime.value = timeFormatter.format(new Date())
   timeInterval = setInterval(() => {
     localTime.value = timeFormatter.format(new Date())
   }, 30_000)
@@ -119,7 +119,7 @@ onUnmounted(() => {
   clearInterval(timeInterval)
 })
 
-const navigate = (key: string) => emit('scrollToSection', key)
+const navigate = (key: string) => scrollToSection(key)
 
 const socialLinks: SocialLink[] = [
   {
@@ -135,7 +135,7 @@ const socialLinks: SocialLink[] = [
   {
     name: 'X',
     url: 'https://x.com/_hackersgoddest',
-    icon: LogoXing
+    icon: LogoX
   },
   {
     name: 'Instagram',

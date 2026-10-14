@@ -61,13 +61,11 @@ import { type Component } from "vue";
 import ContactForm from "../ContactForm.vue";
 import SectionHeader from "../SectionHeader.vue";
 import { Mail, Phone } from "@lucide/vue";
-import {
-  LogoLinkedin,
-  LogoGithub,
-  LogoInstagram,
-  LogoStackoverflow,
-  LogoXing,
-} from "@vicons/ionicons5";
+import LogoLinkedin from "~icons/ri/linkedin-box-fill";
+import LogoGithub from "~icons/ri/github-fill";
+import LogoInstagram from "~icons/ri/instagram-fill";
+import LogoStackoverflow from "~icons/ri/stack-overflow-fill";
+import LogoX from "~icons/ri/twitter-x-fill";
 
 interface SocialOption {
   name: string;
@@ -93,7 +91,7 @@ const socialOptions: SocialOption[] = [
     name: "X",
     label: "X",
     link: "https://x.com/_hackersgoddest",
-    icon: LogoXing
+    icon: LogoX
   },
   {
     name: "Instagram",

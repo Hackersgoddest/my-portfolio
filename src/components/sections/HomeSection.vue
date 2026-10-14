@@ -61,7 +61,7 @@
 
         <!-- CTA Buttons -->
         <div class="hero-buttons flex flex-wrap gap-4">
-          <AppButton variant="primary" @click.passive="$emit('scrollToSection', 'portfolio')">
+          <AppButton variant="primary" @click="scrollToSection('portfolio')">
             View My Work
           </AppButton>
 
@@ -95,8 +95,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { Download } from "@lucide/vue";
 import AppButton from "../AppButton.vue";
-
-defineEmits<{ scrollToSection: [key: string] }>();
+import { scrollToSection } from "../../lib/scroll";
 
 const FULL_NAME = "Frank Oppong Konadu";
 const nameChars = FULL_NAME.split("");

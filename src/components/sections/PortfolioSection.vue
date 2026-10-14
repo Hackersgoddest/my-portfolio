@@ -241,6 +241,7 @@ import { Eye, ExternalLink, ArrowRight, ChevronLeft, ChevronRight, Smartphone, C
 import AppButton from "../AppButton.vue";
 import projects from "../../data/projects";
 import type { Project, ProjectLinkType } from "../../types";
+import { getProjectSummary, parseDescription, type ParsedDescription } from "../../utils/projectDescription";
 
 const LINK_LABELS: Record<ProjectLinkType, string> = {
   site: "Live",
@@ -280,47 +281,6 @@ const nextImage = () => {
   if (!selectedProject.value) return;
   const total = selectedProject.value.images.length;
   currentImageIndex.value = (currentImageIndex.value + 1) % total;
-};
-
-/* SUMMARY */
-const getProjectSummary = (html: string) => {
-  const div = document.createElement("div");
-  div.innerHTML = html;
-  const text = div.querySelector("p")?.textContent ?? "";
-
-  const firstSentence = text.split(".")[0];
-  return firstSentence.length > 120
-    ? text.slice(0, 120) + "..."
-    : firstSentence + ".";
-};
-
-/* MODAL DESCRIPTION - split the raw HTML into an intro paragraph, a list of
-   items, and an optional testimonial quote so the modal can lay each out
-   with its own styling instead of dumping everything through v-html. A
-   testimonial is authored as <blockquote>quote text<cite>attribution</cite></blockquote>. */
-interface ParsedDescription {
-  intro: string;
-  items: string[];
-  quote: { text: string; attribution: string } | null;
-}
-
-const parseDescription = (html: string): ParsedDescription => {
-  const div = document.createElement("div");
-  div.innerHTML = html;
-  const intro = div.querySelector("p")?.textContent?.trim() ?? "";
-  const items = Array.from(div.querySelectorAll("li")).map(
-    (li) => li.textContent?.trim() ?? ""
-  );
-
-  const blockquoteEl = div.querySelector("blockquote");
-  let quote: ParsedDescription["quote"] = null;
-  if (blockquoteEl) {
-    const attribution = blockquoteEl.querySelector("cite")?.textContent?.trim() ?? "";
-    const text = (blockquoteEl.textContent ?? "").replace(attribution, "").trim();
-    quote = { text, attribution };
-  }
-
-  return { intro, items, quote };
 };
 
 const selectedDescription = computed<ParsedDescription>(() =>

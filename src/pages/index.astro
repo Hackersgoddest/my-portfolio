@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MenuBar from "../components/MenuBar.vue";
+import BackToTop from "../components/BackToTop.vue";
+import Footer from "../components/Footer.vue";
+import HomeSection from "../components/sections/HomeSection.vue";
+import ServiceSection from "../components/sections/ServiceSection.vue";
+import SkillsSection from "../components/sections/SkillsSection.vue";
+import PortfolioSection from "../components/sections/PortfolioSection.vue";
+import ContactSection from "../components/sections/ContactSection.vue";
+---
+
+<!-- Every section is rendered to HTML at build time. Only the components with
+     a client:* directive ship JavaScript, and each hydrates when it's needed:
+     the nav and hero right away, the rest as they scroll into view. Services
+     and Skills have no interactivity and ship none at all. -->
+<BaseLayout>
+  <MenuBar class="navbar w-full fixed top-0 z-40" client:load />
+  <BackToTop client:idle />
+  <div class="textured-surface flex w-full min-w-80 flex-col gap-20 bg-surface">
+    <HomeSection id="home" client:load />
+    <ServiceSection id="services" />
+    <SkillsSection id="skills" />
+    <PortfolioSection id="portfolio" client:visible={{ rootMargin: "300px" }} />
+    <ContactSection id="contact" client:visible={{ rootMargin: "300px" }} />
+    <Footer client:visible />
+  </div>
+</BaseLayout>
+
+<script>
+  import "../scripts/motion";
+</script>

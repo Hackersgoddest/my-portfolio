@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @import "tailwindcss";
 
 /* Escape hatch for one-off semantic-status colors (success/error text etc.)
@@ -70,6 +68,7 @@
   --container-padding: 1.5rem;
 
   /* Animations - Subtle and clean */
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-gentle: all 0.25s ease;
 }
@@ -174,6 +173,74 @@ body {
 
 .skill-item {
   position: relative;
+}
+
+/* .js is set on <html> in <head> only when motion is allowed. */
+
+/* Hero + nav entrance: plain CSS so it starts with the first paint instead of
+   waiting for a script download - the hero copy is the page's largest paint. */
+.js .navbar {
+  animation: enter-from-top 1s var(--ease-out-cubic) 0.2s both;
+}
+
+.js .hero-kicker {
+  animation: enter-kicker 0.5s var(--ease-out-cubic) 0.3s both;
+}
+
+.js .hero-name {
+  animation: enter-slide 0.6s var(--ease-out-cubic) 0.6s both;
+}
+
+.js .hero-tagline {
+  animation: enter-fade-slide 0.5s var(--ease-out-cubic) 0.9s both;
+}
+
+.js .hero-description {
+  animation: enter-fade-slide 0.6s var(--ease-out-cubic) 1.1s both;
+}
+
+.js .hero-buttons {
+  animation: enter-rise 0.6s var(--ease-out-cubic) 1.5s both;
+}
+
+@keyframes enter-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}
+
+@keyframes enter-kicker {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes enter-slide {
+  from {
+    transform: translateX(-30px);
+  }
+}
+
+@keyframes enter-fade-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+@keyframes enter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+}
+
+/* Scroll-reveal targets start hidden so the server-rendered markup never
+   paints visible and then snaps to hidden; scripts/motion.ts animates them in. */
+.js :is(.section-header, .service-row, .project-row, .skill-item, .contact-item) {
+  opacity: 0;
 }
 
 /* Short Screen Height Utilities - For mobile/tablet landscape mode */
