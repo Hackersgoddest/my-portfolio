@@ -38,7 +38,12 @@
           </ul>
           <div class="nameplate__controls">
             <a href="#home"><Sunrise :size="13" /> Back to dawn</a>
-            <button type="button" :aria-pressed="still" @click="toggleStill">{{ still ? "Motion off" : "Still mode" }}</button>
+            <!-- A switch, not a label that flips: it always says "Motion", and
+                 the toggle shows whether it's on. -->
+            <button type="button" role="switch" :aria-checked="!still" class="motion-switch" @click="toggleStill">
+              <span class="motion-switch__track" aria-hidden="true"><span class="motion-switch__knob"></span></span>
+              Motion
+            </button>
           </div>
         </div>
       </div>

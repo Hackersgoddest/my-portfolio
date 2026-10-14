@@ -712,6 +712,53 @@ html.scene-live .project-row .glass-panel {
   font-size: 0.72rem;
 }
 
+/* The motion switch: a small slot engraved in the brass, its knob to the
+   right (and lit) while motion is on. */
+.motion-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.motion-switch__track {
+  position: relative;
+  width: 1.6rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: rgb(60 38 6 / 0.35);
+  box-shadow:
+    inset 0 1px 2px rgb(40 22 2 / 0.55),
+    0 1px 0 rgb(255 236 185 / 0.5);
+}
+
+.motion-switch__knob {
+  position: absolute;
+  top: 0.12rem;
+  left: 0.12rem;
+  width: 0.66rem;
+  height: 0.66rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #d9c28a, #8a6a2c);
+  box-shadow: 0 1px 1px rgb(40 22 2 / 0.5);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.motion-switch[aria-checked="true"] .motion-switch__knob {
+  transform: translateX(0.7rem);
+  background: radial-gradient(circle at 35% 30%, #fff3c4, #e0a92e);
+  box-shadow:
+    0 1px 1px rgb(40 22 2 / 0.5),
+    0 0 6px rgb(255 200 80 / 0.8);
+}
+
+.motion-switch:focus-visible {
+  outline: 2px solid #2f2006;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 .nameplate__controls a {
   display: inline-flex;
   align-items: center;
