@@ -13,8 +13,8 @@ interface Props {
 
 const SITE_URL = "https://frankoppongkonadu.netlify.app/";
 const {
-  title: TITLE = "Frank Oppong Konadu — hackersgoddest",
-  description: DESCRIPTION = "Frank Oppong Konadu (hackersgoddest) — full-stack & mobile engineer building web, mobile, and ML-driven products with React, Vue, Node, and Go.",
+  title: TITLE = "Frank Konadu Oppong — hackersgoddest",
+  description: DESCRIPTION = "Frank Konadu Oppong (hackersgoddest) — full-stack & mobile engineer building web, mobile, and ML-driven products with React, Vue, Node, and Go.",
   path = "/",
   image: OG_IMAGE = `${SITE_URL}landing-page.png`,
 } = Astro.props;
@@ -25,7 +25,7 @@ const PAGE_URL = new URL(path, SITE_URL).href;
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Frank Oppong Konadu",
+  name: "Frank Konadu Oppong",
   alternateName: "hackersgoddest",
   url: SITE_URL,
   image: OG_IMAGE,
@@ -70,12 +70,12 @@ const personSchema = {
     </script>
 
     <meta name="description" content={DESCRIPTION} />
-    <meta name="author" content="Frank Oppong Konadu" />
+    <meta name="author" content="Frank Konadu Oppong" />
     <link rel="canonical" href={PAGE_URL} />
 
     <!-- Open Graph / Twitter Card -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Frank Oppong Konadu" />
+    <meta property="og:site_name" content="Frank Konadu Oppong" />
     <meta property="og:title" content={TITLE} />
     <meta property="og:description" content={SHORT_DESCRIPTION} />
     <meta property="og:url" content={PAGE_URL} />

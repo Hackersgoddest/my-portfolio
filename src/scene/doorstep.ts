@@ -551,7 +551,7 @@ function leanShot(index: number, portrait: boolean, outPosition: Vector3, outTar
 // the scene itself is drawn at quarter resolution, blurred in two cheap
 // passes, and laid over the sharp frame - at full strength the sharp pass is
 // skipped entirely, so reading is cheaper than not reading.
-function createSoftener(renderer: WebGLRenderer, scene: Scene, camera: PerspectiveCamera, blur: boolean) {
+function createSoftener(renderer: WebGLRenderer, scene: Scene, camera: PerspectiveCamera, blurAllowed: boolean) {
   const options = { type: HalfFloatType, depthBuffer: true };
   const low = new WebGLRenderTarget(1, 1, options);
   const pong = new WebGLRenderTarget(1, 1, { type: HalfFloatType, depthBuffer: false });
@@ -613,6 +613,8 @@ function createSoftener(renderer: WebGLRenderer, scene: Scene, camera: Perspecti
   };
 
   return {
+    /** Reading blur on (dimming happens either way, via exposure). */
+    blurOn: blurAllowed,
     setSize(width: number, height: number) {
       const w = Math.max(1, Math.round(width / 4));
       const h = Math.max(1, Math.round(height / 4));
@@ -620,7 +622,7 @@ function createSoftener(renderer: WebGLRenderer, scene: Scene, camera: Perspecti
       pong.setSize(w, h);
     },
     render(amount: number) {
-      if (!blur || amount < 0.01) {
+      if (!this.blurOn || amount < 0.01) {
         renderer.render(scene, camera);
         return;
       }
@@ -886,6 +888,7 @@ export function startDoorstep(canvas: HTMLCanvasElement, options: DoorstepOption
   // Frame-time probe for the first couple of seconds of rendering.
   const probe: number[] = [];
   let probing = options.probe ?? true;
+  let warmupUntil = 0;
 
   function invalidate(shadows = false) {
     dirty = true;
@@ -1001,20 +1004,35 @@ export function startDoorstep(canvas: HTMLCanvasElement, options: DoorstepOption
       options.onReady();
     }
 
-    if (probing) {
-      probe.push(dt);
-      if (probe.length >= 45) {
-        probing = false;
-        const avg = probe.slice(5).reduce((a, b) => a + b, 0) / (probe.length - 5);
-        if (avg > 0.05 && dpr > 1) {
-          // Too slow: drop resolution once, then give up if still too slow.
+    // Performance check. The first second or so is always slow (shaders
+    // compiling, pictures uploading) so it's skipped; then the typical
+    // (median) frame is measured. Too slow: step quality down, and only fall
+    // back to the stills if even the lightest version can't keep up.
+    if (probing && pendingTextures === 0) {
+      if (warmupUntil === 0) warmupUntil = now + 1500;
+      if (now >= warmupUntil) probe.push(dt);
+      if (probe.length >= 60) {
+        const median = [...probe].sort((a, b) => a - b)[probe.length >> 1];
+        probe.length = 0;
+        const fps = Math.round(1 / median);
+        if (median <= 0.045) {
+          probing = false;
+          console.info(`[doorstep] live 3D at ~${fps} fps`);
+        } else if (dpr > 1) {
           dpr = 1;
           renderer.setPixelRatio(1);
           resize();
-          probe.length = 0;
-          probing = true;
-        } else if (avg > 0.07) {
+          console.info(`[doorstep] ~${fps} fps: lowering resolution`);
+        } else if (softener.blurOn) {
+          softener.blurOn = false;
+          console.info(`[doorstep] ~${fps} fps: turning off the reading blur`);
+        } else if (median > 0.08) {
+          probing = false;
+          console.info(`[doorstep] ~${fps} fps even at the lightest settings: showing the stills instead`);
           options.onGiveUp();
+        } else {
+          probing = false;
+          console.info(`[doorstep] live 3D at ~${fps} fps (light settings)`);
         }
       }
     }

@@ -16,7 +16,7 @@
         <span class="nameplate__screw" aria-hidden="true"></span>
 
         <a href="#home" class="nameplate__name">hackersgoddest</a>
-        <p class="nameplate__line">Frank Oppong Konadu &middot; Full-stack developer</p>
+        <p class="nameplate__line">Frank Konadu Oppong &middot; Full-stack developer</p>
         <p class="nameplate__line nameplate__line--small">Accra, Ghana &middot; {{ localTime || "--:--" }}</p>
 
         <hr class="nameplate__rule" />
@@ -42,7 +42,7 @@
       </div>
 
       <p class="on-scene flex max-w-md flex-wrap justify-center gap-x-3 gap-y-1 text-center font-mono text-[11px] text-fg-faint">
-        <span>&copy; {{ currentYear }} Frank Oppong Konadu</span>
+        <span>&copy; {{ currentYear }} Frank Konadu Oppong</span>
         <span aria-hidden="true">&middot;</span>
         <span>Scene textures: Poly Haven (CC0)</span>
         <span aria-hidden="true">&middot;</span>
