@@ -74,7 +74,8 @@ import {
   DialogDescription,
 } from "reka-ui";
 import { Mail, Download, Check, Sun, Moon } from "@lucide/vue";
-import { LogoGithub, LogoLinkedin } from "@vicons/ionicons5";
+import LogoGithub from "~icons/ri/github-fill";
+import LogoLinkedin from "~icons/ri/linkedin-box-fill";
 import sections from "../data/navigation";
 import { useTheme } from "../composables/useTheme";
 

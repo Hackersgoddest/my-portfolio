@@ -1,26 +1,34 @@
-import { ref, watchEffect } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 export type Theme = "dark" | "light";
 
 const STORAGE_KEY = "portfolio-theme";
 
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-}
+// Starts as "dark" to match the server-rendered markup. The real theme is
+// already on <html data-theme> (applied by the inline <head> script before
+// first paint) and is synced in on mount, so hydration never sees a mismatch.
+const theme = ref<Theme>("dark");
+let synced = false;
 
-const theme = ref<Theme>(getInitialTheme());
+function syncFromDocument() {
+  if (synced) return;
+  synced = true;
 
-if (typeof window !== "undefined") {
-  watchEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme.value);
-    localStorage.setItem(STORAGE_KEY, theme.value);
+  theme.value = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+
+  watch(theme, (value) => {
+    document.documentElement.dataset.theme = value;
+    try {
+      localStorage.setItem(STORAGE_KEY, value);
+    } catch {
+      // Storage can be unavailable (private mode, blocked site data).
+    }
   });
 }
 
 export function useTheme() {
+  onMounted(syncFromDocument);
+
   const toggleTheme = () => {
     theme.value = theme.value === "dark" ? "light" : "dark";
   };

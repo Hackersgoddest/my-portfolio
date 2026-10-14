@@ -46,25 +46,31 @@
       </nav>
     </div>
 
-    <CommandPalette v-model:open="paletteOpen" @navigate="navigate" />
+    <CommandPalette v-if="paletteRequested" v-model:open="paletteOpen" @navigate="navigate" />
   </header>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, defineAsyncComponent, onMounted, onUnmounted, ref, watch } from "vue";
 import { Search, Sun, Moon } from "@lucide/vue";
-import CommandPalette from "./CommandPalette.vue";
 import sections from "../data/navigation";
 import { useActiveSection } from "../composables/useActiveSection";
 import { useTheme } from "../composables/useTheme";
+import { scrollToSection } from "../lib/scroll";
 
-const emit = defineEmits<{ scrollToSection: [key: string] }>();
+// The palette (and the dialog library behind it) is only downloaded the first
+// time it's opened, keeping it out of the initial page load.
+const CommandPalette = defineAsyncComponent(() => import("./CommandPalette.vue"));
 
 const sectionKeys = sections.map((s) => s.key);
 const { activeKey, isScrolled, scrollProgress } = useActiveSection(sectionKeys);
 const { theme, toggleTheme } = useTheme();
 
 const paletteOpen = ref(false);
+const paletteRequested = ref(false);
+watch(paletteOpen, (open) => {
+  if (open) paletteRequested.value = true;
+});
 
 const activeMenuLabel = computed(
   () => sections.find((s) => s.key === activeKey.value)?.label ?? "Menu"
@@ -75,7 +81,7 @@ const modifierKey = computed(() =>
 );
 
 function navigate(key: string) {
-  emit("scrollToSection", key);
+  scrollToSection(key);
 }
 
 function handleKeydown(e: KeyboardEvent) {

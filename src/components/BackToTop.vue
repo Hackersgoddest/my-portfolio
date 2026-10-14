@@ -22,15 +22,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import { ArrowUp } from "@lucide/vue";
+import { scrollToTop } from "../lib/scroll";
 
 const visible = ref(false);
 
 const handleScroll = () => {
   visible.value = window.scrollY > 400;
-};
-
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
 onMounted(() => window.addEventListener("scroll", handleScroll, { passive: true }));
