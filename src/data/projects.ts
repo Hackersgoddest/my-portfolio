@@ -9,14 +9,14 @@ const projects: Project[] = [
   {
     title: "SchoolShield",
     category: "Personal Project",
-    description: `<p>Focus-first, theft-resistant device management: SchoolShield gives schools, parents, and businesses one dashboard to manage devices — content filtering, app control, remote lock, and theft protection.</p><ul><li>Kiosk-lock classroom tablets to approved apps and manage every device's policy from one dashboard (Schools)</li><li>Filter what a child's phone can reach, with Factory Reset Protection so a reset alone can't hand it to someone else (Families)</li><li>Lock company-issued phones and tablets to work-approved apps, with remote lock, wipe, and anti-theft protection (Businesses)</li></ul>`,
+    description: `<p>SchoolShield is a parental-control and device-management platform built for Ghana: parents see what their children do on their phones and decide what they can open, and schools and businesses manage whole fleets of tablets, phones, and laptops from the same dashboard.</p><ul><li>Block whole website categories (adult content, gambling, social, games) across every browser, and control apps one by one or with an allowlist</li><li>See each child's daily screen time, top apps, and websites visited, then lock or locate the phone remotely</li><li>Tamper-resistant on Android, iPhone/iPad, and Windows 10/11, with protection against uninstalling and factory resets</li><li>Kiosk mode, groups, and central billing for schools and businesses</li></ul>`,
     images: [
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786946637/WhatsApp_Image_2026-08-17_at_05.56.55_cemgeh.jpg",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786560777/Screenshot_2026-08-12_at_6.51.59_PM_gczdlh.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786560776/Screenshot_2026-08-12_at_6.51.06_PM_utzeig.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786560775/Screenshot_2026-08-12_at_6.50.44_PM_bdhqf9.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786560776/Screenshot_2026-08-12_at_6.51.20_PM_w7ex9g.png",
-      "https://res.cloudinary.com/dfm07q3n0/image/upload/v1786560777/Screenshot_2026-08-12_at_6.51.39_PM_z29do8.png"
+      "/projects/schoolshield/family-home.webp",
+      "/projects/schoolshield/family-phone.webp",
+      "/projects/schoolshield/hero.webp",
+      "/projects/schoolshield/filtering.webp",
+      "/projects/schoolshield/devices.webp",
+      "/projects/schoolshield/kiosk.webp",
     ],
     tools: [
       "Next.js",
