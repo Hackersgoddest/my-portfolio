@@ -1,0 +1,133 @@
+---
+// A full page per project: everything the details sheet has, every image,
+// and a real URL to share or read without the 3D. The scene's afternoon
+// still sits behind it, so it still feels like the same house.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import projects from "../../data/projects";
+import { parseDescription } from "../../utils/projectDescription";
+import { projectId, slugify } from "../../utils/slug";
+import { thumbnail } from "../../utils/thumbnail";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: slugify(project.title) }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { intro, items, quote } = parseDescription(project.description);
+const index = projects.indexOf(project);
+const next = projects[(index + 1) % projects.length];
+const LINK_LABELS = { site: "Visit site", code: "View code", ios: "App Store", android: "Google Play" } as const;
+const cover = project.images[0];
+const absolute = (url: string) => (url.startsWith("http") || url.startsWith("data:") ? url : new URL(url, "https://frankoppongkonadu.netlify.app").href);
+---
+
+<BaseLayout
+  title={`${project.title} — Frank Konadu Oppong`}
+  description={intro}
+  path={`/projects/${slugify(project.title)}`}
+  image={cover.startsWith("data:") ? undefined : absolute(thumbnail(cover, 1200))}
+>
+  <div class="case-backdrop" aria-hidden="true">
+    <picture>
+      <source media="(orientation: portrait)" srcset="/scene/posters/noon-portrait.webp" />
+      <img src="/scene/posters/noon-landscape.webp" alt="" />
+    </picture>
+  </div>
+
+  <main class="relative z-10 mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16">
+    <a
+      href={`/#${projectId(project.title)}`}
+      class="inline-flex items-center gap-2 font-mono text-sm text-fg-subtle transition-colors hover:text-primary-green"
+    >
+      &larr; Back to the wall
+    </a>
+
+    <article class="glass-panel mt-6 p-6 sm:p-10">
+      <p class="font-mono text-xs uppercase tracking-widest text-primary-green/80">{project.category}</p>
+      <h1 class="mt-2 text-3xl font-bold text-fg sm:text-5xl">{project.title}</h1>
+      <p class="mt-6 text-base leading-relaxed text-fg-muted sm:text-lg">{intro}</p>
+
+      {
+        items.length > 0 && (
+          <ol class="mt-8 space-y-3 border-t border-border/10 pt-8">
+            {items.map((item, i) => (
+              <li class="flex gap-3">
+                <span class="shrink-0 pt-0.5 font-mono text-xs text-primary-green">{String(i + 1).padStart(2, "0")}</span>
+                <span class="text-sm leading-relaxed text-fg-subtle sm:text-base">{item}</span>
+              </li>
+            ))}
+          </ol>
+        )
+      }
+
+      {
+        quote && (
+          <blockquote class="mt-8 border-l-2 border-primary-green/40 pl-4">
+            <p class="italic leading-relaxed text-fg-muted">&ldquo;{quote.text}&rdquo;</p>
+            <footer class="mt-2 font-mono text-xs text-fg-faint">&mdash; {quote.attribution}</footer>
+          </blockquote>
+        )
+      }
+
+      <ul class="mt-8 flex flex-wrap gap-2 border-t border-border/10 pt-8" aria-label="Built with">
+        {project.tools.map((tool) => <li class="rounded border border-border/10 px-2 py-1 font-mono text-xs text-fg-faint">{tool}</li>)}
+      </ul>
+
+      {
+        project.links.length > 0 && (
+          <div class="mt-8 flex flex-wrap gap-3">
+            {project.links.map((link) => (
+              <a
+                href={link.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded-lg bg-primary-green px-5 py-2.5 font-mono text-sm font-medium text-black transition-colors hover:bg-primary-green-400"
+              >
+                {LINK_LABELS[link.type]}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </article>
+
+    <section class="mt-8 space-y-6" aria-label="Screenshots">
+      {
+        project.images.map((image, i) => (
+          <figure class="glass-panel overflow-hidden p-2">
+            <img
+              src={thumbnail(image, 1600)}
+              alt={`${project.title}, screenshot ${i + 1} of ${project.images.length}`}
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+              class="w-full rounded-xl"
+            />
+          </figure>
+        ))
+      }
+    </section>
+
+    <nav class="mt-10 flex flex-wrap items-center justify-between gap-4 font-mono text-sm" aria-label="More projects">
+      <a href="/#portfolio" class="text-fg-subtle transition-colors hover:text-primary-green">All projects</a>
+      <a href={`/projects/${slugify(next.title)}`} class="text-fg-subtle transition-colors hover:text-primary-green">
+        Next: {next.title} &rarr;
+      </a>
+    </nav>
+  </main>
+</BaseLayout>
+
+<style>
+  .case-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .case-backdrop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(6px) brightness(0.45);
+    transform: scale(1.04);
+  }
+</style>

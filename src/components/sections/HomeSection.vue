@@ -13,7 +13,7 @@
         <div class="relative">
           <h1
             class="hero-name relative mb-4 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] text-fg"
-            aria-label="Frank Oppong Konadu"
+            aria-label="Frank Konadu Oppong"
           >
             <span
               class="name-grain"
@@ -64,7 +64,7 @@
 
         <!-- CTA Buttons -->
         <div class="hero-buttons flex flex-wrap gap-4">
-          <AppButton variant="primary" @click.passive="$emit('scrollToSection', 'portfolio')">
+          <AppButton tag="a" href="#portfolio" variant="primary">
             View My Work
           </AppButton>
 
@@ -82,15 +82,6 @@
       </div>
     </div>
 
-    <!-- Scroll cue -->
-    <div class="absolute bottom-10 left-1/2 z-10 -translate-x-1/2 sm:bottom-12">
-      <div class="scroll-cue flex flex-col items-center gap-2 font-mono text-xs text-fg-faint">
-        scroll
-        <div class="relative h-8 w-px overflow-hidden bg-fg-faint/20">
-          <div class="scroll-cue-beam absolute inset-x-0 h-8 w-px bg-linear-to-b from-transparent via-primary-green to-transparent"></div>
-        </div>
-      </div>
-    </div>
   </section>
 </template>
 
@@ -99,9 +90,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { Download } from "@lucide/vue";
 import AppButton from "../AppButton.vue";
 
-defineEmits<{ scrollToSection: [key: string] }>();
-
-const FULL_NAME = "Frank Oppong Konadu";
+const FULL_NAME = "Frank Konadu Oppong";
 const nameChars = FULL_NAME.split("");
 
 const baseDelay = 500;
@@ -221,41 +210,6 @@ onUnmounted(() => {
 
   .name-grain {
     display: none;
-  }
-}
-
-.scroll-cue {
-  animation: scroll-cue-float 2.4s ease-in-out infinite;
-}
-
-.scroll-cue-beam {
-  animation: scroll-cue-beam 1.8s ease-in-out infinite;
-}
-
-@keyframes scroll-cue-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(4px);
-  }
-}
-
-@keyframes scroll-cue-beam {
-  0% {
-    transform: translateY(-100%);
-  }
-  60%,
-  100% {
-    transform: translateY(100%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-cue,
-  .scroll-cue-beam {
-    animation: none;
   }
 }
 </style>

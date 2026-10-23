@@ -1,1 +1,2 @@
-/// <reference types="vite/client" />
+/// <reference types="astro/client" />
+/// <reference types="unplugin-icons/types/vue" />

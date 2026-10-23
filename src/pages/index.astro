@@ -1,0 +1,110 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MenuBar from "../components/MenuBar.vue";
+import Footer from "../components/Footer.vue";
+import HomeSection from "../components/sections/HomeSection.vue";
+import ServiceSection from "../components/sections/ServiceSection.vue";
+import SkillsSection from "../components/sections/SkillsSection.vue";
+import PortfolioSection from "../components/sections/PortfolioSection.vue";
+import ContactSection from "../components/sections/ContactSection.vue";
+import { HOURS } from "../scene/hours";
+import { NEXT_DAWN_HOUR } from "../scene/state";
+
+// Stills of the doorstep at each hour the page pauses on. The first is the
+// page's opening image; the rest load only if the live 3D can't run.
+const posters = [
+  { hour: HOURS.hero, name: "predawn" },
+  { hour: HOURS.services, name: "morning" },
+  { hour: HOURS.shoes, name: "shoes" },
+  { hour: HOURS.skills, name: "noon" },
+  { hour: HOURS.dusk, name: "dusk" },
+  { hour: HOURS.contact, name: "night" },
+  { hour: HOURS.firstLight, name: "first-light" },
+  { hour: NEXT_DAWN_HOUR, name: "next-morning" },
+];
+const poster = (name: string, orientation: string) => `/scene/posters/${name}-${orientation}.webp`;
+const [first, ...rest] = posters;
+---
+
+<!-- Every section is rendered to HTML at build time. Only the components with
+     a client:* directive ship JavaScript, and each hydrates when it's needed:
+     the nav and hero right away, the rest as they scroll into view. Services
+     and Skills have no interactivity and ship none at all.
+
+     Behind everything sits the doorstep: a fixed scene whose hour of the day
+     follows the scroll (data-hour). It's seen through the hero, the empty
+     "pillow" pauses between sections, and the contact section at night. -->
+<BaseLayout>
+  <div class="scene-layer" aria-hidden="true">
+    <picture>
+      <source media="(orientation: portrait)" srcset={poster(first.name, "portrait")} />
+      <img
+        src={poster(first.name, "landscape")}
+        data-poster-hour={first.hour}
+        alt=""
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+    {
+      rest.map((p) => (
+        <img
+          data-poster-hour={p.hour}
+          data-src-landscape={poster(p.name, "landscape")}
+          data-src-portrait={poster(p.name, "portrait")}
+          alt=""
+          decoding="async"
+        />
+      ))
+    }
+    <canvas></canvas>
+  </div>
+
+  <MenuBar class="navbar page-ui w-full fixed top-0 z-40" client:load />
+  <!-- Long trips across the day cut through a brief fade instead of flying. -->
+  <div class="blink" aria-hidden="true"></div>
+  <!-- Announces arrivals after explicit jumps (nav, palette, [ and ] keys). -->
+  <p id="chapter-status" class="sr-only" role="status" aria-live="polite"></p>
+
+  <!-- Every part of the page carries the hour it sits at (data-hour), which
+       moves the sun and the camera. Content floats as glass over the corner
+       of the house it belongs to; the pillow pauses are the scene alone. -->
+  <div class="page-ui relative z-10 flex w-full min-w-80 flex-col">
+    <HomeSection id="home" class="on-scene" data-hour={HOURS.hero} data-scene-window client:load />
+    <div class="pillow" data-hour={HOURS.sunrise} data-scene-window></div>
+    <ServiceSection id="services" data-hour={HOURS.services} data-reading data-scene-window />
+    <div class="pillow" data-hour={HOURS.shoes} data-scene-window></div>
+    <SkillsSection id="skills" data-hour={HOURS.skills} data-reading data-scene-window />
+    <PortfolioSection id="portfolio" data-scene-window client:visible={{ rootMargin: "300px" }} />
+    <div class="pillow" data-hour={HOURS.dusk} data-scene-window></div>
+    <ContactSection
+      id="contact"
+      data-hour={HOURS.contact}
+      data-reading
+      data-scene-window
+      client:visible={{ rootMargin: "300px" }}
+    />
+    <Footer data-hour={HOURS.firstLight} data-reading="0.35" data-scene-window client:visible />
+  </div>
+
+  <button type="button" class="eyes-button" aria-pressed="false" aria-label="Close your eyes (hold)">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <path
+        d="M3 10c2.4 3 5.4 4.5 9 4.5s6.6-1.5 9-4.5M6 13.2 4.5 15.5M10 14.4 9.4 17M14 14.4l.6 2.6M18 13.2l1.5 2.3"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"></path>
+    </svg>
+    <span class="eyes-button__label">Hold to close your eyes</span>
+  </button>
+</BaseLayout>
+
+<script>
+  import "../scripts/motion";
+  import "../scripts/scene";
+  import "../scripts/eyes";
+  import { initChapters } from "../lib/chapters";
+
+  initChapters();
+</script>

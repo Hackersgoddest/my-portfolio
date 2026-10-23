@@ -28,3 +28,10 @@ coverage
 *.sln
 *.sw?
 .vscode/
+
+# Astro
+.astro
+*.tsbuildinfo
+
+# Private family reference photos for the doorstep scene (never published)
+reference/
