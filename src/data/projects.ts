@@ -7,6 +7,24 @@ const QA_PLACEHOLDER =
 
 const projects: Project[] = [
   {
+    title: "When Is Uncertainty Informative?",
+    category: "Research Project",
+    description: `<p>An independent research project studying when uncertainty helps an active learner choose informative observations, and when model assumptions or distorted representations make uncertainty misleading. Gaussian mixture models provide a controlled laboratory for the investigation.</p><ul><li>Implemented and tested an expectation-maximization (EM) Gaussian mixture model on controlled synthetic data</li><li>Compared entropy-based querying with random selection across 100 fresh trials, including replication checks and statistical tests</li><li>Investigated initialization sensitivity, class imbalance, outliers, model misspecification, and alternative uncertainty estimates</li><li>Compared Gibbs sampling with mean-field variational inference for posterior uncertainty over component means</li></ul>`,
+    images: [
+      "https://raw.githubusercontent.com/Hackersgoddest/active-learning-gmm/main/figures/rq3_entropy_vs_random.png",
+      "https://raw.githubusercontent.com/Hackersgoddest/active-learning-gmm/main/figures/rq5d_misspecification.png",
+      "https://raw.githubusercontent.com/Hackersgoddest/active-learning-gmm/main/figures/rq7_posterior_disagreement.png",
+    ],
+    tools: ["Python", "NumPy", "scikit-learn", "Jupyter", "Git"],
+    links: [
+      {
+        name: "VIEW RESEARCH",
+        type: "code",
+        link: "https://github.com/Hackersgoddest/active-learning-gmm",
+      },
+    ],
+  },
+  {
     title: "SchoolShield",
     category: "Personal Project",
     description: `<p>SchoolShield is a parental-control and device-management platform built for Ghana: parents see what their children do on their phones and decide what they can open, and schools and businesses manage whole fleets of tablets, phones, and laptops from the same dashboard.</p><ul><li>Block whole website categories (adult content, gambling, social, games) across every browser, and control apps one by one or with an allowlist</li><li>See each child's daily screen time, top apps, and websites visited, then lock or locate the phone remotely</li><li>Tamper-resistant on Android, iPhone/iPad, and Windows 10/11, with protection against uninstalling and factory resets</li><li>Kiosk mode, groups, and central billing for schools and businesses</li></ul>`,

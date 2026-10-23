@@ -30,6 +30,31 @@
             </span>
           </div>
         </div>
+
+        <div class="mt-12 grid gap-6 border-t border-border/10 pt-9 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p class="mb-3 font-mono text-sm text-fg-faint">
+              <span class="text-primary-green">//</span> research focus
+            </p>
+            <h3 class="text-2xl font-bold text-fg">Questions before shortcuts.</h3>
+          </div>
+          <div>
+            <p class="mb-5 max-w-2xl text-sm leading-relaxed text-fg-subtle sm:text-base">
+              I am building toward research in machine learning by studying how
+              probabilistic models behave, where their uncertainty comes from,
+              and when it should be trusted.
+            </p>
+            <ul class="flex flex-wrap gap-2" aria-label="Research interests">
+              <li
+                v-for="interest in researchInterests"
+                :key="interest"
+                class="rounded border border-primary-green/30 px-3 py-1.5 font-mono text-xs text-primary-green"
+              >
+                {{ interest }}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- Summary -->
@@ -67,6 +92,14 @@ const skillTabs = shallowRef<SkillTab[]>([
 ]);
 
 const yearsExperience = new Date().getFullYear() - 2022;
+const researchInterests = [
+  "Probabilistic ML",
+  "Bayesian inference",
+  "Active learning",
+  "Uncertainty quantification",
+  "Latent-variable models",
+  "Robustness & model misspecification",
+];
 
 const totalSkills = computed(() => {
   const all = skillTabs.value.flatMap((tab) => tab.skills);

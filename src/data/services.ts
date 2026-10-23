@@ -1,7 +1,14 @@
-import { Globe, Smartphone, Monitor } from "@lucide/vue";
+import { BrainCircuit, Globe, Smartphone, Monitor } from "@lucide/vue";
 import type { Service } from "../types";
 
 const services: Service[] = [
+  {
+    title: "ML Research & Experimentation",
+    description:
+      "Independent research into probabilistic machine learning, Bayesian inference, active learning, and uncertainty quantification through reproducible experiments and careful interpretation.",
+    icon: BrainCircuit,
+    tools: ["Python", "NumPy", "scikit-learn", "GMMs", "EM", "Jupyter"],
+  },
   {
     title: "Web App Development",
     description:

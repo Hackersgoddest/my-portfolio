@@ -14,7 +14,12 @@ export interface ProjectLink {
   link: string;
 }
 
-export type ProjectCategory = "Personal Project" | "Team Project" | "Freelance Project" | "School Project";
+export type ProjectCategory =
+  | "Personal Project"
+  | "Team Project"
+  | "Freelance Project"
+  | "School Project"
+  | "Research Project";
 
 export interface Project {
   title: string;
