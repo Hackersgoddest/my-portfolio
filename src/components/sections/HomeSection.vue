@@ -46,16 +46,19 @@
 
         <!-- Tagline -->
         <p class="hero-tagline mb-6 font-mono text-sm sm:text-base tracking-wide text-primary-green">
-          full-stack &amp; mobile engineer
-          <span class="text-fg-faint">/</span> Accra, Ghana
-          <span class="text-fg-faint">/</span> {{ yearsExperience }}+ yrs
+          <span class="block">software engineer &amp; ML researcher</span>
+          <span class="mt-1 block text-fg-faint">
+            Accra, Ghana <span class="px-1">/</span> {{ yearsExperience }}+ yrs
+          </span>
         </p>
 
         <!-- Description -->
         <p class="hero-description mb-10 max-w-xl text-base sm:text-lg leading-relaxed text-fg-subtle">
-          I build web and mobile products end to end with React, Vue, Node
-          and Go — and I'm fully immersed in applied Machine Learning these
-          days. Known online, and now on record, as
+          I build web and mobile products end to end with React, Vue, Node and
+          Go, while studying probabilistic machine learning, Bayesian
+          inference, active learning, and uncertainty quantification. My
+          independent research asks when model uncertainty is actually useful.
+          Known online, and now on record, as
           <span class="text-fg">hackersgoddest</span>.
         </p>
 
