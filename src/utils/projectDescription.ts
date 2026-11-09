@@ -50,5 +50,6 @@ export function parseDescription(html: string): ParsedDescription {
 export function getProjectSummary(html: string) {
   const text = toText(firstParagraph(html));
   const firstSentence = text.split(".")[0];
-  return firstSentence.length > 120 ? text.slice(0, 120) + "..." : firstSentence + ".";
+  if (firstSentence.length <= 120) return firstSentence + ".";
+  return text.slice(0, text.lastIndexOf(" ", 120)).replace(/[\s,:;—-]+$/, "") + "...";
 }

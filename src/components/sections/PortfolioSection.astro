@@ -1,0 +1,104 @@
+---
+import { ArrowRight } from "@lucide/astro";
+import SectionHeader from "../SectionHeader.astro";
+import projects from "../../data/projects";
+import type { ProjectLinkType } from "../../types";
+import { getProjectSummary, parseDescription } from "../../utils/projectDescription";
+import { projectId, slugify } from "../../utils/slug";
+import { thumbnail } from "../../utils/thumbnail";
+
+const LINK_LABELS: Record<ProjectLinkType, string> = {
+  site: "Live",
+  code: "Code",
+  ios: "iOS",
+  android: "Android",
+};
+
+// A few projects in depth, then the rest at a glance.
+const FEATURED = 3;
+const featured = projects.slice(0, FEATURED);
+const more = projects.slice(FEATURED);
+const number = (i: number) => String(i + 1).padStart(2, "0");
+---
+
+<section id="portfolio" class="py-section">
+  <div class="container-custom">
+    <SectionHeader
+      index="04"
+      eyebrow="Selected Work"
+      title="Featured Projects"
+      description="Selected products, team and client work, and independent machine learning research."
+    />
+
+    <div>
+      {
+        featured.map((project, i) => {
+          const page = `/projects/${slugify(project.title)}`;
+          return (
+            <article id={projectId(project.title)} class:list={["grid items-center gap-8 py-10 sm:py-12 lg:grid-cols-12 lg:gap-12", { "border-t border-ink": i > 0 }]}>
+              <a href={page} class:list={["block bg-cloth-deep p-3 sm:p-5 lg:col-span-7", { "lg:order-2": i % 2 === 1 }]} aria-label={`${project.title} details`}>
+                <div class="aspect-4/3">
+                  <img src={thumbnail(project.images[0], 960)} alt={project.title} class="h-full w-full object-contain" loading="lazy" />
+                </div>
+              </a>
+
+              <div class:list={["lg:col-span-5", { "lg:order-1": i % 2 === 1 }]}>
+                <p class="label text-ink-faint">
+                  <span class="mr-2 bg-gold px-1.5 py-0.5 font-medium text-ink">{number(i)}</span>
+                  {project.category}
+                </p>
+                <h3 class="mt-4 font-display text-5xl leading-none">{project.title}</h3>
+                <p class="mt-4 mb-5 leading-relaxed text-ink-soft">{parseDescription(project.description).intro}</p>
+                <p class="mb-6 font-mono text-xs leading-relaxed text-ink-faint">{project.tools.join(" · ")}</p>
+                <div class="flex flex-wrap items-center gap-5 font-medium">
+                  <a href={page} class="link-gold inline-flex items-center gap-1.5">
+                    Details <ArrowRight size={14} />
+                  </a>
+                  {
+                    project.links.map((link) => (
+                      <a href={link.link} target="_blank" rel="noopener noreferrer" class="link-gold">
+                        {LINK_LABELS[link.type]}
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <h3 class="label mt-10 mb-6 border-b border-ink pb-2 font-medium">More work</h3>
+    <div class="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        more.map((project) => {
+          const page = `/projects/${slugify(project.title)}`;
+          return (
+            <article id={projectId(project.title)}>
+              <a href={page} class="block bg-cloth-deep p-2.5" aria-label={`${project.title} details`}>
+                <div class="aspect-3/2">
+                  <img src={thumbnail(project.images[0], 640)} alt={project.title} class="h-full w-full object-contain" loading="lazy" />
+                </div>
+              </a>
+              <p class="label mt-3 text-ink-faint">{project.category}</p>
+              <h4 class="mt-1 text-xl font-bold leading-tight">
+                <a href={page} class="hover:bg-gold">{project.title}</a>
+              </h4>
+              <p class="mt-2 mb-3 text-sm leading-relaxed text-ink-soft">{getProjectSummary(project.description)}</p>
+              <div class="flex flex-wrap gap-4 text-sm font-medium">
+                {
+                  project.links.map((link) => (
+                    <a href={link.link} target="_blank" rel="noopener noreferrer" class="link-gold">
+                      {LINK_LABELS[link.type]}
+                    </a>
+                  ))
+                }
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

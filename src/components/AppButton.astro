@@ -1,0 +1,34 @@
+---
+interface Props {
+  /** Makes it a link; otherwise it's a button. */
+  href?: string;
+  /** Opens the link in a new tab. */
+  external?: boolean;
+  type?: "button" | "submit";
+  variant?: "primary" | "secondary" | "gold";
+  block?: boolean;
+  [key: `data-${string}`]: unknown;
+}
+
+const { href, external = false, type = "button", variant = "primary", block = false, ...rest } = Astro.props;
+const Tag = href ? "a" : "button";
+const linkProps = href ? { href, ...(external ? { target: "_blank", rel: "noopener noreferrer" } : {}) } : { type };
+const VARIANTS = {
+  primary: "bg-ink text-cloth hover:bg-gold hover:text-ink",
+  secondary: "border border-ink text-ink hover:bg-gold",
+  gold: "bg-gold text-ink hover:bg-cloth",
+};
+---
+
+<Tag
+  {...linkProps}
+  {...rest}
+  class:list={[
+    "inline-flex items-center justify-center gap-2 px-6 py-3 font-mono text-sm font-medium uppercase tracking-wider disabled:pointer-events-none disabled:opacity-50 sm:px-8 sm:py-3.5",
+    VARIANTS[variant],
+    { "w-full": block },
+  ]}
+>
+  <slot name="icon" />
+  <slot />
+</Tag>

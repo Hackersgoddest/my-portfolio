@@ -1,7 +1,5 @@
 ---
-// A full page per project: everything the details sheet has, every image,
-// and a real URL to share or read without the 3D. The scene's afternoon
-// still sits behind it, so it still feels like the same house.
+// A full page per project: the whole description, every screenshot, and a real URL to share.
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import projects from "../../data/projects";
 import { parseDescription } from "../../utils/projectDescription";
@@ -22,38 +20,26 @@ const absolute = (url: string) => (url.startsWith("http") || url.startsWith("dat
 ---
 
 <BaseLayout
-  title={`${project.title} — Frank Konadu Oppong`}
+  title={`${project.title} — Hackersgoddest`}
   description={intro}
   path={`/projects/${slugify(project.title)}`}
   image={cover.startsWith("data:") ? undefined : absolute(thumbnail(cover, 1200))}
 >
-  <div class="case-backdrop" aria-hidden="true">
-    <picture>
-      <source media="(orientation: portrait)" srcset="/scene/posters/noon-portrait.webp" />
-      <img src="/scene/posters/noon-landscape.webp" alt="" />
-    </picture>
-  </div>
+  <main class="mx-auto w-full max-w-4xl px-4 pt-28 pb-16 sm:px-6 sm:pt-36">
+    <a href={`/#${projectId(project.title)}`} class="link-gold font-medium">&larr; Back to projects</a>
 
-  <main class="relative z-10 mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16">
-    <a
-      href={`/#${projectId(project.title)}`}
-      class="inline-flex items-center gap-2 font-mono text-sm text-fg-subtle transition-colors hover:text-primary-green"
-    >
-      &larr; Back to the wall
-    </a>
-
-    <article class="glass-panel mt-6 p-6 sm:p-10">
-      <p class="font-mono text-xs uppercase tracking-widest text-primary-green/80">{project.category}</p>
-      <h1 class="mt-2 text-3xl font-bold text-fg sm:text-5xl">{project.title}</h1>
-      <p class="mt-6 text-base leading-relaxed text-fg-muted sm:text-lg">{intro}</p>
+    <article class="mt-8">
+      <p class="label text-ink-faint">{project.category}</p>
+      <h1 class="text-h2 mt-3">{project.title}</h1>
+      <p class="mt-6 text-lg leading-relaxed text-ink-soft sm:text-xl">{intro}</p>
 
       {
         items.length > 0 && (
-          <ol class="mt-8 space-y-3 border-t border-border/10 pt-8">
+          <ol class="mt-8 border-t border-ink">
             {items.map((item, i) => (
-              <li class="flex gap-3">
-                <span class="shrink-0 pt-0.5 font-mono text-xs text-primary-green">{String(i + 1).padStart(2, "0")}</span>
-                <span class="text-sm leading-relaxed text-fg-subtle sm:text-base">{item}</span>
+              <li class="flex gap-4 border-b border-ink py-4">
+                <span class="shrink-0 font-display text-2xl leading-tight text-gold-deep">{String(i + 1).padStart(2, "0")}</span>
+                <span class="leading-relaxed">{item}</span>
               </li>
             ))}
           </ol>
@@ -62,27 +48,20 @@ const absolute = (url: string) => (url.startsWith("http") || url.startsWith("dat
 
       {
         quote && (
-          <blockquote class="mt-8 border-l-2 border-primary-green/40 pl-4">
-            <p class="italic leading-relaxed text-fg-muted">&ldquo;{quote.text}&rdquo;</p>
-            <footer class="mt-2 font-mono text-xs text-fg-faint">&mdash; {quote.attribution}</footer>
+          <blockquote class="mt-8 bg-gold p-6">
+            <p class="text-lg leading-relaxed">&ldquo;{quote.text}&rdquo;</p>
+            <footer class="label mt-3">&mdash; {quote.attribution}</footer>
           </blockquote>
         )
       }
 
-      <ul class="mt-8 flex flex-wrap gap-2 border-t border-border/10 pt-8" aria-label="Built with">
-        {project.tools.map((tool) => <li class="rounded border border-border/10 px-2 py-1 font-mono text-xs text-fg-faint">{tool}</li>)}
-      </ul>
+      <p class="mt-8 font-mono text-xs leading-relaxed text-ink-faint">{project.tools.join(" · ")}</p>
 
       {
         project.links.length > 0 && (
-          <div class="mt-8 flex flex-wrap gap-3">
+          <div class="mt-6 flex flex-wrap gap-3">
             {project.links.map((link) => (
-              <a
-                href={link.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="rounded-lg bg-primary-green px-5 py-2.5 font-mono text-sm font-medium text-black transition-colors hover:bg-primary-green-400"
-              >
+              <a href={link.link} target="_blank" rel="noopener noreferrer" class="bg-ink px-5 py-2.5 font-mono text-sm font-medium uppercase tracking-wider text-cloth hover:bg-gold hover:text-ink">
                 {LINK_LABELS[link.type]}
               </a>
             ))}
@@ -91,43 +70,25 @@ const absolute = (url: string) => (url.startsWith("http") || url.startsWith("dat
       }
     </article>
 
-    <section class="mt-8 space-y-6" aria-label="Screenshots">
+    <section class="mt-12 space-y-6" aria-label="Screenshots">
       {
         project.images.map((image, i) => (
-          <figure class="glass-panel overflow-hidden p-2">
+          <figure class="bg-cloth-deep p-3 sm:p-5">
             <img
               src={thumbnail(image, 1600)}
               alt={`${project.title}, screenshot ${i + 1} of ${project.images.length}`}
               loading={i === 0 ? "eager" : "lazy"}
               decoding="async"
-              class="w-full rounded-xl"
+              class="mx-auto max-h-[80vh] w-auto max-w-full"
             />
           </figure>
         ))
       }
     </section>
 
-    <nav class="mt-10 flex flex-wrap items-center justify-between gap-4 font-mono text-sm" aria-label="More projects">
-      <a href="/#portfolio" class="text-fg-subtle transition-colors hover:text-primary-green">All projects</a>
-      <a href={`/projects/${slugify(next.title)}`} class="text-fg-subtle transition-colors hover:text-primary-green">
-        Next: {next.title} &rarr;
-      </a>
+    <nav class="mt-10 flex flex-wrap items-center justify-between gap-4 font-medium" aria-label="More projects">
+      <a href="/#portfolio" class="link-gold">All projects</a>
+      <a href={`/projects/${slugify(next.title)}`} class="link-gold">Next: {next.title} &rarr;</a>
     </nav>
   </main>
 </BaseLayout>
-
-<style>
-  .case-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .case-backdrop img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(6px) brightness(0.45);
-    transform: scale(1.04);
-  }
-</style>

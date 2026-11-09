@@ -1,11 +1,7 @@
-import type { Component } from "vue";
-
 export interface NavSection {
   key: string;
   label: string;
   index: string;
-  /** Hour of the day this chapter sits at in the doorstep scene. */
-  hour: number;
 }
 
 export type ProjectLinkType = "site" | "code" | "ios" | "android";
@@ -35,7 +31,6 @@ export interface Project {
 export interface Service {
   title: string;
   description: string;
-  icon: Component;
   tools: string[];
 }
 

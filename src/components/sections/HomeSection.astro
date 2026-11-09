@@ -1,0 +1,42 @@
+---
+import { Download } from "@lucide/astro";
+import AppButton from "../AppButton.astro";
+
+const yearsExperience = new Date().getFullYear() - 2022;
+---
+
+<section id="home" class="pt-28 pb-10 sm:pt-36 lg:pb-16">
+  <div class="container-custom">
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
+      <div class="lg:col-span-7">
+        <h1>
+          <span class="hero-word block">Hackers<br />goddest</span>
+          <span class="mt-6 block text-2xl font-semibold sm:text-3xl">Frank Konadu Oppong</span>
+        </h1>
+        <p class="label mt-3 text-ink-faint">
+          Software engineer &amp; ML researcher &nbsp;/&nbsp; Accra, Ghana &nbsp;/&nbsp; {yearsExperience}+ yrs
+        </p>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="bg-gold p-2.5 sm:p-3">
+          <img src="/portrait.webp" alt="Portrait of Frank Konadu Oppong in a dark suit and glasses, smiling" width="1200" height="1200" fetchpriority="high" class="block h-auto w-full" />
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 grid gap-8 lg:mt-12 lg:grid-cols-12 lg:gap-12">
+      <p class="text-lg leading-relaxed text-ink-soft lg:col-span-7 sm:text-xl">
+        I build web and mobile products end to end with React, Vue, Node and Go, while studying probabilistic machine learning, Bayesian inference, active learning, and uncertainty quantification. My independent research asks when model uncertainty is actually useful.
+      </p>
+
+      <div class="flex flex-wrap items-start gap-3 lg:col-span-5">
+        <AppButton href="#portfolio">View My Work</AppButton>
+        <AppButton variant="secondary" external href="https://drive.google.com/file/d/111tHR99S6vjlGwYtHTkxhDj1D3d84R_w/view?usp=sharing">
+          <Download slot="icon" size={16} />
+          Download CV
+        </AppButton>
+      </div>
+    </div>
+  </div>
+</section>

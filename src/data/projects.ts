@@ -3,7 +3,7 @@ import type { Project } from "../types";
 // TODO: swap for a real screenshot once one's available (same Cloudinary
 // pattern as the other projects) - this is a placeholder card only.
 const QA_PLACEHOLDER =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='900'%3E%3Crect width='1200' height='900' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='47%25' text-anchor='middle' font-family='monospace' font-size='48' font-weight='bold' fill='%2310b981'%3EQuality Assurance%3C/text%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-family='monospace' font-size='22' fill='%238b8ba7'%3EManagement System%3C/text%3E%3C/svg%3E";
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='900'%3E%3Crect width='1200' height='900' fill='%2315182b'/%3E%3Ctext x='50%25' y='47%25' text-anchor='middle' font-family='monospace' font-size='48' font-weight='bold' fill='%23f2b01e'%3EQuality Assurance%3C/text%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-family='monospace' font-size='22' fill='%23cfc8b8'%3EManagement System%3C/text%3E%3C/svg%3E";
 
 const projects: Project[] = [
   {
@@ -23,6 +23,27 @@ const projects: Project[] = [
         link: "https://github.com/Hackersgoddest/active-learning-gmm",
       },
     ],
+  },
+  {
+    title: "Tapstall",
+    category: "Personal Project",
+    description: `<p>Tapstall is an online stall and order book for Ghanaian sellers who sell on WhatsApp Status, in groups, and on Instagram and TikTok: one store link for everything they sell, and one place to see who has paid and who still owes.</p><ul><li>Buyers see photos, prices, and sizes on the seller's store link, then order straight to the seller's WhatsApp, quoting the product's code</li><li>An order book for orders from any channel, with full payment, deposits, part payments, and pay-on-delivery in one ledger</li><li>Delivery details for riders, pickup, and bus parcels stay with the order, and WhatsApp receipts and payment reminders go out in one tap</li><li>Built for cheap Android phones and expensive data: an installable web app, photos shrunk on the phone before upload, and storefronts that ship no client JavaScript</li></ul>`,
+    images: [
+      "/projects/tapstall/home.webp",
+      "/projects/tapstall/orders.webp",
+      "/projects/tapstall/order.webp",
+      "/projects/tapstall/customers.webp",
+    ],
+    tools: [
+      "Go",
+      "PostgreSQL",
+      "Next.js",
+      "React",
+      "Astro",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
+    links: [{ name: "VISIT SITE", type: "site", link: "https://tapstall.com" }],
   },
   {
     title: "SchoolShield",

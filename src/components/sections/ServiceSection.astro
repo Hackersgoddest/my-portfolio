@@ -1,0 +1,23 @@
+---
+import SectionHeader from "../SectionHeader.astro";
+import services from "../../data/services";
+---
+
+<section id="services" class="py-section">
+  <div class="container-custom">
+    <SectionHeader index="02" eyebrow="What I Do" title="Services" description="Comprehensive solutions from web applications to mobile apps and desktop software" />
+
+    <div class="grid border-t border-l border-ink md:grid-cols-2">
+      {
+        services.map((service, i) => (
+          <div class="flex flex-col border-r border-b border-ink p-6 sm:p-8">
+            <span class="font-display text-4xl leading-none text-gold-deep">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="mt-4 text-2xl font-bold leading-tight">{service.title}</h3>
+            <p class="mt-3 mb-6 leading-relaxed text-ink-soft">{service.description}</p>
+            <p class="mt-auto font-mono text-xs leading-relaxed text-ink-faint">{service.tools.join(" · ")}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

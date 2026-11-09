@@ -1,0 +1,53 @@
+---
+import { Menu } from "@lucide/astro";
+import Mark from "./Mark.astro";
+import sections from "../data/navigation";
+---
+
+<header class="fixed inset-x-0 top-0 z-40 bg-cloth">
+  <nav class="mx-auto flex h-16 w-full max-w-[1240px] items-center justify-between px-4 sm:h-18 sm:px-6" aria-label="Main">
+    <a href="/#home" class="flex items-center gap-2.5 text-ink" aria-label="Hackersgoddest, home">
+      <Mark size={28} class="shrink-0" />
+      <span class="font-display text-[1.45rem] leading-none sm:text-[1.65rem]">Hackersgoddest</span>
+    </a>
+
+    <div class="flex items-center">
+      <ul class="hidden items-center gap-7 md:flex">
+        {
+          sections.map((section) => (
+            <li>
+              <a href={`/#${section.key}`} class="label text-ink hover:bg-gold">
+                {section.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <details data-mobile-menu class="relative md:hidden">
+        <summary aria-label="Menu" class="flex h-10 w-10 items-center justify-center border border-ink text-ink">
+          <Menu size={18} />
+        </summary>
+        <ul class="absolute right-0 mt-2 w-48 border border-ink bg-cloth p-2">
+          {
+            sections.map((section) => (
+              <li>
+                <a href={`/#${section.key}`} class="label block px-3 py-2.5 text-ink hover:bg-gold">
+                  {section.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+    </div>
+  </nav>
+  <div class="comb text-ink"></div>
+</header>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>("[data-mobile-menu]");
+  menu?.addEventListener("click", (event) => {
+    if ((event.target as Element).closest("a")) menu.open = false;
+  });
+</script>

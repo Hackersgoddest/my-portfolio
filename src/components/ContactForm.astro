@@ -1,0 +1,98 @@
+---
+import { Check, Send, X } from "@lucide/astro";
+import AppButton from "./AppButton.astro";
+
+const textFields = [
+  { name: "name", type: "text", placeholder: "Jane Doe" },
+  { name: "email", type: "email", placeholder: "jane@example.com" },
+  { name: "subject", type: "text", placeholder: "What's this about?" },
+] as const;
+const fieldClass = "w-full border-b border-cloth/50 bg-transparent py-2 text-base text-cloth placeholder-cloth-dim/70 focus:border-gold focus:outline-none";
+---
+
+<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-contact-form class="space-y-6">
+  <input type="hidden" name="form-name" value="contact" />
+  <div hidden>
+    <label>
+      Don't fill this out if you're human:
+      <input name="bot-field" />
+    </label>
+  </div>
+
+  {
+    textFields.map((field) => (
+      <div>
+        <label for={field.name} class="label mb-1 block text-cloth-dim">
+          {field.name}
+        </label>
+        <input id={field.name} name={field.name} type={field.type} required class={fieldClass} placeholder={field.placeholder} />
+      </div>
+    ))
+  }
+
+  <div>
+    <label for="message" class="label mb-1 block text-cloth-dim">message</label>
+    <textarea id="message" name="message" required rows="4" class:list={[fieldClass, "resize-none"]} placeholder="Tell me about your project or inquiry..."></textarea>
+  </div>
+
+  <div data-form-success hidden role="status">
+    <div class="flex items-center gap-3 border border-gold p-4">
+      <Check size={18} class="shrink-0 text-gold" />
+      <div>
+        <h4 class="font-semibold">Message sent successfully!</h4>
+        <p class="text-sm text-cloth-dim">Thank you for reaching out. I'll get back to you soon.</p>
+      </div>
+    </div>
+  </div>
+
+  <div data-form-error hidden role="alert">
+    <div class="flex items-center gap-3 border border-cloth p-4">
+      <X size={18} class="shrink-0" />
+      <div>
+        <h4 class="font-semibold">Something went wrong</h4>
+        <p class="text-sm text-cloth-dim">Please try again or contact me directly.</p>
+      </div>
+    </div>
+  </div>
+
+  <AppButton type="submit" variant="gold" block data-form-submit>
+    <Send slot="icon" size={16} />
+    <span data-form-label>Send Message</span>
+  </AppButton>
+</form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const success = form.querySelector<HTMLElement>("[data-form-success]")!;
+    const error = form.querySelector<HTMLElement>("[data-form-error]")!;
+    const submit = form.querySelector<HTMLButtonElement>("[data-form-submit]")!;
+    const label = form.querySelector<HTMLElement>("[data-form-label]")!;
+
+    success.hidden = true;
+    error.hidden = true;
+    submit.disabled = true;
+    label.textContent = "Sending...";
+
+    try {
+      const body = new URLSearchParams();
+      new FormData(form).forEach((value, key) => body.append(key, String(value)));
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+      success.hidden = false;
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      error.hidden = false;
+    } finally {
+      submit.disabled = false;
+      label.textContent = "Send Message";
+    }
+  });
+</script>

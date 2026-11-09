@@ -1,0 +1,67 @@
+---
+import LogoGithub from "~icons/ri/github-fill";
+import LogoLinkedin from "~icons/ri/linkedin-box-fill";
+import LogoInstagram from "~icons/ri/instagram-fill";
+import LogoX from "~icons/ri/twitter-x-fill";
+import Mark from "./Mark.astro";
+import sections from "../data/navigation";
+
+const socialLinks = [
+  { name: "GitHub", url: "https://github.com/Hackersgoddest", icon: LogoGithub },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/frank-oppong-9286b523b/", icon: LogoLinkedin },
+  { name: "X", url: "https://x.com/_hackersgoddest", icon: LogoX },
+  { name: "Instagram", url: "https://www.instagram.com/hackersgoddest/", icon: LogoInstagram },
+];
+---
+
+<footer class="on-ink bg-ink pb-10 text-cloth">
+  <div class="container-custom">
+    <div class="comb text-gold"></div>
+
+    <div class="flex flex-col justify-between gap-6 pt-10 sm:flex-row sm:items-center">
+      <a href="/#home" class="flex items-center gap-3">
+        <Mark size={36} class="shrink-0" />
+        <span class="font-display text-3xl leading-none">Hackersgoddest</span>
+      </a>
+      <p class="label text-cloth-dim">Accra, GH &mdash; <span data-accra-time>--:--</span></p>
+    </div>
+
+    <nav class="mt-8 flex flex-wrap gap-x-6 gap-y-2" aria-label="Footer">
+      {
+        sections.map((section) => (
+          <a href={`/#${section.key}`} class="label text-cloth-dim hover:text-gold">
+            {section.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <p class="font-mono text-xs text-cloth-dim">&copy; {new Date().getFullYear()} Frank Konadu Oppong. All rights reserved.</p>
+      <div class="flex gap-2">
+        {
+          socialLinks.map((social) => (
+            <a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name} title={social.name} class="flex h-10 w-10 items-center justify-center border border-cloth/40 hover:border-gold hover:bg-gold hover:text-ink">
+              <social.icon class="h-4 w-4" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const clock = document.querySelector("[data-accra-time]");
+  const format = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Africa/Accra",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+  const tick = () => {
+    if (clock) clock.textContent = format.format(new Date());
+  };
+  tick();
+  setInterval(tick, 30_000);
+</script>

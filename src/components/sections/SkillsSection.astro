@@ -1,0 +1,50 @@
+---
+import SectionHeader from "../SectionHeader.astro";
+import skillsData from "../../data/skills";
+import type { SkillTab } from "../../types";
+
+const skillTabs: SkillTab[] = [
+  { name: "frontend", label: "Frontend", skills: skillsData.frontend },
+  { name: "backend", label: "Backend", skills: skillsData.backend },
+  { name: "mobile", label: "Mobile", skills: skillsData.mobile },
+  { name: "database", label: "Database", skills: skillsData.database },
+  { name: "cloud", label: "Cloud & DevOps", skills: skillsData.cloud },
+  { name: "tools", label: "Tools", skills: skillsData.tools },
+];
+
+const yearsExperience = new Date().getFullYear() - 2022;
+const totalSkills = new Set(skillTabs.flatMap((tab) => tab.skills).map((skill) => skill.name)).size;
+const summary = [
+  { value: `${totalSkills}+`, label: "Technologies" },
+  { value: `${yearsExperience}+`, label: "Years Experience" },
+  { value: "4+", label: "Projects Completed" },
+];
+---
+
+<section id="skills" class="py-section bg-cloth-deep">
+  <div class="container-custom">
+    <SectionHeader index="03" eyebrow="Toolkit" title="Skills & Technologies" description="A comprehensive toolkit of modern technologies for building exceptional digital experiences" />
+
+    <div class="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        skillTabs.map((tab) => (
+          <div>
+            <h3 class="label mb-3 border-b border-ink pb-2 font-medium text-ink">{tab.label}</h3>
+            <p class="leading-relaxed text-ink-soft">{tab.skills.map((skill) => skill.name).join(", ")}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <dl class="mt-14 grid grid-cols-1 gap-6 xs:grid-cols-3">
+      {
+        summary.map((item) => (
+          <div class="bg-gold p-5 text-ink">
+            <dd class="font-display text-5xl leading-none">{item.value}</dd>
+            <dt class="label mt-2">{item.label}</dt>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
